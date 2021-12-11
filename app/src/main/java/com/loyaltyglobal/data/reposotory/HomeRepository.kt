@@ -2,6 +2,7 @@ package com.loyaltyglobal.data.reposotory
 
 import android.content.Context
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrandResponse
+import com.loyaltyglobal.data.source.localModels.userPassResponse.UserPassResponse
 import com.loyaltyglobal.data.source.network.ApiService
 import com.loyaltyglobal.data.source.network.BaseApiResponse
 import com.loyaltyglobal.data.source.network.NetworkResult
@@ -16,5 +17,9 @@ class HomeRepository @Inject constructor(
 
     suspend fun getSubBrand() : NetworkResult<SubBrandResponse> {
         return safeApiCall { apiService.getSubBrand(AGENCY_ID) }
+    }
+
+    suspend fun getUserPassFromAgency() : NetworkResult<UserPassResponse> {
+        return safeApiCall { apiService.getUserPassFromAgency(AGENCY_ID) }
     }
 }

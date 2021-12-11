@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="fragmentClickable">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="poppinsBold24Black">
+        <item name="android:textSize">@dimen/sp_24</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+    <style name="poppinsBold22Grey">
+        <item name="android:textSize">@dimen/sp_22</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+    <style name="poppinsBold22Black">
+        <item name="android:textSize">@dimen/sp_22</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+    <style name="poppinsMedium12Grey">
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+
+    <style name="poppinsNormal13Black">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="poppinsMedium16White">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="searchEditText">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingBottom">@dimen/dp_10</item>
+        <item name="android:layout_marginStart">@dimen/dp_8</item>
+        <item name="android:layout_marginEnd">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_4</item>
+        <item name="android:paddingEnd">@dimen/dp_4</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:textColorHint">@color/caption</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">start</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
     <style name="white40PoppinSemiBold18" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/sp_18</item>
         <item name="android:fontFamily">@font/poppins_semi_bold</item>

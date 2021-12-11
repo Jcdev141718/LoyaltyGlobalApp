@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="CountryListBinding">
+
+        <variable
+            name="mCountryList"
+            type="com.loyaltyglobal.data.model.CountryCodeData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/dp_16" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/dp_16" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:countryFlag="@{mCountryList.key}"
+            android:paddingTop="@dimen/dp_4"
+            app:layout_constraintBottom_toBottomOf="@id/view_"
+            app:layout_constraintEnd_toStartOf="@id/txt_country_name"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_country_name"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:gravity="start"
+            android:paddingTop="@dimen/dp_4"
+            android:paddingBottom="@dimen/dp_4"
+            android:text="@{mCountryList.countryName}"
+            android:textAlignment="viewStart"
+            android:textColor="?editTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/view_"
+            app:layout_constraintEnd_toStartOf="@id/txt_country_code"
+            app:layout_constraintStart_toEndOf="@id/txt_flag"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_country_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_4"
+            android:text="@{mCountryList.countryCode}"
+            android:textColor="?heading"
+            app:layout_constraintBottom_toBottomOf="@id/view_"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/txt_country_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@color/gray_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txt_country_name"
+            app:layout_constraintTop_toBottomOf="@id/txt_country_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

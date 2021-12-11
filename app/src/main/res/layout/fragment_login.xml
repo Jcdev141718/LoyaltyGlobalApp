@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.view.fragment.LoginFragment">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_mainTitle"
@@ -20,7 +17,7 @@
             android:id="@+id/img_walletly"
             android:layout_width="@dimen/dp_50"
             android:layout_height="@dimen/dp_50"
-            android:src="@drawable/img_splash"
+            android:src="@drawable/icon_small_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,10 +35,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/sc_signIn"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dp_0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +65,8 @@
                 style="@style/greyPoppinMedium12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
                 android:text="@string/email"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_started" />
@@ -79,13 +76,13 @@
                 style="@style/blackPoppinMedium13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
                 android:background="@drawable/rounded_corner_with_grey_stroke"
                 android:hint="johndoe@gmail.com"
-                android:minHeight="48dp"
-                android:padding="12dp"
-                android:textColorHint="@color/heading_light"
+                android:minHeight="@dimen/dp_48"
+                android:padding="@dimen/dp_12"
+                android:textColorHint="?heading"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_email" />
@@ -95,9 +92,8 @@
                 style="@style/fillBtnMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="40dp"
-                android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edt_email">
@@ -106,10 +102,10 @@
                     android:id="@+id/txt_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
+                    android:padding="@dimen/dp_12"
                     android:text="@string/next"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +115,7 @@
                     android:id="@+id/img_next"
                     android:layout_width="@dimen/dp_24"
                     android:layout_height="@dimen/dp_24"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:src="@drawable/ic_right_arrow_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -131,8 +127,8 @@
                 android:id="@+id/cl_lines"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_txt_next">
@@ -151,7 +147,7 @@
                     style="@style/greyPoppinMedium16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="17dp"
+                    android:layout_marginStart="@dimen/dp_17"
                     android:text="@string/or"
                     app:layout_constraintEnd_toStartOf="@id/img_leftRight"
                     app:layout_constraintStart_toEndOf="@+id/img_leftLine"
@@ -161,7 +157,7 @@
                     android:id="@+id/img_leftRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="17dp"
+                    android:layout_marginStart="@dimen/dp_17"
                     android:src="@drawable/ic_img_line"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -175,9 +171,8 @@
                 style="@style/fillBtnMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -187,10 +182,10 @@
                     android:id="@+id/txt_continueWithApple"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
+                    android:padding="@dimen/dp_12"
                     android:text="@string/continue_with_apple"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -198,8 +193,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_continueWithApple"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
                     android:src="@drawable/ic_img_apple"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/txt_continueWithApple"
@@ -207,5 +202,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

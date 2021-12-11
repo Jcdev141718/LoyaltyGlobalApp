@@ -2,19 +2,19 @@
 <resources>
     <style name="white40PoppinSemiBold18" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/sp_18</item>
-        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
         <item name="android:textColor">@color/white_40</item>
     </style>
 
     <style name="blackPoppinSemiBold18" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/sp_18</item>
-        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
         <item name="android:textColor">@color/blue_light</item>
     </style>
 
     <style name="black40PoppinSemiBold32" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/sp_32</item>
-        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

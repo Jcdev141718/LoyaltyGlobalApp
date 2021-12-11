@@ -3,7 +3,7 @@ package com.loyaltyglobal.ui.base
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.loyaltyglobal.ui.main.view.activity.MainActivity
+import com.loyaltyglobal.ui.main.view.activity.SplashActivity
 
 /**
  * Created by Abhin.
@@ -15,7 +15,7 @@ class IntroActivity : AppCompatActivity() {
 
         intent = Intent(
             this,
-            MainActivity::class.java
+            SplashActivity::class.java
         )
         startActivity(intent)
         finish()

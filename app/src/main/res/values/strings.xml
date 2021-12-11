@@ -32,17 +32,16 @@
     <string name="invalid_password">Invalid password</string>
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
-    <string name="title_activity_splash">SplashActivity</string>
-
-    <string name="walletly">Walletly</string>
-    <string name="email">Email Address</string>
-    <string name="hi_there_let_s_get_started">Hi there! Let’s Get Started</string>
-    <string name="next">Next</string>
-    <string name="continue_with_apple">Continue with Apple</string>
-    <string name="or">OR</string>
 
 
     <!-- [START] HomeScreen-->
     <string name="home_screen_title">Walletly</string>
     <!-- [END] HomeScreen-->
+    <string name="walletly">Walletly</string>
+    <string name="walletly_global">Walletly Global</string>
+    <string name="email">Email Address</string>
+    <string name="hi_there_let_s_get_started">Hi there! Let’s Get Started</string>
+    <string name="next">Next</string>
+    <string name="continue_with_apple">Continue with Apple</string>
+    <string name="or">OR</string>
 </resources>

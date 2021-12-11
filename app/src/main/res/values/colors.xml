@@ -20,6 +20,7 @@
     <!--[START] Common Color-->
     <color name="link">#1863C9</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
     <color name="black">#000000</color>
     <color name="green">#459157</color>
     <color name="caption">#999999</color>

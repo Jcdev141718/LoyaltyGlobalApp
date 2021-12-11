@@ -2,20 +2,30 @@
     <!-- Base application theme. -->
     <style name="Theme.MyLearningProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!--[START] ThemeColor-->
+        <item name="main_background" type="color">@color/background_light</item>
+        <item name="border" type="color">@color/border_light</item>
+        <item name="heading" type="color">@color/heading_light</item>
+        <item name="paragraph" type="color">@color/paragraph_light</item>
+        <item name="main_card" type="color">@color/card_light</item>
+        <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
+        <!--[START] ThemeColor-->
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/white</item>
     </style>
+
 </resources>

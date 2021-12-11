@@ -1,0 +1,8 @@
+<resources>
+    <attr name="main_background" format="color" />
+    <attr name="border" format="color" />
+    <attr name="heading" format="color" />
+    <attr name="paragraph" format="color" />
+    <attr name="main_card" format="color" />
+    <attr name="navigation_inactive" format="color" />
+</resources>

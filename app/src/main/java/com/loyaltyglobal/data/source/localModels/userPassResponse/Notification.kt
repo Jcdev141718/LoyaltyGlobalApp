@@ -1,17 +1,18 @@
-package com.loyaltyglobal.data.source.localModels.subBrandResponse
+package com.loyaltyglobal.data.source.localModels.userPassResponse
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
 data class Notification(
-    @PrimaryKey var _id: String? = null,
+    @PrimaryKey var _id: String,
     var agencyId: String? = null,
-    var backgroundColor: BackgroundColor? = null,
+    @Embedded(prefix = "notification_background_color_") var backgroundColor: BackgroundColor? = null,
     var brandId: String? = null,
     var campaignId: String? = null,
     var created: Long? = null,
-    var createdAt: CreatedAt? = null,
+    @Embedded(prefix = "notification_created_at_") var createdAt: CreatedAt? = null,
     var delete: Boolean? = null,
     var description: String? = null,
     var displayTitle: String? = null,
@@ -26,5 +27,5 @@ data class Notification(
     var title: String? = null,
     var type: String? = null,
     var updated: Long? = null,
-    var updatedAt: UpdatedAt? = null
+    @Embedded(prefix = "notification_updated_at_") var updatedAt: UpdatedAt? = null,
 )

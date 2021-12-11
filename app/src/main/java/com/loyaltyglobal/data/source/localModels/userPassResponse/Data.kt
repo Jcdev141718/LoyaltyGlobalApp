@@ -1,4 +1,4 @@
-package com.loyaltyglobal.data.source.localModels.subBrandResponse
+package com.loyaltyglobal.data.source.localModels.userPassResponse
 
 data class Data(
     var customFields: ArrayList<CustomField>? = null,

@@ -9,6 +9,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class DollarPointModel(
-    @PrimaryKey var id : Int? = null,
+    @PrimaryKey(autoGenerate = true) var id : Int = 0,
     var perDollarPoint : Int? = null
 )

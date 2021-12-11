@@ -1,4 +1,4 @@
-package com.loyaltyglobal.data.source.localModels.subBrandResponse
+package com.loyaltyglobal.data.source.localModels.userPassResponse
 
 data class CurrentTier(
     var currentTierId: String? = null,

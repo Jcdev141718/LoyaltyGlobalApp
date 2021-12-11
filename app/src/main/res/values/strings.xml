@@ -33,6 +33,7 @@
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
 
+
     <!--Explore [start]-->
     <string name="explore_businesses">Businesses</string>
     <string name="explore_deals_and_offers"><![CDATA[Deals & Offers]]></string>
@@ -44,11 +45,17 @@
 
     <!-- [START] HomeScreen-->
     <string name="home_screen_title">Walletly</string>
+    <string name="home_screen_need_for_next_level">needed for next level</string>
     <!-- [START] TODO: DUMMY DATA Remove after come from server -->
+    <string name="home_screen_need_for_next_level_points">10,050 pt</string>
+    <string name="home_screen_total_points">20,000 pt</string>
+    <string name="home_screen_day_expiration">85 days to expiration</string>
+    <string name="Stories">Stories</string>
     <string name="stories">Stories</string>
     <string name="see_all">See All</string>
     <string name="Versace">Versace</string>
     <!-- [END] TODO: DUMMY DATA Remove after come from server -->
     <!-- [END] HomeScreen-->
     <string name="no_internet_available">No Internet available</string>
+
 </resources>

@@ -19,7 +19,7 @@ fun String.firstLetterCap() : String = this.substring(0, 1).uppercase(Locale.ROO
         Locale.ROOT
     )
 
-fun AppCompatImageView.setImage(url: String, isRound: Boolean = false) {
+fun AppCompatImageView.setImage(url: Any, isRound: Boolean = false) {
     if (isRound){
         Glide.with(this.context)
             .load(url)
@@ -30,5 +30,4 @@ fun AppCompatImageView.setImage(url: String, isRound: Boolean = false) {
             .load(url)
             .into(this)
     }
-
 }

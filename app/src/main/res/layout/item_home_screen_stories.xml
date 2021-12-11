@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.main.view.activity.WalletlyActivity">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_24"
+            android:textColor="?heading"
+            android:textStyle="bold"
+            android:text="@string/Stories"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/rvStories"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSeeAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="?heading"
+            android:textStyle="bold"
+            android:text="See All"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/rvStories"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvStories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            app:layout_constraintTop_toBottomOf="@+id/tvStories"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

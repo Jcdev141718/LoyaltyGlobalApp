@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_16">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_circle"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="@dimen/dp_56"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_home_circle" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_money"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_6"
+        android:layout_marginStart="@dimen/dp_8"
+        android:max="100000"
+        android:progress="50000"
+        android:progressDrawable="@drawable/yellow_progress"
+        app:layout_constraintBottom_toBottomOf="@id/img_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_circle"
+        app:layout_constraintTop_toTopOf="@id/img_circle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_total_pt"
+        style="@style/HeadingMedium12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_6"
+        android:text="@string/home_screen_total_points"
+        app:layout_constraintStart_toEndOf="@id/img_circle"
+        app:layout_constraintTop_toTopOf="@id/img_circle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_needed_for_next"
+        style="@style/ParagraphRegular10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_screen_need_for_next_level"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/img_circle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_needed_for_next_points"
+        style="@style/HeadingRegular10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_3"
+        android:text="@string/home_screen_need_for_next_level_points"
+        app:layout_constraintEnd_toStartOf="@id/txt_needed_for_next"
+        app:layout_constraintTop_toTopOf="@id/txt_needed_for_next"
+        app:layout_constraintBottom_toBottomOf="@id/txt_needed_for_next"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_day_expiration"
+        style="@style/captionMedium10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_6"
+        android:text="@string/home_screen_day_expiration"
+        app:layout_constraintStart_toEndOf="@id/img_circle"
+        app:layout_constraintBottom_toBottomOf="@id/img_circle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

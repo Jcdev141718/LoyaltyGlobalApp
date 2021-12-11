@@ -2,28 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/dp_24"
+    android:paddingTop="@dimen/dp_19"
+    android:paddingEnd="@dimen/dp_24"
+    android:paddingBottom="@dimen/dp_19">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_background"
         android:layout_width="@dimen/dp_28"
         android:layout_height="@dimen/dp_28"
-        android:layout_marginVertical="@dimen/dp_24"
-        android:layout_marginStart="@dimen/dp_19"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_small_logo" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txt_title"
-        style="@style/HeadingSemiBold18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_6"
-        android:text="@string/home_screen_title"
-        app:layout_constraintBottom_toBottomOf="@id/img_background"
-        app:layout_constraintStart_toEndOf="@id/img_background"
-        app:layout_constraintTop_toTopOf="@id/img_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

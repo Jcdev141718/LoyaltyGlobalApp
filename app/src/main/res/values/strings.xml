@@ -32,4 +32,11 @@
     <string name="invalid_password">Invalid password</string>
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
+    <string name="enter_your_verification_code">Enter your \nverification code</string>
+    <string name="i_didn_t_my_code"><u>I didn\'t my code!</u></string>
+    <string name="hi_what_s_your_name">Hi! \nWhat\'s Your Name?</string>
+    <string name="your_name">Your Name</string>
+    <string name="next">Next</string>
+    <string name="hey_haider_enter_your_phone_number">Hey Haider, \nEnter your Phone Number</string>
+    <string name="search">Search</string>
 </resources>

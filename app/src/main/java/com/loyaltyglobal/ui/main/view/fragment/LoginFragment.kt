@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentLoginBinding
+import com.loyaltyglobal.util.addReplaceFragment
 
 class LoginFragment : Fragment() {
 
@@ -20,9 +22,17 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         mBinding = FragmentLoginBinding.inflate(inflater, container, false)
         return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mBinding.clTxtNext.setOnClickListener {
+            activity?.addReplaceFragment(R.id.container_main, EnterMobileNumberFragment(), true,
+                addToBackStack = true
+            )
+        }
     }
 
 }

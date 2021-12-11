@@ -45,3 +45,11 @@ fun AppCompatImageView.setImage(url: Any, isRound: Boolean = false) {
             .into(this)
     }
 }
+
+fun getCountryFlag(flagCode: String): String {
+    val flagOffset = 0x1F1E6
+    val asciiOffset = 0x41
+    val firstChar = Character.codePointAt(flagCode, 0) - asciiOffset + flagOffset
+    val secondChar = Character.codePointAt(flagCode, 1) - asciiOffset + flagOffset
+    return (String(Character.toChars(firstChar)) + String(Character.toChars(secondChar)))
+}

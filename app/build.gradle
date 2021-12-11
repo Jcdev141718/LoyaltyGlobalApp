@@ -81,7 +81,5 @@ dependencies {
     //Preference
     implementation "androidx.preference:preference-ktx:1.1.1"
 
-    //TOP
-    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
 
 }

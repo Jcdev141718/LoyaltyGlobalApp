@@ -20,6 +20,7 @@
         <item name="paragraph" type="color">@color/paragraph_light</item>
         <item name="main_card" type="color">@color/card_light</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
+        <item name="explore_chip_bg" type="color">@color/heading_light</item>
         <!--[START] ThemeColor-->
     </style>
 
@@ -28,4 +29,17 @@
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/white</item>
     </style>
 
+    <style name="ExploreTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize" parent="">
+        <item name="cornerSize">@dimen/dp_6</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
 </resources>

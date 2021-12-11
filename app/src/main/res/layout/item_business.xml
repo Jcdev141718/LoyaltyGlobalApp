@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.loyaltyglobal.data.model.BusinessData" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_logo"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:src="@drawable/dummy_brand_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_brand_name"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@{data.brand}"
+                android:textColor="?heading"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toTopOf="@id/txt_brand_sub_title"
+                app:layout_constraintStart_toEndOf="@id/img_logo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Cluccboi" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_brand_sub_title"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:fontFamily="@font/poppins"
+                android:text="@{data.sub_title}"
+                android:textColor="?heading"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toTopOf="@id/txt_distance"
+                app:layout_constraintStart_toEndOf="@id/img_logo"
+                app:layout_constraintTop_toBottomOf="@id/txt_brand_name"
+                tools:text="Fast Food" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_distance"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:fontFamily="@font/poppins"
+                android:text="@{data.distance}"
+                android:textColor="@color/caption"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_logo"
+                app:layout_constraintTop_toBottomOf="@id/txt_brand_sub_title"
+                tools:text="4 kilometers away" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_chip"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dp_8"
+                android:paddingVertical="@dimen/dp_4"
+                android:text="@{data.offer}"
+                android:textColor="?main_background"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10% OFF" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

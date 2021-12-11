@@ -32,4 +32,13 @@
     <string name="invalid_password">Invalid password</string>
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
+
+    <!--Explore [start]-->
+    <string name="explore_businesses">Businesses</string>
+    <string name="explore_deals_and_offers"><![CDATA[Deals & Offers]]></string>
+    <string name="businesses_will_be_updated_soon">Businesses will be updated soon!</string>
+    <string name="no_deal_available">No Deal Available</string>
+    <string name="many_exciting_deals_will_soon_be_available">Many exciting deals will soon be available.</string>
+    <string name="explore">Explore</string>
+    <!--Explore [end]-->
 </resources>

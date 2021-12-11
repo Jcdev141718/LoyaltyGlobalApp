@@ -5,4 +5,5 @@
     <attr name="paragraph" format="color" />
     <attr name="main_card" format="color" />
     <attr name="navigation_inactive" format="color" />
+    <attr name="explore_chip_bg" format="color" />
 </resources>

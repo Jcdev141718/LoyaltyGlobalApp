@@ -2,6 +2,7 @@ package com.loyaltyglobal.di
 
 import com.loyaltyglobal.BuildConfig
 import com.loyaltyglobal.data.source.network.ApiService
+import com.loyaltyglobal.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,7 +61,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

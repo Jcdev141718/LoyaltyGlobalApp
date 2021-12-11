@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyLearningProject</string>
+    <string name="app_name">LoyaltyGlobal</string>
     <string name="enter_mobile">Mobile Number</string>
     <string name="enter_password">Password</string>
     <string name="confirm_password">Confirm Password</string>
@@ -32,4 +32,5 @@
     <string name="invalid_password">Invalid password</string>
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
+    <string name="no_internet_available">No Internet available</string>
 </resources>

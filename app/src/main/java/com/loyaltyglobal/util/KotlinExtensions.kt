@@ -30,4 +30,5 @@ fun AppCompatImageView.setImage(url: String, isRound: Boolean = false) {
             .load(url)
             .into(this)
     }
+
 }

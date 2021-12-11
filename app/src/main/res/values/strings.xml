@@ -36,5 +36,13 @@
 
     <!-- [START] HomeScreen-->
     <string name="home_screen_title">Walletly</string>
+    <string name="home_screen_need_for_next_level">needed for next level</string>
+    <!-- [START] TODO: DUMMY DATA Remove after come from server -->
+    <string name="home_screen_need_for_next_level_points">10,050 pt</string>
+    <string name="home_screen_total_points">20,000 pt</string>
+    <string name="home_screen_day_expiration">85 days to expiration</string>
+    <string name="Stories">Stories</string>
+    <!-- [END] TODO: DUMMY DATA Remove after come from server -->
     <!-- [END] HomeScreen-->
+
 </resources>

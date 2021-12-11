@@ -20,6 +20,7 @@
         <item name="paragraph" type="color">@color/paragraph_dark</item>
         <item name="main_card" type="color">@color/card_dark</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_dark</item>
+        <item name="android:letterSpacing">-0.03</item>
         <!--[END] Dark ThemeColor-->
     </style>
 

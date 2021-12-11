@@ -32,6 +32,16 @@
     <string name="invalid_password">Invalid password</string>
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- [START] HomeScreen-->
+    <!-- [START] TODO: DUMMY DATA Remove after come from server -->
+
+    <string name="stories">Stories</string>
+    <string name="see_all">See All</string>
+    <string name="Versace">Versace</string>
+    <!-- [END] TODO: DUMMY DATA Remove after come from server -->
+    <!-- [END] HomeScreen-->
 </resources>

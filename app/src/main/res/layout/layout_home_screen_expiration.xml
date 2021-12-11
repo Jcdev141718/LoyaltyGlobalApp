@@ -60,7 +60,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_day_expiration"
-        style="@style/captionMedium10"
+        style="@style/CaptionMedium10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_6"

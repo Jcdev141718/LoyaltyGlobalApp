@@ -37,10 +37,16 @@
     <!-- [START] HomeScreen-->
     <string name="home_screen_title">Walletly</string>
     <string name="home_screen_need_for_next_level">needed for next level</string>
+    <string name="see_all">See All</string>
+    <string name="discover_these_featured_deals_and_games">Discover these featured deals and games</string>
+    <string name="featured_deals_promotions">Featured Deals &amp; Promotions</string>
+    <string name="my_deals_offers">My Deals &amp; Offers</string>
+    <string name="brand_name">Brand Name</string>
     <!-- [START] TODO: DUMMY DATA Remove after come from server -->
     <string name="home_screen_need_for_next_level_points">10,050 pt</string>
     <string name="home_screen_total_points">20,000 pt</string>
     <string name="home_screen_day_expiration">85 days to expiration</string>
+    <string name="get_10_entire_menu">Get 10% entire menu</string>
     <string name="Stories">Stories</string>
     <!-- [END] TODO: DUMMY DATA Remove after come from server -->
     <!-- [END] HomeScreen-->

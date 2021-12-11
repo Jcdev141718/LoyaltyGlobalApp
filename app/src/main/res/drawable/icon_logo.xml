@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedAttribute">
+    <item android:drawable="@drawable/icon_logo_blur_background" />
+    <item
+        android:bottom="@dimen/dp_100"
+        android:drawable="@drawable/icon_only_logo"
+        android:end="@dimen/dp_100"
+        android:start="@dimen/dp_100"
+        android:top="@dimen/dp_100" />
+</layer-list>

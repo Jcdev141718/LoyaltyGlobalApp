@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">MyLearningProject</string>
+    <string name="enter_mobile">Mobile Number</string>
+    <string name="enter_password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account_create_now">Not a member yet? </string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="please_enter_mobile_number">Please enter mobile number</string>
+    <string name="please_enter_valid_mobile_number">Please enter valid mobile number</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="category">TOP CATEGORIES</string>
+    <string name="orders">Orders</string>
+    <string name="Rs">\u20B9</string>
+    <string name="view_all">VIEW ALL</string>
+    <string name="hot_products">HOT PRODUCTS</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_name">Name</string>
+    <string name="enter_email">Email</string>
+    <string name="referral_code">Referral Code</string>
+    <string name="sign_in">Sign In</string>
+    <string name="please_enter_name">Please enter name</string>
+    <string name="please_enter_email">Please enter email</string>
+    <string name="confirm_password_not_match">Confirm password not match</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_enter_valid_email_address">Please enter valid email address</string>
+    <string name="invalid_email_or_password">Invalid username or password</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="permission_denied_by_system">Permission denied by system</string>
+    <string name="permission_denied">Permission denied</string>
+</resources>

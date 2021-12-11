@@ -42,4 +42,5 @@
     <color name="navigation_inactive_light">#474747</color>
     <color name="navigation_inactive_dark">#CCCCCC</color>
     <!--[END] Dark & light themes Color-->
+
 </resources>

@@ -23,4 +23,10 @@
         <!--[END] Dark ThemeColor-->
     </style>
 
+
+    <!--ShapeableImageView style-->
+    <style name="ShapeAppearanceOverlay.App.CornerSize" parent="">
+        <item name="cornerSize">@dimen/dp_6</item>
+    </style>
+
 </resources>

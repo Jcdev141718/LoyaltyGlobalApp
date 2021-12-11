@@ -22,7 +22,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
+import kotlin.math.roundToInt
 
 /**
  * File holding all the methods of general interest.
@@ -320,3 +322,22 @@ fun String?.isEmailValid(): Boolean {
 
 fun String?.isPasswordValid(): Boolean =
     !this.isNullOrEmpty() && this.length >= 6
+
+
+
+class RecyclerItemDecoration(private val spanCount: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+
+        val spacing = (spacing * parent.context.resources.displayMetrics.density).roundToInt()
+        val position = parent.getChildAdapterPosition(view)
+        val column = position % spanCount
+
+        outRect.left = spacing - column * spacing / spanCount
+        outRect.right = (column + 1) * spacing / spanCount
+
+        outRect.top = if (position < spanCount) spacing else 0
+        outRect.bottom = spacing
+    }
+
+}

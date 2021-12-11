@@ -10,7 +10,7 @@ import com.loyaltyglobal.databinding.ItemStoriesBinding
 import com.loyaltyglobal.util.clickWithDebounce
 
 class StoriesAdapter(
-    private var storiesList: ArrayList<String>,
+    private var storiesList: MutableList<String>,
     private var clickInterface : ClickListener
 ) : RecyclerView.Adapter<StoriesAdapter.DataViewHolder>() {
 
@@ -32,7 +32,7 @@ class StoriesAdapter(
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(storiesList[position])
-        holder.binding.imgStories.clickWithDebounce {
+        holder.binding.imgStory.clickWithDebounce {
             clickInterface.itemClick(position)
         }
     }
@@ -40,6 +40,7 @@ class StoriesAdapter(
     class DataViewHolder(var binding: ItemStoriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemData: String) = binding.apply {
+
            // mData = itemData
            // executePendingBindings()
         }

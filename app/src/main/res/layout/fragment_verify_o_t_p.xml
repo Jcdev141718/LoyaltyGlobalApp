@@ -41,18 +41,115 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view_line" />
 
-    <com.mukesh.OtpView
-        android:id="@+id/otp_view"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/otp_1"
+        android:layout_width="0dp"
         style="@style/poppinsNormal13Black"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/grey_border_4"
+        android:maxLength="1"
+        android:padding="@dimen/dp_12"
         android:inputType="number"
-        android:itemBackground="@drawable/grey_border_4"
-        app:OtpItemCount="6"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/otp_2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:text="4" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/otp_2"
+        android:layout_width="0dp"
+        style="@style/poppinsNormal13Black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/grey_border_4"
+        android:maxLength="1"
+        android:padding="@dimen/dp_12"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/otp_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/otp_1"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:text="4" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/otp_3"
+        android:layout_width="0dp"
+        style="@style/poppinsNormal13Black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/grey_border_4"
+        android:maxLength="1"
+        android:padding="@dimen/dp_12"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/otp_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/otp_2"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:text="4" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/otp_4"
+        android:layout_width="0dp"
+        style="@style/poppinsNormal13Black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/grey_border_4"
+        android:maxLength="1"
+        android:padding="@dimen/dp_12"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/otp_5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/otp_3"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:text="4" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/otp_5"
+        android:layout_width="0dp"
+        style="@style/poppinsNormal13Black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/grey_border_4"
+        android:maxLength="1"
+        android:padding="@dimen/dp_12"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/otp_6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/otp_4"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:text="4" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/otp_6"
+        android:layout_width="0dp"
+        style="@style/poppinsNormal13Black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/grey_border_4"
+        android:maxLength="1"
+        android:padding="@dimen/dp_12"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/otp_5"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:text="4" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/poppinsMedium12Grey"
@@ -62,6 +159,6 @@
         android:text="@string/i_didn_t_my_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/otp_view" />
+        app:layout_constraintTop_toBottomOf="@+id/otp_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

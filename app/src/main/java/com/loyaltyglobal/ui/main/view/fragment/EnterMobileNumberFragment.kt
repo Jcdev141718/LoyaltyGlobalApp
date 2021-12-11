@@ -9,6 +9,8 @@ import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.CountryCodeData
 import com.loyaltyglobal.databinding.FragmentEnterMobileNumberBinding
 import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.util.getCountryFlag
+import com.loyaltyglobal.util.setImage
 import kotlinx.coroutines.flow.combine
 
 
@@ -43,16 +45,26 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
         mBinding.textCountryCode.setOnClickListener {
             selectCountryCode()
         }
+        mBinding.imgBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+        mBinding.clTxtNext.setOnClickListener {
+            activity?.addReplaceFragment(R.id.container_main, VerifyOTPFragment(), true,
+                addToBackStack = true
+            )
+        }
     }
 
     override fun onCountryDataSelect(countryData: CountryCodeData) {
+        mBinding.textCountryCode.text = countryData.countryCode
+        mBinding.imgFlag.setImage(getCountryFlag(countryData.key!!))
 
     }
 
     private fun selectCountryCode() {
         val mCountryListFragment = CountryListFragment()
         mCountryListFragment.mSendCountryCodeAndFlag = this
-//        activity?.addReplaceFragment(R.id.main_container, mCountryListFragment, addFragment = true, addToBackStack = true)
+        activity?.addReplaceFragment(R.id.container_main, mCountryListFragment, addFragment = true, addToBackStack = true)
     }
 
 }

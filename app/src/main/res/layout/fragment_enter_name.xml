@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/fragmentClickable"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.view.fragment.EnterNameFragment"
     tools:ignore="UnusedAttribute">
@@ -21,8 +20,8 @@
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edit_text_number"
-        style="@style/poppinsBold22Grey"
+        android:id="@+id/edit_text_name"
+        style="@style/poppinsBold22Black"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
@@ -47,7 +46,7 @@
         android:orientation="horizontal"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="@drawable/round_ripple"
+        android:foreground="@drawable/round_ripple_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">

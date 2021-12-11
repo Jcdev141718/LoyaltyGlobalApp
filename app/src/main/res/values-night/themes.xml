@@ -2,15 +2,25 @@
     <!-- Base application theme. -->
     <style name="Theme.MyLearningProject" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!--[START] Dark ThemeColor-->
+        <item name="main_background" type="color">@color/background_dark</item>
+        <item name="border" type="color">@color/border_dark</item>
+        <item name="heading" type="color">@color/heading_dark</item>
+        <item name="paragraph" type="color">@color/paragraph_dark</item>
+        <item name="main_card" type="color">@color/card_dark</item>
+        <item name="navigation_inactive" type="color">@color/navigation_inactive_dark</item>
+        <!--[END] Dark ThemeColor-->
     </style>
+
 </resources>

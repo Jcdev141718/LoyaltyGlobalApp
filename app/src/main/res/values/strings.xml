@@ -41,4 +41,5 @@
     <string name="many_exciting_deals_will_soon_be_available">Many exciting deals will soon be available.</string>
     <string name="explore">Explore</string>
     <!--Explore [end]-->
+    <string name="no_internet_available">No Internet available</string>
 </resources>

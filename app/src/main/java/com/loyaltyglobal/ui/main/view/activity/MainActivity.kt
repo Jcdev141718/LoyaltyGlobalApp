@@ -1,20 +1,19 @@
 package com.loyaltyglobal.ui.main.view.activity
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.activity.viewModels
 import com.loyaltyglobal.R
-import com.loyaltyglobal.ui.main.view.fragments.ExploreFragment
-import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val homeViewModel : HomeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        addReplaceFragment(
-            R.id.fl_container_main, ExploreFragment(),
-            addFragment = true,
-            addToBackStack = false
-        )
+//        homeViewModel.getSubBrands()
     }
 }

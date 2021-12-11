@@ -43,8 +43,8 @@
     <!--Explore [end]-->
 
     <!-- [START] HomeScreen-->
+    <string name="home_screen_title">Walletly</string>
     <!-- [START] TODO: DUMMY DATA Remove after come from server -->
-
     <string name="stories">Stories</string>
     <string name="see_all">See All</string>
     <string name="Versace">Versace</string>

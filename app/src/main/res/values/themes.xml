@@ -34,4 +34,12 @@
     </style>
 
 
+    <style name="HeadingSemiBold18">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_semi_bold</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+
 </resources>

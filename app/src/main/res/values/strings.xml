@@ -32,4 +32,9 @@
     <string name="invalid_password">Invalid password</string>
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
+
+
+    <!-- [START] HomeScreen-->
+    <string name="home_screen_title">Walletly</string>
+    <!-- [END] HomeScreen-->
 </resources>

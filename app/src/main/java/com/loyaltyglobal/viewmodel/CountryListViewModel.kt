@@ -3,7 +3,7 @@ package com.loyaltyglobal.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.loyaltyglobal.data.model.CountryCodeData
-import com.loyaltyglobal.util.Constants.setCountryList
+import com.loyaltyglobal.util.CountryList.setCountryList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

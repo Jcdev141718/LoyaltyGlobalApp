@@ -40,15 +40,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_flag"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_flag"
         android:layout_width="@dimen/dp_30"
         android:layout_height="@dimen/dp_30"
         android:layout_marginStart="@dimen/dp_5"
         android:src="@drawable/flag"
-        app:layout_constraintBottom_toBottomOf="@+id/text_country_code"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/view_line_code"
-        app:layout_constraintTop_toTopOf="@+id/text_country_code" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_country_code"
@@ -56,13 +56,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gray_line"
-        android:padding="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_5"
+        android:paddingStart="@dimen/dp_2"
+        android:paddingVertical="@dimen/dp_8"
         android:text="@string/_41"
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/round_ripple_4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_flag"
+        app:layout_constraintStart_toEndOf="@+id/txt_flag"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -79,13 +81,13 @@
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edit_text_name"
+        android:id="@+id/edit_text_number"
         style="@style/poppinsBold22Black"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:background="@android:color/transparent"
-        android:padding="@dimen/dp_10"
+        android:padding="@dimen/dp_8"
         android:maxLength="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -99,8 +101,8 @@
         android:layout_height="@dimen/dp_1"
         android:background="@color/gray_line"
         android:elevation="@dimen/dp_1"
-        app:layout_constraintEnd_toEndOf="@+id/edit_text_name"
-        app:layout_constraintStart_toStartOf="@+id/edit_text_name"
+        app:layout_constraintEnd_toEndOf="@+id/edit_text_number"
+        app:layout_constraintStart_toStartOf="@+id/edit_text_number"
         app:layout_constraintTop_toBottomOf="@+id/text_country_code" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

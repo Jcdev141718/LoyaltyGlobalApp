@@ -8,8 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.ActivitySplashBinding
 import com.loyaltyglobal.util.setImage
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -20,9 +20,9 @@ class SplashActivity : AppCompatActivity() {
         mBinding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         mBinding.imgSplash.setImage(R.drawable.icon_logo)
-        lifecycleScope.async {
+        lifecycleScope.launch {
             delay(2000)
-            startActivity(Intent(this@SplashActivity,LoginActivity::class.java))
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }
     }

@@ -15,8 +15,11 @@ import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -340,4 +343,56 @@ class RecyclerItemDecoration(private val spanCount: Int, private val spacing: In
         outRect.bottom = spacing
     }
 
+}
+
+
+fun setMargin(
+    itemView: View,
+    left: Int? = null,
+    top: Int? = null,
+    right: Int? = null,
+    bottom: Int? = null
+) {
+    val layoutParams = itemView.layoutParams as ConstraintLayout.LayoutParams
+    layoutParams.setMargins(
+        left ?: layoutParams.leftMargin,
+        top ?: layoutParams.topMargin,
+        right ?: layoutParams.rightMargin,
+        bottom ?: layoutParams.bottomMargin
+    )
+    itemView.layoutParams = layoutParams
+}
+
+fun setFrameMargin(
+    itemView: View,
+    left: Int? = null,
+    top: Int? = null,
+    right: Int? = null,
+    bottom: Int? = null
+) {
+    val layoutParams = itemView.layoutParams as FrameLayout.LayoutParams
+    layoutParams.setMargins(
+        left ?: layoutParams.leftMargin,
+        top ?: layoutParams.topMargin,
+        right ?: layoutParams.rightMargin,
+        bottom ?: layoutParams.bottomMargin
+    )
+    itemView.layoutParams = layoutParams
+}
+
+fun setLinearMargin(
+    itemView: View,
+    left: Int? = null,
+    top: Int? = null,
+    right: Int? = null,
+    bottom: Int? = null
+) {
+    val layoutParams = itemView.layoutParams as LinearLayoutCompat.LayoutParams
+    layoutParams.setMargins(
+        left ?: layoutParams.leftMargin,
+        top ?: layoutParams.topMargin,
+        right ?: layoutParams.rightMargin,
+        bottom ?: layoutParams.bottomMargin
+    )
+    itemView.layoutParams = layoutParams
 }

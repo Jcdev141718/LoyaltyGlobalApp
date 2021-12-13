@@ -13,15 +13,19 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:fontFamily">@font/poppins</item>
+
         <!--[START] Dark ThemeColor-->
         <item name="main_background" type="color">@color/background_dark</item>
         <item name="border" type="color">@color/border_dark</item>
         <item name="heading" type="color">@color/heading_dark</item>
         <item name="paragraph" type="color">@color/paragraph_dark</item>
         <item name="main_card" type="color">@color/card_dark</item>
+        <item name="main_divider" type="color">@color/divider_dark</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_dark</item>
+        <item name="main_ripple_color" type="color">@color/main_ripple_color_dark</item>
         <item name="explore_chip_bg" type="color">@color/green</item>
-        <item name="android:letterSpacing">-0.03</item>
         <!--[END] Dark ThemeColor-->
     </style>
 

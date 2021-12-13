@@ -6,7 +6,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.main.view.activity.WalletlyActivity">
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:background="?main_background"
+        tools:ignore="UnusedAttribute">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_my_deal_offers"
@@ -15,29 +18,38 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/featured_deals_promotions"
+            android:text="@string/my_deals_offers"
+            app:layout_constraintBottom_toTopOf="@+id/rv_deal_offer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_discover"
-            style="@style/ParagraphRegular13"
+            android:id="@+id/txt_see_all"
+            style="@style/HeadingMedium12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            android:text="@string/discover_these_featured_deals_and_games"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_my_deal_offers" />
+            android:foreground="@drawable/default_ripple_corner"
+            android:padding="@dimen/dp_16"
+            android:text="@string/see_all"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_my_deal_offers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_my_deal_offers" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.HorizontalRecyclerViewHelper
             android:id="@+id/rv_deal_offer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_24"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_discover" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_my_deal_offers"
+            tools:listitem="@layout/item_my_deal_offers" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

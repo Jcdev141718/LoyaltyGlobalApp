@@ -55,6 +55,14 @@
         <item name="android:textSize">@dimen/sp_13</item>
     </style>
 
+    <style name="WhiteMedium13">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+    </style>
+
     <style name="HeadingRegular10">
         <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins</item>
         <item name="android:textColor">?heading</item>
@@ -212,4 +220,5 @@
         <item name="android:lineSpacingExtra">-5dp</item>
         <item name="android:gravity">center</item>
     </style>
+
 </resources>

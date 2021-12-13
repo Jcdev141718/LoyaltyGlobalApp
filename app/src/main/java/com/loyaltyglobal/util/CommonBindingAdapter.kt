@@ -14,6 +14,14 @@ fun setImage(imageView: AppCompatImageView,url : String?){
         imageView.setImage(url)
     }
 }
+
+
+@BindingAdapter("setCircleImage")
+fun setCircleImage(imageView: AppCompatImageView,url : String?){
+    url?.let {
+        imageView.setImage(url,true)
+    }
+}
 @BindingAdapter("android:countryFlag")
 fun setCountryFlag(txtFlag: AppCompatTextView, url: String) {
     if (url.isNotEmpty()) {

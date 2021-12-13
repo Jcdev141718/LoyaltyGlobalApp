@@ -20,6 +20,9 @@
         <item name="paragraph" type="color">@color/paragraph_light</item>
         <item name="main_card" type="color">@color/card_light</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
+        <item name="explore_chip_bg" type="color">@color/heading_light</item>
+        <item name="black_white" type="color">@color/white</item>
+        <item name="explore_business" type="color">@color/white</item>
         <!--[START] ThemeColor-->
     </style>
 

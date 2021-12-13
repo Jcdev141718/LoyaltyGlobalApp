@@ -1,4 +1,4 @@
-package com.loyaltyglobal.ui.main.view.viewmodels
+package com.loyaltyglobal.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

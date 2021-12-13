@@ -6,7 +6,7 @@
     android:background="?main_background"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".ui.main.view.fragments.DealsAndOffersFragment">
+    tools:context=".ui.main.view.fragment.DealsAndOffersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_explore_deals_offers"

@@ -82,4 +82,11 @@
     <string name="invalid_otp">Invali OTP</string>
     <string name="please_select_contry_code">Please select contry code</string>
     <string name="next">Next</string>
+    <string name="bottom_navigation_user">User</string>
+    <string name="notification">Notification</string>
+    <string name="no_notification">No Notification</string>
+    <string name="filters">Filters</string>
+    <string name="business_type">Business Type</string>
+    <string name="clear_all">Clear all</string>
+    <string name="apply">Apply</string>
 </resources>

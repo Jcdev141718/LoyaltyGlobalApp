@@ -1,10 +1,10 @@
-package com.loyaltyglobal.ui.main.view.adapters
+package com.loyaltyglobal.ui.main.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.loyaltyglobal.ui.main.view.fragments.BusinessFragment
-import com.loyaltyglobal.ui.main.view.fragments.DealsAndOffersFragment
+import com.loyaltyglobal.ui.main.view.fragment.BusinessFragment
+import com.loyaltyglobal.ui.main.view.fragment.DealsAndOffersFragment
 
 /**
  * Created by Abhin.

@@ -1,4 +1,4 @@
-package com.loyaltyglobal.ui.adapter
+package com.loyaltyglobal.ui.main.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.CountryCodeData
 import com.loyaltyglobal.databinding.CountryListBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 @SuppressLint("SetTextI18n")
@@ -58,7 +60,9 @@ class CountryAdapter(var mCountryCodeList: ArrayList<CountryCodeData>, var mCoun
                 } else {
                     val filteredList: ArrayList<CountryCodeData> = ArrayList()
                     for (row in mCountryCodeList) {
-                        if (row.countryName?.toLowerCase()!!.contains(charString.toLowerCase())) {
+                        if (row.countryName?.lowercase(Locale.getDefault())!!.contains(charString.lowercase(
+                                Locale.getDefault()
+                            ))) {
                             filteredList.add(row)
                         }
                     }
@@ -69,6 +73,7 @@ class CountryAdapter(var mCountryCodeList: ArrayList<CountryCodeData>, var mCoun
                 return filterResults
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, filterResults: FilterResults?) {
                 mFilterList = filterResults?.values as ArrayList<CountryCodeData>

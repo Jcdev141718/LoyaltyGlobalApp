@@ -26,9 +26,21 @@
         <item name="navigation_inactive" type="color">@color/navigation_inactive_dark</item>
         <item name="main_ripple_color" type="color">@color/main_ripple_color_dark</item>
         <item name="explore_chip_bg" type="color">@color/green</item>
+        <item name="black_white" type="color">@color/black</item>
+        <item name="explore_business" type="color">@color/black_medium</item>
         <!--[END] Dark ThemeColor-->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_bottom_sheet</item>
+    </style>
 
 
 </resources>

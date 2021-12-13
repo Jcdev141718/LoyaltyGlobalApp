@@ -283,4 +283,8 @@ object CountryList {
         mCountryList.add(CountryCodeData("ZW", "Zimbabwe ", "+263"))
         return mCountryList
     }
+
+    fun getCountryDataByCode(networkCountryIso: String?): CountryCodeData? {
+        return setCountryList().find { it.key.equals(networkCountryIso, true) }
+    }
 }

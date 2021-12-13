@@ -46,7 +46,8 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
 
     private fun setOnClickListener() {
         mBinding.txtResendCode.setOnClickListener {
-            activity?.let { it1 -> PhoneAuthHelper.resendVerificationCode(it1, phoneNumber) }
+            //TODO: Enable this code in final
+//            activity?.let { it1 -> PhoneAuthHelper.resendVerificationCode(it1, phoneNumber) }
         }
         mBinding.imgBack.setOnClickListener {
             activity?.onBackPressed()

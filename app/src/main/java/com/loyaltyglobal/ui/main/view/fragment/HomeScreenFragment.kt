@@ -23,6 +23,11 @@ import com.loyaltyglobal.ui.main.adapter.MyDealOfferAdapter
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.clickWithDebounce
+import com.loyaltyglobal.ui.main.view.fragments.QrCodeScannerFragment
+import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.util.clickWithDebounce
+import com.loyaltyglobal.util.openBottomSheet
+import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.setImage
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,9 +49,9 @@ class HomeScreenFragment : BaseFragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_screen, container, false)
+        binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -84,10 +89,28 @@ class HomeScreenFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        clickListener()
+    }
+
+    private fun clickListener() {
+        binding.layoutHomeScreenToolbar.imgNotification.setOnClickListener {
+            hideBottomNavigation()
+            val mNotificationFragment = NotificationFragment()
+            activity?.addReplaceFragment(
+                R.id.fl_main_container, mNotificationFragment,
+                addFragment = true,
+                addToBackStack = true
+            )
+        }
     }
 
     private fun init() {
         binding.layoutHomeScreenToolbar.imgLogo.setImage(R.drawable.icon_logo)
+        binding.layoutHomeScreenToolbar.imgCamera.clickWithDebounce {
+            activity?.addReplaceFragment(R.id.fl_main_container,
+                QrCodeScannerFragment(), addFragment = true, addToBackStack = true)
+        }
+        binding.layoutHomeScreenToolbar.imgQrCode.clickWithDebounce { openBottomSheet(ShowQrBottomSheetFragment()) }
         setClick()
     }
 

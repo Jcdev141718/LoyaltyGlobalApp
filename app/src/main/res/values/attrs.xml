@@ -8,4 +8,6 @@
     <attr name="explore_chip_bg" format="color" />
     <attr name="main_divider" format="color" />
     <attr name="main_ripple_color" format="color" />
+    <attr name="black_white" format="color" />
+    <attr name="explore_business" format="color"/>
 </resources>

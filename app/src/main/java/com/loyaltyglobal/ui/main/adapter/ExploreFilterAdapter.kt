@@ -1,24 +1,24 @@
-package com.loyaltyglobal.ui.main.view.adapters
+package com.loyaltyglobal.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
-import com.loyaltyglobal.data.model.BusinessData
-import com.loyaltyglobal.databinding.ItemBusinessBinding
+import com.loyaltyglobal.data.model.ExploreFilterData
+import com.loyaltyglobal.databinding.ItemExploreFilterBinding
 
 /**
  * Created by Abhin.
  */
-class BusinessAdapter(var businessList: ArrayList<BusinessData>) :
-    RecyclerView.Adapter<BusinessAdapter.BusinessesViewHolder>() {
+class ExploreFilterAdapter(var filterList: ArrayList<ExploreFilterData>) :
+    RecyclerView.Adapter<ExploreFilterAdapter.BusinessesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessesViewHolder {
         return BusinessesViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_business,
+                R.layout.item_explore_filter,
                 parent,
                 false
             )
@@ -26,14 +26,14 @@ class BusinessAdapter(var businessList: ArrayList<BusinessData>) :
     }
 
     override fun onBindViewHolder(holder: BusinessesViewHolder, position: Int) {
-        holder.bind(businessList[position])
+        holder.bind(filterList[position])
     }
 
-    override fun getItemCount() = businessList.size
+    override fun getItemCount() = filterList.size
 
-    class BusinessesViewHolder(var itemCardListBinding: ItemBusinessBinding) :
-        RecyclerView.ViewHolder(itemCardListBinding.root) {
-        fun bind(card: BusinessData) = itemCardListBinding.apply {
+    class BusinessesViewHolder(var itemExploreFilterBinding: ItemExploreFilterBinding) :
+        RecyclerView.ViewHolder(itemExploreFilterBinding.root) {
+        fun bind(card: ExploreFilterData) = itemExploreFilterBinding.apply {
             data = card
             executePendingBindings()
         }

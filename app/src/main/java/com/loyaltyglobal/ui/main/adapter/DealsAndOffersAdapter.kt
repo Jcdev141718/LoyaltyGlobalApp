@@ -1,4 +1,4 @@
-package com.loyaltyglobal.ui.main.view.adapters
+package com.loyaltyglobal.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

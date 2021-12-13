@@ -1,16 +1,17 @@
-package com.loyaltyglobal.ui.main.view.fragments
+package com.loyaltyglobal.ui.main.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.data.model.BusinessData
 import com.loyaltyglobal.databinding.FragmentBusinessBinding
 import com.loyaltyglobal.ui.base.BaseFragment
-import com.loyaltyglobal.ui.main.view.adapters.BusinessAdapter
-import com.loyaltyglobal.ui.main.view.viewmodels.BusinessViewModel
+import com.loyaltyglobal.ui.main.adapter.BusinessAdapter
+import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
 
@@ -19,7 +20,7 @@ class BusinessFragment : BaseFragment() {
     lateinit var mAdapter: BusinessAdapter
     lateinit var mBinding: FragmentBusinessBinding
     private var mBusinessList: ArrayList<BusinessData> = ArrayList()
-    private val mBusinessViewModel: BusinessViewModel by viewModels()
+    private val mBusinessViewModel: ExploreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -20,9 +20,10 @@ class SplashActivity : AppCompatActivity() {
         mBinding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         mBinding.imgSplash.setImage(R.drawable.icon_logo)
+
         lifecycleScope.launch {
             delay(2000)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity,LoginActivity::class.java))
             finish()
         }
     }

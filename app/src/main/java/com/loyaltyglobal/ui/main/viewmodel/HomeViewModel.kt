@@ -10,7 +10,6 @@ import com.loyaltyglobal.data.model.response.MyDealOfferData
 import com.loyaltyglobal.data.reposotory.HomeRepository
 import com.loyaltyglobal.data.source.local.DatabaseDAO
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
-import com.loyaltyglobal.data.source.localModels.userPassResponse.UserPassResponse
 import com.loyaltyglobal.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

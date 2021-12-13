@@ -52,4 +52,5 @@
     <string name="_41">+41</string>
     <string name="invalid_otp">Invali OTP</string>
     <string name="please_select_contry_code">Please select contry code</string>
+    <string name="next">Next</string>
 </resources>

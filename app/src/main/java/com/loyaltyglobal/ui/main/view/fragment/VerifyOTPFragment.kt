@@ -39,7 +39,7 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         PhoneAuthHelper.mPhoneAuthInterface = this
-        activity?.let { PhoneAuthHelper.getNUmber(it, phoneNumber) }
+//        activity?.let { PhoneAuthHelper.getNUmber(it, phoneNumber) }
         setOnClickListener()
 
     }

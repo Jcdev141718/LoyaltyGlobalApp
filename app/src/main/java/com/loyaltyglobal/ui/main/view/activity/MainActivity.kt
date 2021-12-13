@@ -7,6 +7,8 @@ import com.loyaltyglobal.R
 import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.databinding.ActivityMainBinding
 import com.loyaltyglobal.ui.main.view.fragment.ExploreFragment
+import com.loyaltyglobal.ui.main.view.fragment.StoriesFragment
+import com.loyaltyglobal.ui.main.view.fragments.ProfileFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,8 +46,20 @@ class MainActivity : AppCompatActivity() {
                         addToBackStack = false
                     )
                 }
-                R.id.menu_star -> {}
-                R.id.menu_user -> {}
+                R.id.menu_stories -> {
+                    addReplaceFragment(
+                        R.id.fl_main_container, StoriesFragment(),
+                        addFragment = true,
+                        addToBackStack = false
+                    )
+                }
+                R.id.menu_profile -> {
+                    addReplaceFragment(
+                        R.id.fl_main_container, ProfileFragment(),
+                        addFragment = true,
+                        addToBackStack = false
+                    )
+                }
             }
         }
     }

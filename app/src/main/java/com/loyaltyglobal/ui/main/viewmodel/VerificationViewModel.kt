@@ -14,13 +14,15 @@ import javax.inject.Inject
 @HiltViewModel
 class VerificationViewModel @Inject constructor(): BaseViewModel(){
 
-    lateinit var mCountryData: CountryCodeData
+    var mCountryData: CountryCodeData?=null
     lateinit var mMobileNumber: String
     var otpResponse : MutableLiveData<OtpResponse> = MutableLiveData()
 
     fun getCurrentCountryData(context: Context) {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        mCountryData = CountryList.getCountryDataByCode(tm.networkCountryIso)!!
+        CountryList.getCountryDataByCode(tm.networkCountryIso)?.let {
+            mCountryData = it
+        }
     }
 
     fun sendOtp(context: Context, mobileNumber: String) {
@@ -32,7 +34,7 @@ class VerificationViewModel @Inject constructor(): BaseViewModel(){
                 otpResponse.postValue(OtpResponse.Error(context.getString(R.string.invalid_mobile_number_length, MINIMUM_LENGTH_OF_NUMBER)))
             }
             else -> {
-                mMobileNumber = "${mCountryData.countryCode}${mobileNumber}"
+                mMobileNumber = "${mCountryData?.countryCode}${mobileNumber}"
                 otpResponse.postValue(OtpResponse.Success)
             }
         }

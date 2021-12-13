@@ -121,7 +121,7 @@
     <style name="fragmentClickable">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@android:color/white</item>
+        <item name="android:background">?main_background</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
@@ -146,6 +146,18 @@
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
     </style>
 
+    <style name="poppinsNormal13Grey">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="poppinsNormal12Grey">
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
     <style name="poppinsBold22Black">
         <item name="android:textSize">@dimen/sp_22</item>
         <item name="android:textColor">?heading</item>
@@ -161,6 +173,12 @@
 
     <style name="poppinsNormal13Black">
         <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="poppinsNormal16Black">
+        <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">?heading</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>

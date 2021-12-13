@@ -12,3 +12,13 @@
 /captures
 .externalNativeBuild
 .cxx
+/.idea/.gitignore
+/.idea/compiler.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/gradle.xml
+/app/src/main/res/drawable/ic_brand_logo_test.png
+/app/src/main/res/drawable/ic_gucci.jpg
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/app/src/main/res/mipmap-xxhdpi/test_image.png
+/.idea/vcs.xml

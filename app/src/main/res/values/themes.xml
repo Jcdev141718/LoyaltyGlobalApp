@@ -20,6 +20,8 @@
         <item name="paragraph" type="color">@color/paragraph_light</item>
         <item name="main_card" type="color">@color/card_light</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
+        <item name="subtitle_explore" type="color">@color/subtitle_explore_light</item>
+
         <!--[START] ThemeColor-->
     </style>
 

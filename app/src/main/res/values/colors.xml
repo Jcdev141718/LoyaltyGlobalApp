@@ -49,6 +49,10 @@
 
     <color name="navigation_inactive_light">#474747</color>
     <color name="navigation_inactive_dark">#CCCCCC</color>
+
+    <color name="subtitle_explore_light">#5F6368</color>
+    <color name="subtitle_explore_dark">#E4E5E7</color>
     <!--[END] Dark & light themes Color-->
+
 
 </resources>

@@ -32,7 +32,10 @@
     <string name="invalid_password">Invalid password</string>
     <string name="permission_denied_by_system">Permission denied by system</string>
     <string name="permission_denied">Permission denied</string>
+    <string name="map_api_key">AIzaSyDsdYfi3HeW6yXw-LRY_2CVOGgNMQxbobA</string>
 
+    <string name="see_more">See more</string>
+    <string name="see_less">See less</string>
 
     <!--Explore [start]-->
     <string name="explore_businesses">Businesses</string>
@@ -50,6 +53,8 @@
     <string name="my_deals_offers">My Deals &amp; Offers</string>
     <string name="brand_name">Brand Name</string>
     <string name="see_all">See All</string>
+    <!-- [START] TODO: DUMMY DATA Remove after come from server -->
+
     <string name="stories">Stories</string>
     <!-- [START] TODO: DUMMY DATA Remove after come from server -->
     <string name="home_screen_need_for_next_level_points">10,050 pt</string>
@@ -57,6 +62,18 @@
     <string name="home_screen_day_expiration">85 days to expiration</string>
     <string name="get_10_entire_menu">Get 10% entire menu</string>
     <string name="Versace">Versace</string>
+    <string name="cluccboi">Cluccboi</string>
+    <string name="american_style_cluccin_good">American-style Cluccin\' Good™ Fried Chicken! Delivered straight to your door from any of the leading food delivery apps - find us on Uber Eats</string>
+    <string name="shop_3_g7_capri_on_via_roma">Shop 3 G7, Capri on Via Roma Gold Coast, QLD, Australia 4217</string>
+    <string name="_1800_646_990">(1800) 646-990</string>
+    <string name="dummy_email">info@shadowchef.co</string>
+    <string name="dummy_link">http://www.shadowchef.co/cluccboi</string>
+    <string name="cluccboi_co">cluccboi.co</string>
+    <string name="earn_points_on_your_purchases">Earn Points on your purchases</string>
+    <string name="_4_point">4 Point</string>
+    <string name="discounts">Discounts</string>
+    <string name="these_discounts_will_apply">These discounts will apply on your purchase.</string>
+
     <!-- [END] TODO: DUMMY DATA Remove after come from server -->
     <!-- [END] HomeScreen-->
     <string name="no_internet_available">No Internet available</string>
@@ -82,4 +99,11 @@
     <string name="invalid_otp">Invali OTP</string>
     <string name="please_select_contry_code">Please select contry code</string>
     <string name="next">Next</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="earn_point">Earn Point</string>
+    <string name="_2_point">2 Point</string>
+    <string name="per_visit">/per visit</string>
+
+
+
 </resources>

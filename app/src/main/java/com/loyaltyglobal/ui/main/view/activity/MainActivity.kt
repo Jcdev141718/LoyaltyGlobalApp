@@ -10,8 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       val myFragment= StoriesFragment()
-       supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,myFragment).addToBackStack(null).commit()
+
 
     }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -19,14 +18,14 @@
             app:elevation="@dimen/dp_40">
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
+                android:id="@+id/gl_transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.5" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgStory"
+                android:id="@+id/img_story"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -34,39 +33,39 @@
                 app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imgGradient"
+                android:id="@+id/img_gradient"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/transparent_gradient"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/gl_transparent"
                 app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgBorder"
+                android:id="@+id/img_border"
                 android:layout_width="@dimen/dp_56"
                 android:layout_height="@dimen/dp_56"
                 android:layout_marginBottom="@dimen/dp_8"
                 android:src="@drawable/ic_round"
-                app:layout_constraintBottom_toTopOf="@+id/tvStoryName"
+                app:layout_constraintBottom_toTopOf="@+id/txt_story_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgLogo"
+                android:id="@+id/img_logo"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="@dimen/dp_1"
                 android:src="@drawable/ic_test_logo"
-                app:layout_constraintBottom_toBottomOf="@id/imgBorder"
-                app:layout_constraintEnd_toEndOf="@id/imgBorder"
-                app:layout_constraintStart_toStartOf="@id/imgBorder"
-                app:layout_constraintTop_toTopOf="@id/imgBorder" />
+                app:layout_constraintBottom_toBottomOf="@id/img_border"
+                app:layout_constraintEnd_toEndOf="@id/img_border"
+                app:layout_constraintStart_toStartOf="@id/img_border"
+                app:layout_constraintTop_toTopOf="@id/img_border" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvStoryName"
+                android:id="@+id/txt_story_name"
                 style="@style/HeadingRegular13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +75,7 @@
                 android:text="@string/Versace"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

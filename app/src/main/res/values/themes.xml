@@ -20,6 +20,7 @@
         <item name="paragraph" type="color">@color/paragraph_light</item>
         <item name="main_card" type="color">@color/card_light</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
+        <item name="main_divider" type="color">@color/divider_light</item>
         <!--[START] ThemeColor-->
     </style>
 

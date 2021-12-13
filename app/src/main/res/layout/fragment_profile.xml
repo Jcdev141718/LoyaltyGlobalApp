@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
         android:layout_marginTop="@dimen/dp_16"
-        android:background="@color/gray_line"
+        android:background="?main_divider"
         android:elevation="@dimen/dp_1"
         app:layout_constraintTop_toBottomOf="@id/title" />
 
@@ -126,7 +126,7 @@
         android:id="@+id/view_line_1"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/gray_line"
+        android:background="?main_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img_transaction"
         app:layout_constraintTop_toBottomOf="@+id/ll_transaction" />
@@ -169,7 +169,7 @@
         android:id="@+id/view_line_2"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/gray_line"
+        android:background="?main_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img_dark_mode"
         app:layout_constraintTop_toBottomOf="@+id/txt_dark_mode" />
@@ -204,7 +204,7 @@
         android:id="@+id/view_line_3"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/gray_line"
+        android:background="?main_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img_logout"
         app:layout_constraintTop_toBottomOf="@+id/txt_logout" />

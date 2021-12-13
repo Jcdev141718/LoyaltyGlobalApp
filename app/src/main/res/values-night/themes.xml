@@ -22,7 +22,6 @@
         <item name="heading" type="color">@color/heading_dark</item>
         <item name="paragraph" type="color">@color/paragraph_dark</item>
         <item name="main_card" type="color">@color/card_dark</item>
-        <item name="main_divider" type="color">@color/divider_dark</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_dark</item>
         <item name="main_ripple_color" type="color">@color/main_ripple_color_dark</item>
         <item name="explore_chip_bg" type="color">@color/green</item>

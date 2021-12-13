@@ -67,8 +67,8 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let { verificationViewModel.getCurrentCountryData(it) }
-        mBinding.txtFlag.text = verificationViewModel.mCountryData.key?.let { getCountryFlag(it) }
-        mBinding.textCountryCode.text = verificationViewModel.mCountryData.countryCode
+        mBinding.txtFlag.text = verificationViewModel.mCountryData?.key?.let { getCountryFlag(it) }
+        mBinding.textCountryCode.text = verificationViewModel.mCountryData?.countryCode
         setOnClickListener()
     }
 
@@ -94,7 +94,7 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
             activity?.onBackPressed()
         }
         mBinding.clTxtNext.setOnClickListener {
-            if (verificationViewModel.mCountryData.countryCode.isNullOrEmpty()) {
+            if (verificationViewModel.mCountryData?.countryCode.isNullOrEmpty()) {
                 activity?.showToast(getString(R.string.please_select_country_code))
             } else {
                 context?.let { it1 -> verificationViewModel.sendOtp(it1, mBinding.editTextNumber.text.toString()) }

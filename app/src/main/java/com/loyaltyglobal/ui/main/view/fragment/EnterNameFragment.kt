@@ -53,6 +53,7 @@ class EnterNameFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.please_enter_name), Toast.LENGTH_SHORT).show()
             }else{
                 startActivity(Intent(context, MainActivity::class.java))
+                activity?.finish()
             }
         }
     }

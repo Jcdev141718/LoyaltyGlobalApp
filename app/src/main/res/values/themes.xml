@@ -20,10 +20,8 @@
         <item name="heading" type="color">@color/heading_light</item>
         <item name="paragraph" type="color">@color/paragraph_light</item>
         <item name="main_card" type="color">@color/card_light</item>
-        <item name="main_divider" type="color">@color/divider_light</item>
         <item name="main_ripple_color" type="color">@color/main_ripple_color_light</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
-        <item name="main_divider" type="color">@color/divider_light</item>
         <item name="explore_chip_bg" type="color">@color/heading_light</item>
         <item name="black_white" type="color">@color/white</item>
         <item name="explore_business" type="color">@color/white</item>

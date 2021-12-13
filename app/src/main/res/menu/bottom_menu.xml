@@ -19,7 +19,7 @@
         app:cnb_textColor="@color/white" />
 
     <item
-        android:id="@+id/menu_star"
+        android:id="@+id/menu_stories"
         android:icon="@drawable/ic_bottom_star"
         android:title="@string/stories"
         app:cnb_backgroundColor="?explore_chip_bg"
@@ -27,7 +27,7 @@
         app:cnb_textColor="@color/white" />
 
     <item
-        android:id="@+id/menu_user"
+        android:id="@+id/menu_profile"
         android:icon="@drawable/ic_bottom_user"
         android:title="@string/bottom_navigation_user"
         app:cnb_backgroundColor="?explore_chip_bg"

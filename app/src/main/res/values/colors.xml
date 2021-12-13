@@ -51,9 +51,6 @@
     <color name="card_light">#F5F5F5</color>
     <color name="card_dark">#242424</color>
 
-    <color name="divider_light">#F2F2F2</color>
-    <color name="divider_dark">#262626</color>
-
     <color name="navigation_inactive_light">#474747</color>
     <color name="navigation_inactive_dark">#CCCCCC</color>
 

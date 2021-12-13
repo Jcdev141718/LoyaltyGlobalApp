@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.R
@@ -20,14 +19,11 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.HomeScreenDealPromotionsAdapter
 import com.loyaltyglobal.ui.main.adapter.HomeScreenStoriesAdapter
 import com.loyaltyglobal.ui.main.adapter.MyDealOfferAdapter
+import com.loyaltyglobal.ui.main.view.fragments.QrCodeScannerFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.clickWithDebounce
-import com.loyaltyglobal.ui.main.view.fragments.QrCodeScannerFragment
-import com.loyaltyglobal.util.addReplaceFragment
-import com.loyaltyglobal.util.clickWithDebounce
 import com.loyaltyglobal.util.openBottomSheet
-import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.setImage
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -106,22 +102,28 @@ class HomeScreenFragment : BaseFragment() {
 
     private fun init() {
         binding.layoutHomeScreenToolbar.imgLogo.setImage(R.drawable.icon_logo)
-        binding.layoutHomeScreenToolbar.imgCamera.clickWithDebounce {
-            activity?.addReplaceFragment(R.id.fl_main_container,
-                QrCodeScannerFragment(), addFragment = true, addToBackStack = true)
-        }
-        binding.layoutHomeScreenToolbar.imgQrCode.clickWithDebounce { openBottomSheet(ShowQrBottomSheetFragment()) }
         setClick()
     }
 
     private fun setClick() {
+        binding.layoutHomeScreenToolbar.imgCamera.clickWithDebounce {
+            activity?.addReplaceFragment(
+                R.id.fl_main_container,
+                QrCodeScannerFragment(),
+                addFragment = true,
+                addToBackStack = true
+            )
+        }
+        binding.layoutHomeScreenToolbar.imgQrCode.clickWithDebounce {
+            openBottomSheet(
+                ShowQrBottomSheetFragment()
+            )
+        }
         binding.layoutHomeScreenToolbar.imgNotification.clickWithDebounce {}
-        binding.layoutHomeScreenToolbar.imgCamera.clickWithDebounce {}
-        binding.layoutHomeScreenToolbar.imgQrCode.clickWithDebounce {}
         binding.layoutHomeScreenMyDealOffer.txtSeeAll.clickWithDebounce {}
         binding.layoutHomeScreenStories.txtSeeAll.clickWithDebounce {
             activity?.addReplaceFragment(
-                R.id.fl_container, StoriesFragment(), addFragment = true, addToBackStack = true
+                R.id.fl_main_container, StoriesFragment(), addFragment = true, addToBackStack = true
             )
         }
 

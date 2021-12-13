@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
 import com.loyaltyglobal.databinding.HomeScreenStoriesItemBinding
-import com.loyaltyglobal.util.setFrameMargin
-import kotlin.math.roundToInt
 
 /**
  * Created by Abhin.

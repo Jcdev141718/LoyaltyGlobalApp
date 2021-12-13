@@ -28,6 +28,7 @@
                 android:layout_height="@dimen/dp_38"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/dp_12"
+                android:tint="?heading"
                 android:background="@drawable/default_ripple_round"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/ic_icon_back" />

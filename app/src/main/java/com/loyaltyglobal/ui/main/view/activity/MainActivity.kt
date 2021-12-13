@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.loyaltyglobal.R
+import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.databinding.ActivityMainBinding
 import com.loyaltyglobal.ui.main.view.fragment.ExploreFragment
-import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import dagger.hilt.android.AndroidEntryPoint

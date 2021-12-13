@@ -7,10 +7,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentHomeScreenBinding
 import com.loyaltyglobal.ui.base.BaseFragment
+import com.loyaltyglobal.ui.main.view.fragments.QrCodeScannerFragment
+import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.util.clickWithDebounce
+import com.loyaltyglobal.util.openBottomSheet
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.setImage
 
@@ -21,9 +24,9 @@ class HomeScreenFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_screen, container, false)
+        binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,5 +50,10 @@ class HomeScreenFragment : BaseFragment() {
 
     private fun init() {
         binding.layoutHomeScreenToolbar.imgLogo.setImage(R.drawable.icon_logo)
+        binding.layoutHomeScreenToolbar.imgCamera.clickWithDebounce {
+            activity?.addReplaceFragment(R.id.fl_main_container,
+                QrCodeScannerFragment(), addFragment = true, addToBackStack = true)
+        }
+        binding.layoutHomeScreenToolbar.imgQrCode.clickWithDebounce { openBottomSheet(ShowQrBottomSheetFragment()) }
     }
 }

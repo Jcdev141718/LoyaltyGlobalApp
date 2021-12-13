@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fragment_clickable_theme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.view.fragment.ExploreFilterFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_notification"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:contentInsetLeft="@dimen/dp_0"
+        app:contentInsetStart="@dimen/dp_0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_notification_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_12"
+                android:background="@drawable/default_ripple_round"
+                android:padding="@dimen/dp_10"
+                android:src="@drawable/ic_filter_close" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_14"
+                android:layout_marginTop="@dimen/dp_2"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="start|center"
+                android:text="@string/filters"
+                android:textColor="?heading"
+                android:textSize="@dimen/sp_20" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/view_tb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/tb_notification" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_type"
+        style="@style/HeadingSemiBold18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_26"
+        android:text="@string/business_type"
+        app:layout_constraintTop_toBottomOf="@id/view_tb" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_explore_filter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_marginTop="@dimen/dp_4"
+        app:layout_constraintBottom_toTopOf="@id/view_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_type" />
+
+    <View
+        android:id="@+id/view_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/ll_filter" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_16"
+        android:weightSum="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_clear"
+            android:layout_width="@dimen/dp_68"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:paddingVertical="@dimen/dp_12"
+            android:text="@string/clear_all"
+            android:textColor="@color/ripple"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_apply"
+            android:layout_width="@dimen/dp_146"
+            android:layout_height="wrap_content"
+            android:background="@drawable/explore_apply_btn_bg"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:paddingVertical="@dimen/dp_12"
+            android:text="@string/apply"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/fl_container"
+        android:id="@+id/fl_main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintBottom_toTopOf="@id/menu_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:layout_gravity="bottom"
+        android:background="?main_background"
+        android:elevation="@dimen/dp_2"
+        app:cnb_menuResource="@menu/bottom_menu"
+        app:cnb_textAppearance="@style/whiteBottomPoppinSemiBold14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

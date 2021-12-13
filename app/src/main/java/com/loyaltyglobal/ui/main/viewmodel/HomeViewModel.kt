@@ -1,12 +1,9 @@
 package com.loyaltyglobal.ui.main.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.loyaltyglobal.data.reposotory.HomeRepository
 import com.loyaltyglobal.data.source.local.DatabaseDAO
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
-import com.loyaltyglobal.data.source.localModels.userPassResponse.UserPassResponse
 import com.loyaltyglobal.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

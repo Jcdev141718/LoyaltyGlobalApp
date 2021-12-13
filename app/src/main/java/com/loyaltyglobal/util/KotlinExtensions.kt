@@ -1,11 +1,16 @@
 package com.loyaltyglobal.util
 
 import android.content.ContextWrapper
+import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import java.util.*
+
 
 /**
  * Created by Abhin.
@@ -34,15 +39,28 @@ fun View.getParentActivity(): AppCompatActivity? {
 }
 
 fun AppCompatImageView.setImage(url: Any, isRound: Boolean = false) {
-    if (isRound){
+    if (isRound) {
         Glide.with(getParentActivity()!!)
             .load(url)
             .circleCrop()
             .into(this)
-    }else{
+    } else {
         Glide.with(getParentActivity()!!)
             .load(url)
             .into(this)
+    }
+}
+
+@BindingAdapter("setNotificationBg")
+fun ConstraintLayout.setNotificationBg(isNotificationRead: Boolean = false) {
+    if (isNotificationRead) {
+        val value = TypedValue()
+        context.theme.resolveAttribute(com.loyaltyglobal.R.attr.main_card, value, true)
+        this.setBackgroundColor(value.data)
+    } else {
+        val value = TypedValue()
+        context.theme.resolveAttribute(com.loyaltyglobal.R.attr.black_white, value, true)
+        this.setBackgroundColor(value.data)
     }
 }
 

@@ -5,10 +5,7 @@
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/white</item>
-        <item name="colorSecondaryVariant">@color/white</item>
-        <item name="colorOnSecondary">@color/white</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -21,10 +18,9 @@
         <item name="main_card" type="color">@color/card_dark</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_dark</item>
         <item name="explore_chip_bg" type="color">@color/green</item>
+        <item name="black_white" type="color">@color/black</item>
+        <item name="explore_business" type="color">@color/black_medium</item>
         <item name="android:letterSpacing">-0.03</item>
         <!--[END] Dark ThemeColor-->
     </style>
-
-
-
 </resources>

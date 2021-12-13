@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentHomeScreenBinding
 import com.loyaltyglobal.ui.base.BaseFragment
+import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.setImage
 
 class HomeScreenFragment : BaseFragment() {
@@ -29,6 +30,19 @@ class HomeScreenFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        clickListener()
+    }
+
+    private fun clickListener() {
+        binding.layoutHomeScreenToolbar.imgNotification.setOnClickListener {
+            hideBottomNavigation()
+            val mNotificationFragment = NotificationFragment()
+            activity?.addReplaceFragment(
+                R.id.fl_main_container, mNotificationFragment,
+                addFragment = true,
+                addToBackStack = true
+            )
+        }
     }
 
     private fun init() {

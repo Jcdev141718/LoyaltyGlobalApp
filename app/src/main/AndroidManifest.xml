@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLearningProject">
         <activity
-            android:name=".ui.main.view.activity.WalletlyActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.view.activity.MainActivity"
             android:exported="false" />
         <activity

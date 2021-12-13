@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        homeViewModel.getSubBrands()
-        homeViewModel.getUserPassFromAgency()
+//        homeViewModel.getSubBrands()
+//        homeViewModel.getUserPassFromAgency()
     }
 }

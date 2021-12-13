@@ -82,4 +82,10 @@
     <string name="invalid_otp">Invali OTP</string>
     <string name="please_select_contry_code">Please select contry code</string>
     <string name="next">Next</string>
+    <string name="jhon_doe">Jhon Doe</string>
+    <string name="edit">Edit</string>
+    <string name="transactions">Transactions</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="log_out">Log Out</string>
+    <string name="keep_track_your_transactions">Keep track your transactions</string>
 </resources>

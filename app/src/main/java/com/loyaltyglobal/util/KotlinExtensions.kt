@@ -4,14 +4,16 @@ import android.app.Activity
 import android.content.ContextWrapper
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.loyaltyglobal.R
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.*
 
 
@@ -80,4 +82,17 @@ fun Activity.showToast(message: String){
         message,
         Toast.LENGTH_SHORT
     ).show()
+}
+
+fun View.setFullHeight() {
+    val layoutParams = this.layoutParams
+    layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+    this.layoutParams = layoutParams
+}
+
+fun Fragment.openBottomSheet(bottomSheet : BottomSheetDialogFragment) {
+    bottomSheet.show(
+        this.requireActivity().supportFragmentManager,
+        bottomSheet::class.java.simpleName
+    )
 }

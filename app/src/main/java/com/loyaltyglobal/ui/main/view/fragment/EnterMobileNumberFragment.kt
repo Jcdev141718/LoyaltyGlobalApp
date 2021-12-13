@@ -1,6 +1,7 @@
 package com.loyaltyglobal.ui.main.view.fragment
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,8 +79,9 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
                 context?.let { ContextCompat.getColor(it, R.color.green) }
                     ?.let { mBinding.viewLineNumber.setBackgroundColor(it) }
             }else{
-                context?.let { ContextCompat.getColor(it, R.color.gray_line) }
-                    ?.let { mBinding.viewLineNumber.setBackgroundColor(it) }
+                val value = TypedValue()
+                context?.theme?.resolveAttribute(R.attr.main_divider, value, true)
+                mBinding.viewLineNumber.setBackgroundColor(value.data)
             }
         }
         mBinding.txtFlag.setOnClickListener {

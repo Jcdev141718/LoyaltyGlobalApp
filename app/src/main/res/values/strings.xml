@@ -44,7 +44,6 @@
     <!--Explore [end]-->
 
     <!-- [START] HomeScreen-->
-    <string name="home_screen_title">Walletly</string>
     <string name="home_screen_need_for_next_level">needed for next level</string>
     <string name="discover_these_featured_deals_and_games">Discover these featured deals and games</string>
     <string name="featured_deals_promotions">Featured Deals &amp; Promotions</string>
@@ -62,4 +61,25 @@
     <!-- [END] HomeScreen-->
     <string name="no_internet_available">No Internet available</string>
 
+    <string name="enter_your_verification_code">Enter your \nverification code</string>
+    <string name="i_didn_t_my_code"><u>I didn\'t my code!</u></string>
+    <string name="hi_what_s_your_name">Hi! \nWhat\'s Your Name?</string>
+    <string name="your_name">Your Name</string>
+    <string name="hey_haider_enter_your_phone_number">Hey Haider, \nEnter your Phone Number</string>
+    <string name="search">Search</string>
+
+
+    <!-- [START] HomeScreen-->
+    <string name="home_screen_title">Walletly</string>
+    <!-- [END] HomeScreen-->
+    <string name="walletly">Walletly</string>
+    <string name="walletly_global">Walletly Global</string>
+    <string name="email">Email Address</string>
+    <string name="hi_there_let_s_get_started">Hi there! Let’s Get Started</string>
+    <string name="continue_with_apple">Continue with Apple</string>
+    <string name="or">OR</string>
+    <string name="_41">+41</string>
+    <string name="invalid_otp">Invali OTP</string>
+    <string name="please_select_contry_code">Please select contry code</string>
+    <string name="next">Next</string>
 </resources>

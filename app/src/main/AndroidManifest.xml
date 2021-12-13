@@ -20,17 +20,17 @@
             android:name=".ui.main.view.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.base.IntroActivity"
-            android:exported="true"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/SplashTheme">
+            android:name=".ui.main.view.activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.view.activity.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

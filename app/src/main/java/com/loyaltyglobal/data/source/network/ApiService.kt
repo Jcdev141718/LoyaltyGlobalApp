@@ -5,6 +5,7 @@ import com.loyaltyglobal.data.source.localModels.userPassResponse.UserPassRespon
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import okhttp3.ResponseBody
 
 
 interface ApiService {
@@ -14,4 +15,6 @@ interface ApiService {
 
     @GET("brand/mobile/sharedLoyality/subBrand")
     suspend fun getSubBrand(@Query("agencyId") agencyId : String) : Response<SubBrandResponse>
+
+    suspend fun login() : Response<ResponseBody>
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "789629008767",
+    "project_id": "loyaltyglobal-28cd9",
+    "storage_bucket": "loyaltyglobal-28cd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789629008767:android:3cdb1fe3f28a4a925e384a",
+        "android_client_info": {
+          "package_name": "com.loyaltyglobal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789629008767-pc9cpmuaud2uappqb2oe9mf9fs5h2dh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBECi5Ex10RRgTNQVvW4Hn-GCGD9smjz1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789629008767-pc9cpmuaud2uappqb2oe9mf9fs5h2dh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

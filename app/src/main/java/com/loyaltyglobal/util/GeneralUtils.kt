@@ -17,12 +17,16 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.loyaltyglobal.R
+import com.loyaltyglobal.util.Constants.REGEX_EMAIL
+import java.util.regex.Pattern
 
 /**
  * File holding all the methods of general interest.
@@ -189,6 +193,10 @@ fun Activity.statusBarDarkIcons(color: Int? = null, isLightStatusBar: Boolean = 
                 (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
     }
+}
+fun AppCompatEditText.isEmailValid(): Boolean {
+    val matcher = Pattern.compile(REGEX_EMAIL).matcher(text?.trim().toString())
+    return matcher.matches()
 }
 
 //hide the keyboard

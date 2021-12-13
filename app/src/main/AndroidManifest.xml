@@ -13,21 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLearningProject">
+
         <activity
-            android:name=".ui.main.view.activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.view.activity.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.view.activity.SplashActivity"
+            android:name=".ui.main.view.activity.IntroActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- <activity android:name=".ui.main.view.activity.SplashActivity" /> -->
+        </activity>
+
+        <activity
+            android:name=".ui.main.view.activity.SplashActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.main.view.activity.LoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.main.view.activity.MainActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

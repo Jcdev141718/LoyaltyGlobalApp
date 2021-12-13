@@ -2,6 +2,8 @@ package com.loyaltyglobal.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.loyaltyglobal.data.model.request.LoginRequest
+import com.loyaltyglobal.data.model.response.LoginResponse
 import com.loyaltyglobal.data.reposotory.AuthRepository
 import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.ui.base.BaseViewModel
@@ -10,21 +12,18 @@ import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
-/**
- * Created by Abhin.
- */
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : BaseViewModel() {
 
-    var logInResponse : MutableLiveData<NetworkResult<ResponseBody>> = MutableLiveData()
+    var logInResponse : MutableLiveData<NetworkResult<LoginResponse>> = MutableLiveData()
 
-    fun logIn() {
+    fun logIn(loginRequest: LoginRequest) {
         logInResponse.postValue(NetworkResult.Loading())
         viewModelScope.launch {
-            logInResponse.postValue(authRepository.login())
+            logInResponse.postValue(authRepository.getLogin(loginRequest))
         }
     }
 }

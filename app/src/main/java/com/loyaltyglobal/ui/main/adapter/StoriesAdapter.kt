@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-
 import com.loyaltyglobal.R
-import com.loyaltyglobal.databinding.ItemStoriesBinding
+import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
+import com.loyaltyglobal.databinding.StoriesItemBinding
 import com.loyaltyglobal.util.clickWithDebounce
 
 class StoriesAdapter(
-    private var storiesList: MutableList<String>,
-    private var clickInterface : ClickListener
+    private var storiesList: List<HomeScreenStoriesData>,
+    private var clickInterface: ClickListener
 ) : RecyclerView.Adapter<StoriesAdapter.DataViewHolder>() {
 
     interface ClickListener {
@@ -32,30 +32,16 @@ class StoriesAdapter(
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(storiesList[position])
-        holder.binding.imgStory.clickWithDebounce {
+        holder.itemView.clickWithDebounce {
             clickInterface.itemClick(position)
         }
     }
 
-    class DataViewHolder(var binding: ItemStoriesBinding) :
+    class DataViewHolder(var binding: StoriesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemData: String) = binding.apply {
-
-           // mData = itemData
-           // executePendingBindings()
+        fun bind(itemData: HomeScreenStoriesData) = binding.apply {
+            mData = itemData
+            executePendingBindings()
         }
     }
-
-    fun setData(list: List<String>, loadMore: Boolean) {
-        val oldListSize = this.storiesList.size
-        if (!loadMore) {
-            storiesList.clear()
-            storiesList.addAll(list)
-        } else {
-            storiesList.addAll(list)
-        }
-        notifyItemRangeChanged(oldListSize, list.size)
-    }
-
-
 }

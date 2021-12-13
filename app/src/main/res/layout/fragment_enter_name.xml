@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/fragmentClickable"
+    android:background="?main_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.view.fragment.EnterNameFragment"
     tools:ignore="UnusedAttribute">
@@ -28,6 +29,7 @@
         android:backgroundTint="?main_divider"
         android:hint="@string/your_name"
         android:padding="@dimen/dp_16"
+        tools:text="Jhon Doe"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +59,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:text="@string/next"
-            android:textColor="@color/white"
+            android:textColor="?main_background"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +72,7 @@
             android:layout_height="20dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_right_arrow"
+            app:tint="?main_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

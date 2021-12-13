@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
@@ -15,8 +16,12 @@ import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -340,4 +345,20 @@ class RecyclerItemDecoration(private val spanCount: Int, private val spacing: In
         outRect.bottom = spacing
     }
 
+}
+
+fun hasPermissions(
+    context: Context?, permissions: Array<String>?
+): Boolean {
+    if (context != null && !permissions.isNullOrEmpty()) {
+        for (permission in permissions) {
+            if (ActivityCompat.checkSelfPermission(
+                    context, permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return false
+            }
+        }
+    }
+    return true
 }

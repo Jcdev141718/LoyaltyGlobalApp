@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="StoriesItemBinding">
+
+        <variable
+            name="mData"
+            type="com.loyaltyglobal.data.model.response.HomeScreenStoriesData" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_10"
+        android:foreground="@drawable/default_ripple_corner"
         app:cardElevation="@dimen/dp_4"
         app:cardCornerRadius="@dimen/dp_6"
         app:cardPreventCornerOverlap="false">
@@ -29,12 +39,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
+                setImage="@{mData.thumbnailUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/img_gradient"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/dp_0"
                 android:src="@drawable/transparent_gradient"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,10 +69,11 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_logo"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                setCircleImage="@{mData.brandImageUrl}"
+                android:layout_width="@dimen/dp_0"
                 android:padding="@dimen/dp_1"
                 android:src="@drawable/ic_test_logo"
+                android:layout_height="@dimen/dp_0"
                 app:layout_constraintBottom_toBottomOf="@id/img_border"
                 app:layout_constraintEnd_toEndOf="@id/img_border"
                 app:layout_constraintStart_toStartOf="@id/img_border"
@@ -65,16 +81,26 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_story_name"
-                style="@style/HeadingRegular13"
+                style="@style/WhiteMedium13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_17"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="-0.03"
-                android:text="@string/Versace"
+                android:text="@{mData.brandName}"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                tools:text="@string/Versace" />
+
+            <include
+                android:id="@+id/layout_stories_loading"
+                layout="@layout/layout_stories_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -16,6 +16,7 @@ object Constants {
     const val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}"
     const val PASSWORD_PATTERN_WITH_ONE_SPECIAL_CHARS = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@\$!%*#?&])[A-Za-z\\d@\$!%*#?&]{8,}\$"
     const val MOBILE_NUMBER_KEY = "MOBILE_NUMBER_KEY"
-
+    const val MINIMUM_LENGTH_OF_NUMBER = 10
+    const val PERMISSIONS_REQUEST_CODE = 10003
 }
 

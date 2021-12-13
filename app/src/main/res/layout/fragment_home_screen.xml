@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:descendantFocusability="blocksDescendants">
+            android:background="?main_divider">
 
             <include
                 android:id="@+id/layout_home_screen_toolbar"
@@ -30,15 +25,53 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_home_screen"
+            <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper
+                android:id="@+id/ns_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_home_screen_expiration" />
+                app:layout_constraintTop_toBottomOf="@id/layout_home_screen_expiration">
 
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/layout_home_screen_my_deal_offer"
+                        layout="@layout/layout_home_screen_my_deal_offer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
+
+                    <include
+                        android:id="@+id/layout_home_screen_stories"
+                        layout="@layout/layout_home_screen_stories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
+
+                    <include
+                        android:id="@+id/layout_home_screen_feature_deals_promotions"
+                        layout="@layout/layout_home_screen_feature_deals_promotions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
 </layout>

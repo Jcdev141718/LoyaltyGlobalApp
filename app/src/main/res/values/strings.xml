@@ -57,6 +57,7 @@
     <string name="home_screen_day_expiration">85 days to expiration</string>
     <string name="get_10_entire_menu">Get 10% entire menu</string>
     <string name="Versace">Versace</string>
+    <string name="baskin_robins">Baskin Robins</string>
     <!-- [END] TODO: DUMMY DATA Remove after come from server -->
     <!-- [END] HomeScreen-->
     <string name="no_internet_available">No Internet available</string>
@@ -79,9 +80,22 @@
     <string name="continue_with_apple">Continue with Apple</string>
     <string name="or">OR</string>
     <string name="_41">+41</string>
-    <string name="invalid_otp">Invali OTP</string>
-    <string name="please_select_contry_code">Please select contry code</string>
+    <string name="invalid_otp">Invalid OTP</string>
+    <string name="please_select_country_code">Please select country code</string>
     <string name="next">Next</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="membership_code">Membership Code</string>
+    <string name="ca259b7c">CA259B7C</string>
+    <string name="copy">Copy</string>
+    <string name="invalid_mobile_number_length">Mobile number length should be %d </string>
+    <string name="invalid_mobile_number">Invalid mobile number</string>
+    <string name="bottom_navigation_user">User</string>
+    <string name="notification">Notification</string>
+    <string name="no_notification">No Notification</string>
+    <string name="filters">Filters</string>
+    <string name="business_type">Business Type</string>
+    <string name="clear_all">Clear all</string>
+    <string name="apply">Apply</string>
     <string name="jhon_doe">Jhon Doe</string>
     <string name="edit">Edit</string>
     <string name="transactions">Transactions</string>

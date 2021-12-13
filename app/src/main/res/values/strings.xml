@@ -82,4 +82,5 @@
     <string name="invalid_otp">Invali OTP</string>
     <string name="please_select_contry_code">Please select contry code</string>
     <string name="next">Next</string>
+    <string name="invalid_mobile_number">Invalid mobile number</string>
 </resources>

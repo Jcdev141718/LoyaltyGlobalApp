@@ -1,10 +1,13 @@
 package com.loyaltyglobal.util
 
+import android.app.Activity
 import android.content.ContextWrapper
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
+import com.loyaltyglobal.R
 import java.util.*
 
 /**
@@ -52,4 +55,11 @@ fun getCountryFlag(flagCode: String): String {
     val firstChar = Character.codePointAt(flagCode, 0) - asciiOffset + flagOffset
     val secondChar = Character.codePointAt(flagCode, 1) - asciiOffset + flagOffset
     return (String(Character.toChars(firstChar)) + String(Character.toChars(secondChar)))
+}
+fun Activity.showToast(message: String){
+    Toast.makeText(
+        this,
+        message,
+        Toast.LENGTH_SHORT
+    ).show()
 }

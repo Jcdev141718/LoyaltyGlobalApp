@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/HeadingSemiBold22"
-            android:text="@string/Stories"
+            android:text="@string/stories"
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_16"
             app:layout_constraintTop_toTopOf="parent"

@@ -87,4 +87,9 @@
         <item name="android:textSize">@dimen/sp_22</item>
     </style>
 
+    <!--ShapeableImageView style-->
+    <style name="ShapeAppearanceOverlay.App.CornerSize" parent="">
+        <item name="cornerSize">@dimen/dp_6</item>
+    </style>
+
 </resources>

@@ -28,18 +28,4 @@
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/white</item>
     </style>
 
-    <!--ShapeableImageView style-->
-    <style name="ShapeAppearanceOverlay.App.CornerSize" parent="">
-        <item name="cornerSize">@dimen/dp_6</item>
-    </style>
-
-
-    <style name="HeadingSemiBold18">
-        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_semi_bold</item>
-        <item name="android:textColor">?heading</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textSize">@dimen/sp_18</item>
-    </style>
-
 </resources>

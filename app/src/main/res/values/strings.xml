@@ -82,12 +82,11 @@
     <string name="invalid_otp">Invalid OTP</string>
     <string name="please_select_country_code">Please select country code</string>
     <string name="next">Next</string>
-    <string name="invalid_mobile_number">Mobile number length should be %s </string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="membership_code">Membership Code</string>
     <string name="ca259b7c">CA259B7C</string>
     <string name="copy">Copy</string>
-    <string name="invalid_mobile_number_length">Mobile number length should be %s </string>
+    <string name="invalid_mobile_number_length">Mobile number length should be %d </string>
     <string name="invalid_mobile_number">Invalid mobile number</string>
     <string name="bottom_navigation_user">User</string>
     <string name="notification">Notification</string>

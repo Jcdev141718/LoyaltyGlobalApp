@@ -51,7 +51,7 @@ class HomeScreenFragment : BaseFragment() {
     private fun init() {
         binding.layoutHomeScreenToolbar.imgLogo.setImage(R.drawable.icon_logo)
         binding.layoutHomeScreenToolbar.imgCamera.clickWithDebounce {
-            activity?.addReplaceFragment(R.id.fl_container,
+            activity?.addReplaceFragment(R.id.fl_main_container,
                 QrCodeScannerFragment(), addFragment = true, addToBackStack = true)
         }
         binding.layoutHomeScreenToolbar.imgQrCode.clickWithDebounce { openBottomSheet(ShowQrBottomSheetFragment()) }

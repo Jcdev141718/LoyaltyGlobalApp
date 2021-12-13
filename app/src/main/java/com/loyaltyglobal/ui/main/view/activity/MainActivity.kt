@@ -7,7 +7,6 @@ import com.loyaltyglobal.R
 import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.databinding.ActivityMainBinding
 import com.loyaltyglobal.ui.main.view.fragment.ExploreFragment
-import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainBinding.root)
         loadHomeFragment()
         clickListener()
-        addReplaceFragment(R.id.fl_container,HomeScreenFragment(),true,true)
-
 //        homeViewModel.getSubBrands()
 //        homeViewModel.getUserPassFromAgency()
     }

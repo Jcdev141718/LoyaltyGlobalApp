@@ -29,7 +29,7 @@ class VerificationViewModel @Inject constructor(): BaseViewModel(){
                 otpResponse.postValue(OtpResponse.Error(context.getString(R.string.please_enter_mobile_number)))
             }
             mobileNumber.length < MINIMUM_LENGTH_OF_NUMBER -> {
-                otpResponse.postValue(OtpResponse.Error(context.getString(R.string.invalid_mobile_number, MINIMUM_LENGTH_OF_NUMBER)))
+                otpResponse.postValue(OtpResponse.Error(context.getString(R.string.invalid_mobile_number_length, MINIMUM_LENGTH_OF_NUMBER)))
             }
             else -> {
                 mMobileNumber = "${mCountryData.countryCode}${mobileNumber}"

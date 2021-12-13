@@ -10,11 +10,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        addReplaceFragment(
-            R.id.fl_container, HomeScreenFragment(),
-            addFragment = false,
-            addToBackStack = false
-        )
     }
 }

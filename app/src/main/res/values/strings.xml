@@ -96,10 +96,11 @@
     <string name="business_type">Business Type</string>
     <string name="clear_all">Clear all</string>
     <string name="apply">Apply</string>
-    <string name="jhon_doe">Jhon Doe</string>
+    <string name="dummy_name">Jhon Doe</string>
     <string name="edit">Edit</string>
     <string name="transactions">Transactions</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="log_out">Log Out</string>
     <string name="keep_track_your_transactions">Keep track your transactions</string>
+    <string name="dummy_email">johndoe@gmail.com</string>
 </resources>

@@ -12,22 +12,30 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:fontFamily">@font/poppins</item>
         <!--[START] ThemeColor-->
         <item name="main_background" type="color">@color/background_light</item>
         <item name="border" type="color">@color/border_light</item>
         <item name="heading" type="color">@color/heading_light</item>
         <item name="paragraph" type="color">@color/paragraph_light</item>
         <item name="main_card" type="color">@color/card_light</item>
+        <item name="main_ripple_color" type="color">@color/main_ripple_color_light</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="explore_chip_bg" type="color">@color/heading_light</item>
+        <item name="black_white" type="color">@color/white</item>
+        <item name="explore_business" type="color">@color/white</item>
         <!--[START] ThemeColor-->
+
+        <item name="main_divider" type="color">@color/divider_light</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
-<!--    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
-<!--        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
-<!--        <item name="android:statusBarColor" tools:ignore="NewApi">@color/black</item>-->
-<!--    </style>-->
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/icon_logo</item>
@@ -35,12 +43,9 @@
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="HeadingSemiBold18">
-        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_semi_bold</item>
-        <item name="android:textColor">?heading</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textSize">@dimen/sp_18</item>
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_bottom_sheet</item>
     </style>
 
     <style name="ProgressBarTheme">

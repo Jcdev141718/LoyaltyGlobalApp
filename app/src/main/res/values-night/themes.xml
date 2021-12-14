@@ -13,6 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:fontFamily">@font/poppins</item>
+
         <!--[START] Dark ThemeColor-->
         <item name="main_background" type="color">@color/background_dark</item>
         <item name="border" type="color">@color/border_dark</item>
@@ -21,7 +24,23 @@
         <item name="main_card" type="color">@color/card_dark</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_dark</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="main_ripple_color" type="color">@color/main_ripple_color_dark</item>
+        <item name="explore_chip_bg" type="color">@color/green</item>
+        <item name="black_white" type="color">@color/black</item>
+        <item name="explore_business" type="color">@color/black_medium</item>
+        <item name="main_divider" type="color">@color/divider_dark</item>
         <!--[END] Dark ThemeColor-->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_bottom_sheet</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -33,5 +52,6 @@
     <style name="ProgressBarTheme">
         <item name="colorAccent">@color/black</item>
     </style>
+
 
 </resources>

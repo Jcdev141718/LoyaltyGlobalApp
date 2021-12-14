@@ -2,6 +2,9 @@ package com.loyaltyglobal.di
 
 import com.loyaltyglobal.BuildConfig
 import com.loyaltyglobal.data.source.network.ApiService
+import com.loyaltyglobal.util.Constants
+import com.loyaltyglobal.util.Constants.AUTH_TOKEN
+import com.loyaltyglobal.util.Constants.HEADER_AUTH_TOKEN
 import com.loyaltyglobal.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -79,12 +82,8 @@ class NetworkModule {
             val request: Request.Builder = chain.request()
                 .newBuilder()
                 .header(
-                    "buildNumber",
-                    BuildConfig.VERSION_CODE.toString() + ""
-                )
-                .header(
-                    "Authorization",
-                    ""
+                    HEADER_AUTH_TOKEN,
+                    AUTH_TOKEN
                 )
             chain.proceed(request.build())
         }

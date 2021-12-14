@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?main_background"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".ui.main.view.fragment.BusinessFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_explore_business"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_no_item_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:gravity="center"
+        android:text="@string/businesses_will_be_updated_soon"
+        android:textColor="?heading"
+        android:textSize="@dimen/sp_18"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?main_background"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        tools:ignore="UnusedAttribute">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_stories"
+            style="@style/HeadingSemiBold22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/stories"
+            app:layout_constraintBottom_toTopOf="@+id/rv_stories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_see_all"
+            style="@style/HeadingMedium12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/default_ripple_corner"
+            android:padding="@dimen/dp_16"
+            android:text="@string/see_all"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_stories"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_stories" />
+
+        <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.HorizontalRecyclerViewHelper
+            android:id="@+id/rv_stories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_stories"
+            tools:listitem="@layout/item_home_screen_stories" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

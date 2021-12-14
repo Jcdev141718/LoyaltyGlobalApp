@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/fragment_clickable_theme"
+    tools:context=".ui.main.view.fragment.ExploreFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_explore_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingHorizontal="@dimen/dp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SemiBold24"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/explore" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_explore_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/dp_12"
+            android:tint="?heading"
+            android:src="@drawable/icon_search" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_explore_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="?heading"
+            android:padding="@dimen/dp_12"
+            android:src="@drawable/icon_filter" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs_explore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_explore_toolbar"
+        app:tabIndicatorColor="?heading"
+        app:tabSelectedTextColor="?heading"
+        app:tabTextAppearance="@style/ExploreTabTextAppearance"
+        app:tabTextColor="@color/caption" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs_explore" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

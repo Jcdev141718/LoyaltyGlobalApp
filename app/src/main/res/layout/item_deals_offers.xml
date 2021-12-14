@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.loyaltyglobal.data.model.DealsAndOffersData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_16">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_offer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:layout_margin="@dimen/dp_16"
+            android:scaleType="centerCrop"
+            android:elevation="@dimen/dp_4"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_offer_logo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_offer_brand_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_16"
+            android:fontFamily="@font/poppins"
+            android:text="@{data.brandName}"
+            android:textColor="?paragraph"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_offer"
+            tools:text="Brand name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:fontFamily="@font/poppins"
+            android:text="@{data.discount}"
+            android:textColor="?heading"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_offer_brand_name"
+            tools:text="Brand name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

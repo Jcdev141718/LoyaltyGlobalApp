@@ -1,9 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="HeadingSemiBold18">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_semi_bold</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+
+    <style name="HeadingMedium12">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_medium</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="ParagraphRegular10">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins</item>
+        <item name="android:textColor">?paragraph</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="ParagraphRegular13">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins</item>
+        <item name="android:textColor">?paragraph</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+    </style>
+    <style name="ParagraphMedium13">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_medium</item>
+        <item name="android:textColor">?paragraph</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+    </style>
+
+    <style name="HeadingRegular24">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="HeadingRegular13">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_semi_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+    </style>
+
+    <style name="WhiteMedium13">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+    </style>
+
+    <style name="HeadingRegular10">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="HeadingMedium16">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_medium</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="CaptionMedium10">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="HeadingSemiBold22">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_semi_bold</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_22</item>
+    </style>
+
+    <style name="SemiBold24">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/poppins_semi_bold</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <!--ShapeableImageView style-->
+    <style name="ShapeAppearanceOverlay.App.CornerSize" parent="">
+        <item name="cornerSize">@dimen/dp_6</item>
+    </style>
+
+    <style name="ExploreTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="fragmentClickable">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">?main_background</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="fragment_clickable_theme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">?black_white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="poppinsBold24Black">
+        <item name="android:textSize">@dimen/sp_24</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+    <style name="poppinsBold22Grey">
+        <item name="android:textSize">@dimen/sp_22</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+    <style name="poppinsNormal13Grey">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="poppinsNormal12Grey">
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="poppinsBold22Black">
+        <item name="android:textSize">@dimen/sp_22</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+    <style name="poppinsMedium12Grey">
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/caption</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+
+    <style name="poppinsNormal13Black">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="poppinsNormal16Black">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="poppinsMedium16White">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="searchEditText">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingBottom">@dimen/dp_10</item>
+        <item name="android:layout_marginStart">@dimen/dp_8</item>
+        <item name="android:layout_marginEnd">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_4</item>
+        <item name="android:paddingEnd">@dimen/dp_4</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:textColorHint">@color/caption</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">start</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
     <style name="white40PoppinSemiBold18" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/sp_18</item>
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
-        <item name="android:textColor">@color/white_40</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="blackPoppinSemiBold18" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
@@ -36,6 +246,11 @@
         <item name="android:textColor">?heading</item>
     </style>
 
+    <style name="whiteBottomPoppinSemiBold14">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="fillBtnMedium">
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
@@ -44,4 +259,23 @@
         <item name="android:lineSpacingExtra">-5dp</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="bottomSheetTitle20">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">?attr/heading</item>
+        <item name="android:textSize">@dimen/sp_20</item>
+    </style>
+
+    <style name="bottomSheetLabel14">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">?attr/heading</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="bottomSheetLabel16">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">?attr/heading</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
 </resources>

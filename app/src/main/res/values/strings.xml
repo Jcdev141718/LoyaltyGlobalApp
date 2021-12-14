@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyLearningProject</string>
+    <string name="app_name">LoyaltyGlobal</string>
     <string name="enter_mobile">Mobile Number</string>
     <string name="enter_password">Password</string>
     <string name="confirm_password">Confirm Password</string>
@@ -34,6 +34,42 @@
     <string name="permission_denied">Permission denied</string>
 
 
+    <!--Explore [start]-->
+    <string name="explore_businesses">Businesses</string>
+    <string name="explore_deals_and_offers"><![CDATA[Deals & Offers]]></string>
+    <string name="businesses_will_be_updated_soon">Businesses will be updated soon!</string>
+    <string name="no_deal_available">No Deal Available</string>
+    <string name="many_exciting_deals_will_soon_be_available">Many exciting deals will soon be available.</string>
+    <string name="explore">Explore</string>
+    <!--Explore [end]-->
+
+    <!-- [START] HomeScreen-->
+    <string name="home_screen_need_for_next_level">needed for next level</string>
+    <string name="discover_these_featured_deals_and_games">Discover these featured deals and games</string>
+    <string name="featured_deals_promotions">Featured Deals &amp; Promotions</string>
+    <string name="my_deals_offers">My Deals &amp; Offers</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="see_all">See All</string>
+    <string name="stories">Stories</string>
+    <!-- [START] TODO: DUMMY DATA Remove after come from server -->
+    <string name="home_screen_need_for_next_level_points">10,050 pt</string>
+    <string name="home_screen_total_points">20,000 pt</string>
+    <string name="home_screen_day_expiration">85 days to expiration</string>
+    <string name="get_10_entire_menu">Get 10% entire menu</string>
+    <string name="Versace">Versace</string>
+    <string name="baskin_robins">Baskin Robins</string>
+    <!-- [END] TODO: DUMMY DATA Remove after come from server -->
+    <!-- [END] HomeScreen-->
+    <string name="no_internet_available">No Internet available</string>
+
+    <string name="enter_your_verification_code">Enter your \nverification code</string>
+    <string name="i_didn_t_my_code"><u>I didn\'t my code!</u></string>
+    <string name="hi_what_s_your_name">Hi! \nWhat\'s Your Name?</string>
+    <string name="your_name">Your Name</string>
+    <string name="hey_haider_enter_your_phone_number">Hey Haider, \nEnter your Phone Number</string>
+    <string name="search">Search</string>
+
+
     <!-- [START] HomeScreen-->
     <string name="home_screen_title">Walletly</string>
     <!-- [END] HomeScreen-->
@@ -41,8 +77,30 @@
     <string name="walletly_global">Walletly Global</string>
     <string name="email">Email Address</string>
     <string name="hi_there_let_s_get_started">Hi there! Let’s Get Started</string>
-    <string name="next">Next</string>
     <string name="continue_with_apple">Continue with Apple</string>
     <string name="or">OR</string>
     <string name="continue_with_google">Continue with Google</string>
+    <string name="_41">+41</string>
+    <string name="invalid_otp">Invalid OTP</string>
+    <string name="please_select_country_code">Please select country code</string>
+    <string name="next">Next</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="membership_code">Membership Code</string>
+    <string name="ca259b7c">CA259B7C</string>
+    <string name="copy">Copy</string>
+    <string name="invalid_mobile_number_length">Mobile number length should be %d </string>
+    <string name="invalid_mobile_number">Invalid mobile number</string>
+    <string name="bottom_navigation_user">User</string>
+    <string name="notification">Notification</string>
+    <string name="no_notification">No Notification</string>
+    <string name="filters">Filters</string>
+    <string name="business_type">Business Type</string>
+    <string name="clear_all">Clear all</string>
+    <string name="apply">Apply</string>
+    <string name="jhon_doe">Jhon Doe</string>
+    <string name="edit">Edit</string>
+    <string name="transactions">Transactions</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="log_out">Log Out</string>
+    <string name="keep_track_your_transactions">Keep track your transactions</string>
 </resources>

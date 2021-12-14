@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
@@ -15,8 +16,12 @@ import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
@@ -24,7 +29,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
+import kotlin.math.roundToInt
 import com.loyaltyglobal.util.Constants.REGEX_EMAIL
 import java.util.regex.Pattern
 
@@ -328,3 +335,38 @@ fun String?.isEmailValid(): Boolean {
 
 fun String?.isPasswordValid(): Boolean =
     !this.isNullOrEmpty() && this.length >= 6
+
+
+
+class RecyclerItemDecoration(private val spanCount: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+
+        val spacing = (spacing * parent.context.resources.displayMetrics.density).roundToInt()
+        val position = parent.getChildAdapterPosition(view)
+        val column = position % spanCount
+
+        outRect.left = spacing - column * spacing / spanCount
+        outRect.right = (column + 1) * spacing / spanCount
+
+        outRect.top = if (position < spanCount) spacing else 0
+        outRect.bottom = spacing
+    }
+
+}
+
+fun hasPermissions(
+    context: Context?, permissions: Array<String>?
+): Boolean {
+    if (context != null && !permissions.isNullOrEmpty()) {
+        for (permission in permissions) {
+            if (ActivityCompat.checkSelfPermission(
+                    context, permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return false
+            }
+        }
+    }
+    return true
+}

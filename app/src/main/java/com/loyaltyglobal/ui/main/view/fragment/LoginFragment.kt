@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import com.loyaltyglobal.R
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,6 +23,7 @@ import com.loyaltyglobal.data.model.request.LoginRequest
 import com.loyaltyglobal.data.model.response.LoginResponse
 import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.databinding.FragmentLoginBinding
+import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.Constants.AGENCY_ID
 import com.loyaltyglobal.util.Constants.RC_SIGN_IN
 import com.loyaltyglobal.util.hide
@@ -84,6 +86,15 @@ class LoginFragment : Fragment() {
         mBinding = FragmentLoginBinding.inflate(inflater, container, false)
         return mBinding.root
     }
+
+   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mBinding.clTxtNext.setOnClickListener {
+            activity?.addReplaceFragment(R.id.container_main, EnterMobileNumberFragment(), true,
+                addToBackStack = true
+            )
+        }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

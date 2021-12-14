@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cnb_unselectedColor="#666666">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_bottom_home"
+        android:title="@string/home"
+        app:cnb_backgroundColor="?explore_chip_bg"
+        app:cnb_iconColor="@color/white"
+        app:cnb_textColor="@color/white" />
+
+    <item
+        android:id="@+id/menu_explore"
+        android:icon="@drawable/ic_bottom_explore"
+        android:title="@string/explore"
+        app:cnb_backgroundColor="?explore_chip_bg"
+        app:cnb_iconColor="@color/white"
+        app:cnb_textColor="@color/white" />
+
+    <item
+        android:id="@+id/menu_stories"
+        android:icon="@drawable/ic_bottom_star"
+        android:title="@string/stories"
+        app:cnb_backgroundColor="?explore_chip_bg"
+        app:cnb_iconColor="@color/white"
+        app:cnb_textColor="@color/white" />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_bottom_user"
+        android:title="@string/bottom_navigation_user"
+        app:cnb_backgroundColor="?explore_chip_bg"
+        app:cnb_iconColor="@color/white"
+        app:cnb_textColor="@color/white" />
+</menu>

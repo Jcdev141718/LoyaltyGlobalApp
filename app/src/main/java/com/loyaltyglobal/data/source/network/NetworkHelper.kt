@@ -5,7 +5,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
+import com.loyaltyglobal.R
 import com.loyaltyglobal.util.Constants
+import org.json.JSONObject
 import retrofit2.Response
 
 /**
@@ -13,62 +15,85 @@ import retrofit2.Response
  */
 
 sealed class NetworkResult<T>(
-    val data: T? = null,
-    val message: String? = null
+    val responseData: T? = null, val message: String? = null, val statusCode: Int? = null
 ) {
-    class Success<T>(data: T?) : NetworkResult<T>(data)
-    class Error<T>(
-        message: String,
-        data: T? = null
-    ) : NetworkResult<T>(
-        data,
-        message
-    )
+    class Success<T>(data: T?, statusCode: Int? = null) :
+        NetworkResult<T>(responseData = data, statusCode = statusCode)
+
+    class Error<T>(message: String, statusCode: Int? = null) :
+        NetworkResult<T>(message = message, statusCode = statusCode)
 
     class Loading<T> : NetworkResult<T>()
 }
 
 abstract class BaseApiResponse(val context: Context) {
     suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): NetworkResult<T> {
-        try {
-            return if (isInternetAvailable(context)) {
-                val response = apiCall()
-                when {
-                    response.isSuccessful -> {
-                        val body = response.body()
-                        NetworkResult.Success(body)
-                    }
-                    response.code() == Constants.UNAUTHORISED -> {
-                        error("Unauthorised request")
-                    }
-                    else -> error("${response.code()} ${response.message()}")
+        if (isInternetAvailable(context)) {
+            val response = apiCall()
+            when {
+                response.isSuccessful -> {
+                    val body = response.body()
+                    return NetworkResult.Success(data = body, statusCode = response.code())
                 }
-            } else {
-                error("No Internet available")
+                response.code() == Constants.UNAUTHORISED -> {
+                    return NetworkResult.Error(
+                        message = getErrorMessageFromResponse(
+                            response.errorBody()?.string()
+                        ), statusCode = response.code()
+                    )
+                }
+                !response.isSuccessful -> {
+                    return NetworkResult.Error(
+                        message = getErrorMessageFromResponse(
+                            response.errorBody()?.string()
+                        ), statusCode = response.code()
+                    )
+                }
+                else -> return NetworkResult.Error(
+                    message = getErrorMessageFromResponse(
+                        response.errorBody()?.string()
+                    ), statusCode = response.code()
+                )
             }
-
-        } catch (e: Exception) {
-            return error(
-                e.message
-                    ?: e.toString()
-            )
+        } else {
+            return NetworkResult.Error(context.getString(R.string.no_internet_available))
         }
     }
 
-    private fun <T> error(errorMessage: String): NetworkResult<T> =
-        NetworkResult.Error("Api call failed $errorMessage")
+    private fun getErrorMessageFromResponse(errorBody: String?): String {
+        return try {
+            val jsonObj = JSONObject(errorBody!!)
+            when {
+                jsonObj.has("message") -> {
+                    jsonObj.getString("message")
+                }
+                jsonObj.has("error") -> {
+                    jsonObj.getString("error")
+                }
+                else -> {
+                    ""
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
+        }
+
+    }
 }
 
-fun <T>manageApiDataByState(results : NetworkResult<T>,listener : ApiResponseStates){
-    when(results) {
+fun <T> manageApiDataByState(results: NetworkResult<T>, listener: ApiResponseStates) {
+    when (results) {
         is NetworkResult.Loading -> {
             listener.onLoading()
         }
         is NetworkResult.Success -> {
-            listener.onSuccess(results.data)
+            listener.onSuccess(responseData = results.responseData)
         }
         is NetworkResult.Error -> {
-            listener.onError(results.message)
+            results.statusCode?.let {
+                listener.onError(codeData = it, message = results.message)
+            }
         }
     }
 }
@@ -76,7 +101,7 @@ fun <T>manageApiDataByState(results : NetworkResult<T>,listener : ApiResponseSta
 interface ApiResponseStates {
     fun onSuccess(responseData: Any?)
     fun onLoading()
-    fun onError(message: String?)
+    fun onError(codeData: Int?, message: String?)
 }
 
 fun isInternetAvailable(context: Context): Boolean {

@@ -8,7 +8,7 @@ import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.databinding.ActivityMainBinding
 import com.loyaltyglobal.ui.main.view.fragment.ExploreFragment
 import com.loyaltyglobal.ui.main.view.fragment.StoriesFragment
-import com.loyaltyglobal.ui.main.view.fragments.ProfileFragment
+import com.loyaltyglobal.ui.main.view.fragment.ProfileFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import dagger.hilt.android.AndroidEntryPoint

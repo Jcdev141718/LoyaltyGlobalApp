@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import com.loyaltyglobal.R
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -18,17 +17,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.request.LoginRequest
 import com.loyaltyglobal.data.model.response.LoginResponse
 import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.databinding.FragmentLoginBinding
 import com.loyaltyglobal.ui.main.viewmodel.LoginViewModel
+import com.loyaltyglobal.util.*
 import com.loyaltyglobal.util.Constants.AGENCY_ID
 import com.loyaltyglobal.util.Constants.RC_SIGN_IN
-import com.loyaltyglobal.util.hide
-import com.loyaltyglobal.util.hideKeyboard
-import com.loyaltyglobal.util.isEmailValid
-import com.loyaltyglobal.util.show
+import com.loyaltyglobal.util.Constants.USER_NAME_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +36,7 @@ class LoginFragment : Fragment() {
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private var isSignInWithGoogle: Boolean = false
     private val loginViewModel: LoginViewModel by viewModels()
+    private var isNormalLogin = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,28 +50,53 @@ class LoginFragment : Fragment() {
 
     private fun initObserver() {
         loginViewModel.logInResponse.observe(this, {
-           if (it != null){
-               handleLoginResponse(it)
-           }
+            if (it != null) {
+                handleLoginResponse(it)
+            }
         })
     }
 
     private fun handleLoginResponse(result: NetworkResult<LoginResponse>) {
         when (result) {
             is NetworkResult.Loading -> {
-                // show a progress bar
-                Log.e("TAG", "handleUserData() --> Loading  $result")
-                mBinding.progressbar.show()
+                if (isNormalLogin){
+                    mBinding.progressbar.show()
+                }else{
+                    mBinding.progressbarGoogle.show()
+                    mBinding.txtContinueWithGoogle.hide()
+                }
+
             }
             is NetworkResult.Success -> {
-                // bind data to the view
-                Log.e("TAG", "handleUserData() --> Success  $result")
                 mBinding.progressbar.hide()
+                mBinding.progressbarGoogle.hide()
+                mBinding.txtContinueWithGoogle.show()
+                if (result.responseData?.data?.isNumberVerified == true) {
+                    activity?.addReplaceFragment(
+                        R.id.container_main, EnterNameFragment(), true,
+                        addToBackStack = true
+                    )
+                } else {
+                    activity?.addReplaceFragment(
+                        R.id.container_main,
+                        EnterMobileNumberFragment().apply {
+                            arguments = Bundle().apply {
+                                putString(
+                                    USER_NAME_KEY,
+                                    "${result.responseData?.data?.firstName} ${result.responseData?.data?.lastName}"
+                                )
+                            }
+                        },
+                        true,
+                        addToBackStack = true
+                    )
+                }
             }
             is NetworkResult.Error -> {
-                // show error message
-                Log.e("TAG", "handleUserData() --> Error ${result.message}")
                 mBinding.progressbar.hide()
+                mBinding.progressbarGoogle.hide()
+                mBinding.txtContinueWithGoogle.show()
+                result.message?.let{ activity?.showToast(it) }
             }
         }
     }
@@ -85,15 +109,6 @@ class LoginFragment : Fragment() {
         return mBinding.root
     }
 
-   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mBinding.clTxtNext.setOnClickListener {
-            activity?.addReplaceFragment(R.id.container_main, EnterMobileNumberFragment(), true,
-                addToBackStack = true
-            )
-        }
-    }*/
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -101,10 +116,11 @@ class LoginFragment : Fragment() {
 
     private fun init() {
         mBinding.llContinueWithGoogle.setOnClickListener {
+            isNormalLogin = false
             signIn()
         }
 
-        mBinding.clTxtNext.setOnClickListener {
+        mBinding.clTxtNext.clickWithDebounce {
             if (mBinding.edtEmail.text?.trim()?.isNotEmpty() == true) {
                 when {
                     mBinding.edtEmail.text?.trim().isNullOrEmpty() -> {
@@ -141,7 +157,7 @@ class LoginFragment : Fragment() {
             }
         }
         mBinding.edtEmail.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
+            if (text.toString().isNotEmpty() && isNormalLogin) {
                 mBinding.clTxtNext.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
             } else {
@@ -194,7 +210,7 @@ class LoginFragment : Fragment() {
 
     private fun updateUI(account: GoogleSignInAccount?) {
         isSignInWithGoogle = true
-        Toast.makeText(requireContext(), account?.email, Toast.LENGTH_SHORT).show()
+        mBinding.edtEmail.setText(account?.email)
         account?.email?.let {
             LoginRequest(
                 AGENCY_ID, "",

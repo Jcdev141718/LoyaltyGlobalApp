@@ -8,12 +8,18 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.ActivitySplashBinding
+import com.loyaltyglobal.util.Constants.IS_USER_LOGIN_KEY
+import com.loyaltyglobal.util.PreferenceProvider
 import com.loyaltyglobal.util.setImage
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+    @Inject
+    lateinit var preferenceProvider: PreferenceProvider
+
     lateinit var mBinding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +31,11 @@ class SplashActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(1000)
-            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+            if (preferenceProvider.getValue(IS_USER_LOGIN_KEY, false)){
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            }else{
+                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+            }
             finish()
         }
     }

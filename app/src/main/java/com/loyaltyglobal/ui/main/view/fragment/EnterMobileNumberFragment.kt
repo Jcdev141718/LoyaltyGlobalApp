@@ -16,6 +16,7 @@ import com.loyaltyglobal.ui.main.viewmodel.OtpResponse
 import com.loyaltyglobal.ui.main.viewmodel.VerificationViewModel
 import com.loyaltyglobal.util.Constants
 import com.loyaltyglobal.util.Constants.MINIMUM_LENGTH_OF_NUMBER
+import com.loyaltyglobal.util.Constants.USER_NAME_KEY
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.getCountryFlag
 import com.loyaltyglobal.util.showToast
@@ -25,11 +26,12 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
 
     private val verificationViewModel: VerificationViewModel by viewModels()
     private lateinit var mBinding: FragmentEnterMobileNumberBinding
+    private var userName : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
+            userName = it.getString(USER_NAME_KEY)
         }
         initObserver()
     }
@@ -67,6 +69,7 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let { verificationViewModel.getCurrentCountryData(it) }
+        mBinding.txtWelcome.text = getString(R.string.hey_user_enter_your_phone_number, userName)
         mBinding.txtFlag.text = verificationViewModel.mCountryData?.key?.let { getCountryFlag(it) }
         mBinding.textCountryCode.text = verificationViewModel.mCountryData?.countryCode?: getString(R.string._41)
         setOnClickListener()

@@ -1,4 +1,4 @@
-package com.loyaltyglobal.ui.main.view.fragments
+package com.loyaltyglobal.ui.main.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

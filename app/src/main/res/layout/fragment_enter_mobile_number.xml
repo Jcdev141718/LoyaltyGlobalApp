@@ -34,13 +34,13 @@
         app:layout_constraintTop_toBottomOf="@id/img_back" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView"
+        android:id="@+id/txt_welcome"
         style="@style/poppinsBold24Black"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:text="@string/hey_haider_enter_your_phone_number"
+        android:text="@string/hey_user_enter_your_phone_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_line" />

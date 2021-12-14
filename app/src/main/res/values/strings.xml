@@ -66,7 +66,7 @@
     <string name="i_didn_t_my_code"><u>I didn\'t my code!</u></string>
     <string name="hi_what_s_your_name">Hi! \nWhat\'s Your Name?</string>
     <string name="your_name">Your Name</string>
-    <string name="hey_haider_enter_your_phone_number">Hey Haider, \nEnter your Phone Number</string>
+    <string name="hey_user_enter_your_phone_number">Hey %s, \nEnter your Phone Number</string>
     <string name="search">Search</string>
 
 
@@ -76,7 +76,7 @@
     <string name="walletly">Walletly</string>
     <string name="walletly_global">Walletly Global</string>
     <string name="email">Email Address</string>
-    <string name="hi_there_let_s_get_started">Hi there! Let’s Get Started</string>
+    <string name="hi_there_let_s_get_started">Hi there! Let’s \nGet Started</string>
     <string name="continue_with_apple">Continue with Apple</string>
     <string name="or">OR</string>
     <string name="continue_with_google">Continue with Google</string>

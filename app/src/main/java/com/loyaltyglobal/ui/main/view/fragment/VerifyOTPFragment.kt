@@ -11,6 +11,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentVerifyOTPBinding
 import com.loyaltyglobal.util.Constants.MOBILE_NUMBER_KEY
+import com.loyaltyglobal.util.Constants.OTP_LENGTH
 import com.loyaltyglobal.util.PhoneAuthHelper
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.hideKeyboard
@@ -45,65 +46,81 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
     }
 
     private fun setOnClickListener() {
-        mBinding.txtResendCode.setOnClickListener {
-            //TODO: Enable this code in final
+        mBinding.apply {
+            txtResendCode.setOnClickListener {
+                //TODO: Enable this code in final
 //            activity?.let { it1 -> PhoneAuthHelper.resendVerificationCode(it1, phoneNumber) }
-        }
-        mBinding.imgBack.setOnClickListener {
-            activity?.onBackPressed()
-        }
-        mBinding.otp1.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
-                finalOTP += text.toString()
-                mBinding.otp2.requestFocus()
             }
-        }
-        mBinding.otp2.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
-                finalOTP += text.toString()
-                mBinding.otp3.requestFocus()
-            } else {
-                mBinding.otp1.requestFocus()
+            imgBack.setOnClickListener { activity?.onBackPressed() }
+            otp1.doOnTextChanged { text, _, _, _ ->
+                if (text.toString().isNotEmpty()) {
+                    otp2.requestFocus()
+                }
+                getFinalOtp()
             }
-        }
-        mBinding.otp3.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
-                finalOTP += text.toString()
-                mBinding.otp4.requestFocus()
-            } else {
-                mBinding.otp2.requestFocus()
+            otp2.doOnTextChanged { text, _, _, _ ->
+
+                if (text.toString().isNotEmpty()) {
+                    otp3.requestFocus()
+                } else {
+                    otp1.requestFocus()
+                }
+                getFinalOtp()
             }
-        }
-        mBinding.otp4.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
-                finalOTP += text.toString()
-                mBinding.otp5.requestFocus()
-            } else {
-                mBinding.otp3.requestFocus()
+            otp3.doOnTextChanged { text, _, _, _ ->
+                if (text.toString().isNotEmpty()) {
+                    otp4.requestFocus()
+                } else {
+                    otp2.requestFocus()
+                }
+                getFinalOtp()
             }
-        }
-        mBinding.otp5.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
-                finalOTP += text.toString()
-                mBinding.otp6.requestFocus()
-            } else {
-                mBinding.otp4.requestFocus()
+            otp4.doOnTextChanged { text, _, _, _ ->
+                if (text.toString().isNotEmpty()) {
+                    otp5.requestFocus()
+                } else {
+                    otp3.requestFocus()
+                }
+                getFinalOtp()
             }
-        }
-        mBinding.otp6.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
-                activity?.hideKeyboard()
-                finalOTP += text.toString()
+            otp5.doOnTextChanged { text, _, _, _ ->
+                if (text.toString().isNotEmpty()) {
+                    otp6.requestFocus()
+                } else {
+                    otp4.requestFocus()
+                }
+                getFinalOtp()
+            }
+            otp6.doOnTextChanged { text, _, _, _ ->
+                if (text.toString().isNotEmpty()) {
+                    activity?.hideKeyboard()
+                } else {
+                    otp5.requestFocus()
+                    activity?.showKeyboard()
+                }
+                getFinalOtp()
                 finalVerification(finalOTP)
-            } else {
-                mBinding.otp5.requestFocus()
-                activity?.showKeyboard()
             }
         }
     }
 
+    private fun getFinalOtp() {
+        finalOTP = ""
+        mBinding.apply {
+            finalOTP += otp1.text.toString()
+            finalOTP += otp2.text.toString()
+            finalOTP += otp3.text.toString()
+            finalOTP += otp4.text.toString()
+            finalOTP += otp5.text.toString()
+            finalOTP += otp6.text.toString()
+        }
+        if (finalOTP.length == OTP_LENGTH) {
+            finalVerification(finalOTP)
+        }
+    }
+
     private fun finalVerification(otp: String) {
-        if (otp.length == 6) {
+        if (otp.length == OTP_LENGTH) {
             //TODO: enable this code in final code
 //            PhoneAuthHelper.signInWithPhoneAuthCredential(otp)
 

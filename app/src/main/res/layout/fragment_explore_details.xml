@@ -382,7 +382,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_16"
+                        tools:listitem="@layout/item_explore_discount"
+                        tools:itemCount="7"
                         app:layout_constraintTop_toBottomOf="@+id/txt_discounts_description"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_discount_see_more"
+                        style="@style/SubHeadingRegular13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        android:text="@string/see_more"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_discount_see_more"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_discount"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_discount_see_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:background="@drawable/default_ripple_round"
+                        android:padding="@dimen/dp_8"
+                        android:src="@drawable/ic_arrow_next"
+                        app:tint="?heading"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_discount_see_more"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_discount"
+                        app:layout_constraintLeft_toRightOf="@+id/txt_discount_see_more"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

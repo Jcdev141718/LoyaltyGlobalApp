@@ -73,6 +73,8 @@
     <string name="_4_point">4 Point</string>
     <string name="discounts">Discounts</string>
     <string name="these_discounts_will_apply">These discounts will apply on your purchase.</string>
+    <string name="monday">Monday</string>
+    <string name="_20_off">20% OFF</string>
 
     <!-- [END] TODO: DUMMY DATA Remove after come from server -->
     <!-- [END] HomeScreen-->

@@ -4,55 +4,54 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-
 import com.loyaltyglobal.R
-import com.loyaltyglobal.databinding.ItemStoriesBinding
+import com.loyaltyglobal.databinding.ItemExploreDiscountBinding
 import com.loyaltyglobal.util.clickWithDebounce
+import java.util.ArrayList
 
-class StoriesAdapter(private var storiesList: MutableList<String>, private var clickInterface : ClickListener) : RecyclerView.Adapter<StoriesAdapter.DataViewHolder>() {
+/**
+ * Created by Abhin.
+ */
+class ExploreDiscountAdapter(private var discountList: ArrayList<String>, private var clickInterface : StoriesAdapter.ClickListener) : RecyclerView.Adapter<ExploreDiscountAdapter.DataViewHolder>() {
 
-    interface ClickListener {
-        fun itemClick(position: Int)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder =
         DataViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_stories,
+                R.layout.item_explore_discount,
                 parent,
                 false
             )
         )
 
-    override fun getItemCount(): Int = storiesList.size
-
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.bind(storiesList[position])
-        holder.binding.imgStory.clickWithDebounce {
+        holder.bind(discountList[position])
+        holder.itemView.clickWithDebounce {
             clickInterface.itemClick(position)
         }
     }
 
-    class DataViewHolder(var binding: ItemStoriesBinding) :
+    class DataViewHolder(var binding: ItemExploreDiscountBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemData: String) = binding.apply {
 
-           // mData = itemData
-           // executePendingBindings()
+            // mData = itemData
+            // executePendingBindings()
         }
     }
 
     fun setData(list: List<String>, loadMore: Boolean) {
-        val oldListSize = this.storiesList.size
+        val oldListSize = this.discountList.size
         if (!loadMore) {
-            storiesList.clear()
-            storiesList.addAll(list)
+            discountList.clear()
+            discountList.addAll(list)
         } else {
-            storiesList.addAll(list)
+            discountList.addAll(list)
         }
         notifyItemRangeChanged(oldListSize, list.size)
     }
 
+    override fun getItemCount(): Int = discountList.size
 
 }

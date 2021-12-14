@@ -19,6 +19,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.request.LoginRequest
+import com.loyaltyglobal.data.model.response.LoginResponse
+import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.databinding.FragmentLoginBinding
 import com.loyaltyglobal.util.Constants.AGENCY_ID
 import com.loyaltyglobal.util.Constants.RC_SIGN_IN
@@ -43,16 +45,36 @@ class LoginFragment : Fragment() {
         // Configure Google Sign In
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
-
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
         initObserver()
     }
 
     private fun initObserver() {
         loginViewModel.logInResponse.observe(this, {
-            it.data
+           if (it != null){
+               handleLoginResponse(it)
+           }
         })
+    }
+
+    private fun handleLoginResponse(result: NetworkResult<LoginResponse>) {
+        when (result) {
+            is NetworkResult.Loading -> {
+                // show a progress bar
+                Log.e("TAG", "handleUserData() --> Loading  $result")
+                mBinding.progressbar.show()
+            }
+            is NetworkResult.Success -> {
+                // bind data to the view
+                Log.e("TAG", "handleUserData() --> Success  $result")
+                mBinding.progressbar.hide()
+            }
+            is NetworkResult.Error -> {
+                // show error message
+                Log.e("TAG", "handleUserData() --> Error ${result.message}")
+                mBinding.progressbar.hide()
+            }
+        }
     }
 
     override fun onCreateView(
@@ -107,9 +129,7 @@ class LoginFragment : Fragment() {
                         activity?.hideKeyboard()
                     }
                 }
-
             }
-
         }
         mBinding.edtEmail.doOnTextChanged { text, _, _, _ ->
             if (text.toString().isNotEmpty()) {
@@ -133,9 +153,7 @@ class LoginFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN && resultCode != 0) { // The Task returned from this call is always completed, no need to attach
-            // a listener.
+        if (requestCode == RC_SIGN_IN && resultCode != 0) {
             try {
                 val task: Task<GoogleSignInAccount> =
                     GoogleSignIn.getSignedInAccountFromIntent(data) // Google Sign In was successful, authenticate with Firebase
@@ -144,7 +162,8 @@ class LoginFragment : Fragment() {
                 if (resultCode != 0) {
                     handleSignInResult(task)
                 }
-            } catch (e: ApiException) { // Google Sign In failed, update UI appropriately
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
                 Log.e("TAG", "Google sign in failed", e)
             }
 
@@ -170,7 +189,7 @@ class LoginFragment : Fragment() {
         account?.email?.let {
             LoginRequest(
                 AGENCY_ID, "",
-                it,"email",
+                it, "email",
                 AGENCY_ID
             )
         }?.let { loginViewModel.logIn(it) }

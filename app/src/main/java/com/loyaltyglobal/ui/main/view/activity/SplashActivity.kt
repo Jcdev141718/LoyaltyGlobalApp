@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.ActivitySplashBinding
 import com.loyaltyglobal.util.setImage
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -22,7 +21,6 @@ class SplashActivity : AppCompatActivity() {
         mBinding = ActivitySplashBinding.inflate(layoutInflater)
         window.statusBarColor = ContextCompat.getColor(this, R.color.black)
         setContentView(mBinding.root)
-//        setSupportActionBar(null)
         mBinding.imgSplash.setImage(R.drawable.img_splash)
         lifecycleScope.launch {
             delay(1000)

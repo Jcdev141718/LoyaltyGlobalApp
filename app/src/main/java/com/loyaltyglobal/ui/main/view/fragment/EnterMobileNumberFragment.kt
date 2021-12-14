@@ -68,7 +68,7 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
         super.onViewCreated(view, savedInstanceState)
         context?.let { verificationViewModel.getCurrentCountryData(it) }
         mBinding.txtFlag.text = verificationViewModel.mCountryData?.key?.let { getCountryFlag(it) }
-        mBinding.textCountryCode.text = verificationViewModel.mCountryData?.countryCode
+        mBinding.textCountryCode.text = verificationViewModel.mCountryData?.countryCode?: getString(R.string._41)
         setOnClickListener()
     }
 

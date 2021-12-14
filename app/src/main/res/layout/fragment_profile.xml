@@ -47,10 +47,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_profile"
-        tools:text="@string/jhon_doe" />
+        tools:text="@string/dummy_name" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView2"
+        android:id="@+id/txt_email"
         style="@style/poppinsNormal13Grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_transaction"
@@ -91,7 +91,7 @@
         android:id="@+id/ll_transaction"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_16"
+        android:paddingHorizontal="@dimen/dp_56"
         android:layout_marginTop="@dimen/dp_34"
         android:background="@drawable/round_ripple_4"
         android:clickable="true"
@@ -99,7 +99,7 @@
         android:orientation="vertical"
         android:paddingVertical="@dimen/dp_16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_transaction"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_edit">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -190,14 +190,14 @@
         style="@style/poppinsNormal16Black"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_16"
+        android:paddingHorizontal="@dimen/dp_56"
         android:paddingVertical="@dimen/dp_24"
         android:text="@string/log_out"
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/round_ripple_4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_logout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_line_2" />
 
     <View

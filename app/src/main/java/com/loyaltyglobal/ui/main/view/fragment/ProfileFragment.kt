@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentProfileBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.util.clickWithDebounce
@@ -31,6 +32,7 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListener()
+        setData()
     }
 
     private fun setOnClickListener() {
@@ -56,6 +58,11 @@ class ProfileFragment : BaseFragment() {
             }
         }
 
+    }
+    private fun setData(){
+        //TODO: replace this dummy data with real data
+        mBinding.txtName.text = getString(R.string.dummy_name)
+        mBinding.txtEmail.text = getString(R.string.dummy_email)
     }
 
 

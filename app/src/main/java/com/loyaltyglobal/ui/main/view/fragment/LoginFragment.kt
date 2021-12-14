@@ -18,19 +18,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.request.LoginRequest
 import com.loyaltyglobal.data.model.response.LoginResponse
 import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.databinding.FragmentLoginBinding
-import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.ui.main.viewmodel.LoginViewModel
 import com.loyaltyglobal.util.Constants.AGENCY_ID
 import com.loyaltyglobal.util.Constants.RC_SIGN_IN
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.hideKeyboard
 import com.loyaltyglobal.util.isEmailValid
 import com.loyaltyglobal.util.show
-import com.loyaltyglobal.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

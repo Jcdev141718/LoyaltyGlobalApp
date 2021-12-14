@@ -4,7 +4,6 @@ import android.content.Context
 import com.loyaltyglobal.data.source.network.ApiService
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrandResponse
 import com.loyaltyglobal.data.source.localModels.userPassResponse.UserPassResponse
-import com.loyaltyglobal.data.source.network.ApiService
 import com.loyaltyglobal.data.source.network.BaseApiResponse
 import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.util.Constants.AGENCY_ID

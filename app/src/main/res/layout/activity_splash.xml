@@ -17,7 +17,7 @@
         tools:srcCompat="@drawable/img_splash" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/white40PoppinSemiBold18"
+        style="@style/white40PercentageSemiBold18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/walletly_global"

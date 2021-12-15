@@ -228,6 +228,25 @@
         <item name="android:textColor">?heading</item>
     </style>
 
+    <style name="blackPoppinSemiBold24" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_24</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textColor">?heading</item>
+    </style>
+
+    <style name="greeenPoppinSemiBold16" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+    <style name="whitePoppinMedium16" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">?main_background</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="black40PoppinSemiBold32" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/sp_32</item>
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
@@ -250,6 +269,12 @@
         <item name="android:textSize">@dimen/sp_13</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
         <item name="android:textColor">?heading</item>
+    </style>
+
+    <style name="regularPoppin16" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">?paragraph</item>
     </style>
 
     <style name="whiteBottomPoppinSemiBold14">

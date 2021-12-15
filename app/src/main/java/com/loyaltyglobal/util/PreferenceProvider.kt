@@ -20,6 +20,9 @@ class PreferenceProvider(private val appContext: Context) {
         apply()
     }
 
+    fun getPlayerId() : String? = mSharedPreferences.run {
+        getString(Constants.PREF_PLAYER_ID,"")
+    }
 
     /**
      * Set a value for the key

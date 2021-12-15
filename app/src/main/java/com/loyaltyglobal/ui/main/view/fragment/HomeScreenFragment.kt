@@ -101,7 +101,7 @@ class HomeScreenFragment : BaseFragment() {
     }
 
     private fun init() {
-        binding.layoutHomeScreenToolbar.imgLogo.setImage(R.drawable.icon_logo)
+        binding.layoutHomeScreenToolbar.imgLogo.setImage(R.drawable.ic_logo_header_small)
         setClick()
     }
 

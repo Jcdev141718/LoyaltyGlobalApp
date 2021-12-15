@@ -4,17 +4,19 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.loyaltyglobal.R
-import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.databinding.ActivityMainBinding
+import com.loyaltyglobal.notifications.NotificationReceiveListener
+import com.loyaltyglobal.notifications.NotificationServiceExtension
 import com.loyaltyglobal.ui.main.view.fragment.ExploreFragment
-import com.loyaltyglobal.ui.main.view.fragment.StoriesFragment
+import com.loyaltyglobal.ui.main.view.fragment.HomeScreenFragment
 import com.loyaltyglobal.ui.main.view.fragment.ProfileFragment
+import com.loyaltyglobal.ui.main.view.fragment.StoriesFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NotificationReceiveListener {
 
     private val homeViewModel: HomeViewModel by viewModels()
     lateinit var mainBinding: ActivityMainBinding
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainBinding.root)
         loadHomeFragment()
         clickListener()
+        NotificationServiceExtension.mNotificationReceiveListener = this
 //        homeViewModel.getSubBrands()
 //        homeViewModel.getUserPassFromAgency()
     }
@@ -71,6 +74,10 @@ class MainActivity : AppCompatActivity() {
             addToBackStack = false
         )
         mainBinding.menuBottom.setItemSelected(R.id.menu_home)
+    }
+
+    override fun onNotificationReceive(payload: String) {
+
     }
 
 

@@ -5,6 +5,7 @@ package com.loyaltyglobal.util
  */
 
 object Constants {
+    const val OneSignalAppId = "0eb5e848-2ca5-451d-a1b1-fbd20ef02e1b"
     const val BASE_URL = "https://v2dev.walletly.ai/api/v4/"
     const val AGENCY_ID = "WQeEgJhH0SirUT531Rqm"
     const val HEADER_AUTH_TOKEN = "x-auth-token"
@@ -23,5 +24,9 @@ object Constants {
     const val OTP_LENGTH = 6
     const val PERMISSIONS_REQUEST_CODE = 10003
     const val IS_USER_LOGIN_KEY = "IS_USER_LOGIN_KEY"
+
+    const val PREF_PLAYER_ID  = "PLAYER_ID"
+    const val CHANNEL_ID = "LoyaltyChannel"
+    const val CHANNEL_NAME = "LoyaltyGlobal"
 }
 

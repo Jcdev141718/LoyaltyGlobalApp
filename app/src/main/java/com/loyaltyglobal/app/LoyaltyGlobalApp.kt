@@ -2,8 +2,9 @@ package com.loyaltyglobal.app
 
 import android.app.Application
 import com.google.firebase.FirebaseApp
-import com.google.firebase.ktx.Firebase
+import com.loyaltyglobal.util.Constants.OneSignalAppId
 import com.loyaltyglobal.util.PhoneAuthHelper
+import com.onesignal.OneSignal
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -15,5 +16,12 @@ class LoyaltyGlobalApp : Application() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
         PhoneAuthHelper.initFirebase()
+
+        // Enable verbose OneSignal logging to debug issues if needed.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this)
+        OneSignal.setAppId(OneSignalAppId)
     }
 }

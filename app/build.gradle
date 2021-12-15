@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 }
 
 android {
@@ -99,5 +100,8 @@ dependencies {
 
     //Google sign in
     implementation 'com.google.android.gms:play-services-auth:20.0.0'
+
+    //One signal
+    implementation 'com.onesignal:OneSignal:4.6.0'
 
 }

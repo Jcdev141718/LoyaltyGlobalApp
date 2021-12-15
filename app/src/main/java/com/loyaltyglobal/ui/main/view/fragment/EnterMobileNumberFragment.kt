@@ -14,12 +14,9 @@ import com.loyaltyglobal.data.model.CountryCodeData
 import com.loyaltyglobal.databinding.FragmentEnterMobileNumberBinding
 import com.loyaltyglobal.ui.main.viewmodel.OtpResponse
 import com.loyaltyglobal.ui.main.viewmodel.VerificationViewModel
-import com.loyaltyglobal.util.Constants
+import com.loyaltyglobal.util.*
 import com.loyaltyglobal.util.Constants.MINIMUM_LENGTH_OF_NUMBER
 import com.loyaltyglobal.util.Constants.USER_NAME_KEY
-import com.loyaltyglobal.util.addReplaceFragment
-import com.loyaltyglobal.util.getCountryFlag
-import com.loyaltyglobal.util.showToast
 
 
 class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
@@ -51,7 +48,7 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
                         )
                     }
                     is OtpResponse.Error -> {
-                        it.message?.let { it1 -> activity?.showToast(it1) }
+                        it.message?.let { it1 -> activity?.showTopSnackBar(getString(R.string.error),it1) }
                     }
                 }
             }
@@ -69,6 +66,9 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let { verificationViewModel.getCurrentCountryData(it) }
+        mBinding.editTextNumber.apply {
+            preventSpecialCharacter()
+        }
         mBinding.txtWelcome.text = getString(R.string.hey_user_enter_your_phone_number, userName)
         mBinding.txtFlag.text = verificationViewModel.mCountryData?.key?.let { getCountryFlag(it) }
         mBinding.textCountryCode.text = verificationViewModel.mCountryData?.countryCode?: getString(R.string._41)
@@ -98,7 +98,7 @@ class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
         }
         mBinding.clTxtNext.setOnClickListener {
             if (verificationViewModel.mCountryData?.countryCode.isNullOrEmpty()) {
-                activity?.showToast(getString(R.string.please_select_country_code))
+                activity?.showTopSnackBar(getString(R.string.error),getString(R.string.please_select_country_code))
             } else {
                 context?.let { it1 -> verificationViewModel.sendOtp(it1, mBinding.editTextNumber.text.toString()) }
             }

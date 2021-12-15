@@ -59,9 +59,9 @@ class LoginFragment : Fragment() {
     private fun handleLoginResponse(result: NetworkResult<LoginResponse>) {
         when (result) {
             is NetworkResult.Loading -> {
-                if (isNormalLogin){
+                if (isNormalLogin) {
                     mBinding.progressbar.show()
-                }else{
+                } else {
                     mBinding.progressbarGoogle.show()
                     mBinding.txtContinueWithGoogle.hide()
                 }
@@ -69,6 +69,7 @@ class LoginFragment : Fragment() {
             }
             is NetworkResult.Success -> {
                 mBinding.progressbar.hide()
+                mBinding.groupNextArrow.show()
                 mBinding.progressbarGoogle.hide()
                 mBinding.txtContinueWithGoogle.show()
                 if (result.responseData?.data?.isNumberVerified == true) {
@@ -96,7 +97,7 @@ class LoginFragment : Fragment() {
                 mBinding.progressbar.hide()
                 mBinding.progressbarGoogle.hide()
                 mBinding.txtContinueWithGoogle.show()
-                result.message?.let{ activity?.showToast(it) }
+                result.message?.let { activity?.showToast(it) }
             }
         }
     }
@@ -121,43 +122,32 @@ class LoginFragment : Fragment() {
         }
 
         mBinding.clTxtNext.clickWithDebounce {
-            if (mBinding.edtEmail.text?.trim()?.isNotEmpty() == true) {
-                when {
-                    mBinding.edtEmail.text?.trim().isNullOrEmpty() -> {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.please_enter_email),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    !mBinding.edtEmail.isEmailValid() -> {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.invalid_email),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    mBinding.edtEmail.isEmailValid() && !mBinding.edtEmail.text?.trim()
-                        .isNullOrEmpty() -> {
-                        mBinding.groupNextArrow.hide()
-                        mBinding.progressbar.show()
-                    }
-                    else -> {
-                        loginViewModel.logIn(
-                            LoginRequest(
-                                AGENCY_ID, "",
-                                mBinding.edtEmail.text.toString(), "email",
-                                AGENCY_ID
-                            )
-                        )
 
-                        activity?.hideKeyboard()
-                    }
+            if (mBinding.edtEmail.text.toString().trim()
+                    .isNotEmpty()
+            ) {
+                if (mBinding.edtEmail.text.toString().trim().isEmailValid()) {
+                    isNormalLogin = true
+                    mBinding.groupNextArrow.hide()
+                    loginViewModel.logIn(
+                        LoginRequest(
+                            AGENCY_ID, "",
+                            mBinding.edtEmail.text.toString(), "email",
+                            AGENCY_ID
+                        )
+                    )
+                    activity?.hideKeyboard()
+                } else {
+                    activity?.showTopSnackBar(
+                        getString(R.string.error),
+                        getString(R.string.invalid_email)
+                    )
                 }
             }
         }
+
         mBinding.edtEmail.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty() && isNormalLogin) {
+            if (text.toString().isNotEmpty()) {
                 mBinding.clTxtNext.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
             } else {
@@ -167,12 +157,26 @@ class LoginFragment : Fragment() {
                 )
             }
         }
-
     }
+
 
     private fun signIn() {
         val signInIntent = mGoogleSignInClient?.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    override fun onResume() {
+        super.onResume()
+            if (mBinding.edtEmail.text.toString().isNotEmpty()) {
+                mBinding.clTxtNext.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
+            } else {
+                mBinding.clTxtNext.background = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.shape_filled_button_disable
+                )
+            }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

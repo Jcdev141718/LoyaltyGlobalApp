@@ -16,14 +16,11 @@ import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -31,9 +28,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
-import kotlin.math.roundToInt
 import com.loyaltyglobal.util.Constants.REGEX_EMAIL
+import com.loyaltyglobal.util.customCookieView.cookiebar2.CookieBar
 import java.util.regex.Pattern
+import kotlin.math.roundToInt
 
 /**
  * File holding all the methods of general interest.
@@ -369,4 +367,17 @@ fun hasPermissions(
         }
     }
     return true
+}
+
+fun FragmentActivity.showTopSnackBar(title: String, message: String) {
+    CookieBar.build(this).setCustomView(R.layout.view_snackbar_cookie)
+        .setCustomViewInitializer { v ->
+            val tvTitle = v.findViewById<AppCompatTextView>(R.id.tv_title)
+            if (title.isEmpty()) {
+                tvTitle.hide()
+            } else {
+                tvTitle.show()
+            }
+        }.setTitle(title).setMessage(message).setEnableAutoDismiss(true).setSwipeToDismiss(false)
+        .setCookiePosition(Gravity.TOP).show()
 }

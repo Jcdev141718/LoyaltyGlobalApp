@@ -2,16 +2,17 @@ package com.loyaltyglobal.util
 
 import android.app.Activity
 import android.content.ContextWrapper
+import android.text.InputFilter
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.*
@@ -95,4 +96,16 @@ fun Fragment.openBottomSheet(bottomSheet : BottomSheetDialogFragment) {
         this.requireActivity().supportFragmentManager,
         bottomSheet::class.java.simpleName
     )
+}
+
+fun EditText.preventSpecialCharacter() {
+    val blockCharacterSet = "!#\$%&(){|}~:;<=>?@*+,./^_`-\\'\\\" \\t\\r\\n\\f]+ "
+    val filterSpecialChar =
+        InputFilter { source, _, _, _, _, _ ->
+            if (source != null && blockCharacterSet.contains("" + source)) {
+                ""
+            } else null
+        }
+    val filterLength = InputFilter.LengthFilter(10)
+    filters = arrayOf(filterSpecialChar,filterLength)
 }

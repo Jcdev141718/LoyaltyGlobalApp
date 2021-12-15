@@ -31,6 +31,7 @@
     <color name="yellow_light">#66FFDA57</color>
     <color name="profile_green">#4BD964</color>
     <color name="border_outline">#7B61FF</color>
+    <color name="main_black">#221F1E</color>
 
     <!--[END] Common Color-->
 
@@ -58,6 +59,12 @@
 
     <color name="divider_light">#DFDFDF</color>
     <color name="divider_dark">#222222</color>
+
+    <color name="default_bg_color">#ab47bc</color>
+    <color name="default_title_color">#ffffff</color>
+    <color name="default_message_color">#ffffff</color>
+    <color name="default_action_color">#26a69a</color>
+
     <!--[END] Dark & light themes Color-->
 
 </resources>

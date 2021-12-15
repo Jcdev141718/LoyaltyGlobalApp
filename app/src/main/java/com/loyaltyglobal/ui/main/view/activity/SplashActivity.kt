@@ -11,10 +11,12 @@ import com.loyaltyglobal.databinding.ActivitySplashBinding
 import com.loyaltyglobal.util.Constants.IS_USER_LOGIN_KEY
 import com.loyaltyglobal.util.PreferenceProvider
 import com.loyaltyglobal.util.setImage
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     @Inject

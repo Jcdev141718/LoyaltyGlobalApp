@@ -6,7 +6,6 @@
     style="@style/fragmentClickable"
     android:background="?main_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.view.fragment.EnterNameFragment"
     tools:ignore="UnusedAttribute">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -94,8 +93,8 @@
         android:background="@android:color/transparent"
         android:padding="@dimen/dp_8"
         android:maxLength="10"
-        tools:text="9898529628"
-        android:inputType="number"
+        tools:text="98985293433443443"
+        android:inputType="text|number|phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_country_code"

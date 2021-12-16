@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.loyaltyglobal.R
 import com.loyaltyglobal.data.source.network.ApiResponseStates
 import com.loyaltyglobal.data.source.network.manageApiDataByState
 import com.loyaltyglobal.databinding.FragmentEnableNotificationBinding
@@ -32,15 +33,17 @@ class EnableNotificationFragment : BaseFragment() {
             if (it != null) {
                 manageApiDataByState(it, object : ApiResponseStates {
                     override fun onSuccess(responseData: Any?) {
-                        mBinding.progressBar.hide()
+                        showProgressBar(false)
                         startActivity(Intent(context, MainActivity::class.java))
                         activity?.finish()
                     }
 
-                    override fun onLoading() = mBinding.progressBar.show()
+                    override fun onLoading() {
+                        showProgressBar(true)
+                    }
 
                     override fun onError(codeData: Int?, message: String?) {
-                        mBinding.progressBar.hide()
+                        showProgressBar(false)
                     }
                 })
             }
@@ -64,11 +67,22 @@ class EnableNotificationFragment : BaseFragment() {
             }
             imgLeftArrow.clickWithDebounce { activity?.supportFragmentManager?.popBackStack() }
             btnEnableNotification.clickWithDebounce {
+                showProgressBar(true)
                 mPreferenceProvider?.getPlayerId()?.let { playerId -> verificationViewModel.enableNotification(playerId) }
             }
         }
+    }
 
-
+    private fun showProgressBar(isShow: Boolean) {
+        mBinding.apply {
+            if (isShow) {
+                btnEnableNotification.text = ""
+                progressbar.show()
+            } else {
+                btnEnableNotification.text = getString(R.string.enable_notification)
+                progressbar.hide()
+            }
+        }
     }
 
 }

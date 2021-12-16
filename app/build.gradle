@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('E:\\AndroidProjects\\office Project\\LoyaltyGlobalApp\\KeyStore\\keystore.jks')
+            storePassword 'loyaltyglobal'
+            keyAlias 'loyaltyglobal'
+            keyPassword 'loyaltyglobal'
+        }
+    }
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 

@@ -4,18 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.PhoneAuthProvider
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentVerifyOTPBinding
+import com.loyaltyglobal.util.*
 import com.loyaltyglobal.util.Constants.MOBILE_NUMBER_KEY
 import com.loyaltyglobal.util.Constants.OTP_LENGTH
-import com.loyaltyglobal.util.PhoneAuthHelper
-import com.loyaltyglobal.util.addReplaceFragment
-import com.loyaltyglobal.util.hideKeyboard
-import com.loyaltyglobal.util.showKeyboard
 
 
 class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
@@ -40,7 +36,7 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         PhoneAuthHelper.mPhoneAuthInterface = this
-//        activity?.let { PhoneAuthHelper.getNUmber(it, phoneNumber) }
+        activity?.let { PhoneAuthHelper.getNUmber(it, phoneNumber) }
         setOnClickListener()
 
     }
@@ -49,7 +45,7 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
         mBinding.apply {
             txtResendCode.setOnClickListener {
                 //TODO: Enable this code in final
-//            activity?.let { it1 -> PhoneAuthHelper.resendVerificationCode(it1, phoneNumber) }
+            activity?.let { it1 -> PhoneAuthHelper.resendVerificationCode(it1, phoneNumber) }
             }
             imgBack.setOnClickListener { activity?.onBackPressed() }
             otp1.doOnTextChanged { text, _, _, _ ->
@@ -99,7 +95,6 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
                     activity?.showKeyboard()
                 }
                 getFinalOtp()
-                finalVerification(finalOTP)
             }
         }
     }
@@ -122,13 +117,13 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
     private fun finalVerification(otp: String) {
         if (otp.length == OTP_LENGTH) {
             //TODO: enable this code in final code
-//            PhoneAuthHelper.signInWithPhoneAuthCredential(otp)
+            PhoneAuthHelper.signInWithPhoneAuthCredential(otp)
 
             //TODo: Remove this code in final
-            activity?.addReplaceFragment(
-                R.id.container_main, EnterNameFragment(), true,
-                addToBackStack = true
-            )
+//            activity?.addReplaceFragment(
+//                R.id.container_main, EnterNameFragment(), true,
+//                addToBackStack = true
+//            )
         }
     }
 
@@ -140,7 +135,7 @@ class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
     }
 
     override fun otpVerificationFailed(message: String?) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        message?.let { activity?.showTopSnackBar(getString(R.string.error),it) }
     }
 
     override fun onVerificationCodeSent(

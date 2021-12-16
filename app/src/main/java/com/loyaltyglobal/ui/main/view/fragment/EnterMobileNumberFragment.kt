@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.CountryCodeData
 import com.loyaltyglobal.databinding.FragmentEnterMobileNumberBinding
+import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.viewmodel.OtpResponse
 import com.loyaltyglobal.ui.main.viewmodel.VerificationViewModel
 import com.loyaltyglobal.util.*
@@ -19,7 +19,7 @@ import com.loyaltyglobal.util.Constants.MINIMUM_LENGTH_OF_NUMBER
 import com.loyaltyglobal.util.Constants.USER_NAME_KEY
 
 
-class EnterMobileNumberFragment : Fragment(), SendCountryCodeAndFlag {
+class EnterMobileNumberFragment : BaseFragment(), SendCountryCodeAndFlag {
 
     private val verificationViewModel: VerificationViewModel by viewModels()
     private lateinit var mBinding: FragmentEnterMobileNumberBinding

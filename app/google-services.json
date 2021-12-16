@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1035153156552-2is50p4m0483p4kru9ef475viip26kus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.loyaltyglobal",
+            "certificate_hash": "a0d519e9a51281f36b0b173d5dc58c95074ddd07"
+          }
+        },
+        {
           "client_id": "1035153156552-5e0ss2htvrbin2td22nlcfsvqu9bd77m.apps.googleusercontent.com",
           "client_type": 3
         }

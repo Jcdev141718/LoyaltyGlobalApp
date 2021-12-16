@@ -7,10 +7,13 @@ import com.loyaltyglobal.util.PreferenceProvider
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.hideKeyboard
 import com.loyaltyglobal.util.show
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Abhin.
  */
+
+@AndroidEntryPoint
 abstract class BaseFragment : Fragment() {
 
     var mBaseActivity: BaseActivity? = null

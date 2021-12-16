@@ -67,9 +67,4 @@ class EnterNameFragment : Fragment() {
             }
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
 }

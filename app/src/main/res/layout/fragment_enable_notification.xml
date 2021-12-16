@@ -99,28 +99,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_getUpdates" />
 
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/ProgressBarTheme"
+                android:visibility="invisible"
+                android:elevation="@dimen/dp_4"
+                app:layout_constraintBottom_toBottomOf="@id/btn_enableNotification"
+                app:layout_constraintEnd_toEndOf="@id/btn_enableNotification"
+                app:layout_constraintStart_toStartOf="@id/btn_enableNotification"
+                app:layout_constraintTop_toTopOf="@id/btn_enableNotification" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-    <FrameLayout
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0"
-        android:background="@color/cardview_shadow_start_color"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:theme="@style/ProgressBarTheme" />
-
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

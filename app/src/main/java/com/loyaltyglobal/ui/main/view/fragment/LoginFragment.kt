@@ -122,39 +122,23 @@ class LoginFragment : Fragment() {
         }
 
         mBinding.clTxtNext.clickWithDebounce {
-
-            if (mBinding.edtEmail.text.toString().trim()
-                    .isNotEmpty()
-            ) {
-                if (mBinding.edtEmail.text.toString().trim().isEmailValid()) {
-                    isNormalLogin = true
-                    mBinding.groupNextArrow.hide()
-                    loginViewModel.logIn(
-                        LoginRequest(
-                            AGENCY_ID, "",
-                            mBinding.edtEmail.text.toString(), "email",
-                            AGENCY_ID
-                        )
-                    )
-                    activity?.hideKeyboard()
-                } else {
-                    activity?.showTopSnackBar(
-                        getString(R.string.error),
-                        getString(R.string.invalid_email)
-                    )
-                }
-            }
+            isNormalLogin = true
+            mBinding.groupNextArrow.hide()
+            loginViewModel.logIn(
+                LoginRequest(
+                    AGENCY_ID, "",
+                    mBinding.edtEmail.text.toString(), "email",
+                    AGENCY_ID
+                )
+            )
+            activity?.hideKeyboard()
         }
 
         mBinding.edtEmail.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty()) {
-                mBinding.clTxtNext.background =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
+            if (text.toString().isNotEmpty() && mBinding.edtEmail.text.toString().trim().isEmailValid()) {
+                changeButtonState(true)
             } else {
-                mBinding.clTxtNext.background = ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.shape_filled_button_disable
-                )
+                changeButtonState(false)
             }
         }
     }
@@ -165,18 +149,16 @@ class LoginFragment : Fragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    override fun onResume() {
-        super.onResume()
-            if (mBinding.edtEmail.text.toString().isNotEmpty()) {
-                mBinding.clTxtNext.background =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
-            } else {
-                mBinding.clTxtNext.background = ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.shape_filled_button_disable
-                )
-            }
-
+    private fun changeButtonState(isEnable : Boolean) {
+        if (isEnable) {
+            mBinding.clTxtNext.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
+        } else {
+            mBinding.clTxtNext.background = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.shape_filled_button_disable
+            )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -185,9 +167,10 @@ class LoginFragment : Fragment() {
         if (requestCode == RC_SIGN_IN && resultCode != 0) {
             try {
                 val task: Task<GoogleSignInAccount> =
-                    GoogleSignIn.getSignedInAccountFromIntent(data) // Google Sign In was successful, authenticate with Firebase
+                    GoogleSignIn.getSignedInAccountFromIntent(data)
+                // Google Sign In was successful, authenticate with Firebase
                 val account =
-                    task.getResult(com.google.android.gms.common.api.ApiException::class.java)!! //                firebaseAuthWithGoogle(account.idToken!!)
+                    task.getResult(com.google.android.gms.common.api.ApiException::class.java)!!
                 if (resultCode != 0) {
                     handleSignInResult(task)
                 }

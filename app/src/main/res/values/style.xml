@@ -158,6 +158,12 @@
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
+    <style name="poppinsNormal12White">
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">?main_background</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
     <style name="poppinsBold22Black">
         <item name="android:textSize">@dimen/sp_22</item>
         <item name="android:textColor">?heading</item>
@@ -181,6 +187,18 @@
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">?heading</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="poppinsNormal16White">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">?main_background</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="poppinsNormal16Paragraph">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">?paragraph</item>
+        <item name="android:fontFamily">@font/poppins</item>
     </style>
 
     <style name="poppinsMedium16White">

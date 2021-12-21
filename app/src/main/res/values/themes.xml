@@ -26,6 +26,7 @@
         <item name="explore_chip_bg" type="color">@color/heading_light</item>
         <item name="black_white" type="color">@color/white</item>
         <item name="explore_business" type="color">@color/white</item>
+        <item name="notification_bg" type="color">@color/notification_light</item>
         <!--[START] ThemeColor-->
 
         <item name="main_divider" type="color">@color/divider_light</item>

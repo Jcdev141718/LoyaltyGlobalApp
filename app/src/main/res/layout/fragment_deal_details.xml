@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?main_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.view.fragment.DealDetailsFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_deal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_224"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:foreground="@drawable/gredient_black_transperent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dummy_deal"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_cross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="centerCrop"
+        android:padding="@dimen/dp_8"
+        app:tint="@color/white"
+        android:layout_marginTop="@dimen/dp_21"
+        android:layout_marginStart="@dimen/dp_21"
+        android:src="@drawable/ic_close"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_deal_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/dp_24"
+        android:paddingVertical="@dimen/dp_8"
+        android:background="?notification_bg"
+        app:layout_constraintTop_toBottomOf="@id/img_deal"
+        android:text="@string/to_redeem_this_offer_simply_scan_our_qr_code_in_store_and_select_this_offer"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_deal_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/poppinsBold24Heading"
+        android:padding="@dimen/dp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_deal_notification"
+        android:text="@string/cluccboi_signature_family_deal"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_deal_tag_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/poppinsNormal13Heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/dp_16"
+        android:textColor="@color/link"
+        app:layout_constraintTop_toBottomOf="@id/txt_deal_title"
+        android:text="Cluccboi"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_deal_tag"
+        android:layout_width="0dp"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_height="wrap_content"
+        style="@style/poppinsNormal13Heading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txt_deal_tag_label"
+        app:layout_constraintTop_toBottomOf="@id/txt_deal_title"
+        android:text=". Fast Food"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_deal_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/poppinsNormal13Paragraph"
+        android:padding="@dimen/dp_16"
+        app:layout_constraintTop_toBottomOf="@id/txt_deal_tag"
+        android:text="@string/the_cluccboi_signature_family_gives_you_the_choice_for_any_2_subway_footlong_subs_and_any_2_subway_six_inch_subs_choosing_between_our_classic_range_of_chicken_teriyaki_chicken_classic_meatball_melt_or_leg_ham_this_bundle_also_included_your_choice_of_a_1_25l_coca_cola_1_25l_coca_cola_no_suger_or_124mt_franklin_sparkling_water_plus_any_4_of_your_favorite_cookies"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

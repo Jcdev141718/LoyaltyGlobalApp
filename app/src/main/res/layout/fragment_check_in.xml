@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                style="@style/poppinsNormal13Black"
+                style="@style/poppinsNormal13Heading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -76,7 +76,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/btn_show"
-                style="@style/poppinsNormal12White"
+                style="@style/poppinsNormal12MainBg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_filled_button_24"
@@ -115,7 +115,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/check_in_title"
-            style="@style/poppinsBold22Black"
+            style="@style/poppinsBold22Heading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -161,7 +161,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_next"
-                style="@style/poppinsNormal16White"
+                style="@style/poppinsNormal16MainBg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_12"
@@ -225,7 +225,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_congrats_message"
-            style="@style/poppinsBold22Black"
+            style="@style/poppinsBold22Heading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/dp_8"

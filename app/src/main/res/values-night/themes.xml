@@ -29,6 +29,7 @@
         <item name="black_white" type="color">@color/black</item>
         <item name="explore_business" type="color">@color/black_medium</item>
         <item name="main_divider" type="color">@color/divider_dark</item>
+        <item name="notification_bg" type="color">@color/notification_dark</item>
         <!--[END] Dark ThemeColor-->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>

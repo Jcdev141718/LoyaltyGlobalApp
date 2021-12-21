@@ -134,62 +134,68 @@
         <item name="android:focusable">true</item>
     </style>
 
-    <style name="poppinsBold24Black">
+    <style name="poppinsBold24Heading">
         <item name="android:textSize">@dimen/sp_24</item>
         <item name="android:textColor">?heading</item>
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
     </style>
 
-    <style name="poppinsBold22Grey">
+    <style name="poppinsBold22Caption">
         <item name="android:textSize">@dimen/sp_22</item>
         <item name="android:textColor">@color/caption</item>
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
     </style>
 
-    <style name="poppinsNormal13Grey">
+    <style name="poppinsNormal13Caption">
         <item name="android:textSize">@dimen/sp_13</item>
         <item name="android:textColor">@color/caption</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
-    <style name="poppinsNormal12Grey">
+    <style name="poppinsNormal13Paragraph">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">?paragraph</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="poppinsNormal12Caption">
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:textColor">@color/caption</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
-    <style name="poppinsNormal12White">
+    <style name="poppinsNormal12MainBg">
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:textColor">?main_background</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
-    <style name="poppinsBold22Black">
+    <style name="poppinsBold22Heading">
         <item name="android:textSize">@dimen/sp_22</item>
         <item name="android:textColor">?heading</item>
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
     </style>
 
-    <style name="poppinsMedium12Grey">
+    <style name="poppinsMedium12Caption">
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:textColor">@color/caption</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
 
-    <style name="poppinsNormal13Black">
+    <style name="poppinsNormal13Heading">
         <item name="android:textSize">@dimen/sp_13</item>
         <item name="android:textColor">?heading</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
-    <style name="poppinsNormal16Black">
+    <style name="poppinsNormal16Heading">
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">?heading</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
-    <style name="poppinsNormal16White">
+    <style name="poppinsNormal16MainBg">
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">?main_background</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
@@ -306,7 +312,7 @@
         <item name="android:background">@drawable/shape_filled_button</item>
         <item name="android:letterSpacing">-0.03</item>
         <item name="android:lineSpacingExtra">-5dp</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center</item>(
     </style>
 
     <style name="bottomSheetTitle20">

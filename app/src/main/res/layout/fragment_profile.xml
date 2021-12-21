@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
-        style="@style/poppinsBold24Black"
+        style="@style/poppinsBold24Heading"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_24"
@@ -39,7 +39,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_name"
-        style="@style/poppinsBold22Black"
+        style="@style/poppinsBold22Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_24"
@@ -51,7 +51,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_email"
-        style="@style/poppinsNormal13Grey"
+        style="@style/poppinsNormal13Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_2"
@@ -62,7 +62,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_edit"
-        style="@style/poppinsNormal13Black"
+        style="@style/poppinsNormal13Heading"
         android:layout_width="@dimen/dp_86"
         android:layout_height="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_8"
@@ -104,14 +104,14 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_transaction"
-            style="@style/poppinsNormal16Black"
+            style="@style/poppinsNormal16Heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/transactions" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_transaction_desc"
-            style="@style/poppinsNormal12Grey"
+            style="@style/poppinsNormal12Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_2"
@@ -144,7 +144,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_dark_mode"
-        style="@style/poppinsNormal16Black"
+        style="@style/poppinsNormal16Heading"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"
@@ -187,7 +187,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_logout"
-        style="@style/poppinsNormal16Black"
+        style="@style/poppinsNormal16Heading"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/dp_56"

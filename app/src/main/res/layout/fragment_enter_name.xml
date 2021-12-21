@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView"
-        style="@style/poppinsBold24Black"
+        style="@style/poppinsBold24Heading"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
@@ -22,7 +22,7 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edit_text_name"
-        style="@style/poppinsBold22Black"
+        style="@style/poppinsBold22Heading"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"

@@ -14,6 +14,10 @@ import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.response.HomeScreenDealPromotionsData
 import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
 import com.loyaltyglobal.data.model.response.MyDealOfferData
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
+import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.FragmentHomeScreenBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.HomeScreenDealPromotionsAdapter
@@ -34,13 +38,13 @@ class HomeScreenFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeScreenBinding
 
     private var mMyDealOfferAdapter: MyDealOfferAdapter? = null
-    private var mMyDealOfferList = ArrayList<MyDealOfferData>()
+    private var mMyDealOfferList = ArrayList<DealOffer>()
 
     private var mHomeScreenStoriesAdapter: HomeScreenStoriesAdapter? = null
     private var mHomeScreenStoriesDataList = ArrayList<HomeScreenStoriesData>()
 
     private var mHomeScreenDealPromotionsAdapter: HomeScreenDealPromotionsAdapter? = null
-    private var mHomeScreenDealPromotionsList = ArrayList<HomeScreenDealPromotionsData>()
+    private var mHomeScreenDealPromotionsList = ArrayList<CustomField>()
 
     private val homeViewModel: HomeViewModel by activityViewModels()
 
@@ -130,9 +134,11 @@ class HomeScreenFragment : BaseFragment() {
         initMyDealOfferRecyclerView()
         initHomeScreenStoriesRecyclerView()
         initFeatureDealRecyclerView()
-        homeViewModel.dummyOfferList()
-        homeViewModel.dummyStories()
-        homeViewModel.dummyFeatureDeal()
+        homeViewModel.getDealAndOffersList()
+        homeViewModel.getCustomFieldList()
+//        homeViewModel.dummyOfferList()
+//        homeViewModel.dummyStories()
+//        homeViewModel.dummyFeatureDeal()
     }
 
     private fun initMyDealOfferRecyclerView() {

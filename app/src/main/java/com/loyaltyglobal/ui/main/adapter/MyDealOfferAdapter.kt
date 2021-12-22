@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.response.MyDealOfferData
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.databinding.MyDealOfferItemBinding
 
 /**
@@ -15,7 +17,7 @@ import com.loyaltyglobal.databinding.MyDealOfferItemBinding
  */
 class MyDealOfferAdapter(
     private var context: Context,
-    private var mList: List<MyDealOfferData>,
+    private var mList: List<DealOffer>,
     private val mItemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<MyDealOfferAdapter.CommonAdapterViewHolder>() {
 
@@ -53,7 +55,7 @@ class MyDealOfferAdapter(
 
     class CommonAdapterViewHolder(var binding: MyDealOfferItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(list: MyDealOfferData) =
+        fun bindData(list: DealOffer) =
             binding.apply {
                 mData = list
                 executePendingBindings()

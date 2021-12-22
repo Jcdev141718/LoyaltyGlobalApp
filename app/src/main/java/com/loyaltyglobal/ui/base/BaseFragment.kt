@@ -2,6 +2,7 @@ package com.loyaltyglobal.ui.base
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import com.loyaltyglobal.data.source.local.DatabaseDAO
 import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.util.PreferenceProvider
 import com.loyaltyglobal.util.hide
@@ -17,13 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
 abstract class BaseFragment : Fragment() {
 
     var mBaseActivity: BaseActivity? = null
-    val mPreferenceProvider: PreferenceProvider?
+    protected val mPreferenceProvider: PreferenceProvider?
         get() = mBaseActivity?.mPreferenceProvider
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is BaseActivity)
-            mBaseActivity = context
+        if (context is BaseActivity) mBaseActivity = context
     }
 
     fun hideBottomNavigation() {

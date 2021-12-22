@@ -6,13 +6,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.response.HomeScreenDealPromotionsData
+import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
 import com.loyaltyglobal.databinding.HomeScreenDealsPromotionsItemBinding
 
 /**
  * Created by Abhin.
  */
 class HomeScreenDealPromotionsAdapter(
-    private var mList: List<HomeScreenDealPromotionsData>,
+    private var mList: List<CustomField>,
     private val mItemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<HomeScreenDealPromotionsAdapter.CommonAdapterViewHolder>() {
 
@@ -40,7 +41,7 @@ class HomeScreenDealPromotionsAdapter(
 
     class CommonAdapterViewHolder(var binding: HomeScreenDealsPromotionsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(list: HomeScreenDealPromotionsData) =
+        fun bindData(list: CustomField) =
             binding.apply {
                 mData = list
                 executePendingBindings()

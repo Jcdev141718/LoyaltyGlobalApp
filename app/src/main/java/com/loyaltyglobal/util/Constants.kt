@@ -28,5 +28,8 @@ object Constants {
     const val PREF_PLAYER_ID  = "PLAYER_ID"
     const val CHANNEL_ID = "LoyaltyChannel"
     const val CHANNEL_NAME = "LoyaltyGlobal"
+    const val NOTIFICATION_TYPE_TEXT = "textNotification"
+    const val NOTIFICATION_TYPE_IMAGE = "imageNotification"
+    const val CUSTOM_FIELD_TYPE_IMAGE = "imageUrl"
 }
 

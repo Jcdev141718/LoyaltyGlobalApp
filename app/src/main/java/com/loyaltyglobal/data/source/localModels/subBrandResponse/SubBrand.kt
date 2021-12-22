@@ -21,7 +21,7 @@ data class SubBrand(
     @Embedded(prefix = "sub_brand_created_at_") var createdAt: CreatedAt? = null,
     var createdBy: String? = null,
     @Embedded(prefix = "sub_brand_currency_") var currency: Currency? = null,
-    @Embedded(prefix = "sub_brand_deal_offer_") var dealOffer: DealOffer? = null,
+    @Embedded var dealOffer: DealOffer? = null,
     var delete: Boolean? = null,
     var description: String? = null,
     var dialingCode: String? = null,

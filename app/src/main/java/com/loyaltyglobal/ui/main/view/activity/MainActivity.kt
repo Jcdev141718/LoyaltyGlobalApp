@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity(), NotificationReceiveListener {
         loadHomeFragment()
         clickListener()
         NotificationServiceExtension.mNotificationReceiveListener = this
-//        homeViewModel.getSubBrands()
-//        homeViewModel.getUserPassFromAgency()
+        homeViewModel.getSubBrands()
+        homeViewModel.getUserPassFromAgency()
     }
 
     private fun clickListener() {

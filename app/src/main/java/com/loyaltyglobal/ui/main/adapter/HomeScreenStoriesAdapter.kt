@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.HomeScreenStoriesItemBinding
 
 /**

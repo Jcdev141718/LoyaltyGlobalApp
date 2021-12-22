@@ -6,7 +6,7 @@
     <data class="MyDealOfferItemBinding">
         <variable
             name="mData"
-            type="com.loyaltyglobal.data.model.response.MyDealOfferData" />
+            type="com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer" />
     </data>
 
 
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                setImage="@{mData.thumbnailUrl}"
+                setImage="@{mData.image}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_16"
-            android:text="@{mData.brandName}"
+            android:text="@{mData.name}"
             tools:text="@string/brand_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_deal_offer" />
@@ -60,13 +60,14 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_discount"
             style="@style/HeadingMedium16"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_4"
             android:layout_marginBottom="@dimen/dp_16"
-            tools:text="@string/get_10_entire_menu"
-            android:text="@{mData.description}"
+            tools:text="Get 10% entire menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{mData.dealDescription}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_brand_name" />

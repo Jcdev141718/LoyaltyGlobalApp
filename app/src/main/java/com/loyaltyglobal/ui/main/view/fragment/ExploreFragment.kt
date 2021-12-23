@@ -14,6 +14,10 @@ import com.loyaltyglobal.ui.main.adapter.ViewPagerAdapter
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 
+/**
+ * Created by Abhin.
+ */
+
 class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInterface {
 
     lateinit var mBinding: FragmentExploreBinding

@@ -31,5 +31,7 @@ object Constants {
     const val NOTIFICATION_TYPE_TEXT = "textNotification"
     const val NOTIFICATION_TYPE_IMAGE = "imageNotification"
     const val CUSTOM_FIELD_TYPE_IMAGE = "imageUrl"
+    const val KEY_WEB_URL = "KEY_WEB_URL"
+    const val KEY_TITLE = "KEY_TITLE"
 }
 

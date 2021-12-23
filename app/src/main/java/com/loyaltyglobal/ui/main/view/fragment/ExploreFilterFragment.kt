@@ -12,6 +12,10 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.ExploreFilterAdapter
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 
+/**
+ * Created by Abhin.
+ */
+
 class ExploreFilterFragment : BaseFragment() {
 
     var mExploreFilterInterface: ExploreFilterInterface? = null

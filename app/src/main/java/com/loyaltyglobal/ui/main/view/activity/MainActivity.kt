@@ -13,18 +13,20 @@ import com.loyaltyglobal.ui.main.view.fragment.ProfileFragment
 import com.loyaltyglobal.ui.main.view.fragment.StoriesFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.util.hide
+import com.loyaltyglobal.util.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NotificationReceiveListener {
 
     private val homeViewModel: HomeViewModel by viewModels()
-    lateinit var mainBinding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainBinding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         loadHomeFragment()
         clickListener()
         NotificationServiceExtension.mNotificationReceiveListener = this
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity(), NotificationReceiveListener {
     }
 
     private fun clickListener() {
-        mainBinding.menuBottom.setOnItemSelectedListener {
+        binding.menuBottom.setOnItemSelectedListener {
             when (it) {
                 R.id.menu_home -> {
                     addReplaceFragment(
@@ -73,12 +75,22 @@ class MainActivity : AppCompatActivity(), NotificationReceiveListener {
             addFragment = true,
             addToBackStack = false
         )
-        mainBinding.menuBottom.setItemSelected(R.id.menu_home)
+        binding.menuBottom.setItemSelected(R.id.menu_home)
     }
 
     override fun onNotificationReceive(payload: String) {
 
     }
 
+    fun showHideBottomNavigationBar(isShow : Boolean){
+        if (isShow) {
+            binding.menuBottom.show()
+        } else {
+            binding.menuBottom.hide()
+        }
+    }
 
+    fun moveToStoriesTab() {
+        binding.menuBottom.setItemSelected(R.id.menu_stories)
+    }
 }

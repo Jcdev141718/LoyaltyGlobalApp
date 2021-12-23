@@ -18,6 +18,9 @@ import com.loyaltyglobal.util.*
 import com.loyaltyglobal.util.Constants.MINIMUM_LENGTH_OF_NUMBER
 import com.loyaltyglobal.util.Constants.USER_NAME_KEY
 
+/**
+ * Created by Abhin.
+ */
 
 class EnterMobileNumberFragment : BaseFragment(), SendCountryCodeAndFlag {
 

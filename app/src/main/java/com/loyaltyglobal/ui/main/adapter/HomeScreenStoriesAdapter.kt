@@ -7,7 +7,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
-import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.HomeScreenStoriesItemBinding
 
@@ -16,7 +15,7 @@ import com.loyaltyglobal.databinding.HomeScreenStoriesItemBinding
  */
 class HomeScreenStoriesAdapter(
     private var context: Context,
-    private var mList: List<HomeScreenStoriesData>,
+    private var mList: List<Notification?>,
     private val mItemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<HomeScreenStoriesAdapter.CommonAdapterViewHolder>() {
 
@@ -36,7 +35,7 @@ class HomeScreenStoriesAdapter(
 
     override fun onBindViewHolder(holder: CommonAdapterViewHolder, position: Int) {
         val banner = mList[position]
-        holder.bindData(banner)
+        banner?.let { holder.bindData(it) }
         holder.itemView.setOnClickListener {
             mItemClickListener.itemClick(position)
         }
@@ -53,7 +52,7 @@ class HomeScreenStoriesAdapter(
 
     class CommonAdapterViewHolder(var binding: HomeScreenStoriesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(list: HomeScreenStoriesData) =
+        fun bindData(list: Notification) =
             binding.apply {
                 mData = list
                 executePendingBindings()

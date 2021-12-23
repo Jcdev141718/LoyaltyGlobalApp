@@ -14,6 +14,10 @@ import com.loyaltyglobal.ui.main.viewmodel.NotificationViewModel
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
 
+/**
+ * Created by Abhin.
+ */
+
 class NotificationFragment : BaseFragment() {
 
     lateinit var mBinding: FragmentNotificationBinding

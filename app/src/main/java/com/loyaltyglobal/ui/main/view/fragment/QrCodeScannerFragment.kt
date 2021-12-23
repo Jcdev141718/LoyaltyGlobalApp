@@ -18,6 +18,7 @@ import com.loyaltyglobal.util.clickWithDebounce
 /**
  * Create by Abhin.
  */
+
 class QrCodeScannerFragment : BaseFragment() {
 
     private lateinit var binding: FragmentQrCodeScannerBinding

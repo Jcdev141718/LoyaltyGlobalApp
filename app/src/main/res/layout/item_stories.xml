@@ -8,7 +8,7 @@
 
         <variable
             name="mData"
-            type="com.loyaltyglobal.data.model.response.HomeScreenStoriesData" />
+            type="com.loyaltyglobal.data.source.localModels.userPassResponse.Notification" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -39,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
+                setImage="@{mData.imageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,10 +69,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_logo"
-                setCircleImage="@{mData.brandImageUrl}"
                 android:layout_width="@dimen/dp_0"
                 android:padding="@dimen/dp_1"
-                android:src="@drawable/ic_test_logo"
+                setCircleImage="@{mData.brandLogo}"
                 android:layout_height="@dimen/dp_0"
                 app:layout_constraintBottom_toBottomOf="@id/img_border"
                 app:layout_constraintEnd_toEndOf="@id/img_border"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_17"
-                android:text="@{mData.brandName}"
+                android:text="@{mData.branName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

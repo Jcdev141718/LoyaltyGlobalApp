@@ -8,19 +8,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.FragmentStoriesBinding
 import com.loyaltyglobal.ui.main.adapter.StoriesAdapter
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.RecyclerItemDecoration
 import com.loyaltyglobal.util.dpToPx
 
+/**
+ * Created by Abhin.
+ */
+
 @SuppressLint("NotifyDataSetChanged")
 class StoriesFragment : Fragment() {
 
     lateinit var binding: FragmentStoriesBinding
     private var storiesAdapter: StoriesAdapter? = null
-    private var mStoriesList = ArrayList<HomeScreenStoriesData>()
+    private var mStoriesList = ArrayList<Notification?>()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(

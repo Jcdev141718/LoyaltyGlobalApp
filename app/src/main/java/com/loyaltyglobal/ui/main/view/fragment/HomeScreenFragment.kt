@@ -11,11 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.R
-import com.loyaltyglobal.data.model.response.HomeScreenDealPromotionsData
-import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
-import com.loyaltyglobal.data.model.response.MyDealOfferData
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
-import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.FragmentHomeScreenBinding
@@ -23,12 +19,10 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.HomeScreenDealPromotionsAdapter
 import com.loyaltyglobal.ui.main.adapter.HomeScreenStoriesAdapter
 import com.loyaltyglobal.ui.main.adapter.MyDealOfferAdapter
+import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.ui.main.view.fragments.QrCodeScannerFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
-import com.loyaltyglobal.util.addReplaceFragment
-import com.loyaltyglobal.util.clickWithDebounce
-import com.loyaltyglobal.util.openBottomSheet
-import com.loyaltyglobal.util.setImage
+import com.loyaltyglobal.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("NotifyDataSetChanged")
@@ -41,7 +35,7 @@ class HomeScreenFragment : BaseFragment() {
     private var mMyDealOfferList = ArrayList<DealOffer>()
 
     private var mHomeScreenStoriesAdapter: HomeScreenStoriesAdapter? = null
-    private var mHomeScreenStoriesDataList = ArrayList<HomeScreenStoriesData>()
+    private var mHomeScreenStoriesDataList = ArrayList<Notification?>()
 
     private var mHomeScreenDealPromotionsAdapter: HomeScreenDealPromotionsAdapter? = null
     private var mHomeScreenDealPromotionsList = ArrayList<CustomField>()
@@ -96,11 +90,7 @@ class HomeScreenFragment : BaseFragment() {
         binding.layoutHomeScreenToolbar.imgNotification.setOnClickListener {
             hideBottomNavigation()
             val mNotificationFragment = NotificationFragment()
-            activity?.addReplaceFragment(
-                R.id.fl_main_container, mNotificationFragment,
-                addFragment = true,
-                addToBackStack = true
-            )
+            activity?.addReplaceFragment(R.id.fl_main_container, mNotificationFragment, addFragment = true, addToBackStack = true)
         }
     }
 
@@ -111,24 +101,18 @@ class HomeScreenFragment : BaseFragment() {
 
     private fun setClick() {
         binding.layoutHomeScreenToolbar.imgCamera.clickWithDebounce {
-            activity?.addReplaceFragment(
-                R.id.fl_main_container,
+            activity?.addReplaceFragment(R.id.fl_main_container,
                 QrCodeScannerFragment(),
                 addFragment = true,
-                addToBackStack = true
-            )
+                addToBackStack = true)
         }
         binding.layoutHomeScreenToolbar.imgQrCode.clickWithDebounce {
-            openBottomSheet(
-                ShowQrBottomSheetFragment()
-            )
+            openBottomSheet(ShowQrBottomSheetFragment())
         }
         binding.layoutHomeScreenToolbar.imgNotification.clickWithDebounce {}
         binding.layoutHomeScreenMyDealOffer.txtSeeAll.clickWithDebounce {}
         binding.layoutHomeScreenStories.txtSeeAll.clickWithDebounce {
-            activity?.addReplaceFragment(
-                R.id.fl_main_container, StoriesFragment(), addFragment = true, addToBackStack = true
-            )
+            (activity as MainActivity).moveToStoriesTab()
         }
 
         initMyDealOfferRecyclerView()
@@ -136,19 +120,14 @@ class HomeScreenFragment : BaseFragment() {
         initFeatureDealRecyclerView()
         homeViewModel.getDealAndOffersList()
         homeViewModel.getCustomFieldList()
-//        homeViewModel.dummyOfferList()
-//        homeViewModel.dummyStories()
-//        homeViewModel.dummyFeatureDeal()
+        homeViewModel.getStoriesList()
     }
 
     private fun initMyDealOfferRecyclerView() {
-        val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.layoutHomeScreenMyDealOffer.rvDealOffer.layoutManager = layoutManager
-        mMyDealOfferAdapter = MyDealOfferAdapter(
-            requireContext(),
-            mMyDealOfferList,
-            object : MyDealOfferAdapter.ItemClickListener {
+        mMyDealOfferAdapter =
+            MyDealOfferAdapter(requireContext(), mMyDealOfferList, object : MyDealOfferAdapter.ItemClickListener {
                 override fun itemClick(position: Int) {
 
                 }
@@ -157,8 +136,7 @@ class HomeScreenFragment : BaseFragment() {
     }
 
     private fun initHomeScreenStoriesRecyclerView() {
-        val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.layoutHomeScreenStories.rvStories.layoutManager = layoutManager
         mHomeScreenStoriesAdapter = HomeScreenStoriesAdapter(requireContext(),
             mHomeScreenStoriesDataList,
@@ -173,14 +151,17 @@ class HomeScreenFragment : BaseFragment() {
     private fun initFeatureDealRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.layoutHomeScreenFeatureDealsPromotions.rvDealOffer.layoutManager = layoutManager
-        mHomeScreenDealPromotionsAdapter = HomeScreenDealPromotionsAdapter(
-            mHomeScreenDealPromotionsList,
+        mHomeScreenDealPromotionsAdapter = HomeScreenDealPromotionsAdapter(mHomeScreenDealPromotionsList,
             object : HomeScreenDealPromotionsAdapter.ItemClickListener {
                 override fun itemClick(position: Int) {
-
+                    activity?.addReplaceFragment(R.id.fl_main_container, WebViewFragment().apply {
+                        arguments = Bundle().apply {
+                            putString(Constants.KEY_WEB_URL, mHomeScreenDealPromotionsList[position].value)
+                        }
+                    }, true, true)
+                    (activity as MainActivity).showHideBottomNavigationBar(false)
                 }
             })
-        binding.layoutHomeScreenFeatureDealsPromotions.rvDealOffer.adapter =
-            mHomeScreenDealPromotionsAdapter
+        binding.layoutHomeScreenFeatureDealsPromotions.rvDealOffer.adapter = mHomeScreenDealPromotionsAdapter
     }
 }

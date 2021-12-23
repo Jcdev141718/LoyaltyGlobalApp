@@ -15,6 +15,7 @@ import com.loyaltyglobal.util.setFullHeight
 /**
  * Created by Abhin.
  */
+
 class ShowQrBottomSheetFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomsheetShowQrBinding

@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.data.model.DealsAndOffersData
 import com.loyaltyglobal.databinding.FragmentDealsAndOffersBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.DealsAndOffersAdapter
-import com.loyaltyglobal.ui.main.viewmodel.DealsAndOffersViewModel
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
+
+/**
+ * Created by Abhin.
+ */
 
 class DealsAndOffersFragment : BaseFragment() {
 

@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
-import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.StoriesItemBinding
 import com.loyaltyglobal.util.clickWithDebounce
 
 class StoriesAdapter(
-    private var storiesList: List<HomeScreenStoriesData>,
+    private var storiesList: List<Notification?>,
     private var clickInterface: ClickListener
 ) : RecyclerView.Adapter<StoriesAdapter.DataViewHolder>() {
 
@@ -31,7 +31,7 @@ class StoriesAdapter(
     override fun getItemCount(): Int = storiesList.size
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.bind(storiesList[position])
+        storiesList[position]?.let { holder.bind(it) }
         holder.itemView.clickWithDebounce {
             clickInterface.itemClick(position)
         }
@@ -39,7 +39,7 @@ class StoriesAdapter(
 
     class DataViewHolder(var binding: StoriesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemData: HomeScreenStoriesData) = binding.apply {
+        fun bind(itemData: Notification) = binding.apply {
             mData = itemData
             executePendingBindings()
         }

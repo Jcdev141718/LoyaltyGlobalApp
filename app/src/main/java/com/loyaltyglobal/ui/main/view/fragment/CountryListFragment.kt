@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.data.model.CountryCodeData
 import com.loyaltyglobal.databinding.FragmentCountryListBinding
 import com.loyaltyglobal.ui.main.adapter.CountryAdapter
-import com.loyaltyglobal.util.hideKeyboard
 import com.loyaltyglobal.ui.main.viewmodel.CountryListViewModel
+import com.loyaltyglobal.util.hideKeyboard
 
+/**
+ * Created by Abhin.
+ */
 
 class CountryListFragment : Fragment() {
 

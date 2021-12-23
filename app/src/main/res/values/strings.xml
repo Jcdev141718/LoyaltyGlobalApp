@@ -110,4 +110,7 @@
     <string name="error">Error</string>
     <string name="enable_notification">Enable Notification</string>
     <string name="get_updates_on_your_loyalty_points_and_more_through_push_notification">Get updates on your loyalty points(and more) through push notification.</string>
+    <string name="ok">OK</string>
+    <string name="ssl_certificate_error">SSL Certificate Error</string>
+    <string name="certificate_authority_error">The certificate authority is not trusted</string>
 </resources>

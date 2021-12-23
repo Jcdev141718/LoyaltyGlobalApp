@@ -29,6 +29,10 @@ import com.loyaltyglobal.util.Constants.RC_SIGN_IN
 import com.loyaltyglobal.util.Constants.USER_NAME_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Created by Abhin.
+ */
+
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 

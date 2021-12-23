@@ -13,6 +13,10 @@ import com.loyaltyglobal.util.Constants.IS_USER_LOGIN_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**
+ * Created by Abhin.
+ */
+
 @AndroidEntryPoint
 class EnterNameFragment : Fragment() {
 

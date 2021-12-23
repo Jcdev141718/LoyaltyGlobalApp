@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.data.model.BusinessData
 import com.loyaltyglobal.databinding.FragmentBusinessBinding
@@ -14,6 +13,10 @@ import com.loyaltyglobal.ui.main.adapter.BusinessAdapter
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
+
+/**
+ * Created by Abhin.
+ */
 
 class BusinessFragment : BaseFragment() {
 

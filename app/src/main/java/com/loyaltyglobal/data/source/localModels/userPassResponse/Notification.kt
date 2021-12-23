@@ -28,4 +28,6 @@ data class Notification(
     var type: String? = null,
     var updated: Long? = null,
     @Embedded(prefix = "notification_updated_at_") var updatedAt: UpdatedAt? = null,
+    var branName : String? = null,
+    var brandLogo : String? = null
 )

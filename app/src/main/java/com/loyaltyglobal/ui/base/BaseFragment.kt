@@ -2,7 +2,6 @@ package com.loyaltyglobal.ui.base
 
 import android.content.Context
 import androidx.fragment.app.Fragment
-import com.loyaltyglobal.data.source.local.DatabaseDAO
 import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.util.PreferenceProvider
 import com.loyaltyglobal.util.hide
@@ -28,7 +27,7 @@ abstract class BaseFragment : Fragment() {
 
     fun hideBottomNavigation() {
         try {
-            (activity as MainActivity).mainBinding.menuBottom.hide()
+            (activity as MainActivity).binding.menuBottom.hide()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -36,7 +35,7 @@ abstract class BaseFragment : Fragment() {
 
     fun showBottomNavigation() {
         try {
-            (activity as MainActivity).mainBinding.menuBottom.show()
+            (activity as MainActivity).binding.menuBottom.show()
         } catch (e: Exception) {
             e.printStackTrace()
         }

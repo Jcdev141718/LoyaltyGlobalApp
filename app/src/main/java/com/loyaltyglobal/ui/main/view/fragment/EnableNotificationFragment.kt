@@ -18,6 +18,10 @@ import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Created by Abhin.
+ */
+
 @AndroidEntryPoint
 class EnableNotificationFragment : BaseFragment() {
     private lateinit var mBinding: FragmentEnableNotificationBinding

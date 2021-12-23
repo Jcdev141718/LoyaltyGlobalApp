@@ -9,6 +9,9 @@ import com.loyaltyglobal.databinding.FragmentProfileBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.util.clickWithDebounce
 
+/**
+ * Created by Abhin.
+ */
 
 class ProfileFragment : BaseFragment() {
 

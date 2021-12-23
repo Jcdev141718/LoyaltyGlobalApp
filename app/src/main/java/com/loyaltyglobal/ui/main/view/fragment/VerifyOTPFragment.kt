@@ -13,6 +13,9 @@ import com.loyaltyglobal.util.*
 import com.loyaltyglobal.util.Constants.MOBILE_NUMBER_KEY
 import com.loyaltyglobal.util.Constants.OTP_LENGTH
 
+/**
+ * Created by Abhin.
+ */
 
 class VerifyOTPFragment : Fragment(), PhoneAuthHelper.PhoneAuthInterface {
     private lateinit var mBinding: FragmentVerifyOTPBinding

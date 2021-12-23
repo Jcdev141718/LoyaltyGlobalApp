@@ -2,13 +2,10 @@ package com.loyaltyglobal.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.loyaltyglobal.data.model.response.HomeScreenDealPromotionsData
-import com.loyaltyglobal.data.model.response.HomeScreenStoriesData
-import com.loyaltyglobal.data.model.response.MyDealOfferData
 import com.loyaltyglobal.data.reposotory.HomeRepository
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
-import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,11 +22,8 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var mOfferList = MutableLiveData<ArrayList<DealOffer>>()
-    var offerList = ArrayList<MyDealOfferData>()
     var mDealPromotionsList = MutableLiveData<ArrayList<CustomField>>()
-    var dealPromotionsList = ArrayList<HomeScreenDealPromotionsData>()
-    var mStoriesList = MutableLiveData<ArrayList<HomeScreenStoriesData>>()
-    var storiesList = ArrayList<HomeScreenStoriesData>()
+    var mStoriesList = MutableLiveData<ArrayList<Notification?>>()
 
     fun getUserPassFromAgency() {
         viewModelScope.launch(coroutineScope) {
@@ -52,6 +46,12 @@ class HomeViewModel @Inject constructor(
     fun getCustomFieldList() {
         viewModelScope.launch(Dispatchers.IO) {
             mDealPromotionsList.postValue(homeRepository.getCustomFieldList())
+        }
+    }
+
+    fun getStoriesList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            mStoriesList.postValue(homeRepository.getStoriesList())
         }
     }
 }

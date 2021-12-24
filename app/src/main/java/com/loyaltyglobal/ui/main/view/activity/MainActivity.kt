@@ -3,6 +3,7 @@ package com.loyaltyglobal.ui.main.view.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.ActivityMainBinding
 import com.loyaltyglobal.notifications.NotificationReceiveListener
@@ -16,6 +17,7 @@ import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NotificationReceiveListener {
@@ -30,8 +32,12 @@ class MainActivity : AppCompatActivity(), NotificationReceiveListener {
         loadHomeFragment()
         clickListener()
         NotificationServiceExtension.mNotificationReceiveListener = this
-        homeViewModel.getSubBrands()
-        homeViewModel.getUserPassFromAgency()
+        lifecycleScope.launch {
+            if (!homeViewModel.isDataIsAvailableInDB()) {
+                homeViewModel.getSubBrands()
+                homeViewModel.getUserPassFromAgency()
+            }
+        }
     }
 
     private fun clickListener() {

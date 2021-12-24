@@ -113,4 +113,5 @@
     <string name="ok">OK</string>
     <string name="ssl_certificate_error">SSL Certificate Error</string>
     <string name="certificate_authority_error">The certificate authority is not trusted</string>
+    <string name="no_stories_available">No Stories Available</string>
 </resources>

@@ -28,7 +28,7 @@ class StoriesFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
         binding = FragmentStoriesBinding.inflate(inflater, container, false)
         initData()
@@ -53,7 +53,13 @@ class StoriesFragment : Fragment() {
     private fun initData() {
         storiesAdapter = StoriesAdapter(mStoriesList, object : StoriesAdapter.ClickListener {
             override fun itemClick(position: Int) {
-
+                mStoriesList[position]?.let {
+                    if (!it.isOpenedOnce) {
+                        it.isOpenedOnce = true
+                        homeViewModel.updateStoryItemInDB(it._id)
+                        storiesAdapter?.notifyItemChanged(position)
+                    }
+                }
             }
         })
 

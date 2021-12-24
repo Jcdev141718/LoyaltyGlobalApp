@@ -19,7 +19,6 @@
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             android:text="@string/my_deals_offers"
-            app:layout_constraintBottom_toTopOf="@+id/rv_deal_offer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,5 +50,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_my_deal_offers"
             tools:listitem="@layout/item_my_deal_offers" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_no_deals_offer_found"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_300"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:gravity="center_horizontal|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_my_deal_offers">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_deals_offers" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="center"
+                android:text="@string/no_deal_available"
+                android:textColor="?heading"
+                android:textSize="@dimen/sp_18" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:text="@string/many_exciting_deals_will_soon_be_available"
+                android:textColor="?paragraph"
+                android:textSize="@dimen/sp_13" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

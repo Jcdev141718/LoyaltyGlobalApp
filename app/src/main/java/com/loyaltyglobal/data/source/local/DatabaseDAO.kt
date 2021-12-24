@@ -61,4 +61,7 @@ interface DatabaseDAO {
 
     @Query("select _id,brandName,brandLogo from SubBrand")
     suspend fun getSubBrandNameAndLogo() : List<SubBrand>
+
+    @Query("update Notification set isOpenedOnce = '1' where _id = :id")
+    suspend fun updateStoryItem(id : String)
 }

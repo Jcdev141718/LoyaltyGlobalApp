@@ -66,4 +66,8 @@ class HomeRepository @Inject constructor(
     suspend fun getCustomFieldList() : ArrayList<CustomField> {
         return ArrayList(dataBaseDao.getCustomFieldList())
     }
+
+    suspend fun isDataIsAvailableInDB() : Boolean = dataBaseDao.countOfSubBrands() != 0
+
+    suspend fun updateStoryItemIntoDB(storyId : String) = dataBaseDao.updateStoryItem(storyId)
 }

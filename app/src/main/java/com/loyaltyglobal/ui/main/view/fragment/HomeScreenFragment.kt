@@ -60,6 +60,9 @@ class HomeScreenFragment : BaseFragment() {
                 mMyDealOfferList.clear()
                 mMyDealOfferList.addAll(it)
                 mMyDealOfferAdapter?.notifyDataSetChanged()
+                setEmptyViewForDealsAndOffers(isEmpty = false)
+            } else {
+                setEmptyViewForDealsAndOffers(isEmpty = true)
             }
         })
 
@@ -68,6 +71,9 @@ class HomeScreenFragment : BaseFragment() {
                 mHomeScreenStoriesDataList.clear()
                 mHomeScreenStoriesDataList.addAll(it)
                 mHomeScreenStoriesAdapter?.notifyDataSetChanged()
+                setEmptyViewForStories(isEmpty = false)
+            } else {
+                setEmptyViewForStories(isEmpty = true)
             }
         })
 
@@ -163,5 +169,29 @@ class HomeScreenFragment : BaseFragment() {
                 }
             })
         binding.layoutHomeScreenFeatureDealsPromotions.rvDealOffer.adapter = mHomeScreenDealPromotionsAdapter
+    }
+
+    private fun setEmptyViewForStories(isEmpty: Boolean) = if (isEmpty) {
+        binding.layoutHomeScreenStories.apply {
+            llNoStories.show()
+            rvStories.hide()
+        }
+    } else {
+        binding.layoutHomeScreenStories.apply {
+            llNoStories.hide()
+            rvStories.show()
+        }
+    }
+
+    private fun setEmptyViewForDealsAndOffers(isEmpty: Boolean) = if (isEmpty) {
+        binding.layoutHomeScreenMyDealOffer.apply {
+            llNoDealsOfferFound.show()
+            rvDealOffer.hide()
+        }
+    } else {
+        binding.layoutHomeScreenMyDealOffer.apply {
+            llNoDealsOfferFound.hide()
+            rvDealOffer.show()
+        }
     }
 }

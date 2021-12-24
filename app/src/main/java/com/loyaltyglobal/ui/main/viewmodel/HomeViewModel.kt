@@ -10,6 +10,7 @@ import com.loyaltyglobal.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -52,6 +53,18 @@ class HomeViewModel @Inject constructor(
     fun getStoriesList() {
         viewModelScope.launch(Dispatchers.IO) {
             mStoriesList.postValue(homeRepository.getStoriesList())
+        }
+    }
+
+    suspend fun isDataIsAvailableInDB(): Boolean {
+        return withContext(Dispatchers.IO) {
+            homeRepository.isDataIsAvailableInDB()
+        }
+    }
+
+    fun updateStoryItemInDB(storyId : String) {
+        viewModelScope.launch {
+            homeRepository.updateStoryItemIntoDB(storyId)
         }
     }
 }

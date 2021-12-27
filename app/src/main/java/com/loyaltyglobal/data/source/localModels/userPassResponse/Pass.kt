@@ -22,4 +22,9 @@ data class Pass(
     @Embedded(prefix = "pass_updated_at_") var updatedAt: UpdatedAt? = null,
     var userId: String? = null,
     var wallet: Boolean? = null
-)
+) {
+
+    fun getRemainingPoints(maxPoints : Int) : Int? {
+        return loyaltyCard?.currentPoints?.let { maxPoints.minus(it) }
+    }
+}

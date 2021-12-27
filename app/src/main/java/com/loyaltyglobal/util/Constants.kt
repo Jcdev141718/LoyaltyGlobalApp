@@ -26,6 +26,7 @@ object Constants {
     const val IS_USER_LOGIN_KEY = "IS_USER_LOGIN_KEY"
 
     const val PREF_PLAYER_ID  = "PLAYER_ID"
+    const val PREF_USER_ID  = "USER_ID"
     const val CHANNEL_ID = "LoyaltyChannel"
     const val CHANNEL_NAME = "LoyaltyGlobal"
     const val NOTIFICATION_TYPE_TEXT = "textNotification"

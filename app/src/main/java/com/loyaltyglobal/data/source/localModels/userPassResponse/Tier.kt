@@ -20,4 +20,12 @@ data class Tier(
     var fontColor: String? = null,
     var name: String? = null,
     @Embedded(prefix = "tier_point_range") var pointRange: PointRange? = null,
-)
+) {
+    fun getProgressData(daysLeft: Int): Int {
+        var progress: Int? = null
+        expirationDays?.let { expDays ->
+            progress = (daysLeft * 100) / expDays
+        }
+        return progress ?: 0
+    }
+}

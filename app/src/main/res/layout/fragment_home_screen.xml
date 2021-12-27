@@ -1,77 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-        <androidx.constraintlayout.widget.ConstraintLayout
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mData"
+            type="com.loyaltyglobal.ui.main.viewmodel.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?main_divider">
+
+        <include
+            android:id="@+id/layout_home_screen_toolbar"
+            layout="@layout/layout_home_screen_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?main_divider">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                android:id="@+id/layout_home_screen_toolbar"
-                layout="@layout/layout_home_screen_toolbar"
+        <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper
+            android:id="@+id/ns_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
 
-            <include
-                android:id="@+id/layout_home_screen_expiration"
-                layout="@layout/layout_home_screen_expiration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
-
-            <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper
-                android:id="@+id/ns_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constrainedHeight="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_home_screen_expiration">
-
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <include
+                    android:id="@+id/layout_home_screen_expiration"
+                    layout="@layout/layout_home_screen_expiration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/dp_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    bind:mPointsData="@{mData.mPassData}"
+                    bind:mTiersData="@{mData.mTierData}" />
 
-                    <include
-                        android:id="@+id/layout_home_screen_my_deal_offer"
-                        layout="@layout/layout_home_screen_my_deal_offer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
+                <include
+                    android:id="@+id/layout_home_screen_my_deal_offer"
+                    layout="@layout/layout_home_screen_my_deal_offer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
 
-                    <include
-                        android:id="@+id/layout_home_screen_stories"
-                        layout="@layout/layout_home_screen_stories"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
+                <include
+                    android:id="@+id/layout_home_screen_stories"
+                    layout="@layout/layout_home_screen_stories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
 
-                    <include
-                        android:id="@+id/layout_home_screen_feature_deals_promotions"
-                        layout="@layout/layout_home_screen_feature_deals_promotions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
+                <include
+                    android:id="@+id/layout_home_screen_feature_deals_promotions"
+                    layout="@layout/layout_home_screen_feature_deals_promotions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar" />
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
-            </com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

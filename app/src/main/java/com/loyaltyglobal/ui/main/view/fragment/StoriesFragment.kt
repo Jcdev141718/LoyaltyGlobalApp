@@ -14,6 +14,8 @@ import com.loyaltyglobal.ui.main.adapter.StoriesAdapter
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.RecyclerItemDecoration
 import com.loyaltyglobal.util.dpToPx
+import com.loyaltyglobal.util.hide
+import com.loyaltyglobal.util.show
 
 /**
  * Created by Abhin.
@@ -31,7 +33,6 @@ class StoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
         binding = FragmentStoriesBinding.inflate(inflater, container, false)
-        initData()
         return binding.root
     }
 
@@ -40,12 +41,20 @@ class StoriesFragment : Fragment() {
         initObserver()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initData()
+    }
+
     private fun initObserver() {
         homeViewModel.mStoriesList.observe(this, {
             if (!it.isNullOrEmpty()) {
                 mStoriesList.clear()
                 mStoriesList.addAll(it)
                 storiesAdapter?.notifyDataSetChanged()
+                setEmptyViewForStories(false)
+            }else {
+                setEmptyViewForStories(true)
             }
         })
     }
@@ -67,6 +76,18 @@ class StoriesFragment : Fragment() {
             rvStories.layoutManager = GridLayoutManager(requireContext(), 2)
             rvStories.addItemDecoration(RecyclerItemDecoration(2, dpToPx(4f, resources)))
             rvStories.adapter = storiesAdapter
+        }
+    }
+
+    private fun setEmptyViewForStories(isEmpty: Boolean) = if (isEmpty) {
+        binding.apply {
+            llNoStories.root.show()
+            rvStories.hide()
+        }
+    } else {
+        binding.apply {
+            llNoStories.root.hide()
+            rvStories.show()
         }
     }
 

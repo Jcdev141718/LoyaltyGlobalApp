@@ -52,9 +52,9 @@
     <string name="see_all">See All</string>
     <string name="stories">Stories</string>
     <!-- [START] TODO: DUMMY DATA Remove after come from server -->
-    <string name="home_screen_need_for_next_level_points">10,050 pt</string>
-    <string name="home_screen_total_points">20,000 pt</string>
-    <string name="home_screen_day_expiration">85 days to expiration</string>
+    <string name="home_screen_need_for_next_level_points">%d pt</string>
+    <string name="home_screen_total_points">%d pt</string>
+    <string name="home_screen_day_expiration">%d days to expiration</string>
     <string name="get_10_entire_menu">Get 10% entire menu</string>
     <string name="Versace">Versace</string>
     <string name="baskin_robins">Baskin Robins</string>
@@ -114,4 +114,5 @@
     <string name="ssl_certificate_error">SSL Certificate Error</string>
     <string name="certificate_authority_error">The certificate authority is not trusted</string>
     <string name="no_stories_available">No Stories Available</string>
+    <string name="enter_email_hint">Enter Email</string>
 </resources>

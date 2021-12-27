@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,7 +36,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="@color/border_light"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_stories_title"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_stories_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_stories"
@@ -42,15 +45,25 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:paddingHorizontal="@dimen/dp_8"
-                app:layout_constrainedHeight="true"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
-                tools:itemCount="10"
+                app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider"
-                tools:listitem="@layout/item_stories"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:spanCount="2"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_stories" />
 
+            <include
+                android:id="@+id/ll_no_stories"
+                layout="@layout/layout_no_stories"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
 </layout>

@@ -50,13 +50,13 @@ interface DatabaseDAO {
     @Query("select count() from CustomField")
     suspend fun countOfCustomFields() : Int
 
-    @Query("select sub_brand_deal_offer_name,sub_brand_deal_offer_image,sub_brand_deal_offer_dealDescription from SubBrand where _id in (select childBrandId from coalition where availDealOffer = 0)")
+    @Query("select sub_brand_deal_offer_name,sub_brand_deal_offer_image,sub_brand_deal_offer_dealDescription from SubBrand where _id in (select childBrandId from Coalition where availDealOffer = '0') and `delete` = '0'")
     suspend fun getDealsAndOffers() : List<DealOffer>
 
     @Query("select * from Notification where type == '$NOTIFICATION_TYPE_TEXT' or type == '$NOTIFICATION_TYPE_IMAGE'")
     suspend fun getStoriesList() : List<Notification>
 
-    @Query("select * from CustomField where type == '$CUSTOM_FIELD_TYPE_IMAGE'")
+    @Query("select * from CustomField where type == '$CUSTOM_FIELD_TYPE_IMAGE' and `delete` == '0'")
     suspend fun getCustomFieldList() : List<CustomField>
 
     @Query("select _id,brandName,brandLogo from SubBrand")
@@ -64,4 +64,13 @@ interface DatabaseDAO {
 
     @Query("update Notification set isOpenedOnce = '1' where _id = :id")
     suspend fun updateStoryItem(id : String)
+
+    @Query("select * from Pass where userId = :userId")
+    suspend fun getPassData(userId : String) : Pass
+
+    @Query("select daysLeft from Pass where userId = :userId")
+    suspend fun getDaysLeft(userId : String) : Int
+
+    @Query("select * from Tier where _id = (select loyalty_card_currentTierId from Pass where userId = :userId)")
+    suspend fun getPointsDataFromTiers(userId : String) : Tier
 }

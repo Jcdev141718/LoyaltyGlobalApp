@@ -7,9 +7,12 @@ import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Pass
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Tier
 import com.loyaltyglobal.data.source.network.ApiService
 import com.loyaltyglobal.data.source.network.BaseApiResponse
 import com.loyaltyglobal.util.Constants.AGENCY_ID
+import com.loyaltyglobal.util.PreferenceProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +21,10 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class HomeRepository @Inject constructor(
-    private val apiService: ApiService, private val dataBaseDao: DatabaseDAO, @ApplicationContext context: Context,
+    private val apiService: ApiService,
+    private val dataBaseDao: DatabaseDAO,
+    @ApplicationContext context: Context,
+    private val preferenceProvider: PreferenceProvider,
 ) : BaseApiResponse(context) {
 
     suspend fun getSubBrand() {
@@ -44,30 +50,35 @@ class HomeRepository @Inject constructor(
         }
     }
 
-    suspend fun getDealAndOffersList() : ArrayList<DealOffer> {
+    suspend fun getDealAndOffersList(): ArrayList<DealOffer> {
         return ArrayList(dataBaseDao.getDealsAndOffers())
     }
 
-    suspend fun getStoriesList() : ArrayList<Notification?> {
+    suspend fun getStoriesList(): ArrayList<Notification?> {
         val subBrandList = withContext(Dispatchers.IO) { dataBaseDao.getSubBrandNameAndLogo() }
         val storiesList = ArrayList(dataBaseDao.getStoriesList())
-        val subBrandMap : Map<String, SubBrand> = subBrandList.associateBy { it._id }
-        val result = storiesList.filter { subBrandMap[it.brandId] != null }.map { notification ->
-            subBrandMap[notification.brandId]?.let { subBrand ->
-                notification?.apply {
-                    branName = subBrand.brandName
-                    brandLogo = subBrand.brandLogo
+        val subBrandMap: Map<String, SubBrand> = subBrandList.associateBy { it._id }
+        val result = storiesList.filter { subBrandMap[it.brandId] != null && subBrandMap[it.brandId]?.delete == false }
+            .filter { it.sendTo?.contains(preferenceProvider.getUserId()) == true }.map { notification ->
+                subBrandMap[notification.brandId]?.let { subBrand ->
+                    notification?.apply {
+                        branName = subBrand.brandName
+                        brandLogo = subBrand.brandLogo
+                    }
                 }
             }
-        }
         return ArrayList(result)
     }
 
-    suspend fun getCustomFieldList() : ArrayList<CustomField> {
+    suspend fun getCustomFieldList(): ArrayList<CustomField> {
         return ArrayList(dataBaseDao.getCustomFieldList())
     }
 
-    suspend fun isDataIsAvailableInDB() : Boolean = dataBaseDao.countOfSubBrands() != 0
+    suspend fun isDataIsAvailableInDB(): Boolean = dataBaseDao.countOfSubBrands() != 0
 
-    suspend fun updateStoryItemIntoDB(storyId : String) = dataBaseDao.updateStoryItem(storyId)
+    suspend fun updateStoryItemIntoDB(storyId: String) = dataBaseDao.updateStoryItem(storyId)
+
+    suspend fun getPassData() : Pass? = preferenceProvider.getUserId()?.let { dataBaseDao.getPassData(it) }
+
+    suspend fun getTiersData() : Tier? = preferenceProvider.getUserId()?.let { dataBaseDao.getPointsDataFromTiers(it) }
 }

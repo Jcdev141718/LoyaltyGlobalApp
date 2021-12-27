@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
             if (preferenceProvider.getValue(IS_USER_LOGIN_KEY, false)){
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             }else{
-                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                startActivity(Intent(this@SplashActivity, LoginActivity/*MainActivity*/::class.java))
             }
             finish()
         }

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,9 +21,11 @@ import com.loyaltyglobal.data.model.request.LoginRequest
 import com.loyaltyglobal.data.model.response.LoginResponse
 import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.databinding.FragmentLoginBinding
+import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.viewmodel.LoginViewModel
 import com.loyaltyglobal.util.*
 import com.loyaltyglobal.util.Constants.AGENCY_ID
+import com.loyaltyglobal.util.Constants.PREF_USER_ID
 import com.loyaltyglobal.util.Constants.RC_SIGN_IN
 import com.loyaltyglobal.util.Constants.USER_NAME_KEY
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +35,7 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
     lateinit var mBinding: FragmentLoginBinding
     private var mGoogleSignInClient: GoogleSignInClient? = null
@@ -76,6 +77,7 @@ class LoginFragment : Fragment() {
                 mBinding.groupNextArrow.show()
                 mBinding.progressbarGoogle.hide()
                 mBinding.txtContinueWithGoogle.show()
+                mBaseActivity?.mPreferenceProvider?.setValue(PREF_USER_ID, result.responseData?.data?._id.toString())
                 if (result.responseData?.data?.isNumberVerified == true) {
                     activity?.addReplaceFragment(
                         R.id.container_main, EnterNameFragment(), true,

@@ -6,6 +6,8 @@ import com.loyaltyglobal.data.reposotory.HomeRepository
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
 import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Pass
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Tier
 import com.loyaltyglobal.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +27,8 @@ class HomeViewModel @Inject constructor(
     var mOfferList = MutableLiveData<ArrayList<DealOffer>>()
     var mDealPromotionsList = MutableLiveData<ArrayList<CustomField>>()
     var mStoriesList = MutableLiveData<ArrayList<Notification?>>()
+    var mPassData = MutableLiveData<Pass>()
+    var mTierData = MutableLiveData<Tier>()
 
     fun getUserPassFromAgency() {
         viewModelScope.launch(coroutineScope) {
@@ -65,6 +69,18 @@ class HomeViewModel @Inject constructor(
     fun updateStoryItemInDB(storyId : String) {
         viewModelScope.launch {
             homeRepository.updateStoryItemIntoDB(storyId)
+        }
+    }
+
+    fun getPassData() {
+        viewModelScope.launch {
+            mPassData.postValue(homeRepository.getPassData())
+        }
+    }
+
+    fun getTiersData(){
+        viewModelScope.launch {
+            mTierData.postValue(homeRepository.getTiersData())
         }
     }
 }

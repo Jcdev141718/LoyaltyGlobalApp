@@ -45,7 +45,11 @@ class HomeScreenFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
+        binding = FragmentHomeScreenBinding.inflate(inflater, container, false).apply {
+            mData = homeViewModel
+            lifecycleOwner = this@HomeScreenFragment
+            executePendingBindings()
+        }
         return binding.root
     }
 
@@ -89,19 +93,18 @@ class HomeScreenFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        clickListener()
-    }
-
-    private fun clickListener() {
-        binding.layoutHomeScreenToolbar.imgNotification.setOnClickListener {
-            hideBottomNavigation()
-            val mNotificationFragment = NotificationFragment()
-            activity?.addReplaceFragment(R.id.fl_main_container, mNotificationFragment, addFragment = true, addToBackStack = true)
-        }
     }
 
     private fun init() {
         binding.layoutHomeScreenToolbar.imgLogo.setImage(R.drawable.ic_logo_header_small)
+        initMyDealOfferRecyclerView()
+        initHomeScreenStoriesRecyclerView()
+        initFeatureDealRecyclerView()
+        homeViewModel.getDealAndOffersList()
+        homeViewModel.getCustomFieldList()
+        homeViewModel.getStoriesList()
+        homeViewModel.getPassData()
+        homeViewModel.getTiersData()
         setClick()
     }
 
@@ -120,13 +123,11 @@ class HomeScreenFragment : BaseFragment() {
         binding.layoutHomeScreenStories.txtSeeAll.clickWithDebounce {
             (activity as MainActivity).moveToStoriesTab()
         }
-
-        initMyDealOfferRecyclerView()
-        initHomeScreenStoriesRecyclerView()
-        initFeatureDealRecyclerView()
-        homeViewModel.getDealAndOffersList()
-        homeViewModel.getCustomFieldList()
-        homeViewModel.getStoriesList()
+        binding.layoutHomeScreenToolbar.imgNotification.setOnClickListener {
+            hideBottomNavigation()
+            val mNotificationFragment = NotificationFragment()
+            activity?.addReplaceFragment(R.id.fl_main_container, mNotificationFragment, addFragment = true, addToBackStack = true)
+        }
     }
 
     private fun initMyDealOfferRecyclerView() {
@@ -173,13 +174,13 @@ class HomeScreenFragment : BaseFragment() {
 
     private fun setEmptyViewForStories(isEmpty: Boolean) = if (isEmpty) {
         binding.layoutHomeScreenStories.apply {
-            llNoStories.show()
-            rvStories.hide()
+            llNoStories.root.show()
+            hide(rvStories,txtSeeAll)
         }
     } else {
         binding.layoutHomeScreenStories.apply {
-            llNoStories.hide()
-            rvStories.show()
+            llNoStories.root.hide()
+            show(rvStories,txtSeeAll)
         }
     }
 

@@ -5,7 +5,7 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="mData"
             type="com.loyaltyglobal.ui.main.viewmodel.HomeViewModel" />
@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="?main_divider">
 
         <include
@@ -25,15 +25,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper
-            android:id="@+id/ns_main"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeToRefresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constrainedHeight="true"
+            android:layout_height="0dp"
+            app:refreshing="@{mData.swipeLoader}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar">
+
+        <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper
+            android:id="@+id/ns_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -84,5 +89,27 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_main_loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?main_background"
+            app:layout_constrainedHeight="true"
+            android:visibility="@{mData.mainLoader == true ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_home_screen_toolbar">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:theme="@style/ProgressBarThemeDashboard"/>
+
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

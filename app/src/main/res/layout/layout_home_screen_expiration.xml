@@ -34,7 +34,6 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_6"
             android:layout_marginStart="@dimen/dp_8"
-
             android:max="100"
             tools:progress="70"
             android:progress="@{mTiersData.getProgressData(mPointsData.daysLeft)}"

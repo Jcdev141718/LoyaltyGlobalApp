@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.FragmentStoriesBinding
@@ -16,18 +16,20 @@ import com.loyaltyglobal.util.RecyclerItemDecoration
 import com.loyaltyglobal.util.dpToPx
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Abhin.
  */
 
+@AndroidEntryPoint
 @SuppressLint("NotifyDataSetChanged")
 class StoriesFragment : Fragment() {
 
     lateinit var binding: FragmentStoriesBinding
     private var storiesAdapter: StoriesAdapter? = null
     private var mStoriesList = ArrayList<Notification?>()
-    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
@@ -44,12 +46,16 @@ class StoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initData()
+        homeViewModel.getStoriesList()
     }
 
     private fun initObserver() {
         homeViewModel.mStoriesList.observe(this, {
             if (!it.isNullOrEmpty()) {
                 mStoriesList.clear()
+                it.map { notification ->
+                    notification?.isOpenedOnce = notification?.readBy?.contains(notification.userId) == true
+                }
                 mStoriesList.addAll(it)
                 storiesAdapter?.notifyDataSetChanged()
                 setEmptyViewForStories(false)
@@ -64,8 +70,8 @@ class StoriesFragment : Fragment() {
             override fun itemClick(position: Int) {
                 mStoriesList[position]?.let {
                     if (!it.isOpenedOnce) {
+                        homeViewModel.readNotification(it._id)
                         it.isOpenedOnce = true
-                        homeViewModel.updateStoryItemInDB(it._id)
                         storiesAdapter?.notifyItemChanged(position)
                     }
                 }

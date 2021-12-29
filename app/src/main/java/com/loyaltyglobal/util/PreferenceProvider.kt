@@ -28,6 +28,10 @@ class PreferenceProvider(private val appContext: Context) {
         getString(Constants.PREF_USER_ID,"")
     }
 
+    fun getLastRefreshTimeStamp() : Long = mSharedPreferences.run {
+        getLongValue(Constants.KEY_LAST_REFRESH_TIMESTAMP,0)
+    }
+
     /**
      * Set a value for the key
      */

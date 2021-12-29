@@ -8,6 +8,7 @@ import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentProfileBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.util.clickWithDebounce
+import com.loyaltyglobal.util.showTopSnackBar
 
 /**
  * Created by Abhin.
@@ -50,7 +51,7 @@ class ProfileFragment : BaseFragment() {
 
             }
             txtLogout.clickWithDebounce {
-
+                activity?.showTopSnackBar("title","message")
             }
             switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){

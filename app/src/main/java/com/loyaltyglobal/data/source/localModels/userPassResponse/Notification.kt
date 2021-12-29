@@ -15,8 +15,7 @@ data class Notification(
     @Embedded(prefix = "notification_created_at_") var createdAt: CreatedAt? = null,
     var delete: Boolean? = null,
     var description: String? = null,
-    var displayTitle: String? = null,
-    var foregroundColor: String? = null,
+    var displayTitle: String? = null, //    var foregroundColor: String? = null,
     var imageUrl: String? = null,
     var linkUrl: String? = null,
     var readBy: List<String>? = null,
@@ -28,7 +27,8 @@ data class Notification(
     var type: String? = null,
     var updated: Long? = null,
     @Embedded(prefix = "notification_updated_at_") var updatedAt: UpdatedAt? = null,
-    var branName : String? = null,
-    var brandLogo : String? = null,
-    var isOpenedOnce : Boolean = false
+    var branName: String? = null,
+    var brandLogo: String? = null,
+    var isOpenedOnce: Boolean = false,
+    var userId: String? = null,
 )

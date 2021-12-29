@@ -8,7 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
@@ -24,23 +25,23 @@ import com.loyaltyglobal.ui.main.view.fragments.QrCodeScannerFragment
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
 import com.loyaltyglobal.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 @SuppressLint("NotifyDataSetChanged")
 @AndroidEntryPoint
 class HomeScreenFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeScreenBinding
-
     private var mMyDealOfferAdapter: MyDealOfferAdapter? = null
     private var mMyDealOfferList = ArrayList<DealOffer>()
-
     private var mHomeScreenStoriesAdapter: HomeScreenStoriesAdapter? = null
     private var mHomeScreenStoriesDataList = ArrayList<Notification?>()
-
     private var mHomeScreenDealPromotionsAdapter: HomeScreenDealPromotionsAdapter? = null
     private var mHomeScreenDealPromotionsList = ArrayList<CustomField>()
-
-    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
@@ -73,6 +74,9 @@ class HomeScreenFragment : BaseFragment() {
         homeViewModel.mStoriesList.observe(this, {
             if (!it.isNullOrEmpty()) {
                 mHomeScreenStoriesDataList.clear()
+                it.map { notification ->
+                    notification?.isOpenedOnce = notification?.readBy?.contains(notification.userId) == true
+                }
                 mHomeScreenStoriesDataList.addAll(it)
                 mHomeScreenStoriesAdapter?.notifyDataSetChanged()
                 setEmptyViewForStories(isEmpty = false)
@@ -100,12 +104,8 @@ class HomeScreenFragment : BaseFragment() {
         initMyDealOfferRecyclerView()
         initHomeScreenStoriesRecyclerView()
         initFeatureDealRecyclerView()
-        homeViewModel.getDealAndOffersList()
-        homeViewModel.getCustomFieldList()
-        homeViewModel.getStoriesList()
-        homeViewModel.getPassData()
-        homeViewModel.getTiersData()
         setClick()
+        homeViewModel.getDashboardData()
     }
 
     private fun setClick() {
@@ -127,6 +127,18 @@ class HomeScreenFragment : BaseFragment() {
             hideBottomNavigation()
             val mNotificationFragment = NotificationFragment()
             activity?.addReplaceFragment(R.id.fl_main_container, mNotificationFragment, addFragment = true, addToBackStack = true)
+        }
+        binding.swipeToRefresh.setOnRefreshListener {
+            lifecycleScope.launch {
+                mPreferenceProvider?.getLastRefreshTimeStamp()?.let {
+                    if (checkRefreshThreshold(it)) {
+                        homeViewModel.dataFromApiCall(isRefresh = true)
+                    } else {
+                        delay(2000)
+                        binding.swipeToRefresh.isRefreshing = false
+                    }
+                }
+            }
         }
     }
 
@@ -175,12 +187,12 @@ class HomeScreenFragment : BaseFragment() {
     private fun setEmptyViewForStories(isEmpty: Boolean) = if (isEmpty) {
         binding.layoutHomeScreenStories.apply {
             llNoStories.root.show()
-            hide(rvStories,txtSeeAll)
+            hide(rvStories, txtSeeAll)
         }
     } else {
         binding.layoutHomeScreenStories.apply {
             llNoStories.root.hide()
-            show(rvStories,txtSeeAll)
+            show(rvStories, txtSeeAll)
         }
     }
 

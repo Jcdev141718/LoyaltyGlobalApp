@@ -30,6 +30,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
 import com.loyaltyglobal.util.Constants.REGEX_EMAIL
 import com.loyaltyglobal.util.customCookieView.cookiebar2.CookieBar
+import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 import kotlin.math.roundToInt
 
@@ -369,7 +371,8 @@ fun hasPermissions(
     return true
 }
 
-fun FragmentActivity.showTopSnackBar(title: String, message: String) {
+fun FragmentActivity.
+        showTopSnackBar(title: String, message: String) {
     CookieBar.build(this).setCustomView(R.layout.view_snackbar_cookie)
         .setCustomViewInitializer { v ->
             val tvTitle = v.findViewById<AppCompatTextView>(R.id.tv_title)
@@ -380,4 +383,11 @@ fun FragmentActivity.showTopSnackBar(title: String, message: String) {
             }
         }.setTitle(title).setMessage(message).setEnableAutoDismiss(true).setSwipeToDismiss(false)
         .setCookiePosition(Gravity.TOP).show()
+}
+
+fun checkRefreshThreshold(storedTime : Long) : Boolean {
+    val storeDate = Date(storedTime)
+    val difference = Date().time - storeDate.time
+    val diffInMinute = TimeUnit.MILLISECONDS.toMinutes(difference)
+    return diffInMinute > 15
 }

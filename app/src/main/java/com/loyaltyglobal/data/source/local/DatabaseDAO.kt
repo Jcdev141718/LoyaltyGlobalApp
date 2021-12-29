@@ -1,9 +1,6 @@
 package com.loyaltyglobal.data.source.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.Coalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
@@ -47,6 +44,9 @@ interface DatabaseDAO {
     @Query("select count() from SubBrand")
     suspend fun countOfSubBrands() : Int
 
+    @Query("select count() from Pass")
+    suspend fun countOfPassData() : Int
+
     @Query("select count() from CustomField")
     suspend fun countOfCustomFields() : Int
 
@@ -73,4 +73,10 @@ interface DatabaseDAO {
 
     @Query("select * from Tier where _id = (select loyalty_card_currentTierId from Pass where userId = :userId)")
     suspend fun getPointsDataFromTiers(userId : String) : Tier
+
+    @Query("update Notification set readBy = :readBy where _id = :id")
+    suspend fun readNotification(id : String,readBy : List<String>)
+
+    @Update
+    suspend fun updateNotification(notification : Notification)
 }

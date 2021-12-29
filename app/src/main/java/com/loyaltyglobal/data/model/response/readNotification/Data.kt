@@ -1,0 +1,56 @@
+package com.loyaltyglobal.data.model.response.readNotification
+
+import com.loyaltyglobal.data.source.localModels.userPassResponse.CreatedAt
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
+import com.loyaltyglobal.data.source.localModels.userPassResponse.UpdatedAt
+
+data class Data(
+    var _id: String? = null,
+    var agencyId: String? = null,
+    var backgroundColor: String? = null,
+    var brandId: String? = null,
+    var campaignId: String? = null,
+    var created: Long? = null,
+    var createdAt: CreatedAt? = null,
+    var delete: Boolean? = null,
+    var description: String? = null,
+    var displayTitle: String? = null, //    var foregroundColor: String? = null,
+    var imageUrl: String? = null,
+    var linkUrl: String? = null,
+    var readBy: List<String>? = null,
+    var schedule: Boolean? = null,
+    var sendTo: List<String>? = null,
+    var title: String? = null,
+    var type: String? = null,
+    var updated: Long? = null,
+    var updatedAt: UpdatedAt? = null,
+    var scheduleDate: Long? = null,
+    var scheduleDateString: String? = null,
+    var branName: String? = null,
+    var brandLogo: String? = null,
+    var isOpenedOnce: Boolean = false,
+)
+
+fun Data.toNotificationOBJ(isOpenedOnce: Boolean) = Notification(_id = _id.toString(),
+    agencyId = agencyId,
+    brandId = brandId,
+    campaignId = campaignId,
+    created = created,
+    createdAt = createdAt,
+    delete = delete,
+    description = description,
+    displayTitle = displayTitle,
+    imageUrl = imageUrl,
+    linkUrl = linkUrl,
+    readBy = readBy,
+    schedule = schedule,
+    scheduleDate = scheduleDate,
+    scheduleDateString = scheduleDateString,
+    sendTo = sendTo,
+    title = title,
+    type = type,
+    updated = updated,
+    updatedAt = updatedAt,
+    branName = branName,
+    brandLogo = brandLogo,
+    isOpenedOnce = isOpenedOnce)

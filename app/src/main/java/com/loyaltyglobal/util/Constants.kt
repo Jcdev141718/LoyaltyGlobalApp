@@ -34,5 +34,6 @@ object Constants {
     const val CUSTOM_FIELD_TYPE_IMAGE = "imageUrl"
     const val KEY_WEB_URL = "KEY_WEB_URL"
     const val KEY_TITLE = "KEY_TITLE"
+    const val KEY_LAST_REFRESH_TIMESTAMP = "LAST_REFRESH_TIMESTAMP"
 }
 

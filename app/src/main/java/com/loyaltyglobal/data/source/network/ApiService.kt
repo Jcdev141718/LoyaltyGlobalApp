@@ -1,8 +1,10 @@
 package com.loyaltyglobal.data.source.network
 
 import com.loyaltyglobal.data.model.request.LoginRequest
+import com.loyaltyglobal.data.model.request.ReadNotificationRequest
 import com.loyaltyglobal.data.model.request.UpdateUserRequest
 import com.loyaltyglobal.data.model.response.LoginResponse
+import com.loyaltyglobal.data.model.response.readNotification.ReadNotificationResponse
 import com.loyaltyglobal.data.model.response.updateUser.UpdateUserResponse
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrandResponse
 import com.loyaltyglobal.data.source.localModels.userPassResponse.UserPassResponse
@@ -23,4 +25,7 @@ interface ApiService {
 
     @PUT("user/mobile/wallet")
     suspend fun enableNotification(@Body request: UpdateUserRequest) : Response<UpdateUserResponse>
+
+    @PUT("notifications")
+    suspend fun readNotification(@Body request : ReadNotificationRequest) : Response<ReadNotificationResponse>
 }

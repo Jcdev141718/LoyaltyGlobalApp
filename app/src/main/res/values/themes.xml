@@ -52,6 +52,11 @@
         <item name="colorAccent">@color/white</item>
     </style>
 
+    <style name="ProgressBarThemeDashboard">
+        <item name="colorAccent">@color/black</item>
+    </style>
+
+
 <!--    <item name="android:navigationBarColor">@android:color/transparent</item>-->
 <!--    <item name="android:windowTranslucentNavigation">true</item>-->
 </resources>

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data class="HomeScreenStoriesItemBinding">
+        <import type="android.view.View"/>
         <variable
             name="mData"
             type="com.loyaltyglobal.data.source.localModels.userPassResponse.Notification" />
@@ -73,6 +76,7 @@
                 android:layout_height="@dimen/dp_0"
                 android:padding="@dimen/dp_1"
                 setCircleImage="@{mData.brandLogo}"
+                android:visibility="@{mData.openedOnce ? View.GONE : View.VISIBLE }"
                 app:layout_constraintBottom_toBottomOf="@id/img_border"
                 app:layout_constraintEnd_toEndOf="@id/img_border"
                 app:layout_constraintStart_toStartOf="@id/img_border"
@@ -86,6 +90,7 @@
                 android:layout_marginBottom="@dimen/dp_17"
                 tools:text="@string/Versace"
                 android:text="@{mData.branName}"
+                android:visibility="@{mData.openedOnce ? View.GONE : View.VISIBLE }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -95,6 +100,7 @@
                 layout="@layout/layout_stories_loading"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                bind:mNotificationData="@{mData}"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

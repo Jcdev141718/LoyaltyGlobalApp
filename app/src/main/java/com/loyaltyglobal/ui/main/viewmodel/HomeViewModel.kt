@@ -2,17 +2,20 @@ package com.loyaltyglobal.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.loyaltyglobal.data.model.response.readNotification.ReadNotificationResponse
 import com.loyaltyglobal.data.reposotory.HomeRepository
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
 import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Pass
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Tier
+import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -29,58 +32,56 @@ class HomeViewModel @Inject constructor(
     var mStoriesList = MutableLiveData<ArrayList<Notification?>>()
     var mPassData = MutableLiveData<Pass>()
     var mTierData = MutableLiveData<Tier>()
-
-    fun getUserPassFromAgency() {
-        viewModelScope.launch(coroutineScope) {
-            homeRepository.getUserPassFromAgency()
-        }
-    }
-
-    fun getSubBrands() {
-        viewModelScope.launch(coroutineScope) {
-            homeRepository.getSubBrand()
-        }
-    }
-
-    fun getDealAndOffersList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            mOfferList.postValue(homeRepository.getDealAndOffersList())
-        }
-    }
-
-    fun getCustomFieldList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            mDealPromotionsList.postValue(homeRepository.getCustomFieldList())
-        }
-    }
+    var mReadNotificationResponse = MutableLiveData<NetworkResult<ReadNotificationResponse>>()
+    var mainLoader: MutableLiveData<Boolean> = MutableLiveData(false)
+    var swipeLoader: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getStoriesList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             mStoriesList.postValue(homeRepository.getStoriesList())
         }
     }
 
-    suspend fun isDataIsAvailableInDB(): Boolean {
-        return withContext(Dispatchers.IO) {
-            homeRepository.isDataIsAvailableInDB()
+    fun readNotification(notificationId: String) {
+        viewModelScope.launch {
+            mReadNotificationResponse.postValue(homeRepository.readNotification(notificationId))
         }
     }
 
-    fun updateStoryItemInDB(storyId : String) {
+    // get data from DB if available else api call
+    fun getDashboardData() {
         viewModelScope.launch {
-            homeRepository.updateStoryItemIntoDB(storyId)
+            if (homeRepository.isSubBrandsIsAvailableInDB()) {
+                getAllDataFromDB()
+            } else {
+                dataFromApiCall()
+            }
         }
     }
 
-    fun getPassData() {
+    fun dataFromApiCall(isRefresh: Boolean = false) {
         viewModelScope.launch {
-            mPassData.postValue(homeRepository.getPassData())
+            mainLoader.postValue(!isRefresh)
+            awaitAll(async {
+                homeRepository.getSubBrand()
+            }, async {
+                homeRepository.getUserPassFromAgency()
+            })
+            delay(1000)
+            if (isRefresh) {
+                swipeLoader.postValue(false)
+            } else {
+                mainLoader.postValue(false)
+            }
+            getAllDataFromDB()
         }
     }
 
-    fun getTiersData(){
-        viewModelScope.launch {
-            mTierData.postValue(homeRepository.getTiersData())
-        }
+    private suspend fun getAllDataFromDB() {
+        mOfferList.postValue(homeRepository.getDealAndOffersList())
+        mDealPromotionsList.postValue(homeRepository.getCustomFieldList())
+        mStoriesList.postValue(homeRepository.getStoriesList())
+        mPassData.postValue(homeRepository.getPassData())
+        mTierData.postValue(homeRepository.getTiersData())
     }
 }

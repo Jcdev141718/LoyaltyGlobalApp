@@ -1,6 +1,9 @@
 package com.loyaltyglobal.data.reposotory
 
 import android.content.Context
+import com.loyaltyglobal.data.model.request.ReadNotificationRequest
+import com.loyaltyglobal.data.model.response.readNotification.ReadNotificationResponse
+import com.loyaltyglobal.data.model.response.readNotification.toNotificationOBJ
 import com.loyaltyglobal.data.source.local.DatabaseDAO
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
@@ -11,6 +14,8 @@ import com.loyaltyglobal.data.source.localModels.userPassResponse.Pass
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Tier
 import com.loyaltyglobal.data.source.network.ApiService
 import com.loyaltyglobal.data.source.network.BaseApiResponse
+import com.loyaltyglobal.data.source.network.NetworkResult
+import com.loyaltyglobal.util.Constants
 import com.loyaltyglobal.util.Constants.AGENCY_ID
 import com.loyaltyglobal.util.PreferenceProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -28,25 +33,23 @@ class HomeRepository @Inject constructor(
 ) : BaseApiResponse(context) {
 
     suspend fun getSubBrand() {
-        if (dataBaseDao.countOfSubBrands() == 0) {
-            val response = safeApiCall { apiService.getSubBrand(AGENCY_ID) }
-            response.responseData?.let { data ->
-                data.coalition?.let { dataBaseDao.insertCoalition(it) }
-                data.subBrands?.let { dataBaseDao.insertSubBrand(it) }
-            }
+        preferenceProvider.setValue(Constants.KEY_LAST_REFRESH_TIMESTAMP,System.currentTimeMillis())
+        val response = safeApiCall { apiService.getSubBrand(AGENCY_ID) }
+        response.responseData?.let { data ->
+            data.coalition?.let { dataBaseDao.insertCoalition(it) }
+            data.subBrands?.let { dataBaseDao.insertSubBrand(it) }
         }
     }
 
     suspend fun getUserPassFromAgency() {
-        if (dataBaseDao.countOfCustomFields() == 0) {
-            val response = safeApiCall { apiService.getUserPassFromAgency(AGENCY_ID) }
-            response.responseData?.data?.let { data ->
-                data.customFields?.let { dataBaseDao.insertCustomFields(it) }
-                data.pass?.let { dataBaseDao.insertPass(it) }
-                data.notification?.let { dataBaseDao.insertNotification(it) }
-                data.tiers?.let { dataBaseDao.insertTiers(it) }
-                data.perDollarPoint?.let { dataBaseDao.insertDollarPoint(DollarPointModel(perDollarPoint = it)) }
-            }
+        val response = safeApiCall { apiService.getUserPassFromAgency(AGENCY_ID) }
+        response.responseData?.data?.let { data ->
+            data.customFields?.let { dataBaseDao.insertCustomFields(it) }
+            data.pass?.let { dataBaseDao.insertPass(it) }
+            data.notification?.map { it.userId = preferenceProvider.getUserId() }
+            data.notification?.let { dataBaseDao.insertNotification(it) }
+            data.tiers?.let { dataBaseDao.insertTiers(it) }
+            data.perDollarPoint?.let { dataBaseDao.insertDollarPoint(DollarPointModel(perDollarPoint = it)) }
         }
     }
 
@@ -64,6 +67,7 @@ class HomeRepository @Inject constructor(
                     notification?.apply {
                         branName = subBrand.brandName
                         brandLogo = subBrand.brandLogo
+                        userId = preferenceProvider.getUserId()
                     }
                 }
             }
@@ -74,11 +78,17 @@ class HomeRepository @Inject constructor(
         return ArrayList(dataBaseDao.getCustomFieldList())
     }
 
-    suspend fun isDataIsAvailableInDB(): Boolean = dataBaseDao.countOfSubBrands() != 0
+    suspend fun isSubBrandsIsAvailableInDB(): Boolean = dataBaseDao.countOfSubBrands() != 0 && dataBaseDao.countOfPassData() != 0
 
-    suspend fun updateStoryItemIntoDB(storyId: String) = dataBaseDao.updateStoryItem(storyId)
+    suspend fun getPassData(): Pass? = preferenceProvider.getUserId()?.let { dataBaseDao.getPassData(it) }
 
-    suspend fun getPassData() : Pass? = preferenceProvider.getUserId()?.let { dataBaseDao.getPassData(it) }
+    suspend fun getTiersData(): Tier? = preferenceProvider.getUserId()?.let { dataBaseDao.getPointsDataFromTiers(it) }
 
-    suspend fun getTiersData() : Tier? = preferenceProvider.getUserId()?.let { dataBaseDao.getPointsDataFromTiers(it) }
+    suspend fun readNotification(notificationId: String): NetworkResult<ReadNotificationResponse> {
+        val response = safeApiCall { apiService.readNotification(ReadNotificationRequest(notificationId)) }
+        if (response.statusCode == 200) {
+            response.responseData?.data?.toNotificationOBJ(isOpenedOnce = true)?.let { dataBaseDao.updateNotification(it) }
+        }
+        return response
+    }
 }

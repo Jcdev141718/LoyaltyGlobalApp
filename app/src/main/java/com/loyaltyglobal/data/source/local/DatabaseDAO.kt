@@ -79,4 +79,7 @@ interface DatabaseDAO {
 
     @Update
     suspend fun updateNotification(notification : Notification)
+
+    @Query("select * from SubBrand where `delete` = '0'")
+    suspend fun getAllSubBrands() : List<SubBrand>
 }

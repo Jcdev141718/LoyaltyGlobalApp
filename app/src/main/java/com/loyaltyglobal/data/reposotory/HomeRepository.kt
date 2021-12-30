@@ -33,11 +33,14 @@ class HomeRepository @Inject constructor(
 ) : BaseApiResponse(context) {
 
     suspend fun getSubBrand() {
-        preferenceProvider.setValue(Constants.KEY_LAST_REFRESH_TIMESTAMP,System.currentTimeMillis())
+        preferenceProvider.setValue(Constants.KEY_LAST_REFRESH_TIMESTAMP, System.currentTimeMillis())
         val response = safeApiCall { apiService.getSubBrand(AGENCY_ID) }
         response.responseData?.let { data ->
             data.coalition?.let { dataBaseDao.insertCoalition(it) }
-            data.subBrands?.let { dataBaseDao.insertSubBrand(it) }
+            data.subBrands?.let {
+//                it.map { brand -> brand.brandName?.firstLetterCap() }
+                dataBaseDao.insertSubBrand(it)
+            }
         }
     }
 

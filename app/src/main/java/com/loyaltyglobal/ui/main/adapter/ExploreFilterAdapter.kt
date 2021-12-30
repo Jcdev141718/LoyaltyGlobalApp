@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.ExploreFilterData
 import com.loyaltyglobal.databinding.ItemExploreFilterBinding
+import kotlin.collections.ArrayList
 
 /**
  * Created by Abhin.

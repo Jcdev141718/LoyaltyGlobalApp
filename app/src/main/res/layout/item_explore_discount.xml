@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--<data>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
         <variable
             name="data"
-            type="" />
-    </data>-->
+            type="com.loyaltyglobal.data.model.AllDaysModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -17,7 +19,8 @@
             android:id="@+id/txt_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/monday"
+            tools:text="@string/monday"
+            android:text="@{data.dayName}"
             style="@style/SubHeadingMedium13"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -26,12 +29,9 @@
             android:id="@+id/txt_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/_20_off"
+            android:text="@{@string/num_offer(data.discount)}"
             style="@style/SubHeadingMedium13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

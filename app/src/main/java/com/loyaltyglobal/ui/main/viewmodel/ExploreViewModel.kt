@@ -1,71 +1,48 @@
 package com.loyaltyglobal.ui.main.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.loyaltyglobal.data.model.BusinessData
+import androidx.lifecycle.viewModelScope
+import com.loyaltyglobal.data.model.AllDaysModel
 import com.loyaltyglobal.data.model.DealsAndOffersData
 import com.loyaltyglobal.data.model.ExploreFilterData
+import com.loyaltyglobal.data.reposotory.ExploreRepository
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import java.util.*
+import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Created by Abhin.
  */
-class ExploreViewModel : ViewModel() {
+@HiltViewModel
+class ExploreViewModel @Inject constructor(
+    private val exploreRepository: ExploreRepository
+) : ViewModel() {
 
-    var mutableBusinessList = MutableLiveData<ArrayList<BusinessData>>()
+    private val days = arrayListOf("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
+    var mutableBusinessList = MutableLiveData<ArrayList<SubBrand>>()
     var mutableFilterList = MutableLiveData<ArrayList<ExploreFilterData>>()
     var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealsAndOffersData>>()
 
     fun getBusinessList() {
-        val list = ArrayList<BusinessData>()
-        list.add(
-            BusinessData(
-                brand = "Cluccboi",
-                sub_title = "Fast Food",
-                distance = "4 kilometer away",
-                offer = "10% OFF"
-            )
-        )
-        list.add(
-            BusinessData(
-                brand = "Wendy's",
-                sub_title = "Fried Chicken",
-                distance = "4 kilometer away",
-                offer = "10% OFF"
-            )
-        )
-        list.add(
-            BusinessData(
-                brand = "Burger king",
-                sub_title = "Burgers",
-                distance = "4 kilometer away",
-                offer = "10% OFF"
-            )
-        )
-        list.add(
-            BusinessData(
-                brand = "Versace",
-                sub_title = "Fashion",
-                distance = "4 kilometer away",
-                offer = "10% OFF"
-            )
-        )
-        list.add(
-            BusinessData(
-                brand = "Gucci",
-                sub_title = "Fashion",
-                distance = "4 kilometer away",
-                offer = "10% OFF"
-            )
-        )
-        list.add(
-            BusinessData(
-                brand = "Starbucks",
-                sub_title = "Category",
-                distance = "4 kilometer away",
-                offer = "10% OFF"
-            )
-        )
-        mutableBusinessList.value = list
+        viewModelScope.launch {
+            mutableBusinessList.postValue(exploreRepository.getAllSubBrandList())
+        }
+    }
+
+    fun getDayList(offPercentage : String) : ArrayList<AllDaysModel> {
+        val list = ArrayList<AllDaysModel>()
+        days.forEach { day ->
+            list.add(AllDaysModel(day,offPercentage))
+        }
+        val currentDay = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+        val index = list.indexOfFirst { it.dayName == currentDay }
+        Collections.rotate(list,-index)
+        return list
     }
 
     fun getDealsAndOffersList() {

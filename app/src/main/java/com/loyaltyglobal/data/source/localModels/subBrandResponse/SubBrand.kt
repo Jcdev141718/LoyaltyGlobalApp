@@ -1,9 +1,13 @@
 package com.loyaltyglobal.data.source.localModels.subBrandResponse
 
+import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.loyaltyglobal.util.firstLetterCap
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity
 data class SubBrand(
     @PrimaryKey var _id: String,
@@ -37,8 +41,11 @@ data class SubBrand(
     var platform: String? = null,
     var platformId: String? = null,
     @Embedded(prefix = "sub_brand_selectedCampaign_") var selectedCampaign: SelectedCampaign? = null,
-    @Embedded(prefix = "sub_brand_social_")var social: Social? = null,
+    @Embedded(prefix = "sub_brand_social_") var social: Social? = null,
     var updated: Long? = null,
     @Embedded(prefix = "sub_brand_updated_at_") var updatedAt: UpdatedAt? = null,
-    @Embedded(prefix = "sub_brand_walletApp_") var walletApp: WalletApp? = null
-)
+    @Embedded(prefix = "sub_brand_walletApp_") var walletApp: WalletApp? = null,
+) : Parcelable {
+    fun getBrandNameFirstCap() = brandName?.firstLetterCap()
+    fun getLocationTypeFirstCap() = locationType?.firstLetterCap()
+}

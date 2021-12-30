@@ -35,5 +35,6 @@ object Constants {
     const val KEY_WEB_URL = "KEY_WEB_URL"
     const val KEY_TITLE = "KEY_TITLE"
     const val KEY_LAST_REFRESH_TIMESTAMP = "LAST_REFRESH_TIMESTAMP"
+    const val KEY_SUB_BRAND_DATA = "SUB_BRAND_DATA"
 }
 

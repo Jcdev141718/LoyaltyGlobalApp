@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.loyaltyglobal.data.model.BusinessData
+import com.loyaltyglobal.R
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.databinding.FragmentBusinessBinding
 import com.loyaltyglobal.ui.base.BaseFragment
-import com.loyaltyglobal.ui.main.adapter.BusinessAdapter
+import com.loyaltyglobal.ui.main.adapter.SubBrandAdapter
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
+import com.loyaltyglobal.util.Constants
+import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
 
@@ -20,14 +23,14 @@ import com.loyaltyglobal.util.show
 
 class BusinessFragment : BaseFragment() {
 
-    lateinit var mAdapter: BusinessAdapter
-    lateinit var mBinding: FragmentBusinessBinding
-    private var mBusinessList: ArrayList<BusinessData> = ArrayList()
+    private lateinit var mAdapter: SubBrandAdapter
+    private lateinit var mBinding: FragmentBusinessBinding
+    private var mBusinessList: ArrayList<SubBrand> = ArrayList()
     private val mBusinessViewModel: ExploreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentBusinessBinding.inflate(layoutInflater, container, false)
         return mBinding.root
@@ -41,7 +44,16 @@ class BusinessFragment : BaseFragment() {
     }
 
     private fun setBusinessAdapter() {
-        mAdapter = BusinessAdapter(mBusinessList)
+        mAdapter = SubBrandAdapter(mBusinessList, object : SubBrandAdapter.SubBrandItemClickListener {
+            override fun clickListener(position: Int) {
+                activity?.addReplaceFragment(R.id.fl_main_container, ExploreDetailsFragment().apply {
+                    arguments = Bundle().apply {
+                        putParcelable(Constants.KEY_SUB_BRAND_DATA, mBusinessList[position])
+                    }
+                }, true, true)
+            }
+
+        })
         mBinding.rvExploreBusiness.layoutManager = LinearLayoutManager(requireContext())
         mBinding.rvExploreBusiness.adapter = mAdapter
     }

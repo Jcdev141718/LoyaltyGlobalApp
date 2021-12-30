@@ -3,12 +3,9 @@ package com.loyaltyglobal.util
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.Rect
 import android.os.Build
 import android.os.SystemClock
@@ -29,7 +26,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
@@ -227,102 +223,6 @@ fun Activity.showKeyboard() {
     methodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
 }
 
-fun isKeyboardShown(rootView: View): Boolean {
-    /* 128dp = 32dp * 4, minimum button height 32dp and generic 4 rows soft keyboard */
-    val softKeyboardHeightThreshold = 128
-    val r = Rect()
-    rootView.getWindowVisibleDisplayFrame(r)
-    val dm = rootView.resources.displayMetrics
-    /* heightDiff = rootView height - status bar height (r.top) - visible frame height (r.bottom - r.top) */
-    val heightDiff = rootView.bottom - r.bottom
-    /* Threshold size: dp to pixels, multiply with display density */
-
-    return heightDiff > softKeyboardHeightThreshold * dm.density
-}
-
-fun EditText.showKeyboard() {
-    post {
-        requestFocus()
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-    }
-}
-
-fun isViewVisible(view: View?): Boolean {
-    if (view == null) {
-        return false
-    }
-    if (!view.isShown) {
-        return false
-    }
-    val actualPosition = Rect()
-    view.getGlobalVisibleRect(actualPosition)
-    val screen =
-        Rect(0, 0, getScreenWidth(), getScreenHeight())
-    return actualPosition.intersect(screen)
-}
-
-fun getScreenHeight(): Int = Resources.getSystem().displayMetrics.heightPixels
-
-fun getScreenWidth(): Int = Resources.getSystem().displayMetrics.widthPixels
-
-
-/**
- * To check soft navigation is on phone or not
- */
-@SuppressLint("ObsoleteSdkInt")
-fun Activity.isNavigationBarShow(): Boolean {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        val display = windowManager.defaultDisplay
-        val size = Point()
-        val realSize = Point()
-        display.getSize(size)
-        display.getRealSize(realSize)
-        realSize.y != size.y
-    } else {
-        val menu = ViewConfiguration.get(this).hasPermanentMenuKey()
-        val back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
-        !(menu || back)
-    }
-}
-
-/**
- * return Height of navigation bar
- */
-fun Activity.getHeightOfNavigationBar(): Int {
-    var navigationBarHeight = 0
-    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    if (resourceId > 0) {
-        navigationBarHeight = resources.getDimensionPixelSize(resourceId)
-    }
-    return navigationBarHeight
-}
-
-fun Context.hideKeyboard(view: View) {
-    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as
-            InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-}
-
-fun FragmentActivity.gotoFirstFragment() {
-    supportFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-}
-
-//change the Orientation
-fun isOrientationLandscape(resources: Resources): Boolean {
-    val orientation = resources.configuration.orientation
-    return orientation == Configuration.ORIENTATION_LANDSCAPE
-}
-
-//Check Rotation the Orientation
-fun changeOrientation(activity: Activity, shouldLandscape: Boolean) {
-    activity.requestedOrientation = if (shouldLandscape) {
-        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-    } else {
-        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    }
-}
-
 fun View.clickWithDebounce(debounceTime: Long = 1200L, action: () -> Unit) {
     this.setOnClickListener(object : View.OnClickListener {
         private var lastClickTime: Long = 0
@@ -333,15 +233,6 @@ fun View.clickWithDebounce(debounceTime: Long = 1200L, action: () -> Unit) {
         }
     })
 }
-
-fun String?.isEmailValid(): Boolean {
-    return !this.isNullOrEmpty() && doesStringMatchPattern(this, Constants.REGEX_EMAIL)
-}
-
-fun String?.isPasswordValid(): Boolean =
-    !this.isNullOrEmpty() && this.length >= 6
-
-
 
 class RecyclerItemDecoration(private val spanCount: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
 
@@ -357,7 +248,6 @@ class RecyclerItemDecoration(private val spanCount: Int, private val spacing: In
         outRect.top = if (position < spanCount) spacing else 0
         outRect.bottom = spacing
     }
-
 }
 
 fun hasPermissions(
@@ -481,7 +371,7 @@ fun TextView.setResizableText(
     val lastHasNewLine =
         adjustedText.substring(textLayout.getLineStart(maxLines - 1), textLayout.getLineEnd(maxLines - 1))
             .contains("\n")
-    var linedText = if (lastHasNewLine) {
+    val linedText = if (lastHasNewLine) {
         val charactersPerLine =
             textLayout.getLineEnd(0) / (textLayout.getLineWidth(0) / textLayout.ellipsizedWidth.toFloat())
         val lineOfSpaces =

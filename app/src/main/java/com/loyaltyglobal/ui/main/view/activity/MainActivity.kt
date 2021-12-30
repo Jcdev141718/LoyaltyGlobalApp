@@ -14,8 +14,6 @@ import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
 import dagger.hilt.android.AndroidEntryPoint
-import com.loyaltyglobal.ui.main.view.fragment.ExploreDetailsFragment
-import com.loyaltyglobal.util.addReplaceFragment
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity(), NotificationReceiveListener {

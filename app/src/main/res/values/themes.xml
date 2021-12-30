@@ -22,6 +22,8 @@
         <item name="main_card" type="color">@color/card_light</item>
         <item name="main_ripple_color" type="color">@color/main_ripple_color_light</item>
         <item name="navigation_inactive" type="color">@color/navigation_inactive_light</item>
+        <item name="subtitle_explore" type="color">@color/subtitle_explore_light</item>
+
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="explore_chip_bg" type="color">@color/heading_light</item>
         <item name="black_white" type="color">@color/white</item>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.view.fragment.ExploreDetailsFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@drawable/default_ripple_round"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:paddingVertical="@dimen/dp_8"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toTopOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?heading" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@color/border_light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_back" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/rv_stories"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:fillViewport="true"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:layout_constraintVertical_bias="1.0"
+                tools:layout_editor_absoluteX="-76dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_16">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_brand_logo"
+                        android:layout_width="@dimen/dp_56"
+                        android:layout_height="@dimen/dp_56"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:src="@drawable/ic_brand_logo_test"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_story_name"
+                        style="@style/HeadingSemiBold18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:lineSpacingExtra="0dp"
+                        android:text="@string/cluccboi"
+                        app:layout_constraintLeft_toRightOf="@+id/img_brand_logo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_fast_food_title"
+                        style="@style/CaptionMedium12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_16"
+                        android:text="@string/fast_food"
+                        app:layout_constraintLeft_toRightOf="@+id/img_brand_logo"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_story_name" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_food_details"
+                        style="@style/CaptionMedium12MaxLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_brand_logo" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_120"
+                        android:layout_marginTop="@dimen/dp_16"
+                        app:cardCornerRadius="@dimen/dp_8"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_food_details">
+
+                        <androidx.fragment.app.FragmentContainerView
+                            android:id="@+id/map_fragment"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_address"
+                        style="@style/CaptionMedium12MaxLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="@string/shop_3_g7_capri_on_via_roma"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/card_map" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:src="@drawable/ic_call"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_phone_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_address"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_phone_number"
+                        style="@style/LinkMedium12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:text="@string/_1800_646_990"
+                        app:layout_constraintLeft_toRightOf="@+id/img_call"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_address" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:src="@drawable/ic_message"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_email_address"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_call"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_email_address"
+                        style="@style/LinkMedium12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="@string/dummy_email"
+                        app:layout_constraintLeft_toRightOf="@+id/img_email"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_phone_number" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:src="@drawable/ic_link"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_link"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_email"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_link"
+                        style="@style/LinkMedium12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="@string/dummy_link"
+                        app:layout_constraintLeft_toRightOf="@+id/img_link"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_email_address" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_insta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:src="@drawable/ic_insta"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_insta_id"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_link"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_insta_id"
+                        style="@style/LinkMedium12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="@string/cluccboi_co"
+                        app:layout_constraintLeft_toRightOf="@+id/img_insta"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_link" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_see_more"
+                        style="@style/SubHeadingRegular13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        android:text="@string/see_more"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_see_more_next"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_insta_id" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_see_more_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:background="@drawable/default_ripple_round"
+                        android:padding="@dimen/dp_8"
+                        android:src="@drawable/ic_arrow_next"
+                        app:layout_constraintLeft_toRightOf="@+id/txt_see_more"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_insta_id"
+                        app:tint="?heading" />
+
+                    <View
+                        android:id="@+id/divider_see_more"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:background="@color/gray_line"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_see_more_next" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_food"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_120"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:elevation="@dimen/dp_16"
+                        app:cardCornerRadius="@dimen/dp_6"
+                        app:layout_constraintTop_toBottomOf="@+id/divider_see_more">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_200"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/dummy_food_image" />
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_title"
+                        style="@style/ParagraphMedium13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="@string/cluccboi"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/card_food" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_description"
+                        style="@style/HeadingMedium16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:text="@string/get_10_entire_menu"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_earn"
+                        style="@style/HeadingSemiBold22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_32"
+                        android:text="@string/earn_point"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_description" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_earn_description"
+                        style="@style/ParagraphRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/earn_points_on_your_purchases"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_earn" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_point"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_52"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:background="@drawable/shape_squre_filled"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_earn_description">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_point"
+                            style="@style/poppinsMedium13Green"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_16"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:text="@string/_4_point"
+                            android:textColor="@color/profile_green"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/CaptionMedium13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_8"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:text="@string/_2_point"
+                            app:layout_constraintLeft_toRightOf="@+id/txt_point"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/HeadingMedium13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_8"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:layout_marginEnd="@dimen/dp_16"
+                            android:text="@string/per_visit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_discounts"
+                        style="@style/HeadingSemiBold22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="@string/discounts"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cl_point" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_discounts_description"
+                        style="@style/ParagraphRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/these_discounts_will_apply"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_discounts"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_discount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        tools:listitem="@layout/item_explore_discount"
+                        tools:itemCount="7"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_discounts_description"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_discount_see_more"
+                        style="@style/SubHeadingRegular13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        android:text="@string/see_more"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_discount_see_more"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_discount"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_discount_see_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:background="@drawable/default_ripple_round"
+                        android:padding="@dimen/dp_8"
+                        android:src="@drawable/ic_arrow_next"
+                        app:tint="?heading"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_discount_see_more"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_discount"
+                        app:layout_constraintLeft_toRightOf="@+id/txt_discount_see_more"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

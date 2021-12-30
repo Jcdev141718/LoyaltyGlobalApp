@@ -9,10 +9,7 @@ import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.StoriesItemBinding
 import com.loyaltyglobal.util.clickWithDebounce
 
-class StoriesAdapter(
-    private var storiesList: List<Notification?>,
-    private var clickInterface: ClickListener
-) : RecyclerView.Adapter<StoriesAdapter.DataViewHolder>() {
+class StoriesAdapter(private var storiesList: List<Notification?>, private var clickInterface: ClickListener) : RecyclerView.Adapter<StoriesAdapter.DataViewHolder>() {
 
     interface ClickListener {
         fun itemClick(position: Int)

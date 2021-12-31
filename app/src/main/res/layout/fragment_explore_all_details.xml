@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/fragmentClickable">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@drawable/default_ripple_round"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:paddingVertical="@dimen/dp_8"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toTopOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?heading" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@color/border_light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_back" />
+
+            <com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:fillViewport="true"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:layout_constraintVertical_bias="1.0"
+                tools:layout_editor_absoluteX="-76dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_16">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_brand_name"
+                        style="@style/HeadingSemiBold18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:lineSpacingExtra="0dp"
+                        android:text="@string/about"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_food_details"
+                        style="@style/CaptionMedium12MaxLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_brand_name" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_120"
+                        android:layout_marginTop="@dimen/dp_16"
+                        app:cardCornerRadius="@dimen/dp_8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_food_details">
+
+                        <androidx.fragment.app.FragmentContainerView
+                            android:id="@+id/map_fragment"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_address"
+                        style="@style/CaptionMedium12MaxLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="@{viewModel.brandDetailsData.location.address}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/card_map"
+                        tools:text="@string/shop_3_g7_capri_on_via_roma" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:src="@drawable/ic_call"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_phone_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_address"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_phone_number"
+                        style="@style/LinkMedium12"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:lines="1"
+                        android:onClick="@{(v) -> viewModel.onPhoneNumClick(v,viewModel.brandDetailsData.dialingCode+viewModel.brandDetailsData.phone)}"
+                        android:text="@{viewModel.brandDetailsData.dialingCode+viewModel.brandDetailsData.phone}"
+                        android:ellipsize="end"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_call"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_address"
+                        tools:text="@string/_1800_646_990" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:src="@drawable/ic_message"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_email_address"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_call"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_email_address"
+                        style="@style/LinkMedium12"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:onClick="@{(v) -> viewModel.onEmailClick(v)}"
+                        android:text="@{viewModel.brandDetailsData.email}"
+                        android:layout_marginTop="@dimen/dp_16"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_email"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_phone_number"
+                        tools:text="@string/dummy_email" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:src="@drawable/ic_link"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_link"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_email"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_link"
+                        style="@style/LinkMedium12"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        tools:text="@string/dummy_link"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_link"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_email_address" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_insta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:src="@drawable/ic_insta"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_insta_id"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_link"
+                        app:tint="?heading" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_insta_id"
+                        style="@style/LinkMedium12"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="@string/cluccboi_co"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_insta"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_link" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_other"
+                        style="@style/HeadingSemiBold18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:lineSpacingExtra="0dp"
+                        android:text="@string/other_links"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_insta_id" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_links"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:nestedScrollingEnabled="false"
+                        app:layout_constraintVertical_bias="0"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_other"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.dhyeyaias.util.customRecyclerviewAndNestedScroll.NestedScrollViewHelper>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

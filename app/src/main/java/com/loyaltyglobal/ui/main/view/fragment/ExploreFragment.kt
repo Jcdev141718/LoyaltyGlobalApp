@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentExploreBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.ViewPagerAdapter
-import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 
 /**
@@ -21,7 +19,6 @@ import com.loyaltyglobal.util.addReplaceFragment
 class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInterface {
 
     lateinit var mBinding: FragmentExploreBinding
-    private val mExploreViewModel: ExploreViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

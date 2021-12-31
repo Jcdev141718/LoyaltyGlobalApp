@@ -38,7 +38,6 @@ class HomeRepository @Inject constructor(
         response.responseData?.let { data ->
             data.coalition?.let { dataBaseDao.insertCoalition(it) }
             data.subBrands?.let {
-//                it.map { brand -> brand.brandName?.firstLetterCap() }
                 dataBaseDao.insertSubBrand(it)
             }
         }

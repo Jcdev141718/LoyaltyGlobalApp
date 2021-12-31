@@ -1,6 +1,6 @@
 package com.loyaltyglobal.ui.main.viewmodel
 
-import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +9,8 @@ import com.loyaltyglobal.data.model.DealsAndOffersData
 import com.loyaltyglobal.data.model.ExploreFilterData
 import com.loyaltyglobal.data.reposotory.ExploreRepository
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
+import com.loyaltyglobal.util.dialPhoneNum
+import com.loyaltyglobal.util.sendEmailTo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -20,13 +22,15 @@ import kotlin.collections.ArrayList
  */
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
-    private val exploreRepository: ExploreRepository
+    private val exploreRepository: ExploreRepository,
 ) : ViewModel() {
 
     private val days = arrayListOf("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
     var mutableBusinessList = MutableLiveData<ArrayList<SubBrand>>()
     var mutableFilterList = MutableLiveData<ArrayList<ExploreFilterData>>()
     var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealsAndOffersData>>()
+
+    var brandDetailsData  = MutableLiveData<SubBrand>()
 
     fun getBusinessList() {
         viewModelScope.launch {
@@ -73,5 +77,13 @@ class ExploreViewModel @Inject constructor(
         list.add(ExploreFilterData(filter_name = "Car, Motorbike, Industrial"))
         list.add(ExploreFilterData(filter_name = "Home & Garden / Major Appliance / Freezers"))
         mutableFilterList.value = list
+    }
+
+    fun onPhoneNumClick(view : View,phone : String){
+        view.context.dialPhoneNum(phone)
+    }
+
+    fun onEmailClick(view : View){
+        view.context.sendEmailTo(brandDetailsData.value?.email.toString())
     }
 }

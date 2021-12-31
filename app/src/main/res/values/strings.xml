@@ -140,6 +140,8 @@
     <string name="enter_email_hint">Enter Email</string>
     <string name="num_offer">%s\%% OFF</string>
     <string name="some_point">%d Point</string>
+    <string name="about">About</string>
+    <string name="other_links">Other Links</string>
 
     <plurals name="some_point">
         <item quantity="one">%d Point</item>

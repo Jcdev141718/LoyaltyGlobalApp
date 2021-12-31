@@ -11,7 +11,7 @@ data class Pass(
     var campaignId: String? = null,
     var created: Long? = null,
     @Embedded(prefix = "pass_created_at_") var createdAt: CreatedAt? = null,
-    var daysLeft: Int? = null,
+    var daysLeft: Int = 0,
     var delete: Boolean? = null,
     @Embedded(prefix = "loyalty_card_") var loyaltyCard: LoyaltyCard? = null,
     var passCode: String? = null,
@@ -24,7 +24,7 @@ data class Pass(
     var wallet: Boolean? = null
 ) {
 
-    fun getRemainingPoints(maxPoints : Int) : Int? {
-        return loyaltyCard?.currentPoints?.let { maxPoints.minus(it) }
+    fun getRemainingPoints(maxPoints : Int) : Int {
+        return loyaltyCard?.currentPoints?.let { maxPoints.minus(it) } ?: 0
     }
 }

@@ -1,7 +1,11 @@
 package com.loyaltyglobal.util
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
+import android.net.Uri
 import android.text.InputFilter
 import android.util.TypedValue
 import android.view.View
@@ -24,13 +28,9 @@ import java.util.*
 
 fun String.isEmailValid(): Boolean = doesStringMatchPattern(this, Constants.REGEX_EMAIL)
 
-fun String.isPasswordValid(): Boolean =
-    doesStringMatchPattern(this, Constants.PASSWORD_PATTERN_WITH_ONE_SPECIAL_CHARS)
+fun String.isPasswordValid(): Boolean = doesStringMatchPattern(this, Constants.PASSWORD_PATTERN_WITH_ONE_SPECIAL_CHARS)
 
-fun String.firstLetterCap() : String = this.substring(0, 1).uppercase(Locale.ROOT) + this.substring(1)
-    .lowercase(
-        Locale.ROOT
-    )
+fun String.firstLetterCap(): String = this.substring(0, 1).uppercase(Locale.ROOT) + this.substring(1).lowercase(Locale.ROOT)
 
 
 fun View.getParentActivity(): AppCompatActivity? {
@@ -46,14 +46,9 @@ fun View.getParentActivity(): AppCompatActivity? {
 
 fun AppCompatImageView.setImage(url: Any, isRound: Boolean = false) {
     if (isRound) {
-        Glide.with(getParentActivity()!!)
-            .load(url)
-            .circleCrop()
-            .into(this)
+        Glide.with(getParentActivity()!!).load(url).circleCrop().into(this)
     } else {
-        Glide.with(getParentActivity()!!)
-            .load(url)
-            .into(this)
+        Glide.with(getParentActivity()!!).load(url).into(this)
     }
 }
 
@@ -77,12 +72,9 @@ fun getCountryFlag(flagCode: String): String {
     val secondChar = Character.codePointAt(flagCode, 1) - asciiOffset + flagOffset
     return (String(Character.toChars(firstChar)) + String(Character.toChars(secondChar)))
 }
-fun Activity.showToast(message: String){
-    Toast.makeText(
-        this,
-        message,
-        Toast.LENGTH_SHORT
-    ).show()
+
+fun Activity.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
 fun View.setFullHeight() {
@@ -91,21 +83,37 @@ fun View.setFullHeight() {
     this.layoutParams = layoutParams
 }
 
-fun Fragment.openBottomSheet(bottomSheet : BottomSheetDialogFragment) {
-    bottomSheet.show(
-        this.requireActivity().supportFragmentManager,
-        bottomSheet::class.java.simpleName
-    )
+fun Fragment.openBottomSheet(bottomSheet: BottomSheetDialogFragment) {
+    bottomSheet.show(this.requireActivity().supportFragmentManager, bottomSheet::class.java.simpleName)
 }
 
 fun EditText.preventSpecialCharacter() {
     val blockCharacterSet = "!#\$%&(){|}~:;<=>?@*+,./^_`-\\'\\\" \\t\\r\\n\\f]+ "
-    val filterSpecialChar =
-        InputFilter { source, _, _, _, _, _ ->
-            if (source != null && blockCharacterSet.contains("" + source)) {
-                ""
-            } else null
-        }
+    val filterSpecialChar = InputFilter { source, _, _, _, _, _ ->
+        if (source != null && blockCharacterSet.contains("" + source)) {
+            ""
+        } else null
+    }
     val filterLength = InputFilter.LengthFilter(10)
-    filters = arrayOf(filterSpecialChar,filterLength)
+    filters = arrayOf(filterSpecialChar, filterLength)
+}
+
+fun Context.dialPhoneNum(number: String) {
+    startActivity(Intent(Intent.ACTION_DIAL).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        data = Uri.parse("tel:$number")
+    })
+}
+
+fun Context.sendEmailTo(email: String) {
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "message/rfc822"
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+    }
+    try {
+        startActivity(Intent.createChooser(intent, "Send mail..."))
+    } catch (ex: ActivityNotFoundException) {
+//        showToast("There are no email clients installed.")
+    }
 }

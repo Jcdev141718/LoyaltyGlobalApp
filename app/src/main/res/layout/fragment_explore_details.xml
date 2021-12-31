@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel" />
+    </data>
+
     <FrameLayout
+        style="@style/fragmentClickable"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/fragmentClickable">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -54,6 +62,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_brand_logo"
+                        setCircleImage="@{viewModel.brandDetailsData.brandLogo}"
                         android:layout_width="@dimen/dp_56"
                         android:layout_height="@dimen/dp_56"
                         android:layout_marginTop="@dimen/dp_16"
@@ -70,9 +79,10 @@
                         android:layout_marginStart="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_24"
                         android:lineSpacingExtra="0dp"
-                        android:text="@string/cluccboi"
+                        android:text="@{viewModel.brandDetailsData.getBrandNameFirstCap()}"
                         app:layout_constraintLeft_toRightOf="@+id/img_brand_logo"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/cluccboi" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -81,17 +91,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_16"
-                        android:text="@string/fast_food"
+                        android:text="@{viewModel.brandDetailsData.getLocationTypeFirstCap()}"
                         app:layout_constraintLeft_toRightOf="@+id/img_brand_logo"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_brand_name" />
+                        app:layout_constraintTop_toBottomOf="@+id/txt_brand_name"
+                        tools:text="@string/fast_food" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_food_details"
                         style="@style/CaptionMedium12MaxLine"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dp_0"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
+                        tools:text="21123132121231213"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/img_brand_logo" />
@@ -119,6 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
+                        android:text="@{viewModel.brandDetailsData.location.address}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/card_map"
@@ -143,6 +156,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_8"
                         android:layout_marginTop="@dimen/dp_24"
+                        android:onClick="@{(v) -> viewModel.onPhoneNumClick(v,viewModel.brandDetailsData.dialingCode+viewModel.brandDetailsData.phone)}"
+                        android:text="@{viewModel.brandDetailsData.dialingCode+viewModel.brandDetailsData.phone}"
                         app:layout_constraintLeft_toRightOf="@+id/img_call"
                         app:layout_constraintTop_toBottomOf="@+id/txt_address"
                         tools:text="@string/_1800_646_990" />
@@ -166,6 +181,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_8"
                         android:layout_marginTop="@dimen/dp_16"
+                        android:onClick="@{(v) -> viewModel.onEmailClick(v)}"
+                        android:text="@{viewModel.brandDetailsData.email}"
                         app:layout_constraintLeft_toRightOf="@+id/img_email"
                         app:layout_constraintTop_toBottomOf="@+id/txt_phone_number"
                         tools:text="@string/dummy_email" />
@@ -216,7 +233,6 @@
                         app:layout_constraintLeft_toRightOf="@+id/img_insta"
                         app:layout_constraintTop_toBottomOf="@+id/txt_link" />
 
-
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_see_more"
                         style="@style/SubHeadingRegular13"
@@ -224,23 +240,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_16"
                         android:layout_marginEnd="@dimen/dp_8"
+                        android:background="@drawable/default_ripple_square"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_arrow_next"
+                        android:drawablePadding="8dp"
+                        android:focusable="true"
+                        android:padding="@dimen/dp_10"
                         android:text="@string/see_more"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_see_more_next"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txt_insta_id" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/img_see_more_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:background="@drawable/default_ripple_round"
-                        android:padding="@dimen/dp_8"
-                        android:src="@drawable/ic_arrow_next"
-                        app:layout_constraintLeft_toRightOf="@+id/txt_see_more"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_insta_id"
-                        app:tint="?heading" />
 
                     <View
                         android:id="@+id/divider_see_more"
@@ -249,7 +258,7 @@
                         android:layout_marginTop="@dimen/dp_24"
                         android:background="?main_divider"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img_see_more_next" />
+                        app:layout_constraintTop_toBottomOf="@+id/txt_see_more" />
 
 
                     <androidx.cardview.widget.CardView
@@ -329,6 +338,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_16"
                             android:layout_marginTop="@dimen/dp_16"
+                            android:text="@{@plurals/some_point(viewModel.brandDetailsData.earnPointPer,viewModel.brandDetailsData.earnPointPer)}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="@string/some_point" />
@@ -384,47 +394,55 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_16"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txt_discounts_description"
                         tools:itemCount="7"
                         tools:listitem="@layout/item_explore_discount" />
 
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_discount_see_more"
-                        style="@style/SubHeadingRegular13"
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ll_see_more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:layout_marginEnd="@dimen/dp_8"
-                        android:layout_marginBottom="@dimen/dp_8"
-                        android:text="@string/see_more"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_discount_see_more"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/default_ripple_square"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/dp_8"
+                        android:paddingVertical="@dimen/dp_8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rv_discount" />
+                        app:layout_constraintTop_toBottomOf="@+id/rv_discount">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/img_discount_see_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:layout_marginBottom="@dimen/dp_8"
-                        android:background="@drawable/default_ripple_round"
-                        android:padding="@dimen/dp_8"
-                        android:rotation="90"
-                        android:src="@drawable/ic_arrow_next"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_discount_see_more"
-                        app:layout_constraintLeft_toRightOf="@+id/txt_discount_see_more"
-                        app:layout_constraintTop_toBottomOf="@+id/rv_discount"
-                        app:tint="?heading" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_discount_see_more"
+                            style="@style/SubHeadingRegular13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/see_more" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_discount_see_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/dp_8"
+                            android:rotation="90"
+                            android:src="@drawable/ic_arrow_next"
+                            app:layout_constraintBottom_toBottomOf="@+id/txt_discount_see_more"
+                            app:layout_constraintLeft_toRightOf="@+id/txt_discount_see_more"
+                            app:layout_constraintTop_toBottomOf="@+id/rv_discount"
+                            app:tint="?heading" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.constraintlayout.widget.Group
                         android:id="@+id/group"
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:constraint_referenced_ids="card_food,txt_title,txt_description" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

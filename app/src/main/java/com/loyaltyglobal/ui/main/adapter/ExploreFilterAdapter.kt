@@ -12,7 +12,7 @@ import kotlin.collections.ArrayList
 /**
  * Created by Abhin.
  */
-class ExploreFilterAdapter(var filterList: ArrayList<ExploreFilterData>) :
+class ExploreFilterAdapter(var filterList: ArrayList<String>) :
     RecyclerView.Adapter<ExploreFilterAdapter.BusinessesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessesViewHolder {
@@ -34,7 +34,7 @@ class ExploreFilterAdapter(var filterList: ArrayList<ExploreFilterData>) :
 
     class BusinessesViewHolder(var itemExploreFilterBinding: ItemExploreFilterBinding) :
         RecyclerView.ViewHolder(itemExploreFilterBinding.root) {
-        fun bind(card: ExploreFilterData) = itemExploreFilterBinding.apply {
+        fun bind(card: String) = itemExploreFilterBinding.apply {
             data = card
             executePendingBindings()
         }

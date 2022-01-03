@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand" />
+            type="com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition" />
     </data>
 
     <FrameLayout
@@ -22,7 +22,7 @@
                 android:id="@+id/img_logo"
                 android:layout_width="@dimen/dp_56"
                 android:layout_height="@dimen/dp_56"
-                setCircleImage="@{data.brandLogo}"
+                setCircleImage="@{data.subBrand.brandLogo}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:fontFamily="@font/poppins_medium"
-                android:text="@{data.getBrandNameFirstCap()}"
+                android:text="@{data.subBrand.getBrandNameFirstCap()}"
                 android:textColor="?heading"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toTopOf="@id/txt_brand_sub_title"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:fontFamily="@font/poppins"
-                android:text="@{data.getLocationTypeFirstCap()}"
+                android:text="@{data.subBrand.getLocationTypeFirstCap()}"
                 android:textColor="?heading"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintBottom_toTopOf="@id/txt_distance"
@@ -79,7 +79,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/dp_8"
                 android:paddingVertical="@dimen/dp_4"
-                android:text="@{@string/num_offer(30)}"
+                android:text="@{@string/num_offer(data.coalition.tiers.benefits.discount.discountValue)}"
                 android:textColor="?main_background"
                 android:textSize="@dimen/sp_10"
                 app:layout_constraintBottom_toBottomOf="parent"

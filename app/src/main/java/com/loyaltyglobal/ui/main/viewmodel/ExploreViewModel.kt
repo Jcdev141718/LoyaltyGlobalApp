@@ -1,17 +1,22 @@
 package com.loyaltyglobal.ui.main.viewmodel
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.loyaltyglobal.data.model.AllDaysModel
 import com.loyaltyglobal.data.model.DealsAndOffersData
 import com.loyaltyglobal.data.model.ExploreFilterData
 import com.loyaltyglobal.data.reposotory.ExploreRepository
+import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.util.dialPhoneNum
 import com.loyaltyglobal.util.sendEmailTo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -25,58 +30,44 @@ class ExploreViewModel @Inject constructor(
     private val exploreRepository: ExploreRepository,
 ) : ViewModel() {
 
-    private val days = arrayListOf("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
-    var mutableBusinessList = MutableLiveData<ArrayList<SubBrand>>()
-    var mutableFilterList = MutableLiveData<ArrayList<ExploreFilterData>>()
-    var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealsAndOffersData>>()
+    private val days = arrayListOf("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+    var mutableBusinessList = MutableLiveData<ArrayList<SubBrandAndCoalition>>()
+    var mutableFilterList = MutableLiveData<ArrayList<String>>()
+    var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealOffer>>()
 
-    var brandDetailsData  = MutableLiveData<SubBrand>()
+    var brandDetailsData = MutableLiveData<SubBrandAndCoalition>()
 
     fun getBusinessList() {
         viewModelScope.launch {
-            mutableBusinessList.postValue(exploreRepository.getAllSubBrandList())
+            mutableBusinessList.postValue(exploreRepository.getSubBrandWithCoalitionData())
         }
     }
 
-    fun getDayList(offPercentage : String) : ArrayList<AllDaysModel> {
-        val list = ArrayList<AllDaysModel>()
-        days.forEach { day ->
-            list.add(AllDaysModel(day,offPercentage))
+    fun getDealAndOffersList(){
+        viewModelScope.launch {
+            mutableDealsAndOffersList.postValue(exploreRepository.getDealAndOffersList())
         }
-        val currentDay = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
-        val index = list.indexOfFirst { it.dayName == currentDay }
-        Collections.rotate(list,-index)
+    }
+
+    fun getDayList() : ArrayList<AllDaysModel> {
+        val list = ArrayList<AllDaysModel>()
+        val discountList = ArrayList<Int>()
+        brandDetailsData.value?.let { data ->
+            discountList.addAll(data.coalition.tiers?.benefits?.discount?.customDiscounts as ArrayList)
+            days.forEachIndexed { index, day ->
+                list.add(AllDaysModel(day, discountList[index].toString()))
+            }
+            val currentDay = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+            val index = list.indexOfFirst { it.dayName == currentDay }
+            Collections.rotate(list,-index)
+        }
         return list
     }
 
-    fun getDealsAndOffersList() {
-        val list = ArrayList<DealsAndOffersData>()
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        list.add(DealsAndOffersData(brandName = "Brand name", discount = "Get 10% entire menu"))
-        mutableDealsAndOffersList.value = list
-    }
-
-    fun getFilterList() {
-        val list = ArrayList<ExploreFilterData>()
-        list.add(ExploreFilterData(filter_name = "Gift Cards & Mobile Recharges"))
-        list.add(ExploreFilterData(filter_name = "Beauty, Health, Grocery"))
-        list.add(ExploreFilterData(filter_name = "Mobiles, Computers"))
-        list.add(ExploreFilterData(filter_name = "Books"))
-        list.add(ExploreFilterData(filter_name = "Movies, Music & Video Games"))
-        list.add(ExploreFilterData(filter_name = "Sports, Fitness, Bags, Luggage"))
-        list.add(ExploreFilterData(filter_name = "Home, Kitchen, Pets"))
-        list.add(ExploreFilterData(filter_name = "Toys, Baby Products, Kids Fashion"))
-        list.add(ExploreFilterData(filter_name = "Women's Fashion"))
-        list.add(ExploreFilterData(filter_name = "Men's Fashion"))
-        list.add(ExploreFilterData(filter_name = "Car, Motorbike, Industrial"))
-        list.add(ExploreFilterData(filter_name = "Home & Garden / Major Appliance / Freezers"))
-        mutableFilterList.value = list
+    fun getFilterList(){
+        viewModelScope.launch {
+            mutableFilterList.postValue(exploreRepository.getFilters())
+        }
     }
 
     fun onPhoneNumClick(view : View,phone : String){
@@ -84,6 +75,6 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun onEmailClick(view : View){
-        view.context.sendEmailTo(brandDetailsData.value?.email.toString())
+        view.context.sendEmailTo(brandDetailsData.value?.subBrand?.email.toString())
     }
 }

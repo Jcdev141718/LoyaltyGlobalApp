@@ -22,7 +22,7 @@ class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentExploreBinding.inflate(layoutInflater, container, false)
         return mBinding.root
@@ -36,14 +36,10 @@ class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInter
 
     private fun clickListener() {
         mBinding.imgExploreFilter.setOnClickListener {
-            val mExploreFilterFragment = ExploreFilterFragment()
-            mExploreFilterFragment.mExploreFilterInterface = this
             hideBottomNavigation()
-            activity?.addReplaceFragment(
-                R.id.fl_main_container, mExploreFilterFragment,
-                addFragment = true,
-                addToBackStack = true
-            )
+            activity?.addReplaceFragment(R.id.fl_main_container, ExploreFilterFragment().apply {
+                setFilterInterface(this@ExploreFragment)
+            }, addFragment = true, addToBackStack = true)
         }
     }
 

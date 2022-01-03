@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="com.loyaltyglobal.data.model.ExploreFilterData" />
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_16"
-            android:text="@{data.filter_name}"
+            android:text="@{data}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/img_check"
             app:layout_constraintStart_toStartOf="parent"

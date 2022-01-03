@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.loyaltyglobal.data.model.DealsAndOffersData" />
+            type="com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +23,7 @@
             android:layout_margin="@dimen/dp_16"
             android:scaleType="centerCrop"
             android:elevation="@dimen/dp_4"
+            setImage="@{data.image}"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,7 @@
             android:layout_marginStart="@dimen/dp_24"
             android:layout_marginTop="@dimen/dp_16"
             android:fontFamily="@font/poppins"
-            android:text="@{data.brandName}"
+            android:text="@{data.name}"
             android:textColor="?paragraph"
             android:textSize="@dimen/sp_13"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +52,7 @@
             android:layout_marginStart="@dimen/dp_24"
             android:layout_marginTop="@dimen/dp_4"
             android:fontFamily="@font/poppins"
-            android:text="@{data.discount}"
+            android:text="@{data.dealDescription}"
             android:textColor="?heading"
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toEndOf="parent"

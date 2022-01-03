@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
+import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.databinding.ItemBusinessBinding
 
 /**
  * Created by Abhin.
  */
-class SubBrandAdapter(var businessList: ArrayList<SubBrand>,private var listener : SubBrandItemClickListener) :
+class SubBrandAdapter(var businessList: ArrayList<SubBrandAndCoalition>,private var listener : SubBrandItemClickListener) :
     RecyclerView.Adapter<SubBrandAdapter.BusinessesViewHolder>() {
 
     interface SubBrandItemClickListener{
@@ -38,7 +39,7 @@ class SubBrandAdapter(var businessList: ArrayList<SubBrand>,private var listener
 
     class BusinessesViewHolder(var itemCardListBinding: ItemBusinessBinding) :
         RecyclerView.ViewHolder(itemCardListBinding.root) {
-        fun bind(card: SubBrand) = itemCardListBinding.apply {
+        fun bind(card: SubBrandAndCoalition) = itemCardListBinding.apply {
             data = card
             executePendingBindings()
         }

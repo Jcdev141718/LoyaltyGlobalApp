@@ -18,17 +18,17 @@ import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 
 class ExploreFilterFragment : BaseFragment() {
 
-    var mExploreFilterInterface: ExploreFilterInterface? = null
-    lateinit var mBinding: FragmentExploreFilterBinding
+    private var mExploreFilterInterface: ExploreFilterInterface? = null
+    private lateinit var mBinding: FragmentExploreFilterBinding
     lateinit var mAdapter: ExploreFilterAdapter
-    private var mFilterList: ArrayList<ExploreFilterData> = ArrayList()
+    private var mFilterList: ArrayList<String> = ArrayList()
     private val mExploreViewModel: ExploreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        mBinding = FragmentExploreFilterBinding.inflate(layoutInflater)
+        mBinding = FragmentExploreFilterBinding.inflate(inflater,container,false)
         return mBinding.root
     }
 
@@ -72,5 +72,9 @@ class ExploreFilterFragment : BaseFragment() {
 
     interface ExploreFilterInterface {
         fun applyFilter()
+    }
+
+    fun setFilterInterface(listener : ExploreFilterInterface) {
+        this.mExploreFilterInterface = listener
     }
 }

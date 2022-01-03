@@ -1,12 +1,16 @@
 package com.loyaltyglobal.ui.main.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.loyaltyglobal.data.model.DealsAndOffersData
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
+import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.databinding.FragmentDealsAndOffersBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.DealsAndOffersAdapter
@@ -22,22 +26,26 @@ class DealsAndOffersFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentDealsAndOffersBinding
     private lateinit var mAdapter: DealsAndOffersAdapter
-    private var mDealsAndOfferList: ArrayList<DealsAndOffersData> = ArrayList()
+    private var mDealsAndOfferList: ArrayList<DealOffer> = ArrayList()
     private val mExploreViewModel: ExploreViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initObserver()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding = FragmentDealsAndOffersBinding.inflate(layoutInflater, container, false)
+        mBinding = FragmentDealsAndOffersBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObserver()
         setDealsAndOfferAdapter()
-        mExploreViewModel.getDealsAndOffersList()
+        mExploreViewModel.getDealAndOffersList()
     }
 
     private fun setDealsAndOfferAdapter() {
@@ -47,9 +55,9 @@ class DealsAndOffersFragment : BaseFragment() {
     }
 
     private fun initObserver() {
-
-        mExploreViewModel.mutableDealsAndOffersList.observe(viewLifecycleOwner, {
+        mExploreViewModel.mutableDealsAndOffersList.observe(this, {
             if (!it.isNullOrEmpty()) {
+                Log.e("TAG","initObserver --> ${Gson().toJson(it)}")
                 mBinding.rvExploreDealsOffers.show()
                 mDealsAndOfferList.addAll(it)
                 mAdapter.notifyItemInserted(mDealsAndOfferList.size)

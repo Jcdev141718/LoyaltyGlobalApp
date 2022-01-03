@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.R
-import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
+import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.databinding.FragmentBusinessBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.SubBrandAdapter
@@ -24,7 +24,7 @@ class BusinessFragment : BaseFragment() {
 
     private lateinit var mAdapter: SubBrandAdapter
     private lateinit var mBinding: FragmentBusinessBinding
-    private var mBusinessList: ArrayList<SubBrand> = ArrayList()
+    private var mBusinessList: ArrayList<SubBrandAndCoalition> = ArrayList()
     private val exploreViewModel: ExploreViewModel by activityViewModels()
 
     override fun onCreateView(

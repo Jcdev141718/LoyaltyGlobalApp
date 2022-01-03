@@ -72,13 +72,13 @@ class ExploreDetailsFragment : Fragment() {
 
     private fun setData() {
         exploreViewModel.brandDetailsData.value.let { data ->
-            binding.txtFoodDetails.setResizableText(data?.description.toString(), 2, false)
-            initMap(LatLng(data?.location?.lat ?: 0.0, data?.location?.lng ?: 0.0), "")
+            binding.txtFoodDetails.setResizableText(data?.subBrand?.description.toString(), 2, false)
+            initMap(LatLng(data?.subBrand?.location?.lat ?: 0.0, data?.subBrand?.location?.lng ?: 0.0), "")
         }
     }
 
     private fun initRecyclerView() {
-        allDaysList = exploreViewModel.getDayList("30")
+        allDaysList = exploreViewModel.getDayList()
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvDiscount.layoutManager = layoutManager
         allDayAdapter = AllDaysAdapter()

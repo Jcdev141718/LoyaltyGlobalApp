@@ -2,6 +2,7 @@ package com.loyaltyglobal.data.source.local
 
 import androidx.room.*
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
+import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.Coalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
@@ -82,4 +83,11 @@ interface DatabaseDAO {
 
     @Query("select * from SubBrand where `delete` = '0'")
     suspend fun getAllSubBrands() : List<SubBrand>
+
+    @Query("select distinct locationType from SubBrand where `delete` = '0'")
+    suspend fun getFilters() : List<String>
+
+    @Transaction
+    @Query("select * from SubBrand where `delete` = '0'")
+    suspend fun getSubBrandWithCoalitionData(): List<SubBrandAndCoalition>
 }

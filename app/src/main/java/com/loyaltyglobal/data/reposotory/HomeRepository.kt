@@ -56,23 +56,25 @@ class HomeRepository @Inject constructor(
     }
 
     suspend fun getDealAndOffersList(): ArrayList<DealOffer> {
-        return ArrayList(dataBaseDao.getDealsAndOffers())
+        return ArrayList(dataBaseDao.getDealsAndOffers().filter { !it.image.isNullOrEmpty() })
     }
 
     suspend fun getStoriesList(): ArrayList<Notification?> {
         val subBrandList = withContext(Dispatchers.IO) { dataBaseDao.getSubBrandNameAndLogo() }
         val storiesList = ArrayList(dataBaseDao.getStoriesList())
         val subBrandMap: Map<String, SubBrand> = subBrandList.associateBy { it._id }
-        val result = storiesList.filter { subBrandMap[it.brandId] != null && subBrandMap[it.brandId]?.delete == false }
-            .filter { it.sendTo?.contains(preferenceProvider.getUserId()) == true }.map { notification ->
-                subBrandMap[notification.brandId]?.let { subBrand ->
-                    notification?.apply {
-                        branName = subBrand.brandName
-                        brandLogo = subBrand.brandLogo
-                        userId = preferenceProvider.getUserId()
+        val result = withContext(Dispatchers.IO) {
+            storiesList.filter { subBrandMap[it.brandId] != null && subBrandMap[it.brandId]?.delete == false }
+                .filter { it.sendTo?.contains(preferenceProvider.getUserId()) == true }.map { notification ->
+                    subBrandMap[notification.brandId]?.let { subBrand ->
+                        notification?.apply {
+                            branName = subBrand.brandName
+                            brandLogo = subBrand.brandLogo
+                            userId = preferenceProvider.getUserId()
+                        }
                     }
                 }
-            }
+        }
         return ArrayList(result)
     }
 

@@ -62,7 +62,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_brand_logo"
-                        setCircleImage="@{viewModel.brandDetailsData.brandLogo}"
+                        setCircleImage="@{viewModel.brandDetailsData.subBrand.brandLogo}"
                         android:layout_width="@dimen/dp_56"
                         android:layout_height="@dimen/dp_56"
                         android:layout_marginTop="@dimen/dp_16"
@@ -79,7 +79,7 @@
                         android:layout_marginStart="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_24"
                         android:lineSpacingExtra="0dp"
-                        android:text="@{viewModel.brandDetailsData.getBrandNameFirstCap()}"
+                        android:text="@{viewModel.brandDetailsData.subBrand.getBrandNameFirstCap()}"
                         app:layout_constraintLeft_toRightOf="@+id/img_brand_logo"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="@string/cluccboi" />
@@ -91,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_16"
-                        android:text="@{viewModel.brandDetailsData.getLocationTypeFirstCap()}"
+                        android:text="@{viewModel.brandDetailsData.subBrand.getLocationTypeFirstCap()}"
                         app:layout_constraintLeft_toRightOf="@+id/img_brand_logo"
                         app:layout_constraintTop_toBottomOf="@+id/txt_brand_name"
                         tools:text="@string/fast_food" />
@@ -103,10 +103,10 @@
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
-                        tools:text="21123132121231213"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img_brand_logo" />
+                        app:layout_constraintTop_toBottomOf="@+id/img_brand_logo"
+                        tools:text="21123132121231213" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_map"
@@ -131,7 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
-                        android:text="@{viewModel.brandDetailsData.location.address}"
+                        android:text="@{viewModel.brandDetailsData.subBrand.location.address}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/card_map"
@@ -156,8 +156,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_8"
                         android:layout_marginTop="@dimen/dp_24"
-                        android:onClick="@{(v) -> viewModel.onPhoneNumClick(v,viewModel.brandDetailsData.dialingCode+viewModel.brandDetailsData.phone)}"
-                        android:text="@{viewModel.brandDetailsData.dialingCode+viewModel.brandDetailsData.phone}"
+                        android:onClick="@{(v) -> viewModel.onPhoneNumClick(v,viewModel.brandDetailsData.subBrand.dialingCode+viewModel.brandDetailsData.subBrand.phone)}"
+                        android:text="@{viewModel.brandDetailsData.subBrand.dialingCode+viewModel.brandDetailsData.subBrand.phone}"
                         app:layout_constraintLeft_toRightOf="@+id/img_call"
                         app:layout_constraintTop_toBottomOf="@+id/txt_address"
                         tools:text="@string/_1800_646_990" />
@@ -182,7 +182,7 @@
                         android:layout_marginStart="@dimen/dp_8"
                         android:layout_marginTop="@dimen/dp_16"
                         android:onClick="@{(v) -> viewModel.onEmailClick(v)}"
-                        android:text="@{viewModel.brandDetailsData.email}"
+                        android:text="@{viewModel.brandDetailsData.subBrand.email}"
                         app:layout_constraintLeft_toRightOf="@+id/img_email"
                         app:layout_constraintTop_toBottomOf="@+id/txt_phone_number"
                         tools:text="@string/dummy_email" />
@@ -338,7 +338,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_16"
                             android:layout_marginTop="@dimen/dp_16"
-                            android:text="@{@plurals/some_point(viewModel.brandDetailsData.earnPointPer,viewModel.brandDetailsData.earnPointPer)}"
+                            android:text="@{@plurals/some_point(viewModel.brandDetailsData.subBrand.earnPointPer,viewModel.brandDetailsData.subBrand.earnPointPer)}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="@string/some_point" />

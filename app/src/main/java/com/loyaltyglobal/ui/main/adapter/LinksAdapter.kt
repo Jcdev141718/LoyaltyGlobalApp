@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyglobal.R
+import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
 import com.loyaltyglobal.databinding.ItemLinkBinding
 import com.loyaltyglobal.util.clickWithDebounce
 
 /**
  * Created by Abhin.
  */
-class LinksAdapter(private val mList: ArrayList<String>, private val listener: LinkClickListeners) :
+class LinksAdapter(private val mList: ArrayList<LinkKeyValueModel>, private val listener: LinkClickListeners) :
     RecyclerView.Adapter<LinksAdapter.LinksVH>() {
 
     interface LinkClickListeners {
@@ -30,7 +31,7 @@ class LinksAdapter(private val mList: ArrayList<String>, private val listener: L
     }
 
     class LinksVH(val binding: ItemLinkBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: String) = binding.apply {
+        fun bind(item: LinkKeyValueModel) = binding.apply {
             link = item
             executePendingBindings()
         }

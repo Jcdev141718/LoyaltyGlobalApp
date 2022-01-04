@@ -1,9 +1,9 @@
 package com.loyaltyglobal.data.reposotory
 
-import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.local.DatabaseDAO
+import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
+import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
-import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
@@ -25,5 +25,9 @@ class ExploreRepository @Inject constructor(
 
     suspend fun getSubBrandWithCoalitionData(): ArrayList<SubBrandAndCoalition> {
         return ArrayList(databaseDAO.getSubBrandWithCoalitionData())
+    }
+
+    suspend fun getKeyValueData(childBrandId : String) : ArrayList<LinkKeyValueModel> {
+        return ArrayList(databaseDAO.getKeyValueData(childBrandId).filter { !it.value.isNullOrEmpty() })
     }
 }

@@ -1,21 +1,20 @@
 package com.loyaltyglobal.ui.main.view.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.databinding.FragmentStoriesBinding
 import com.loyaltyglobal.ui.main.adapter.StoriesAdapter
+import com.loyaltyglobal.ui.main.view.activity.FullscreenNotificationActivity
 import com.loyaltyglobal.ui.main.viewmodel.HomeViewModel
-import com.loyaltyglobal.util.RecyclerItemDecoration
-import com.loyaltyglobal.util.dpToPx
-import com.loyaltyglobal.util.hide
-import com.loyaltyglobal.util.show
+import com.loyaltyglobal.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -29,7 +28,7 @@ class StoriesFragment : Fragment() {
     lateinit var binding: FragmentStoriesBinding
     private var storiesAdapter: StoriesAdapter? = null
     private var mStoriesList = ArrayList<Notification?>()
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
@@ -56,7 +55,7 @@ class StoriesFragment : Fragment() {
                 it.map { notification ->
                     notification?.isOpenedOnce = notification?.readBy?.contains(notification.userId) == true
                 }
-                mStoriesList.addAll(it)
+                mStoriesList.addAll(it.sortedBy { it?.isOpenedOnce })
                 storiesAdapter?.notifyDataSetChanged()
                 setEmptyViewForStories(false)
             }else {
@@ -74,6 +73,11 @@ class StoriesFragment : Fragment() {
                         it.isOpenedOnce = true
                         storiesAdapter?.notifyItemChanged(position)
                     }
+                    mStoriesList.sortedBy { it?.isOpenedOnce }
+                    storiesAdapter?.notifyDataSetChanged()
+                    startActivity(Intent(activity,FullscreenNotificationActivity::class.java).apply {
+                        putExtra(Constants.NOTIFICATION_KEY,it)
+                    })
                 }
             }
         })

@@ -42,6 +42,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.main.view.activity.FullscreenNotificationActivity"/>
+
         <activity
             android:name=".ui.main.view.activity.SplashActivity"
             android:exported="true" />

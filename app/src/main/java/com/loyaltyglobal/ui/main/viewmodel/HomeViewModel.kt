@@ -35,6 +35,7 @@ class HomeViewModel @Inject constructor(
     var mReadNotificationResponse = MutableLiveData<NetworkResult<ReadNotificationResponse>>()
     var mainLoader: MutableLiveData<Boolean> = MutableLiveData(false)
     var swipeLoader: MutableLiveData<Boolean> = MutableLiveData(false)
+    var currentStoriesData : MutableLiveData<Notification> = MutableLiveData()
 
     fun getStoriesList() {
         viewModelScope.launch {

@@ -31,6 +31,21 @@ class ExploreDetailsFragment : Fragment() {
     private var allDaysList: ArrayList<AllDaysModel> = ArrayList()
     private var isAllDayExpand = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initObserver()
+    }
+
+    private fun initObserver() {
+        exploreViewModel.mutableUrlLinks.observe(this,{
+            if (!it.isNullOrEmpty()){
+                binding.txtSeeMore.show()
+            } else {
+                binding.txtSeeMore.hide()
+            }
+        })
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentExploreDetailsBinding.inflate(inflater, container, false).apply {
             viewModel = exploreViewModel
@@ -71,6 +86,7 @@ class ExploreDetailsFragment : Fragment() {
     }
 
     private fun setData() {
+        exploreViewModel.getLinksData()
         exploreViewModel.brandDetailsData.value.let { data ->
             binding.txtFoodDetails.setResizableText(data?.subBrand?.description.toString(), 2, false)
             initMap(LatLng(data?.subBrand?.location?.lat ?: 0.0, data?.subBrand?.location?.lng ?: 0.0), "")

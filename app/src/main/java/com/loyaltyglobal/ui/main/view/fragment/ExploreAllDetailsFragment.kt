@@ -1,5 +1,6 @@
 package com.loyaltyglobal.ui.main.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,27 +14,46 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.loyaltyglobal.R
+import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
 import com.loyaltyglobal.databinding.FragmentExploreAllDetailsBinding
 import com.loyaltyglobal.ui.main.adapter.LinksAdapter
+import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
-import com.loyaltyglobal.util.clickWithDebounce
-import com.loyaltyglobal.util.setResizableText
+import com.loyaltyglobal.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Abhin.
  */
 
+@SuppressLint("NotifyDataSetChanged")
 @AndroidEntryPoint
 class ExploreAllDetailsFragment : Fragment() {
 
     private val exploreViewModel: ExploreViewModel by activityViewModels()
-    private lateinit var binding : FragmentExploreAllDetailsBinding
+    private lateinit var binding: FragmentExploreAllDetailsBinding
     private var mMapFragment: SupportMapFragment? = null
     private lateinit var googleMap: GoogleMap
+    private var linkAdapter: LinksAdapter? = null
+    private var mUrlsList: ArrayList<LinkKeyValueModel> = ArrayList()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initObserver()
+    }
+
+    private fun initObserver() {
+        exploreViewModel.mutableUrlLinks.observe(this, {
+            if (!it.isNullOrEmpty()) {
+                mUrlsList.clear()
+                mUrlsList.addAll(it)
+                linkAdapter?.notifyDataSetChanged()
+            }
+        })
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentExploreAllDetailsBinding.inflate(inflater,container,false).apply {
+        binding = FragmentExploreAllDetailsBinding.inflate(inflater, container, false).apply {
             viewModel = exploreViewModel
             lifecycleOwner = this@ExploreAllDetailsFragment
             executePendingBindings()
@@ -50,15 +70,15 @@ class ExploreAllDetailsFragment : Fragment() {
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvLinks.layoutManager = layoutManager
-        val linkAdapter = LinksAdapter(arrayListOf(), object : LinksAdapter.LinkClickListeners {
-            override fun onClick(position: Int) {
-                //TODO : Open webView
-                /*activity?.addReplaceFragment(R.id.fl_main_container, WebViewFragment().apply {
+        linkAdapter = LinksAdapter(mUrlsList, object : LinksAdapter.LinkClickListeners {
+            override fun onClick(position: Int) { //TODO : Open webView
+                activity?.addReplaceFragment(R.id.fl_main_container, WebViewFragment().apply {
                     arguments = Bundle().apply {
-                        putString(Constants.KEY_WEB_URL, mHomeScreenDealPromotionsList[position].value)
+                        putString(Constants.KEY_WEB_URL, mUrlsList[position].value)
+                        putString(Constants.KEY_TITLE, mUrlsList[position].key)
                     }
                 }, true, true)
-                (activity as MainActivity).showHideBottomNavigationBar(false)*/
+                (activity as MainActivity).showHideBottomNavigationBar(false)
             }
         })
         binding.rvLinks.adapter = linkAdapter

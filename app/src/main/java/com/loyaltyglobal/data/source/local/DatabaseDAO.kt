@@ -2,6 +2,7 @@ package com.loyaltyglobal.data.source.local
 
 import androidx.room.*
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
+import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.Coalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
@@ -10,6 +11,7 @@ import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Pass
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Tier
+import com.loyaltyglobal.util.Constants
 import com.loyaltyglobal.util.Constants.CUSTOM_FIELD_TYPE_IMAGE
 import com.loyaltyglobal.util.Constants.NOTIFICATION_TYPE_IMAGE
 import com.loyaltyglobal.util.Constants.NOTIFICATION_TYPE_TEXT
@@ -60,7 +62,7 @@ interface DatabaseDAO {
     @Query("select * from CustomField where type == '$CUSTOM_FIELD_TYPE_IMAGE' and `delete` == '0'")
     suspend fun getCustomFieldList() : List<CustomField>
 
-    @Query("select _id,brandName,brandLogo from SubBrand")
+    @Query("select _id,brandName,brandLogo from SubBrand where `delete` == '0'")
     suspend fun getSubBrandNameAndLogo() : List<SubBrand>
 
     @Query("update Notification set isOpenedOnce = '1' where _id = :id")
@@ -81,13 +83,13 @@ interface DatabaseDAO {
     @Update
     suspend fun updateNotification(notification : Notification)
 
-    @Query("select * from SubBrand where `delete` = '0'")
-    suspend fun getAllSubBrands() : List<SubBrand>
-
     @Query("select distinct locationType from SubBrand where `delete` = '0'")
     suspend fun getFilters() : List<String>
 
     @Transaction
     @Query("select * from SubBrand where `delete` = '0'")
     suspend fun getSubBrandWithCoalitionData(): List<SubBrandAndCoalition>
+
+    @Query("select `key`,value from CustomField where type = '${Constants.URL}' and childBrandId = :id")
+    suspend fun getKeyValueData(id : String) : List<LinkKeyValueModel>
 }

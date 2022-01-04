@@ -1,22 +1,17 @@
 package com.loyaltyglobal.ui.main.viewmodel
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
 import com.loyaltyglobal.data.model.AllDaysModel
-import com.loyaltyglobal.data.model.DealsAndOffersData
-import com.loyaltyglobal.data.model.ExploreFilterData
 import com.loyaltyglobal.data.reposotory.ExploreRepository
+import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
-import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.util.dialPhoneNum
 import com.loyaltyglobal.util.sendEmailTo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -34,6 +29,7 @@ class ExploreViewModel @Inject constructor(
     var mutableBusinessList = MutableLiveData<ArrayList<SubBrandAndCoalition>>()
     var mutableFilterList = MutableLiveData<ArrayList<String>>()
     var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealOffer>>()
+    var mutableUrlLinks = MutableLiveData<ArrayList<LinkKeyValueModel>>()
 
     var brandDetailsData = MutableLiveData<SubBrandAndCoalition>()
 
@@ -76,5 +72,13 @@ class ExploreViewModel @Inject constructor(
 
     fun onEmailClick(view : View){
         view.context.sendEmailTo(brandDetailsData.value?.subBrand?.email.toString())
+    }
+
+    fun getLinksData() {
+        brandDetailsData.value?.let { data ->
+            viewModelScope.launch {
+                mutableUrlLinks.postValue(exploreRepository.getKeyValueData(data.subBrand._id))
+            }
+        }
     }
 }

@@ -1,9 +1,12 @@
 package com.loyaltyglobal.data.source.localModels.userPassResponse
 
+import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity
 data class Notification(
     @PrimaryKey var _id: String,
@@ -31,4 +34,4 @@ data class Notification(
     var brandLogo: String? = null,
     var isOpenedOnce: Boolean = false,
     var userId: String? = null,
-)
+) : Parcelable

@@ -22,6 +22,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @ActivityRetainedScoped
@@ -61,10 +62,10 @@ class HomeRepository @Inject constructor(
 
     suspend fun getStoriesList(): ArrayList<Notification?> {
         val subBrandList = withContext(Dispatchers.IO) { dataBaseDao.getSubBrandNameAndLogo() }
-        val storiesList = ArrayList(dataBaseDao.getStoriesList())
+        val storiesList = ArrayList(dataBaseDao.getStoriesList()).filter { it.createdAt?._seconds?.toLong()?.let { it1 -> checkStoriesIsBetween24Hours(it1) } == true }.sortedBy { it.createdAt?._seconds }
         val subBrandMap: Map<String, SubBrand> = subBrandList.associateBy { it._id }
         val result = withContext(Dispatchers.IO) {
-            storiesList.filter { subBrandMap[it.brandId] != null && subBrandMap[it.brandId]?.delete == false }
+            storiesList.filter { subBrandMap[it.brandId] != null }
                 .filter { it.sendTo?.contains(preferenceProvider.getUserId()) == true }.map { notification ->
                     subBrandMap[notification.brandId]?.let { subBrand ->
                         notification?.apply {
@@ -94,5 +95,9 @@ class HomeRepository @Inject constructor(
             response.responseData?.data?.toNotificationOBJ(isOpenedOnce = true)?.let { dataBaseDao.updateNotification(it) }
         }
         return response
+    }
+
+    private fun checkStoriesIsBetween24Hours(createdAt : Long) : Boolean {
+        return System.currentTimeMillis() - (TimeUnit.SECONDS.toMillis(createdAt)) < TimeUnit.HOURS.toMillis(24)
     }
 }

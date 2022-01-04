@@ -142,10 +142,12 @@
     <string name="some_point">%d Point</string>
     <string name="about">About</string>
     <string name="other_links">Other Links</string>
+    <string name="visit_link">Visit link</string>
 
     <plurals name="some_point">
         <item quantity="one">%d Point</item>
         <item quantity="two">%d Points</item>
         <item quantity="other">%d Points</item>
     </plurals>
+    <string name="text_with_underline"><u>%s</u></string>
 </resources>

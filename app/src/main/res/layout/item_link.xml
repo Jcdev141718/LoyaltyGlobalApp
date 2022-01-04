@@ -7,7 +7,7 @@
     <data>
         <variable
             name="link"
-            type="String" />
+            type="com.loyaltyglobal.data.source.localModels.LinkKeyValueModel" />
     </data>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -16,9 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/dp_4"
-        android:layout_marginHorizontal="@dimen/dp_8"
         android:lines="1"
         android:ellipsize="end"
+        android:layout_marginVertical="@dimen/dp_4"
+        app:linkWithUnderline="@{link.key}"
         tools:text="@string/dummy_link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_link"

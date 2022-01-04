@@ -121,7 +121,7 @@ class WebViewFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
-        (activity as MainActivity).showHideBottomNavigationBar(true)
+        if (activity is MainActivity) (activity as MainActivity).showHideBottomNavigationBar(true)
         super.onDestroyView()
     }
 }

@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.maps.model.LatLng
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.databinding.FragmentBusinessBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.SubBrandAdapter
+import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.hide
@@ -31,7 +33,7 @@ class BusinessFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        mBinding = FragmentBusinessBinding.inflate(layoutInflater, container, false)
+        mBinding = FragmentBusinessBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
@@ -43,7 +45,15 @@ class BusinessFragment : BaseFragment() {
     }
 
     private fun setBusinessAdapter() {
-        mAdapter = SubBrandAdapter(mBusinessList, object : SubBrandAdapter.SubBrandItemClickListener {
+        val latitude = (activity as MainActivity).gpsTracker?.getLatitude()
+        val longitude = (activity as MainActivity).gpsTracker?.getLongitude()
+        val latLong = latitude?.let { lat ->
+            longitude?.let { long ->
+                LatLng(lat, long)
+            }
+
+        }
+        mAdapter = SubBrandAdapter(latLong, mBusinessList, object : SubBrandAdapter.SubBrandItemClickListener {
             override fun clickListener(position: Int) {
                 exploreViewModel.brandDetailsData.value = mBusinessList[position]
                 activity?.addReplaceFragment(R.id.fl_main_container, ExploreDetailsFragment(), true, true)

@@ -23,6 +23,7 @@ object Constants {
     const val MINIMUM_LENGTH_OF_NUMBER = 10
     const val OTP_LENGTH = 6
     const val PERMISSIONS_REQUEST_CODE = 10003
+    const val MAP_PERMISSIONS_REQUEST_CODE = 10004
     const val IS_USER_LOGIN_KEY = "IS_USER_LOGIN_KEY"
 
     const val PREF_PLAYER_ID  = "PLAYER_ID"

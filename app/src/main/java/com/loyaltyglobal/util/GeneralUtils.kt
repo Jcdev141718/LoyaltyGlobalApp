@@ -1,5 +1,6 @@
 package com.loyaltyglobal.util
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -462,3 +463,5 @@ private fun TextView.addClickablePartTextResizable(
     }
     return builder
 }
+
+val locationPermissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)

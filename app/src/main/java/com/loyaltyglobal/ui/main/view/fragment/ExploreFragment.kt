@@ -19,6 +19,8 @@ import com.loyaltyglobal.util.addReplaceFragment
 class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInterface {
 
     lateinit var mBinding: FragmentExploreBinding
+    private var switchBusinessMap = false
+    private var businessFragment = BusinessFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,10 +43,20 @@ class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInter
                 setFilterInterface(this@ExploreFragment)
             }, addFragment = true, addToBackStack = true)
         }
+
+        mBinding.imgMap.setOnClickListener {
+            switchBusinessMap = !switchBusinessMap
+            if (switchBusinessMap) {
+                mBinding.imgMap.setImageResource(R.drawable.ic_menu)
+            } else mBinding.imgMap.setImageResource(R.drawable.ic_map)
+            mBinding.viewPager.isUserInputEnabled = !switchBusinessMap
+            mBinding.viewPager.setCurrentItem(0, true)
+            businessFragment.switchMap(switchBusinessMap)
+        }
     }
 
     private fun setExploreTabs() {
-        val adapter = ViewPagerAdapter(requireActivity())
+        val adapter = ViewPagerAdapter(requireActivity(), businessFragment)
         mBinding.viewPager.adapter = adapter
         TabLayoutMediator(mBinding.tabsExplore, mBinding.viewPager) { tab, position ->
             if (position == 0) {

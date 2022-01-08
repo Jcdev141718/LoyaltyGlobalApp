@@ -34,4 +34,8 @@ data class Notification(
     var brandLogo: String? = null,
     var isOpenedOnce: Boolean = false,
     var userId: String? = null,
-) : Parcelable
+) : Parcelable{
+    fun getReadByUser() : Boolean{
+        return readBy?.contains(userId)!!
+    }
+}

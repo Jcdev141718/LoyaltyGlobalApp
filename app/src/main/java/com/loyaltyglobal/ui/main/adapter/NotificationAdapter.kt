@@ -1,41 +1,55 @@
 package com.loyaltyglobal.ui.main.adapter
 
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.loyaltyglobal.R
-import com.loyaltyglobal.data.model.NotificationData
+import com.loyaltyglobal.data.source.localModels.NotificationAndSubBrand
 import com.loyaltyglobal.databinding.ItemNotificationBinding
+
 
 /**
  * Created by Abhin.
  */
-class NotificationAdapter(var notificationList: ArrayList<NotificationData>) :
-    RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-        return NotificationViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_notification,
-                parent,
-                false
-            )
-        )
+class NotificationAdapter(private val onNotificationClick: OnNotificationClick) : ListAdapter<NotificationAndSubBrand, NotificationAdapter.ItemViewHolder>(DiffCallback()) {
+
+    interface OnNotificationClick{
+        fun onItemClick(itemData: NotificationAndSubBrand)
     }
 
-    override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
-        holder.bind(notificationList[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(ItemNotificationBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun getItemCount() = notificationList.size
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        holder.bind(getItem(position),onNotificationClick)
+    }
 
-    class NotificationViewHolder(var itemCardListBinding: ItemNotificationBinding) :
-        RecyclerView.ViewHolder(itemCardListBinding.root) {
-        fun bind(notificationData: NotificationData) = itemCardListBinding.apply {
-            data = notificationData
+    class ItemViewHolder(private val binding: ItemNotificationBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(itemData: NotificationAndSubBrand, onNotificationClick: OnNotificationClick) = binding.apply {
+            data = itemData
             executePendingBindings()
+            itemView.setOnClickListener{
+                onNotificationClick.onItemClick(itemData)
+            }
+        }
+    }
+
+    class DiffCallback : DiffUtil.ItemCallback<NotificationAndSubBrand>() {
+        override fun areItemsTheSame(
+            oldItem: NotificationAndSubBrand,
+            newItem: NotificationAndSubBrand
+        ): Boolean {
+            return oldItem.notification.title == newItem.notification.title
+        }
+
+        override fun areContentsTheSame(
+            oldItem: NotificationAndSubBrand,
+            newItem: NotificationAndSubBrand
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 }

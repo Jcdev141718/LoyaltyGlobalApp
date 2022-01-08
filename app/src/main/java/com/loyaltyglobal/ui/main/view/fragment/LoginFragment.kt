@@ -47,8 +47,7 @@ class LoginFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Configure Google Sign In
-        val gso =
-            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         initObserver()
     }
@@ -62,50 +61,55 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun handleLoginResponse(result: NetworkResult<LoginResponse>) {
-        when (result) {
-            is NetworkResult.Loading -> {
-                if (isNormalLogin) {
-                    mBinding.progressbar.show()
-                } else {
-                    mBinding.progressbarGoogle.show()
-                    mBinding.txtContinueWithGoogle.hide()
-                }
+        mBinding.apply {
+            when (result) {
+                is NetworkResult.Loading -> {
+                    if (isNormalLogin) {
+                        groupNextArrow.hide()
+                        progressbar.show()
+                    } else {
+                        progressbarGoogle.show()
+                        txtContinueWithGoogle.hide()
+                    }
 
-            }
-            is NetworkResult.Success -> {
-                mBinding.progressbar.hide()
-                mBinding.groupNextArrow.show()
-                mBinding.progressbarGoogle.hide()
-                mBinding.txtContinueWithGoogle.show()
-                mBaseActivity?.mPreferenceProvider?.setValue(PREF_USER_ID, result.responseData?.data?._id.toString())
-                if (result.responseData?.data?.isNumberVerified == true) {
-                    activity?.addReplaceFragment(
-                        R.id.container_main, EnterNameFragment(), true,
-                        addToBackStack = true
-                    )
-                } else {
-                    activity?.addReplaceFragment(
-                        R.id.container_main,
-                        EnterMobileNumberFragment().apply {
-                            arguments = Bundle().apply {
-                                putString(
-                                    USER_NAME_KEY,
-                                    "${result.responseData?.data?.firstName} ${result.responseData?.data?.lastName}"
-                                )
-                            }
-                        },
-                        true,
-                        addToBackStack = true
-                    )
                 }
-            }
-            is NetworkResult.Error -> {
-                mBinding.progressbar.hide()
-                mBinding.progressbarGoogle.hide()
-                mBinding.txtContinueWithGoogle.show()
-                result.message?.let { activity?.showToast(it) }
+                is NetworkResult.Success -> {
+                    progressbar.hide()
+                    groupNextArrow.show()
+                    progressbarGoogle.hide()
+                    txtContinueWithGoogle.show()
+                    mBaseActivity?.mPreferenceProvider?.setValue(PREF_USER_ID, result.responseData?.data?._id.toString())
+                    if (result.responseData?.data?.isNumberVerified == true) {
+                        activity?.addReplaceFragment(
+                            R.id.container_main, EnterNameFragment(), true,
+                            addToBackStack = true
+                        )
+                    } else {
+                        activity?.addReplaceFragment(
+                            R.id.container_main,
+                            EnterMobileNumberFragment().apply {
+                                arguments = Bundle().apply {
+                                    putString(
+                                        USER_NAME_KEY,
+                                        "${result.responseData?.data?.firstName} ${result.responseData?.data?.lastName}"
+                                    )
+                                }
+                            },
+                            true,
+                            addToBackStack = true
+                        )
+                    }
+                }
+                is NetworkResult.Error -> {
+                    progressbar.hide()
+                    progressbarGoogle.hide()
+                    txtContinueWithGoogle.show()
+                    groupNextArrow.show()
+                    result.message?.let { activity?.showToast(it) }
+                }
             }
         }
+
     }
 
     override fun onCreateView(
@@ -122,32 +126,49 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun init() {
-        mBinding.llContinueWithGoogle.setOnClickListener {
-            isNormalLogin = false
-            signIn()
-        }
+        mBinding.apply {
+            llContinueWithGoogle.setOnClickListener {
+                isNormalLogin = false
+                signIn()
+            }
 
-        mBinding.clTxtNext.clickWithDebounce {
-            isNormalLogin = true
-            mBinding.groupNextArrow.hide()
-            loginViewModel.logIn(
-                LoginRequest(
+            clTxtNext.clickWithDebounce {
+                isNormalLogin = true
+                doLogin(LoginRequest(
                     AGENCY_ID, "",
-                    mBinding.edtEmail.text.toString(), "email",
+                    edtEmail.text.toString(), "email",
                     AGENCY_ID
-                )
-            )
-            activity?.hideKeyboard()
-        }
+                ))
+                activity?.hideKeyboard()
+            }
 
-        mBinding.edtEmail.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isNotEmpty() && mBinding.edtEmail.text.toString().trim().isEmailValid()) {
-                changeButtonState(true)
-            } else {
-                changeButtonState(false)
+            edtEmail.doOnTextChanged { text, _, _, _ ->
+                if (text.toString().isNotEmpty() && edtEmail.text.toString().trim().isEmailValid()) {
+                    changeButtonState(true)
+                } else {
+                    changeButtonState(false)
+                }
             }
         }
+
+
+
     }
+    private fun changeButtonState(isEnable : Boolean) {
+        mBinding.apply {
+            if (isEnable) {
+                clTxtNext.background = ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
+            } else {
+                clTxtNext.background = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.shape_filled_button_disable
+                )
+            }
+        }
+
+    }
+
+
 
 
     private fun signIn() {
@@ -155,28 +176,15 @@ class LoginFragment : BaseFragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    private fun changeButtonState(isEnable : Boolean) {
-        if (isEnable) {
-            mBinding.clTxtNext.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
-        } else {
-            mBinding.clTxtNext.background = ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.shape_filled_button_disable
-            )
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == RC_SIGN_IN && resultCode != 0) {
             try {
-                val task: Task<GoogleSignInAccount> =
-                    GoogleSignIn.getSignedInAccountFromIntent(data)
+                val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
                 // Google Sign In was successful, authenticate with Firebase
-                val account =
-                    task.getResult(com.google.android.gms.common.api.ApiException::class.java)!!
+                val account = task.getResult(com.google.android.gms.common.api.ApiException::class.java)!!
                 if (resultCode != 0) {
                     handleSignInResult(task)
                 }
@@ -186,7 +194,7 @@ class LoginFragment : BaseFragment() {
             }
 
         } else {
-            Toast.makeText(requireContext(), "Error:resultCode = 0", Toast.LENGTH_SHORT).show()
+            activity?.showToast("Error:resultCode = 0")
         }
     }
 
@@ -210,6 +218,22 @@ class LoginFragment : BaseFragment() {
                 it, "email",
                 AGENCY_ID
             )
-        }?.let { loginViewModel.logIn(it) }
+        }?.let { doLogin(it) }
+    }
+
+    private fun doLogin(loginRequest: LoginRequest) {
+        mBinding.apply {
+            when {
+                edtEmail.text.isNullOrEmpty() -> {
+                    activity?.showToast(requireActivity().getString(R.string.please_enter_email))
+                }
+                !edtEmail.text.toString().isEmailValid() -> {
+                    activity?.showToast(requireActivity().getString(R.string.please_enter_valid_email_address))
+                }
+                else -> {
+                    loginViewModel.logIn(loginRequest)
+                }
+            }
+        }
     }
 }

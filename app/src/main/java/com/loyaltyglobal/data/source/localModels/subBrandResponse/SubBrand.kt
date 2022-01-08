@@ -48,4 +48,5 @@ data class SubBrand(
 ) : Parcelable {
     fun getBrandNameFirstCap() = brandName?.firstLetterCap()
     fun getLocationTypeFirstCap() = locationType?.firstLetterCap()
+    fun getSafePointsPer() = earnPointPer ?: 0
 }

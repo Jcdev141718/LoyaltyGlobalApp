@@ -27,6 +27,10 @@ class ExploreRepository @Inject constructor(
         return ArrayList(databaseDAO.getSubBrandWithCoalitionData())
     }
 
+    suspend fun getSubBrandWithCoalitionDataById(brandId : String): SubBrandAndCoalition {
+        return databaseDAO.getSubBrandWithCoalitionDataById(brandId)
+    }
+
     suspend fun getKeyValueData(childBrandId : String) : ArrayList<LinkKeyValueModel> {
         return ArrayList(databaseDAO.getKeyValueData(childBrandId).filter { !it.value.isNullOrEmpty() })
     }

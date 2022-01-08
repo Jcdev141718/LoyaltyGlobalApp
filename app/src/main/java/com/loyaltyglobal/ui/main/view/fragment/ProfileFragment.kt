@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentProfileBinding
 import com.loyaltyglobal.ui.base.BaseFragment
+import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.clickWithDebounce
 import com.loyaltyglobal.util.showTopSnackBar
 
@@ -48,17 +49,13 @@ class ProfileFragment : BaseFragment() {
 
             }
             llTransaction.clickWithDebounce {
-
+                activity?.addReplaceFragment(R.id.fl_main_container, TransactionsFragment(), true, true)
             }
             txtLogout.clickWithDebounce {
                 activity?.showTopSnackBar("title","message")
             }
             switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked){
-                    //TODO: Enable dark mode here
-                }else{
-                    //TODO: Disable dark mode here
-                }
+
             }
         }
 

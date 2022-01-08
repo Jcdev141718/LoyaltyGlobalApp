@@ -50,6 +50,13 @@ class ExploreAllDetailsFragment : Fragment() {
                 linkAdapter?.notifyDataSetChanged()
             }
         })
+
+        exploreViewModel.brandDetailsData.observe(this,{
+            if (it != null){
+                setData()
+            }
+        })
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -64,7 +71,7 @@ class ExploreAllDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        setData()
+        exploreViewModel.getBrandDetails()
     }
 
     private fun initRecyclerView() {

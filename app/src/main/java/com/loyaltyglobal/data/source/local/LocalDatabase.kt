@@ -17,7 +17,7 @@ import com.loyaltyglobal.data.source.localModels.userPassResponse.Tier
  */
 
 @Database(entities = [Tier::class, SubBrandModel::class, CustomField::class, Notification::class, Pass::class, DollarPointModel::class, Coalition::class, SubBrand::class],
-    version = 1,
+    version = 3,
     exportSchema = false)
 @TypeConverters(TypeConverterHelper::class)
 abstract class LocalDatabase : RoomDatabase() {

@@ -4,8 +4,12 @@ import android.content.Context
 import com.loyaltyglobal.data.model.request.ReadNotificationRequest
 import com.loyaltyglobal.data.model.response.readNotification.ReadNotificationResponse
 import com.loyaltyglobal.data.model.response.readNotification.toNotificationOBJ
+import com.loyaltyglobal.data.model.response.transactionData.Data
+import com.loyaltyglobal.data.model.response.transactionData.TransactionData
 import com.loyaltyglobal.data.source.local.DatabaseDAO
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
+import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
+import com.loyaltyglobal.data.source.localModels.NotificationAndSubBrand
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
 import com.loyaltyglobal.data.source.localModels.userPassResponse.CustomField
@@ -100,4 +104,38 @@ class HomeRepository @Inject constructor(
     private fun checkStoriesIsBetween24Hours(createdAt : Long) : Boolean {
         return System.currentTimeMillis() - (TimeUnit.SECONDS.toMillis(createdAt)) < TimeUnit.HOURS.toMillis(24)
     }
+
+    suspend fun getAllNotifications() : MutableList<NotificationAndSubBrand> {
+        return dataBaseDao.getAllNotifications().toMutableList()
+    }
+
+
+
+    /*suspend fun getTransaction() : MutableList<Data?> {
+        val api = safeApiCall { apiService.getTransactions(AGENCY_ID) }
+        val subBrandList = withContext(Dispatchers.IO) { dataBaseDao.getSubBrandNameAndLogo() }
+        val subBrandMap: Map<String, SubBrand> = subBrandList.associateBy { it._id }
+        val result = withContext(Dispatchers.IO) {
+            api.responseData?.data?.filter { subBrandMap[it.brandId] != null }?.map { transection ->
+                    subBrandMap[transection.brandId]?.let { subBrand ->
+                        transection.apply {
+                            brandName = subBrand.brandName
+                            brandLogo = subBrand.brandLogo
+                        }
+                    }
+                }
+        }
+        return result?.toMutableList() ?: mutableListOf()
+    }*/
+
+    suspend fun getTransaction() : NetworkResult<TransactionData> {
+        return safeApiCall { apiService.getTransactions(AGENCY_ID) }
+
+    }
+
+   suspend fun getSubBrandMap() : Map<String, SubBrand>{
+        val subBrandList = withContext(Dispatchers.IO) { dataBaseDao.getSubBrandNameAndLogo() }
+       return subBrandList.associateBy { it._id }
+    }
+
 }

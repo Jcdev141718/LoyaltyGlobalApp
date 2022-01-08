@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.loyaltyglobal.R
 import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
 
 
@@ -102,4 +103,14 @@ fun AppCompatTextView.linkWithUnderline(link: String) {
     val content = SpannableString(link)
     content.setSpan(UnderlineSpan(), 0, content.length, 0)
     text = content
+}
+
+@BindingAdapter("app:setTime")
+fun AppCompatTextView.setTime(time: Long) {
+    text = time.covertTimeToText()
+}
+
+@BindingAdapter("setCircleImageWithPlaceHolder")
+fun AppCompatImageView.setCircleImageWithPlaceHolder(url: String?) {
+    Glide.with(this.context).load(url).circleCrop().placeholder(R.drawable.ic_brand_logo_test).into(this)
 }

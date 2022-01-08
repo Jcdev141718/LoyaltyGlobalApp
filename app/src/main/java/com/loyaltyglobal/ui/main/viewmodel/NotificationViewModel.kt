@@ -2,50 +2,27 @@ package com.loyaltyglobal.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.loyaltyglobal.data.model.NotificationData
+import com.loyaltyglobal.data.reposotory.ExploreRepository
+import com.loyaltyglobal.data.reposotory.HomeRepository
+import com.loyaltyglobal.data.source.localModels.NotificationAndSubBrand
+import com.loyaltyglobal.data.source.localModels.userPassResponse.Notification
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Created by Abhin.
  */
-class NotificationViewModel : ViewModel() {
+@HiltViewModel
+class NotificationViewModel @Inject constructor(private val homeRepository: HomeRepository) : ViewModel() {
 
-    var mutableNotificationList = MutableLiveData<ArrayList<NotificationData>>()
+    var mutableNotificationList = MutableLiveData<MutableList<NotificationAndSubBrand>>()
 
     fun getNotificationList() {
-        val list = ArrayList<NotificationData>()
-        list.add(
-            NotificationData(
-                title = "Mcdonalds has updated 20 points.",
-                sub_title = "30 minutes ago",
-                is_notification_read = true
-            )
-        )
-        list.add(
-            NotificationData(
-                title = "KFC a new brand has been added.",
-                sub_title = "30 minutes ago",
-                is_notification_read = true
-            )
-        )
-        list.add(
-            NotificationData(
-                title = "Burger King added their story: “A MEGA DEAL TILL 10 Nov, 2021”",
-                sub_title = "30 minutes ago",
-                is_notification_read = true
-            )
-        )
-        list.add(
-            NotificationData(
-                title = "Mcdonalds has updated 20 points.",
-                sub_title = "30 minutes ago"
-            )
-        )
-        list.add(
-            NotificationData(
-                title = "Mcdonalds has updated 20 points.",
-                sub_title = "30 minutes ago"
-            )
-        )
-        mutableNotificationList.value = list
+        viewModelScope.launch {
+            mutableNotificationList.value = homeRepository.getAllNotifications()
+        }
     }
 }

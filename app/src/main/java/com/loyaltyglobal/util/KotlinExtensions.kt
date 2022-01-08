@@ -5,8 +5,10 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.net.ParseException
 import android.net.Uri
 import android.text.InputFilter
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
@@ -19,7 +21,11 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.loyaltyglobal.R
+import com.loyaltyglobal.app.LoyaltyGlobalApp
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -54,13 +60,13 @@ fun AppCompatImageView.setImage(url: Any, isRound: Boolean = false) {
 
 @BindingAdapter("setNotificationBg")
 fun ConstraintLayout.setNotificationBg(isNotificationRead: Boolean = false) {
-    if (isNotificationRead) {
+    if (!isNotificationRead) {
         val value = TypedValue()
-        context.theme.resolveAttribute(com.loyaltyglobal.R.attr.main_card, value, true)
+        context.theme.resolveAttribute(R.attr.main_card, value, true)
         this.setBackgroundColor(value.data)
     } else {
         val value = TypedValue()
-        context.theme.resolveAttribute(com.loyaltyglobal.R.attr.black_white, value, true)
+        context.theme.resolveAttribute(R.attr.black_white, value, true)
         this.setBackgroundColor(value.data)
     }
 }
@@ -117,3 +123,71 @@ fun Context.sendEmailTo(email: String) {
 //        showToast("There are no email clients installed.")
     }
 }
+
+
+
+fun Long.covertTimeToText(): String? {
+    var convertTime: String? = null
+    val suffix = "ago"
+    try {
+        val nowTime = Date()
+        val dateDiff = nowTime.time - this
+        val second: Long = TimeUnit.MILLISECONDS.toSeconds(dateDiff)
+        val minute: Long = TimeUnit.MILLISECONDS.toMinutes(dateDiff)
+        val hour: Long = TimeUnit.MILLISECONDS.toHours(dateDiff)
+        val day: Long = TimeUnit.MILLISECONDS.toDays(dateDiff)
+        convertTime = if (second < 60) {
+            if (second == 1L) {
+                "$second second $suffix"
+            } else {
+                "$second seconds $suffix"
+            }
+        } else if (minute < 60) {
+            if (minute == 1L) {
+                "$minute minute $suffix"
+            } else {
+                "$minute minutes $suffix"
+            }
+        } else if (hour < 24) {
+            if (hour == 1L) {
+                "$hour hour $suffix"
+            } else {
+                "$hour hours $suffix"
+            }
+        } else if (day >= 7) {
+            if (day >= 365) {
+                val tempYear = day / 365
+                if (tempYear == 1L) {
+                    "$tempYear year $suffix"
+                } else {
+                    "$tempYear years $suffix"
+                }
+            } else if (day >= 30) {
+                val tempMonth = day / 30
+                if (tempMonth == 1L) {
+                    (day / 30).toString() + " month " + suffix
+                } else {
+                    (day / 30).toString() + " months " + suffix
+                }
+            } else {
+                val tempWeek = day / 7
+                if (tempWeek == 1L) {
+                    (day / 7).toString() + " week " + suffix
+                } else {
+                    (day / 7).toString() + " weeks " + suffix
+                }
+            }
+        } else {
+            if (day == 1L) {
+                "$day day $suffix"
+            } else {
+                "$day days $suffix"
+            }
+        }
+    } catch (e: ParseException) {
+        e.printStackTrace()
+        Log.e("TimeAgo", e.message.toString() + "")
+    }
+    return convertTime
+}
+

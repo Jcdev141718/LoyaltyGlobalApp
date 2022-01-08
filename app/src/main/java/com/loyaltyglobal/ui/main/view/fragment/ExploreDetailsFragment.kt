@@ -44,6 +44,12 @@ class ExploreDetailsFragment : Fragment() {
                 binding.txtSeeMore.hide()
             }
         })
+
+        exploreViewModel.brandDetailsData.observe(this,{
+            if (it != null){
+                setData()
+            }
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -59,7 +65,8 @@ class ExploreDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initClickListener()
-        setData()
+        exploreViewModel.getBrandDetails()
+//        setData()
     }
 
     private fun initClickListener() {

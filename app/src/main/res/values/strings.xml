@@ -150,4 +150,7 @@
         <item quantity="other">%d Points</item>
     </plurals>
     <string name="text_with_underline"><u>%s</u></string>
+    <string name="search_brand">Search Brand</string>
+    <string name="no_search_brands_found">No search brands found</string>
+    <string name="reset_filters">Reset Filters</string>
 </resources>

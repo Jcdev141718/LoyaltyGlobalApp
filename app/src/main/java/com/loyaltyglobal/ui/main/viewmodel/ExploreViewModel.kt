@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.loyaltyglobal.data.model.AllDaysModel
 import com.loyaltyglobal.data.reposotory.ExploreRepository
+import com.loyaltyglobal.data.source.localModels.FilterModel
 import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
@@ -27,10 +28,10 @@ class ExploreViewModel @Inject constructor(
 
     private val days = arrayListOf("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
     var mutableBusinessList = MutableLiveData<ArrayList<SubBrandAndCoalition>>()
-    var mutableFilterList = MutableLiveData<ArrayList<String>>()
+    var mutableFilterList = MutableLiveData<ArrayList<FilterModel>>()
     var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealOffer>>()
     var mutableUrlLinks = MutableLiveData<ArrayList<LinkKeyValueModel>>()
-
+    var mutableFiltersList = MutableLiveData<ArrayList<String>>()
     var brandDetailsData = MutableLiveData<SubBrandAndCoalition>()
 
     fun getBusinessList() {
@@ -62,7 +63,12 @@ class ExploreViewModel @Inject constructor(
 
     fun getFilterList(){
         viewModelScope.launch {
-            mutableFilterList.postValue(exploreRepository.getFilters())
+            val filtersList = exploreRepository.getFilters()
+            val filtersModelList = ArrayList<FilterModel>()
+            filtersList.map {
+                filtersModelList.add(FilterModel(it))
+            }
+            mutableFilterList.postValue(filtersModelList)
         }
     }
 
@@ -80,5 +86,9 @@ class ExploreViewModel @Inject constructor(
                 mutableUrlLinks.postValue(exploreRepository.getKeyValueData(data.subBrand._id))
             }
         }
+    }
+
+    fun setFilters(filters: List<String>, isReset: Boolean = false) {
+        mutableFiltersList.postValue(ArrayList(filters))
     }
 }

@@ -83,7 +83,7 @@ interface DatabaseDAO {
     @Update
     suspend fun updateNotification(notification : Notification)
 
-    @Query("select distinct locationType from SubBrand where `delete` = '0'")
+    @Query("select distinct locationType from SubBrand where `delete` = '0' order by locationType")
     suspend fun getFilters() : List<String>
 
     @Transaction

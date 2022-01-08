@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.tabs.TabLayoutMediator
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentExploreBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.ViewPagerAdapter
 import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.util.clickWithDebounce
 
 /**
  * Created by Abhin.
  */
 
-class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInterface {
+class ExploreFragment : BaseFragment() {
 
     lateinit var mBinding: FragmentExploreBinding
 
@@ -37,9 +37,11 @@ class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInter
     private fun clickListener() {
         mBinding.imgExploreFilter.setOnClickListener {
             hideBottomNavigation()
-            activity?.addReplaceFragment(R.id.fl_main_container, ExploreFilterFragment().apply {
-                setFilterInterface(this@ExploreFragment)
-            }, addFragment = true, addToBackStack = true)
+            activity?.addReplaceFragment(R.id.fl_main_container, ExploreFilterFragment(), addFragment = true, addToBackStack = true)
+        }
+        mBinding.imgExploreSearch.clickWithDebounce {
+            hideBottomNavigation()
+            activity?.addReplaceFragment(R.id.fl_main_container, SearchBrandsFragment(), addFragment = true, addToBackStack = true)
         }
     }
 
@@ -51,9 +53,5 @@ class ExploreFragment : BaseFragment(), ExploreFilterFragment.ExploreFilterInter
                 tab.text = getString(R.string.explore_businesses)
             } else tab.text = getString(R.string.explore_deals_and_offers)
         }.attach()
-    }
-
-    override fun applyFilter() {
-        Toast.makeText(requireContext(), "Filter applied", Toast.LENGTH_SHORT).show()
     }
 }

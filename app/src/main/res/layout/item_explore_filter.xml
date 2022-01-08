@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="String" />
+            type="com.loyaltyglobal.data.source.localModels.FilterModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,17 +19,20 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_16"
-            android:text="@{data}"
+            android:text="@{data.getFilterTitleCap()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/img_check"
+            app:layout_constraintEnd_toStartOf="@id/filter_checkbox"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_check"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/filter_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_checkbox_deselected"
+            android:gravity="center"
+            android:minWidth="@dimen/dp_0"
+            android:minHeight="@dimen/dp_0"
+            android:checked="@{data.selected}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -32,6 +32,9 @@
             android:layout_gravity="center"
             android:padding="@dimen/dp_12"
             android:tint="?heading"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/default_ripple_round"
             android:src="@drawable/icon_search" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -41,6 +44,9 @@
             android:layout_gravity="center"
             android:tint="?heading"
             android:padding="@dimen/dp_12"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/default_ripple_round"
             android:src="@drawable/icon_filter" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

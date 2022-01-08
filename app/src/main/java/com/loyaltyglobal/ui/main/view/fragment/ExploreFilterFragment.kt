@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.loyaltyglobal.data.model.ExploreFilterData
+import com.loyaltyglobal.R
+import com.loyaltyglobal.data.source.localModels.FilterModel
 import com.loyaltyglobal.databinding.FragmentExploreFilterBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.ExploreFilterAdapter
@@ -18,10 +19,9 @@ import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 
 class ExploreFilterFragment : BaseFragment() {
 
-    private var mExploreFilterInterface: ExploreFilterInterface? = null
     private lateinit var mBinding: FragmentExploreFilterBinding
     lateinit var mAdapter: ExploreFilterAdapter
-    private var mFilterList: ArrayList<String> = ArrayList()
+    private var mFilterList: ArrayList<FilterModel> = ArrayList()
     private val mExploreViewModel: ExploreViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -44,13 +44,19 @@ class ExploreFilterFragment : BaseFragment() {
         mBinding.imgNotificationBack.setOnClickListener { activity?.supportFragmentManager?.popBackStack() }
         mBinding.txtClear.setOnClickListener { }
         mBinding.txtApply.setOnClickListener {
-            mExploreFilterInterface?.applyFilter()
+            mExploreViewModel.setFilters(mFilterList.filter { it.isSelected }.map { it.filterTitle.toString() }, true)
             activity?.supportFragmentManager?.popBackStack()
         }
     }
 
     private fun setExploreFilterAdapter() {
-        mAdapter = ExploreFilterAdapter(mFilterList)
+        mAdapter = ExploreFilterAdapter(object : ExploreFilterAdapter.FilterCallback {
+            override fun onFilter(position: Int, isChecked: Boolean) {
+                mFilterList[position].isSelected = isChecked
+                setButtonEnable(mFilterList.any { it.isSelected })
+                mAdapter.notifyItemChanged(position)
+            }
+        })
         mBinding.rvExploreFilter.layoutManager = LinearLayoutManager(requireContext())
         mBinding.rvExploreFilter.adapter = mAdapter
     }
@@ -60,7 +66,7 @@ class ExploreFilterFragment : BaseFragment() {
             mFilterList.clear()
             if (!it.isNullOrEmpty()) {
                 mFilterList.addAll(it)
-                mAdapter.notifyItemInserted(mFilterList.size)
+                mAdapter.submitList(mFilterList)
             }
         })
     }
@@ -70,11 +76,13 @@ class ExploreFilterFragment : BaseFragment() {
         super.onDestroyView()
     }
 
-    interface ExploreFilterInterface {
-        fun applyFilter()
-    }
-
-    fun setFilterInterface(listener : ExploreFilterInterface) {
-        this.mExploreFilterInterface = listener
+    private fun setButtonEnable(isEnable : Boolean) {
+        if (isEnable){
+            mBinding.txtApply.setBackgroundResource(R.drawable.explore_apply_btn_bg)
+            mBinding.txtApply.isEnabled = true
+        } else {
+            mBinding.txtApply.setBackgroundResource(R.drawable.shape_filled_button_disable)
+            mBinding.txtApply.isEnabled = false
+        }
     }
 }

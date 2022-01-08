@@ -15,6 +15,7 @@ import com.loyaltyglobal.ui.main.adapter.SubBrandAdapter
 import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.util.clickWithDebounce
 import com.loyaltyglobal.util.hide
 import com.loyaltyglobal.util.show
 
@@ -24,17 +25,17 @@ import com.loyaltyglobal.util.show
 
 class BusinessFragment : BaseFragment() {
 
-    private lateinit var mAdapter: SubBrandAdapter
-    private lateinit var mBinding: FragmentBusinessBinding
-    private var mBusinessList: ArrayList<SubBrandAndCoalition> = ArrayList()
+    private lateinit var subBrandAdapter: SubBrandAdapter
+    private lateinit var binding: FragmentBusinessBinding
+    private var brandList: ArrayList<SubBrandAndCoalition> = ArrayList()
     private val exploreViewModel: ExploreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        mBinding = FragmentBusinessBinding.inflate(inflater, container, false)
-        return mBinding.root
+        binding = FragmentBusinessBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +46,12 @@ class BusinessFragment : BaseFragment() {
     }
 
     private fun setBusinessAdapter() {
+        binding.txtResetFilter.clickWithDebounce {
+            binding.txtResetFilter.hide()
+            exploreViewModel.mutableFilterList.value?.clear()
+            exploreViewModel.mutableFiltersList.value?.clear()
+            subBrandAdapter.submitList(brandList)
+        }
         val latitude = (activity as MainActivity).gpsTracker?.getLatitude()
         val longitude = (activity as MainActivity).gpsTracker?.getLongitude()
         val latLong = latitude?.let { lat ->
@@ -53,28 +60,36 @@ class BusinessFragment : BaseFragment() {
             }
 
         }
-        mAdapter = SubBrandAdapter(latLong, mBusinessList, object : SubBrandAdapter.SubBrandItemClickListener {
+        subBrandAdapter = SubBrandAdapter(latLong,object : SubBrandAdapter.SubBrandItemClickListener {
             override fun clickListener(position: Int) {
-                exploreViewModel.brandDetailsData.value = mBusinessList[position]
+                exploreViewModel.brandDetailsData.value = brandList[position]
                 activity?.addReplaceFragment(R.id.fl_main_container, ExploreDetailsFragment(), true, true)
             }
-
         })
-        mBinding.rvExploreBusiness.layoutManager = LinearLayoutManager(requireContext())
-        mBinding.rvExploreBusiness.adapter = mAdapter
+        binding.rvExploreBusiness.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvExploreBusiness.adapter = subBrandAdapter
     }
 
     private fun initObserver() {
 
         exploreViewModel.mutableBusinessList.observe(viewLifecycleOwner, {
             if (!it.isNullOrEmpty()) {
-                mBinding.rvExploreBusiness.show()
-                mBusinessList.addAll(it)
-                mAdapter.notifyItemInserted(mBusinessList.size)
-                mBinding.txtNoItemFound.hide()
+                binding.rvExploreBusiness.show()
+                brandList.addAll(it)
+                subBrandAdapter.submitList(brandList)
+                binding.txtNoItemFound.hide()
             } else {
-                mBinding.txtNoItemFound.show()
-                mBinding.rvExploreBusiness.hide()
+                binding.txtNoItemFound.show()
+                binding.rvExploreBusiness.hide()
+            }
+        })
+
+        exploreViewModel.mutableFiltersList.observe(viewLifecycleOwner, { filtersList ->
+            if (!filtersList.isNullOrEmpty()) {
+                subBrandAdapter.submitList(brandList.filter { filtersList.contains(it.subBrand.locationType) })
+                binding.txtResetFilter.show()
+            } else {
+                binding.txtResetFilter.hide()
             }
         })
     }

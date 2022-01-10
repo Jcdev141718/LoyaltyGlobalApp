@@ -28,9 +28,12 @@ import kotlin.collections.ArrayList
  * Created by Abhin.
  */
 @HiltViewModel
-class ExploreViewModel @Inject constructor(private val exploreRepository: ExploreRepository,private val homeRepository: HomeRepository) : ViewModel() {
+class ExploreViewModel @Inject constructor(
+    private val exploreRepository: ExploreRepository,
+    private val homeRepository: HomeRepository,
+) : ViewModel() {
 
-    private val days = arrayListOf("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+    private val days = arrayListOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     var mutableBusinessList = MutableLiveData<ArrayList<SubBrandAndCoalition>>()
     var mutableFilterList = MutableLiveData<ArrayList<FilterModel>>()
     var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealOffer>>()
@@ -39,7 +42,7 @@ class ExploreViewModel @Inject constructor(private val exploreRepository: Explor
 
     var transactionList = MutableLiveData<List<Data?>?>()
 
-    var brandId : String? = null
+    var brandId: String? = null
     var mutableFiltersList = MutableLiveData<ArrayList<String>>()
     var brandDetailsData = MutableLiveData<SubBrandAndCoalition>()
 
@@ -57,13 +60,13 @@ class ExploreViewModel @Inject constructor(private val exploreRepository: Explor
         }
     }
 
-    fun getDealAndOffersList(){
+    fun getDealAndOffersList() {
         viewModelScope.launch {
             mutableDealsAndOffersList.postValue(exploreRepository.getDealAndOffersList())
         }
     }
 
-    fun getDayList() : ArrayList<AllDaysModel> {
+    fun getDayList(): ArrayList<AllDaysModel> {
         val list = ArrayList<AllDaysModel>()
         val discountList = ArrayList<Int>()
         brandDetailsData.value?.let { data ->
@@ -73,12 +76,12 @@ class ExploreViewModel @Inject constructor(private val exploreRepository: Explor
             }
             val currentDay = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
             val index = list.indexOfFirst { it.dayName == currentDay }
-            Collections.rotate(list,-index)
+            Collections.rotate(list, -index)
         }
         return list
     }
 
-    fun getFilterList(){
+    fun getFilterList() {
         viewModelScope.launch {
             val filtersList = exploreRepository.getFilters()
             val filtersModelList = ArrayList<FilterModel>()
@@ -89,11 +92,11 @@ class ExploreViewModel @Inject constructor(private val exploreRepository: Explor
         }
     }
 
-    fun onPhoneNumClick(view : View,phone : String){
+    fun onPhoneNumClick(view: View, phone: String) {
         view.context.dialPhoneNum(phone)
     }
 
-    fun onEmailClick(view : View){
+    fun onEmailClick(view: View) {
         view.context.sendEmailTo(brandDetailsData.value?.subBrand?.email.toString())
     }
 
@@ -110,7 +113,7 @@ class ExploreViewModel @Inject constructor(private val exploreRepository: Explor
     }
 
 
-    fun getTransactionData(){
+    fun getTransactionData() {
         transactionData.value = NetworkResult.Loading()
         viewModelScope.launch {
             val allTransaction = homeRepository.getTransaction()

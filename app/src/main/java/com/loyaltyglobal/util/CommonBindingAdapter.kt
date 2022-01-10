@@ -112,5 +112,5 @@ fun AppCompatTextView.setTime(time: Long) {
 
 @BindingAdapter("setCircleImageWithPlaceHolder")
 fun AppCompatImageView.setCircleImageWithPlaceHolder(url: String?) {
-    Glide.with(this.context).load(url).circleCrop().placeholder(R.drawable.ic_brand_logo_test).into(this)
+    Glide.with(this.context).load(url).circleCrop().placeholder(R.drawable.dummy_brand_logo).into(this)
 }

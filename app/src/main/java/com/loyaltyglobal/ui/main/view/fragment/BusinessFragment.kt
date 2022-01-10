@@ -148,7 +148,7 @@ class BusinessFragment : BaseFragment() {
                     marker.tag = brandList[i].subBrand._id
                     googleMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f))
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng))
-                    marker.showInfoWindow()
+//                    marker.showInfoWindow()
                 }
             }
             googleMap.setInfoWindowAdapter(mMyContentsView?.let { it1 ->

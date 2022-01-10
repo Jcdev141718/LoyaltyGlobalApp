@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -16,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.gson.Gson
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.request.LoginRequest
 import com.loyaltyglobal.data.model.response.LoginResponse
@@ -25,6 +25,7 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.viewmodel.LoginViewModel
 import com.loyaltyglobal.util.*
 import com.loyaltyglobal.util.Constants.AGENCY_ID
+import com.loyaltyglobal.util.Constants.PREF_USER_DATA
 import com.loyaltyglobal.util.Constants.PREF_USER_ID
 import com.loyaltyglobal.util.Constants.RC_SIGN_IN
 import com.loyaltyglobal.util.Constants.USER_NAME_KEY
@@ -45,8 +46,7 @@ class LoginFragment : BaseFragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // Configure Google Sign In
+        super.onCreate(savedInstanceState) // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         initObserver()
@@ -79,25 +79,16 @@ class LoginFragment : BaseFragment() {
                     progressbarGoogle.hide()
                     txtContinueWithGoogle.show()
                     mBaseActivity?.mPreferenceProvider?.setValue(PREF_USER_ID, result.responseData?.data?._id.toString())
+                    mBaseActivity?.mPreferenceProvider?.setValue(PREF_USER_DATA, Gson().toJson(result.responseData?.data))
                     if (result.responseData?.data?.isNumberVerified == true) {
-                        activity?.addReplaceFragment(
-                            R.id.container_main, EnterNameFragment(), true,
-                            addToBackStack = true
-                        )
+                        activity?.addReplaceFragment(R.id.container_main, EnterNameFragment(), true, addToBackStack = true)
                     } else {
-                        activity?.addReplaceFragment(
-                            R.id.container_main,
-                            EnterMobileNumberFragment().apply {
-                                arguments = Bundle().apply {
-                                    putString(
-                                        USER_NAME_KEY,
-                                        "${result.responseData?.data?.firstName} ${result.responseData?.data?.lastName}"
-                                    )
-                                }
-                            },
-                            true,
-                            addToBackStack = true
-                        )
+                        activity?.addReplaceFragment(R.id.container_main, EnterMobileNumberFragment().apply {
+                            arguments = Bundle().apply {
+                                putString(USER_NAME_KEY,
+                                    "${result.responseData?.data?.firstName} ${result.responseData?.data?.lastName}")
+                            }
+                        }, true, addToBackStack = true)
                     }
                 }
                 is NetworkResult.Error -> {
@@ -114,7 +105,7 @@ class LoginFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentLoginBinding.inflate(inflater, container, false)
         return mBinding.root
@@ -134,11 +125,7 @@ class LoginFragment : BaseFragment() {
 
             clTxtNext.clickWithDebounce {
                 isNormalLogin = true
-                doLogin(LoginRequest(
-                    AGENCY_ID, "",
-                    edtEmail.text.toString(), "email",
-                    AGENCY_ID
-                ))
+                doLogin(LoginRequest(AGENCY_ID, "", edtEmail.text.toString(), "email", AGENCY_ID))
                 activity?.hideKeyboard()
             }
 
@@ -152,23 +139,18 @@ class LoginFragment : BaseFragment() {
         }
 
 
-
     }
-    private fun changeButtonState(isEnable : Boolean) {
+
+    private fun changeButtonState(isEnable: Boolean) {
         mBinding.apply {
             if (isEnable) {
                 clTxtNext.background = ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button)
             } else {
-                clTxtNext.background = ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.shape_filled_button_disable
-                )
+                clTxtNext.background = ContextCompat.getDrawable(requireContext(), R.drawable.shape_filled_button_disable)
             }
         }
 
     }
-
-
 
 
     private fun signIn() {
@@ -182,14 +164,13 @@ class LoginFragment : BaseFragment() {
 
         if (requestCode == RC_SIGN_IN && resultCode != 0) {
             try {
-                val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-                // Google Sign In was successful, authenticate with Firebase
+                val task: Task<GoogleSignInAccount> =
+                    GoogleSignIn.getSignedInAccountFromIntent(data) // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(com.google.android.gms.common.api.ApiException::class.java)!!
                 if (resultCode != 0) {
                     handleSignInResult(task)
                 }
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
+            } catch (e: ApiException) { // Google Sign In failed, update UI appropriately
                 Log.e("TAG", "Google sign in failed", e)
             }
 
@@ -200,8 +181,7 @@ class LoginFragment : BaseFragment() {
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            val account: GoogleSignInAccount =
-                completedTask.getResult(com.google.android.gms.common.api.ApiException::class.java)
+            val account: GoogleSignInAccount = completedTask.getResult(com.google.android.gms.common.api.ApiException::class.java)
             updateUI(account)
         } catch (e: ApiException) {
             updateUI(null)
@@ -213,11 +193,7 @@ class LoginFragment : BaseFragment() {
         isSignInWithGoogle = true
         mBinding.edtEmail.setText(account?.email)
         account?.email?.let {
-            LoginRequest(
-                AGENCY_ID, "",
-                it, "email",
-                AGENCY_ID
-            )
+            LoginRequest(AGENCY_ID, "", it, "email", AGENCY_ID)
         }?.let { doLogin(it) }
     }
 

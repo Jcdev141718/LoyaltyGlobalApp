@@ -2,6 +2,7 @@ package com.loyaltyglobal.ui.main.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.gson.Gson
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.databinding.FragmentBusinessBinding
@@ -58,6 +60,7 @@ class BusinessFragment : BaseFragment() {
     }
 
     private fun setBusinessAdapter() {
+        binding.txtResetFilter.hide()
         binding.txtResetFilter.clickWithDebounce {
             binding.txtResetFilter.hide()
             exploreViewModel.mutableFilterList.value?.clear()
@@ -92,7 +95,7 @@ class BusinessFragment : BaseFragment() {
     }
 
     private fun navigateToExploreDetailFragment(subBrandAndCoalition: SubBrandAndCoalition) {
-        exploreViewModel.brandDetailsData.value = subBrandAndCoalition
+        exploreViewModel.brandId = subBrandAndCoalition.subBrand._id
         activity?.addReplaceFragment(
             R.id.fl_main_container,
             ExploreDetailsFragment(),
@@ -106,6 +109,7 @@ class BusinessFragment : BaseFragment() {
         exploreViewModel.mutableBusinessList.observe(viewLifecycleOwner, {
             if (!it.isNullOrEmpty()) {
                 binding.rvExploreBusiness.show()
+                brandList.clear()
                 brandList.addAll(it)
                 subBrandAdapter.submitList(brandList)
                 binding.txtNoItemFound.hide()
@@ -116,9 +120,11 @@ class BusinessFragment : BaseFragment() {
             }
         })
 
-        exploreViewModel.mutableFiltersList.observe(viewLifecycleOwner, { filtersList ->
-            if (!filtersList.isNullOrEmpty()) {
-                subBrandAdapter.submitList(brandList.filter { filtersList.contains(it.subBrand.locationType) })
+        exploreViewModel.mutableFiltersList.observe(viewLifecycleOwner, { filters ->
+            if (!filters.isNullOrEmpty()) {
+                val filterList = brandList.filter { filters.contains(it.subBrand.locationType) }
+                subBrandAdapter.submitList(filterList)
+                Log.e("TAG","Business Fragment filterList [${filterList.size}] --> ${Gson().toJson(filterList.map { it.subBrand.locationType })} ")
                 binding.txtResetFilter.show()
             } else {
                 binding.txtResetFilter.hide()
@@ -166,43 +172,43 @@ class BusinessFragment : BaseFragment() {
         }
     }
 
-    /* @SuppressLint("InflateParams")
-     private fun getMarkerBitmapFromView(resId: String): Bitmap? {
-         val customMarkerView: View =
-             layoutInflater.inflate(R.layout.map_custom_marker, null)
-         val imgBrandBg: AppCompatImageView =
-             customMarkerView.findViewById(R.id.img_bg)
-         val imgBrand: ShapeableImageView =
-             customMarkerView.findViewById(R.id.img_brand_logo)
-
-         imgBrandBg.setImageResource(R.drawable.ic_custom_marker)
-         Glide.with(this).load(resId).into(imgBrand)
-
-         var brandBGBitmap: Bitmap? = null
-         imgBrandBg.post {
-             brandBGBitmap =
-                 Bitmap.createBitmap(imgBrandBg.width, imgBrandBg.height, Bitmap.Config.RGB_565)
-         }
-
-         var brandBitmap: Bitmap? = null
-         imgBrand.post {
-             brandBitmap =
-                 Bitmap.createBitmap(imgBrand.width, imgBrand.height, Bitmap.Config.RGB_565)
-         }
-
-         val bmOverlay =
-             Bitmap.createBitmap(
-                 brandBGBitmap?.width!!,
-                 brandBGBitmap?.height!!,
-                 brandBGBitmap!!.config
-             )
-         val canvas = Canvas(bmOverlay)
-
-         canvas.drawBitmap(brandBGBitmap!!, Matrix(), null)
-         canvas.drawBitmap(brandBitmap!!, 0f, 0f, null)
-
-         return bmOverlay
-     }*/
+//     @SuppressLint("InflateParams")
+//     private fun getMarkerBitmapFromView(resId: String): Bitmap? {
+//         val customMarkerView: View =
+//             layoutInflater.inflate(R.layout.map_custom_marker, null)
+//         val imgBrandBg: AppCompatImageView =
+//             customMarkerView.findViewById(R.id.img_bg)
+//         val imgBrand: ShapeableImageView =
+//             customMarkerView.findViewById(R.id.img_brand_logo)
+//
+//         imgBrandBg.setImageResource(R.drawable.ic_custom_marker)
+//         Glide.with(this).load(resId).into(imgBrand)
+//
+//         var brandBGBitmap: Bitmap? = null
+//         imgBrandBg.post {
+//             brandBGBitmap =
+//                 Bitmap.createBitmap(imgBrandBg.width, imgBrandBg.height, Bitmap.Config.RGB_565)
+//         }
+//
+//         var brandBitmap: Bitmap? = null
+//         imgBrand.post {
+//             brandBitmap =
+//                 Bitmap.createBitmap(imgBrand.width, imgBrand.height, Bitmap.Config.RGB_565)
+//         }
+//
+//         val bmOverlay =
+//             Bitmap.createBitmap(
+//                 brandBGBitmap?.width!!,
+//                 brandBGBitmap?.height!!,
+//                 brandBGBitmap!!.config
+//             )
+//         val canvas = Canvas(bmOverlay)
+//
+//         canvas.drawBitmap(brandBGBitmap!!, Matrix(), null)
+//         canvas.drawBitmap(brandBitmap!!, 0f, 0f, null)
+//
+//         return bmOverlay
+//     }
 
     fun switchMap(isSwitch: Boolean) {
         if (isSwitch) {

@@ -3,6 +3,9 @@ package com.loyaltyglobal.util
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.loyaltyglobal.data.model.response.Data
 
 /**
  * Created by Abhin.
@@ -26,6 +29,13 @@ class PreferenceProvider(private val appContext: Context) {
 
     fun getUserId() : String? = mSharedPreferences.run {
         getString(Constants.PREF_USER_ID,"")
+    }
+
+    fun getUserData(): Data {
+//        val gson = GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create()
+        val type = object : TypeToken<Data>() {}.type
+        val userData = mSharedPreferences.getString(Constants.PREF_USER_DATA, "")
+        return Gson().fromJson(userData, type)
     }
 
     fun getLastRefreshTimeStamp() : Long = mSharedPreferences.run {

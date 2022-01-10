@@ -1,15 +1,14 @@
 package com.loyaltyglobal.ui.main.view.fragment
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.FragmentProfileBinding
 import com.loyaltyglobal.ui.base.BaseFragment
-import com.loyaltyglobal.util.addReplaceFragment
-import com.loyaltyglobal.util.clickWithDebounce
-import com.loyaltyglobal.util.showTopSnackBar
+import com.loyaltyglobal.util.*
 
 /**
  * Created by Abhin.
@@ -21,9 +20,6 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
     }
 
     override fun onCreateView(
@@ -46,7 +42,7 @@ class ProfileFragment : BaseFragment() {
 
             }
             btnEdit.clickWithDebounce {
-
+                openBottomSheet(EditProfileBottomSheetFragment())
             }
             llTransaction.clickWithDebounce {
                 activity?.addReplaceFragment(R.id.fl_main_container, TransactionsFragment(), true, true)
@@ -61,9 +57,10 @@ class ProfileFragment : BaseFragment() {
 
     }
     private fun setData(){
-        //TODO: replace this dummy data with real data
-        mBinding.txtName.text = getString(R.string.dummy_name)
-        mBinding.txtEmail.text = getString(R.string.dummy_email)
+        mPreferenceProvider?.getUserData()?.let { userData ->
+            mBinding.txtName.text = TextUtils.concat(userData.firstName?.firstLetterCap()," ", userData.lastName?.firstLetterCap())
+            mBinding.txtEmail.text = userData.email
+        }
     }
 
 

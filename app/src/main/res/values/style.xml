@@ -369,7 +369,7 @@
         <item name="android:textSize">@dimen/sp_20</item>
     </style>
 
-    <style name="bottomSheetLabel14">
+    <style name="bottomSheetLabel14Bold">
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:textColor">?attr/heading</item>
         <item name="android:textSize">@dimen/sp_14</item>
@@ -379,6 +379,12 @@
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">?attr/heading</item>
         <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="bottomSheetLabel14">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">?attr/heading</item>
+        <item name="android:textSize">@dimen/sp_14</item>
     </style>
 
     <style name="blackSFRegular">

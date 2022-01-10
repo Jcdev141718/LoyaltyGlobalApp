@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:behavior_expandedOffset="@dimen/dp_20"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="@dimen/dp_120"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/dp_16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/dp_16" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_10"
+        android:foreground="@drawable/default_ripple_round"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/ic_close"
+        android:tint="?attr/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_title"
+        style="@style/bottomSheetTitle20"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_19"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/edit_profile"
+        app:layout_constraintBottom_toBottomOf="@id/img_close"
+        app:layout_constraintEnd_toStartOf="@id/txt_save"
+        app:layout_constraintStart_toEndOf="@id/img_close"
+        app:layout_constraintTop_toTopOf="@id/img_close" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_save"
+        style="@style/bottomSheetTitle20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:text="@string/save"
+        android:textSize="@dimen/sp_15"
+        android:clickable="true"
+        android:padding="@dimen/dp_10"
+        android:focusable="true"
+        android:layout_marginEnd="@dimen/dp_6"
+        android:background="@drawable/default_ripple_square"
+        app:layout_constraintBottom_toBottomOf="@id/img_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txt_title"
+        app:layout_constraintTop_toTopOf="@id/img_close" />
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="?border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_close" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_profile"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="@dimen/dp_72"
+        android:layout_marginTop="@dimen/dp_18"
+        android:src="@drawable/ic_user_place_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_divider" />
+
+    <View
+        android:id="@+id/view_divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_18"
+        android:background="?border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_profile" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".4" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_name"
+        style="@style/bottomSheetLabel14"
+        android:layout_marginTop="@dimen/dp_20"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/view_divider_2"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_email_address_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_address"
+        style="@style/bottomSheetLabel14"
+        app:layout_constraintTop_toTopOf="@id/txt_email_address"
+        app:layout_constraintStart_toStartOf="@id/guideline_start" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_dob_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dob"
+        style="@style/bottomSheetLabel14"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="@id/txt_dob"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_phone_num_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        style="@style/bottomSheetLabel14"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="@id/txt_phone_num"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="mushaleen bhai"
+        style="@style/bottomSheetLabel14"
+        android:layout_marginTop="@dimen/dp_14"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/view_divider_2"/>
+
+    <View
+        android:id="@+id/view_divider_name"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_14"
+        android:background="?border"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/txt_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_email_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="mm@isystematic.com"
+        style="@style/bottomSheetLabel14"
+        android:layout_marginTop="@dimen/dp_14"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/view_divider_name"/>
+
+    <View
+        android:id="@+id/view_divider_email"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_14"
+        android:background="?border"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/txt_email_address" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_dob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="15/03/1990"
+        style="@style/bottomSheetLabel14"
+        android:layout_marginTop="@dimen/dp_14"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/view_divider_email"/>
+
+    <View
+        android:id="@+id/view_divider_dob"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_14"
+        android:background="?border"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/txt_dob" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_phone_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="+921234567890"
+        style="@style/bottomSheetLabel14"
+        android:layout_marginTop="@dimen/dp_14"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/view_divider_dob"/>
+
+    <View
+        android:id="@+id/view_divider_phone_num"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_14"
+        android:background="?border"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_mid"
+        app:layout_constraintTop_toBottomOf="@id/txt_phone_num" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

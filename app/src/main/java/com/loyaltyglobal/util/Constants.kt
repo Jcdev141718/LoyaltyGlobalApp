@@ -41,5 +41,6 @@ object Constants {
     const val IMAGE_URL = "imageUrl"
     const val URL = "url"
     const val BRAND_AND_NOTIFICATION = "brandAddNotification"
+    const val PREF_USER_DATA = "USER_DATA"
 }
 

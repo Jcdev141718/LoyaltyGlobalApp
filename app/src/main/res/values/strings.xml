@@ -153,4 +153,9 @@
     <string name="search_brand">Search Brand</string>
     <string name="no_search_brands_found">No search brands found</string>
     <string name="reset_filters">Reset Filters</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="display_name">Display Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="dob">DOB</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

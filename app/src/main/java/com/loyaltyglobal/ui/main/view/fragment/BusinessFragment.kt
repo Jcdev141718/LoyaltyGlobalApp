@@ -132,9 +132,9 @@ class BusinessFragment : BaseFragment() {
             childFragmentManager.findFragmentById(R.id.map_fragment_business) as? SupportMapFragment
         mMapFragment?.getMapAsync { it ->
             googleMap = it
-            for (i in 0 until mBusinessList.size) {
-                val latLng = mBusinessList[i].subBrand.location?.lng?.let { it1 ->
-                    mBusinessList[i].subBrand.location?.lat?.let { it2 ->
+            for (i in 0 until brandList.size) {
+                val latLng = brandList[i].subBrand.location?.lng?.let { it1 ->
+                    brandList[i].subBrand.location?.lat?.let { it2 ->
                         LatLng(
                             it2,
                             it1
@@ -145,7 +145,7 @@ class BusinessFragment : BaseFragment() {
                     val marker: Marker = googleMap.addMarker(
                         MarkerOptions().position(latlng)
                     )!!
-                    marker.tag = mBusinessList[i].subBrand._id
+                    marker.tag = brandList[i].subBrand._id
                     googleMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f))
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng))
                     marker.showInfoWindow()
@@ -154,13 +154,13 @@ class BusinessFragment : BaseFragment() {
             googleMap.setInfoWindowAdapter(mMyContentsView?.let { it1 ->
                 MyInfoWindowAdapter(
                     requireContext(),
-                    it1, mBusinessList
+                    it1, brandList
                 )
             })
 
             googleMap.setOnInfoWindowClickListener { marker ->
                 val sSubBrandAndCoalition: SubBrandAndCoalition =
-                    mBusinessList.firstOrNull { marker.tag.toString() == it.subBrand._id }!!
+                    brandList.firstOrNull { marker.tag.toString() == it.subBrand._id }!!
                 navigateToExploreDetailFragment(sSubBrandAndCoalition)
             }
         }
@@ -206,11 +206,11 @@ class BusinessFragment : BaseFragment() {
 
     fun switchMap(isSwitch: Boolean) {
         if (isSwitch) {
-            mBinding.rvExploreBusiness.hide()
-            mBinding.mapFragmentBusiness.show()
+            binding.rvExploreBusiness.hide()
+            binding.mapFragmentBusiness.show()
         } else {
-            mBinding.rvExploreBusiness.show()
-            mBinding.mapFragmentBusiness.hide()
+            binding.rvExploreBusiness.show()
+            binding.mapFragmentBusiness.hide()
         }
     }
 }

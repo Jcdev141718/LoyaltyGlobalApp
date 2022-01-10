@@ -4,6 +4,7 @@ import androidx.room.*
 import com.loyaltyglobal.data.source.localModels.DollarPointModel
 import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
+import com.loyaltyglobal.data.source.localModels.NotificationAndSubBrand
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.Coalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrand
@@ -92,4 +93,10 @@ interface DatabaseDAO {
 
     @Query("select `key`,value from CustomField where type = '${Constants.URL}' and childBrandId = :id")
     suspend fun getKeyValueData(id : String) : List<LinkKeyValueModel>
+
+    @Query("select * from Notification where type = 'pointsUpdateNotification' or type = 'brandAddNotification' order by created desc")
+    suspend fun getAllNotifications() : List<NotificationAndSubBrand>
+
+    @Query("select * from SubBrand where `delete` = '0' and _id = :brandId")
+    suspend fun getSubBrandWithCoalitionDataById(brandId :String): SubBrandAndCoalition
 }

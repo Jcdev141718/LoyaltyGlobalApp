@@ -341,7 +341,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_16"
                             android:layout_marginTop="@dimen/dp_16"
-                            android:text="@{@plurals/some_point(viewModel.brandDetailsData.subBrand.earnPointPer,viewModel.brandDetailsData.subBrand.earnPointPer)}"
+                            android:text="@{@plurals/some_point(viewModel.brandDetailsData.subBrand.getSafePointsPer(),viewModel.brandDetailsData.subBrand.getSafePointsPer())}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="@string/some_point" />

@@ -5,6 +5,7 @@ import com.loyaltyglobal.data.model.request.ReadNotificationRequest
 import com.loyaltyglobal.data.model.request.UpdateUserRequest
 import com.loyaltyglobal.data.model.response.LoginResponse
 import com.loyaltyglobal.data.model.response.readNotification.ReadNotificationResponse
+import com.loyaltyglobal.data.model.response.transactionData.TransactionData
 import com.loyaltyglobal.data.model.response.updateUser.UpdateUserResponse
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.SubBrandResponse
 import com.loyaltyglobal.data.source.localModels.userPassResponse.UserPassResponse
@@ -28,4 +29,7 @@ interface ApiService {
 
     @PUT("notifications")
     suspend fun readNotification(@Body request : ReadNotificationRequest) : Response<ReadNotificationResponse>
+
+    @GET("transaction/mobile/wallet")
+    suspend fun getTransactions(@Query("agencyId") agencyId : String) : Response<TransactionData>
 }

@@ -73,7 +73,7 @@ class BusinessFragment : BaseFragment() {
         }
         subBrandAdapter = SubBrandAdapter(latLong,object : SubBrandAdapter.SubBrandItemClickListener {
             override fun clickListener(position: Int) {
-                exploreViewModel.brandDetailsData.value = brandList[position]
+                exploreViewModel.brandId = brandList[position].subBrand._id
                 activity?.addReplaceFragment(R.id.fl_main_container, ExploreDetailsFragment(), true, true)
             }
         })

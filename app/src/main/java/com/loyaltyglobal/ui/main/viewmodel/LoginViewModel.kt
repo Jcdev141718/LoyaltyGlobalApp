@@ -9,7 +9,6 @@ import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 import javax.inject.Inject
 
 
@@ -20,10 +19,14 @@ class LoginViewModel @Inject constructor(
 
     var logInResponse : MutableLiveData<NetworkResult<LoginResponse>> = MutableLiveData()
 
+
+
     fun logIn(loginRequest: LoginRequest) {
         logInResponse.postValue(NetworkResult.Loading())
         viewModelScope.launch {
             logInResponse.postValue(authRepository.getLogin(loginRequest))
         }
     }
+
+
 }

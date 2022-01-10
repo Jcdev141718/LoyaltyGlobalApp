@@ -5,15 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.loyaltyglobal.data.model.AllDaysModel
+import com.loyaltyglobal.data.model.response.transactionData.Data
+import com.loyaltyglobal.data.model.response.transactionData.TransactionData
 import com.loyaltyglobal.data.reposotory.ExploreRepository
+import com.loyaltyglobal.data.reposotory.HomeRepository
 import com.loyaltyglobal.data.source.localModels.FilterModel
 import com.loyaltyglobal.data.source.localModels.LinkKeyValueModel
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.data.source.localModels.subBrandResponse.DealOffer
+import com.loyaltyglobal.data.source.network.NetworkResult
 import com.loyaltyglobal.util.dialPhoneNum
 import com.loyaltyglobal.util.sendEmailTo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -22,21 +28,32 @@ import kotlin.collections.ArrayList
  * Created by Abhin.
  */
 @HiltViewModel
-class ExploreViewModel @Inject constructor(
-    private val exploreRepository: ExploreRepository,
-) : ViewModel() {
+class ExploreViewModel @Inject constructor(private val exploreRepository: ExploreRepository,private val homeRepository: HomeRepository) : ViewModel() {
 
     private val days = arrayListOf("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
     var mutableBusinessList = MutableLiveData<ArrayList<SubBrandAndCoalition>>()
     var mutableFilterList = MutableLiveData<ArrayList<FilterModel>>()
     var mutableDealsAndOffersList = MutableLiveData<ArrayList<DealOffer>>()
     var mutableUrlLinks = MutableLiveData<ArrayList<LinkKeyValueModel>>()
+    var transactionData = MutableLiveData<NetworkResult<TransactionData>>()
+
+    var transactionList = MutableLiveData<List<Data?>?>()
+
+    var brandId : String? = null
     var mutableFiltersList = MutableLiveData<ArrayList<String>>()
     var brandDetailsData = MutableLiveData<SubBrandAndCoalition>()
 
     fun getBusinessList() {
         viewModelScope.launch {
             mutableBusinessList.postValue(exploreRepository.getSubBrandWithCoalitionData())
+        }
+    }
+
+    fun getBrandDetails() {
+        viewModelScope.launch {
+            brandId?.let {
+                brandDetailsData.postValue(exploreRepository.getSubBrandWithCoalitionDataById(it))
+            }
         }
     }
 
@@ -90,5 +107,27 @@ class ExploreViewModel @Inject constructor(
 
     fun setFilters(filters: List<String>, isReset: Boolean = false) {
         mutableFiltersList.postValue(ArrayList(filters))
+    }
+
+
+    fun getTransactionData(){
+        transactionData.value = NetworkResult.Loading()
+        viewModelScope.launch {
+            val allTransaction = homeRepository.getTransaction()
+            val subBrandMap = homeRepository.getSubBrandMap()
+            val result = withContext(Dispatchers.IO) {
+                allTransaction.responseData?.data?.filter { subBrandMap[it.brandId] != null }?.map { transection ->
+                    subBrandMap[transection.brandId]?.let { subBrand ->
+                        transection.apply {
+                            brandName = subBrand.brandName
+                            brandLogo = subBrand.brandLogo
+                        }
+                    }
+                }
+            }
+            transactionData.postValue(allTransaction)
+            transactionList.postValue(result)
+
+        }
     }
 }

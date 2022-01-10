@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fragment_clickable_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/fragment_clickable_theme"
     tools:context=".ui.main.view.fragment.ExploreFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -17,11 +18,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/SemiBold24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/SemiBold24"
-            android:layout_marginStart="@dimen/dp_12"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_12"
             android:layout_weight="1"
             android:text="@string/explore" />
 
@@ -31,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/dp_12"
-            android:tint="?heading"
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/default_ripple_round"
@@ -42,12 +42,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:tint="?heading"
             android:padding="@dimen/dp_12"
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/default_ripple_round"
-            android:src="@drawable/icon_filter" />
+            android:src="@drawable/icon_filter"
+            android:tint="?heading" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:foreground="@drawable/default_ripple_round"
+            android:padding="@dimen/dp_12"
+            android:src="@drawable/ic_map"
+            android:tint="?heading" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

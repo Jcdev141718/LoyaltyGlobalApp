@@ -17,6 +17,7 @@ import com.loyaltyglobal.ui.main.viewmodel.NotificationViewModel
 import com.loyaltyglobal.util.Constants.BRAND_AND_NOTIFICATION
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.hide
+import com.loyaltyglobal.util.popFragment
 import com.loyaltyglobal.util.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,7 +52,7 @@ class NotificationFragment : BaseFragment() {
 
     private fun clickListener() {
         mBinding.imgNotificationBack.setOnClickListener {
-            activity?.supportFragmentManager?.popBackStack()
+            activity?.popFragment()
         }
     }
 

@@ -20,6 +20,9 @@ class AuthRepository @Inject constructor(
 
     suspend fun getLogin(loginRequest: LoginRequest) : NetworkResult<LoginResponse> = safeApiCall { apiService.login(loginRequest) }
 
-    suspend fun enableNotification(oneSignalId: String) : NetworkResult<UpdateUserResponse> = safeApiCall { apiService.enableNotification(
+    suspend fun enableNotification(oneSignalId: String) : NetworkResult<UpdateUserResponse> = safeApiCall { apiService.updateUserApi(
         UpdateUserRequest(oneSignalId = oneSignalId, agencyId = Constants.AGENCY_ID, platform = Constants.AGENCY_ID)) }
+
+    suspend fun updateName(name : String) : NetworkResult<UpdateUserResponse> = safeApiCall { apiService.updateUserApi(
+        UpdateUserRequest(firstName = name , lastName = " ")) }
 }

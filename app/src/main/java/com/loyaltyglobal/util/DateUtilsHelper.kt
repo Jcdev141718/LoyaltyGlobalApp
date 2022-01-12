@@ -50,7 +50,7 @@ fun convertDateFormat(date: Date): String? {
 }
 
 fun convertDateYearFormat(date: Date): String? {
-    return SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(date.time)
+    return SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(date.time)
 }
 
 @SuppressLint("SimpleDateFormat")

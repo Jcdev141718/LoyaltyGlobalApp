@@ -25,7 +25,7 @@ interface ApiService {
     suspend fun login(@Body loginRequest : LoginRequest) : Response<LoginResponse>
 
     @PUT("user/mobile/wallet")
-    suspend fun enableNotification(@Body request: UpdateUserRequest) : Response<UpdateUserResponse>
+    suspend fun updateUserApi(@Body request: UpdateUserRequest) : Response<UpdateUserResponse>
 
     @PUT("notifications")
     suspend fun readNotification(@Body request : ReadNotificationRequest) : Response<ReadNotificationResponse>

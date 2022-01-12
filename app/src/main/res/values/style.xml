@@ -203,6 +203,12 @@
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
     </style>
 
+    <style name="poppins14Black">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">?heading</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
     <style name="poppinsBold22Grey">
         <item name="android:textSize">@dimen/sp_22</item>
         <item name="android:textColor">@color/caption</item>

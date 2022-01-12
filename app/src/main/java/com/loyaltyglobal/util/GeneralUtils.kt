@@ -1,3 +1,5 @@
+@file:Suppress("BlockingMethodInNonBlockingContext")
+
 package com.loyaltyglobal.util
 
 import android.Manifest
@@ -6,16 +8,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.graphics.Color
-import android.graphics.Rect
+import android.graphics.*
 import android.location.Location
 import android.os.Build
 import android.os.SystemClock
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.*
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.annotation.IdRes
@@ -33,10 +36,17 @@ import com.google.android.gms.maps.model.LatLng
 import com.loyaltyglobal.R
 import com.loyaltyglobal.util.Constants.REGEX_EMAIL
 import com.loyaltyglobal.util.customCookieView.cookiebar2.CookieBar
+import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 import kotlin.math.roundToInt
+
 
 /**
  * File holding all the methods of general interest.
@@ -101,17 +111,21 @@ fun FragmentActivity.addReplaceFragment(
     addFragment: Boolean,
     addToBackStack: Boolean,
 ) {
-    val transaction: FragmentTransaction? = supportFragmentManager.beginTransaction()
+    val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
     if (addFragment) {
-        transaction?.add(container, fragment, fragment.javaClass.simpleName)
+        transaction.add(container, fragment, fragment.javaClass.simpleName)
     } else {
-        transaction?.replace(container, fragment, fragment.javaClass.simpleName)
+        transaction.replace(container, fragment, fragment.javaClass.simpleName)
     }
     if (addToBackStack) {
-        transaction?.addToBackStack(fragment.tag)
+        transaction.addToBackStack(fragment.tag)
     }
     hideKeyboard()
-    transaction?.commit()
+    transaction.commit()
+}
+
+fun FragmentActivity.popFragment() {
+    supportFragmentManager.popBackStack()
 }
 
 /**
@@ -439,4 +453,40 @@ fun getDistance(userLatLng : LatLng, brandLatLng: LatLng): String {
         longitude = brandLatLng.longitude
     }
     return ((locationA.distanceTo(locationB)) / 1000).toInt().toString() + " kilometers away"
+}
+
+suspend fun createCustomMarker(context: Context,imageUrl: String): Bitmap? {
+    val bitmap: Bitmap?
+    val marker =
+            (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.custom_marker_layout,
+                null)
+        val markerImage = marker.findViewById(R.id.user_dp) as CircleImageView
+        val imageBitMap = withContext(Dispatchers.IO){
+            getBitmapFromUrl(imageUrl)
+        }
+        try {
+            markerImage.setImageBitmap(imageBitMap)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        val displayMetrics = DisplayMetrics()
+        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+        marker.layoutParams = ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT)
+        marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
+        marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+        marker.buildDrawingCache()
+        bitmap = Bitmap.createBitmap(marker.measuredWidth, marker.measuredHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap!!)
+        marker.draw(canvas)
+    return bitmap
+}
+
+
+suspend fun getBitmapFromUrl(imageUrl : String) : Bitmap {
+    val url = URL(imageUrl)
+    val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+    conn.doInput = true
+    conn.connect()
+    val inputStream: InputStream = conn.inputStream
+    return BitmapFactory.decodeStream(inputStream)
 }

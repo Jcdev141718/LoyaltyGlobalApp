@@ -85,6 +85,8 @@
     <string name="hi_what_s_your_name">Hi! \nWhat\'s Your Name?</string>
     <string name="your_name">Your Name</string>
     <string name="hey_user_enter_your_phone_number">Hey %s, \nEnter your Phone Number</string>
+    <string name="when_are_you_born_with_name">When are you born, \n%s</string>
+    <string name="when_are_you_born">When are you born</string>
     <string name="search">Search</string>
 
 
@@ -158,4 +160,9 @@
     <string name="email_address">Email Address</string>
     <string name="dob">DOB</string>
     <string name="phone_number">Phone Number</string>
+    <string name="update">Update</string>
+    <string name="so_that_we_can_send_you_specials">So that we can send you specials</string>
+    <string name="day">Day</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
 </resources>

@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/fragmentClickable"
     android:background="?main_background"
-    android:elevation="@dimen/dp_12"
     tools:context=".ui.main.view.fragment.EnterNameFragment"
     tools:ignore="UnusedAttribute">
 

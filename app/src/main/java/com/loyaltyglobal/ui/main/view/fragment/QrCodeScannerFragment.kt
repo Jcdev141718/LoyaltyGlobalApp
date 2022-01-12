@@ -14,6 +14,7 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.util.Constants.PERMISSIONS_REQUEST_CODE
 import com.loyaltyglobal.util.MarshMellowHelper
 import com.loyaltyglobal.util.clickWithDebounce
+import com.loyaltyglobal.util.popFragment
 
 /**
  * Create by Abhin.
@@ -53,7 +54,7 @@ class QrCodeScannerFragment : BaseFragment() {
 
     private fun init() {
         initRequestPermission()
-        binding.imgClose.clickWithDebounce { activity?.supportFragmentManager?.popBackStack() }
+        binding.imgClose.clickWithDebounce { activity?.popFragment() }
     }
 
     private fun initRequestPermission() {

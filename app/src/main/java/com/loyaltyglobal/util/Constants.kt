@@ -45,5 +45,6 @@ object Constants {
     const val URL = "url"
     const val BRAND_AND_NOTIFICATION = "brandAddNotification"
     const val PREF_USER_DATA = "USER_DATA"
+    const val KEY_IS_FROM_EDIT_PROFILE = "IS_FROM_EDIT_PROFILE"
 }
 

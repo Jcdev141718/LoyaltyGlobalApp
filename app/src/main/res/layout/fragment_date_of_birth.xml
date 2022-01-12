@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fragmentClickable"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?main_background"
+    tools:ignore="UnusedAttribute">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_back"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
+        android:background="@drawable/round_ripple"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp_15"
+        android:src="@drawable/ic_icon_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?heading" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginTop="@dimen/dp_15"
+        android:background="?main_divider"
+        android:elevation="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@id/img_back" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_welcome"
+        style="@style/poppinsBold24Black"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        tools:text="@string/when_are_you_born"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_line" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_sub_title"
+        style="@style/poppinsBold24Black"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text="@string/so_that_we_can_send_you_specials"
+        android:textColor="?subtitle_explore"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_day_label"
+        style="@style/poppins14Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:text="@string/day"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintBottom_toTopOf="@id/txt_next"
+        app:layout_constraintEnd_toStartOf="@id/txt_month_label"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_sub_title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_day"
+        style="@style/poppins14Black"
+        android:textSize="@dimen/sp_22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="16"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toTopOf="@id/txt_next"
+        app:layout_constraintEnd_toEndOf="@id/txt_day_label"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/txt_day_label"
+        app:layout_constraintTop_toBottomOf="@id/txt_day_label" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_month_label"
+        style="@style/poppins14Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/month"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintBottom_toTopOf="@id/txt_next"
+        app:layout_constraintEnd_toStartOf="@id/txt_year_label"
+        app:layout_constraintStart_toEndOf="@id/txt_day_label"
+        app:layout_constraintTop_toBottomOf="@id/txt_sub_title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_month"
+        style="@style/poppins14Black"
+        android:textSize="@dimen/sp_22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="06"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toTopOf="@id/txt_next"
+        app:layout_constraintEnd_toEndOf="@id/txt_month_label"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/txt_month_label"
+        app:layout_constraintTop_toBottomOf="@id/txt_day_label" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_year_label"
+        style="@style/poppins14Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:text="@string/year"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintBottom_toTopOf="@id/txt_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txt_month_label"
+        app:layout_constraintTop_toBottomOf="@id/txt_sub_title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_year"
+        style="@style/poppins14Black"
+        android:textSize="@dimen/sp_22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1996"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toTopOf="@id/txt_next"
+        app:layout_constraintEnd_toEndOf="@id/txt_year_label"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/txt_year_label"
+        app:layout_constraintTop_toBottomOf="@id/txt_day_label" />
+
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_filled_button_disable"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/round_ripple_4"
+        android:gravity="center"
+        android:text="@string/update"
+        android:enabled="false"
+        android:textColor="?main_background"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/date_picker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

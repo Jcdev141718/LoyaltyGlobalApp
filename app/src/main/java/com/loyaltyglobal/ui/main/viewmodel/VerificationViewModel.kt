@@ -26,6 +26,7 @@ class VerificationViewModel @Inject constructor(
     lateinit var mMobileNumber: String
     var otpResponse : MutableLiveData<OtpResponse> = MutableLiveData()
     var updateUserResponse : MutableLiveData<NetworkResult<UpdateUserResponse>> = MutableLiveData()
+    var updateNameResponse  : MutableLiveData<NetworkResult<UpdateUserResponse>> = MutableLiveData()
 
     fun getCurrentCountryData(context: Context) {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
@@ -53,6 +54,12 @@ class VerificationViewModel @Inject constructor(
         updateUserResponse.postValue(NetworkResult.Loading())
         viewModelScope.launch(Dispatchers.IO) {
             updateUserResponse.postValue(authRepository.enableNotification(oneSignalId))
+        }
+    }
+
+    fun updateName(name : String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateNameResponse.postValue(authRepository.updateName(name))
         }
     }
 }

@@ -2,19 +2,19 @@ package com.loyaltyglobal.ui.main.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.gson.Gson
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.databinding.FragmentBusinessBinding
@@ -23,10 +23,10 @@ import com.loyaltyglobal.ui.main.adapter.MyInfoWindowAdapter
 import com.loyaltyglobal.ui.main.adapter.SubBrandAdapter
 import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
-import com.loyaltyglobal.util.addReplaceFragment
-import com.loyaltyglobal.util.clickWithDebounce
-import com.loyaltyglobal.util.hide
-import com.loyaltyglobal.util.show
+import com.loyaltyglobal.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 /**
@@ -74,34 +74,28 @@ class BusinessFragment : BaseFragment() {
                 LatLng(lat, long)
             }
         }
-        subBrandAdapter = SubBrandAdapter(latLong,object : SubBrandAdapter.SubBrandItemClickListener {
+        subBrandAdapter = SubBrandAdapter(latLong, object : SubBrandAdapter.SubBrandItemClickListener {
             override fun clickListener(position: Int) {
                 exploreViewModel.brandId = brandList[position].subBrand._id
                 activity?.addReplaceFragment(R.id.fl_main_container, ExploreDetailsFragment(), true, true)
             }
         })
         binding.rvExploreBusiness.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvExploreBusiness.adapter = subBrandAdapter
-//        mAdapter = SubBrandAdapter(
-//            latLong,
-//            mBusinessList,
-//            object : SubBrandAdapter.SubBrandItemClickListener {
-//                override fun clickListener(position: Int) {
-//                    navigateToExploreDetailFragment(mBusinessList[position])
-//                }
-//            })
-//        mBinding.rvExploreBusiness.layoutManager = LinearLayoutManager(requireContext())
-//        mBinding.rvExploreBusiness.adapter = mAdapter
+        binding.rvExploreBusiness.adapter = subBrandAdapter //        mAdapter = SubBrandAdapter(
+        //            latLong,
+        //            mBusinessList,
+        //            object : SubBrandAdapter.SubBrandItemClickListener {
+        //                override fun clickListener(position: Int) {
+        //                    navigateToExploreDetailFragment(mBusinessList[position])
+        //                }
+        //            })
+        //        mBinding.rvExploreBusiness.layoutManager = LinearLayoutManager(requireContext())
+        //        mBinding.rvExploreBusiness.adapter = mAdapter
     }
 
     private fun navigateToExploreDetailFragment(subBrandAndCoalition: SubBrandAndCoalition) {
         exploreViewModel.brandId = subBrandAndCoalition.subBrand._id
-        activity?.addReplaceFragment(
-            R.id.fl_main_container,
-            ExploreDetailsFragment(),
-            addFragment = true,
-            addToBackStack = true
-        )
+        activity?.addReplaceFragment(R.id.fl_main_container, ExploreDetailsFragment(), addFragment = true, addToBackStack = true)
     }
 
     private fun initObserver() {
@@ -124,7 +118,6 @@ class BusinessFragment : BaseFragment() {
             if (!filters.isNullOrEmpty()) {
                 val filterList = brandList.filter { filters.contains(it.subBrand.locationType) }
                 subBrandAdapter.submitList(filterList)
-                Log.e("TAG","Business Fragment filterList [${filterList.size}] --> ${Gson().toJson(filterList.map { it.subBrand.locationType })} ")
                 binding.txtResetFilter.show()
             } else {
                 binding.txtResetFilter.hide()
@@ -134,34 +127,33 @@ class BusinessFragment : BaseFragment() {
 
     @SuppressLint("PotentialBehaviorOverride")
     private fun initMap() {
-        mMapFragment =
-            childFragmentManager.findFragmentById(R.id.map_fragment_business) as? SupportMapFragment
+        mMapFragment = childFragmentManager.findFragmentById(R.id.map_fragment_business) as? SupportMapFragment
         mMapFragment?.getMapAsync { it ->
             googleMap = it
-            for (i in 0 until brandList.size) {
-                val latLng = brandList[i].subBrand.location?.lng?.let { it1 ->
-                    brandList[i].subBrand.location?.lat?.let { it2 ->
-                        LatLng(
-                            it2,
-                            it1
-                        )
+            lifecycleScope.launch(Dispatchers.Main) {
+                for (i in 0 until brandList.size) {
+                    val latLng = brandList[i].subBrand.location?.lng?.let { it1 ->
+                        brandList[i].subBrand.location?.lat?.let { it2 ->
+                            LatLng(it2, it1)
+                        }
                     }
-                }
-                latLng?.let { latlng ->
-                    val marker: Marker = googleMap.addMarker(
-                        MarkerOptions().position(latlng)
-                    )!!
-                    marker.tag = brandList[i].subBrand._id
-                    googleMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f))
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng))
-//                    marker.showInfoWindow()
+                    latLng?.let { latlng ->
+                        val marker: Marker = googleMap.addMarker(MarkerOptions().position(latlng))!!
+                        val bitmap = withContext(Dispatchers.IO) {
+                            createCustomMarker(requireActivity(),
+                                brandList[i].subBrand.brandLogo.toString())
+                        }
+                        bitmap?.let {
+                            marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                        }
+                        marker.tag = brandList[i].subBrand._id
+                        googleMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f))
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng)) //                    marker.showInfoWindow()
+                    }
                 }
             }
             googleMap.setInfoWindowAdapter(mMyContentsView?.let { it1 ->
-                MyInfoWindowAdapter(
-                    requireContext(),
-                    it1, brandList
-                )
+                MyInfoWindowAdapter(requireContext(), it1, brandList)
             })
 
             googleMap.setOnInfoWindowClickListener { marker ->
@@ -172,43 +164,6 @@ class BusinessFragment : BaseFragment() {
         }
     }
 
-//     @SuppressLint("InflateParams")
-//     private fun getMarkerBitmapFromView(resId: String): Bitmap? {
-//         val customMarkerView: View =
-//             layoutInflater.inflate(R.layout.map_custom_marker, null)
-//         val imgBrandBg: AppCompatImageView =
-//             customMarkerView.findViewById(R.id.img_bg)
-//         val imgBrand: ShapeableImageView =
-//             customMarkerView.findViewById(R.id.img_brand_logo)
-//
-//         imgBrandBg.setImageResource(R.drawable.ic_custom_marker)
-//         Glide.with(this).load(resId).into(imgBrand)
-//
-//         var brandBGBitmap: Bitmap? = null
-//         imgBrandBg.post {
-//             brandBGBitmap =
-//                 Bitmap.createBitmap(imgBrandBg.width, imgBrandBg.height, Bitmap.Config.RGB_565)
-//         }
-//
-//         var brandBitmap: Bitmap? = null
-//         imgBrand.post {
-//             brandBitmap =
-//                 Bitmap.createBitmap(imgBrand.width, imgBrand.height, Bitmap.Config.RGB_565)
-//         }
-//
-//         val bmOverlay =
-//             Bitmap.createBitmap(
-//                 brandBGBitmap?.width!!,
-//                 brandBGBitmap?.height!!,
-//                 brandBGBitmap!!.config
-//             )
-//         val canvas = Canvas(bmOverlay)
-//
-//         canvas.drawBitmap(brandBGBitmap!!, Matrix(), null)
-//         canvas.drawBitmap(brandBitmap!!, 0f, 0f, null)
-//
-//         return bmOverlay
-//     }
 
     fun switchMap(isSwitch: Boolean) {
         if (isSwitch) {

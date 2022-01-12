@@ -14,6 +14,7 @@ import com.loyaltyglobal.databinding.FragmentCountryListBinding
 import com.loyaltyglobal.ui.main.adapter.CountryAdapter
 import com.loyaltyglobal.ui.main.viewmodel.CountryListViewModel
 import com.loyaltyglobal.util.hideKeyboard
+import com.loyaltyglobal.util.popFragment
 
 /**
  * Created by Abhin.
@@ -64,7 +65,7 @@ class CountryListFragment : Fragment() {
 
         mBinding.imgClear.setOnClickListener {
             activity?.hideKeyboard()
-            activity?.supportFragmentManager?.popBackStack()
+            activity?.popFragment()
         }
     }
 
@@ -72,7 +73,7 @@ class CountryListFragment : Fragment() {
         mCountryAdapter = CountryAdapter(mCountryList, object : CountryAdapter.CountryCodeListener {
             override fun countryCodeListener(mCountryCodeData: CountryCodeData) {
                 mSendCountryCodeAndFlag?.onCountryDataSelect(mCountryCodeData)
-                activity?.supportFragmentManager?.popBackStack()
+                activity?.popFragment()
             }
         })
         mBinding.rvCountryList.layoutManager = LinearLayoutManager(activity)

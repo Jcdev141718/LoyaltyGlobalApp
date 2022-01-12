@@ -34,7 +34,7 @@ fun String.isEmailValid(): Boolean = doesStringMatchPattern(this, Constants.REGE
 
 fun String.isPasswordValid(): Boolean = doesStringMatchPattern(this, Constants.PASSWORD_PATTERN_WITH_ONE_SPECIAL_CHARS)
 
-fun String.firstLetterCap(): String = this.substring(0, 1).uppercase(Locale.ROOT) + this.substring(1).lowercase(Locale.ROOT)
+fun String?.firstLetterCap(): String = this?.substring(0, 1)?.uppercase(Locale.ROOT) + this?.substring(1)?.lowercase(Locale.ROOT)
 
 
 fun View.getParentActivity(): AppCompatActivity? {

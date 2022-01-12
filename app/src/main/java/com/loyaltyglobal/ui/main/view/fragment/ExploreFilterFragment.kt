@@ -12,6 +12,7 @@ import com.loyaltyglobal.databinding.FragmentExploreFilterBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.ExploreFilterAdapter
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
+import com.loyaltyglobal.util.popFragment
 
 /**
  * Created by Abhin.
@@ -41,11 +42,11 @@ class ExploreFilterFragment : BaseFragment() {
     }
 
     private fun clickListener() {
-        mBinding.imgNotificationBack.setOnClickListener { activity?.supportFragmentManager?.popBackStack() }
+        mBinding.imgNotificationBack.setOnClickListener { activity?.popFragment() }
         mBinding.txtClear.setOnClickListener { }
         mBinding.txtApply.setOnClickListener {
             mExploreViewModel.setFilters(mFilterList.filter { it.isSelected }.map { it.filterTitle.toString() }, true)
-            activity?.supportFragmentManager?.popBackStack()
+            activity?.popFragment()
         }
     }
 

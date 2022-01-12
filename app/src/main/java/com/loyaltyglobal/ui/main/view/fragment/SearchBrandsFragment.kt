@@ -83,7 +83,7 @@ class SearchBrandsFragment : Fragment() {
             }
         }
 
-        binding.imgBack.clickWithDebounce { activity?.supportFragmentManager?.popBackStack() }
+        binding.imgBack.clickWithDebounce { activity?.popFragment() }
     }
 
     private fun showNoSearchedItemUI(isEmptyList: Boolean) {

@@ -92,7 +92,7 @@ class ExploreAllDetailsFragment : Fragment() {
     }
 
     private fun setData() {
-        binding.imgBack.clickWithDebounce { activity?.supportFragmentManager?.popBackStack() }
+        binding.imgBack.clickWithDebounce { activity?.popFragment() }
         exploreViewModel.brandDetailsData.value.let { data ->
             binding.txtFoodDetails.setResizableText(data?.subBrand?.description.toString(), 2, false)
             initMap(LatLng(data?.subBrand?.location?.lat ?: 0.0, data?.subBrand?.location?.lng ?: 0.0), "")

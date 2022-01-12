@@ -72,7 +72,7 @@ class ExploreDetailsFragment : Fragment() {
     private fun initClickListener() {
         binding.apply {
             imgBack.clickWithDebounce {
-                activity?.supportFragmentManager?.popBackStack()
+                activity?.popFragment()
             }
             txtSeeMore.clickWithDebounce {
                 activity?.addReplaceFragment(R.id.fl_main_container, ExploreAllDetailsFragment(), true, true)
@@ -120,5 +120,11 @@ class ExploreDetailsFragment : Fragment() {
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLong, 16.0f))
             }
         }
+    }
+
+    override fun onDestroyView() {
+        exploreViewModel.brandId = null
+        exploreViewModel.brandDetailsData.value = null
+        super.onDestroyView()
     }
 }

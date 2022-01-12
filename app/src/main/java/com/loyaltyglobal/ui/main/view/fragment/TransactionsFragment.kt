@@ -1,13 +1,11 @@
 package com.loyaltyglobal.ui.main.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.loyaltyglobal.data.source.network.ApiResponseStates
 import com.loyaltyglobal.data.source.network.manageApiDataByState
 import com.loyaltyglobal.databinding.FragmentTransactionsBinding
@@ -15,6 +13,7 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.TransactionAdapter
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
 import com.loyaltyglobal.util.hide
+import com.loyaltyglobal.util.popFragment
 import com.loyaltyglobal.util.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,7 +47,7 @@ class TransactionsFragment : BaseFragment() {
 
     private fun clickListener() {
         mBinding.imgTransactionBack.setOnClickListener {
-            activity?.supportFragmentManager?.popBackStack()
+            activity?.popFragment()
         }
     }
 

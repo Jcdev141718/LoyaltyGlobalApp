@@ -13,6 +13,7 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.util.Constants
 import com.loyaltyglobal.util.hide
+import com.loyaltyglobal.util.popFragment
 import com.loyaltyglobal.util.show
 
 /**
@@ -49,7 +50,7 @@ class WebViewFragment : BaseFragment() {
                 binding.webView.goBack()
                 binding.webView.show()
             } else {
-                activity?.supportFragmentManager?.popBackStack()
+                activity?.popFragment()
             }
         }
     }
@@ -107,7 +108,7 @@ class WebViewFragment : BaseFragment() {
             builder?.setMessage(resources.getString(R.string.certificate_authority_error))
             builder?.setPositiveButton(resources.getText(R.string.ok)) { _, _ ->
                 dialog?.dismiss()
-                activity?.supportFragmentManager?.popBackStack()
+                activity?.popFragment()
             }
             dialog = builder?.create()
             dialog?.show()

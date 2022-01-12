@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.source.localModels.NotificationAndSubBrand
-import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.databinding.FragmentNotificationBinding
 import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.NotificationAdapter
@@ -32,10 +31,11 @@ class NotificationFragment : BaseFragment() {
 
     private val mNotificationViewModel: NotificationViewModel by viewModels()
     private val exploreViewModel: ExploreViewModel by activityViewModels()
+    private var notificationList: ArrayList<NotificationAndSubBrand> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentNotificationBinding.inflate(layoutInflater, container, false)
         return mBinding.root
@@ -65,19 +65,34 @@ class NotificationFragment : BaseFragment() {
 
     private fun initObserver() {
 
-        mAdapter = NotificationAdapter(object : NotificationAdapter.OnNotificationClick{
-             override fun onItemClick(itemData: NotificationAndSubBrand) {
-                 if(itemData.notification.type == BRAND_AND_NOTIFICATION){
-                     exploreViewModel.brandId = itemData.subBrand._id
-                     activity?.addReplaceFragment(R.id.fl_main_container,ExploreDetailsFragment(),addFragment = true, addToBackStack = true)
-                 }
-             }
+        mAdapter = NotificationAdapter(object : NotificationAdapter.OnNotificationClick {
+            override fun onItemClick(position: Int) {
+                if (!notificationList[position].notification.isOpenedOnce) {
+                    mNotificationViewModel.readNotification(notificationList[position].notification._id)
+                    notificationList[position].notification.isOpenedOnce = true
+                    mAdapter.notifyItemChanged(position)
+                    mAdapter.submitList(notificationList)
+                }
 
+                if (notificationList[position].notification.type == BRAND_AND_NOTIFICATION) {
+                    exploreViewModel.brandId = notificationList[position].subBrand._id
+                    activity?.addReplaceFragment(R.id.fl_main_container,
+                        ExploreDetailsFragment(),
+                        addFragment = true,
+                        addToBackStack = true)
+                }
+            }
         })
 
         mNotificationViewModel.mutableNotificationList.observe(viewLifecycleOwner, {
             mBinding.apply {
                 if (!it.isNullOrEmpty()) {
+                    it.map { notification ->
+                        notification.notification.isOpenedOnce =
+                            notification.notification.readBy?.contains(mPreferenceProvider?.getUserId()) == true
+                    }
+                    notificationList.clear()
+                    notificationList.addAll(it)
                     rvNotification.show()
                     mAdapter.submitList(it)
                     groupNoNotification.hide()

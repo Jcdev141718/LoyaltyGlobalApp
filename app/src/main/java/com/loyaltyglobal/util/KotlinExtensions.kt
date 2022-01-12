@@ -22,8 +22,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.loyaltyglobal.R
-import com.loyaltyglobal.app.LoyaltyGlobalApp
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -60,13 +58,13 @@ fun AppCompatImageView.setImage(url: Any, isRound: Boolean = false) {
 
 @BindingAdapter("setNotificationBg")
 fun ConstraintLayout.setNotificationBg(isNotificationRead: Boolean = false) {
-    if (!isNotificationRead) {
+    if (isNotificationRead) {
         val value = TypedValue()
-        context.theme.resolveAttribute(R.attr.main_card, value, true)
+        context.theme.resolveAttribute(R.attr.black_white, value, true)
         this.setBackgroundColor(value.data)
     } else {
         val value = TypedValue()
-        context.theme.resolveAttribute(R.attr.black_white, value, true)
+        context.theme.resolveAttribute(R.attr.main_card, value, true)
         this.setBackgroundColor(value.data)
     }
 }
@@ -119,8 +117,7 @@ fun Context.sendEmailTo(email: String) {
     }
     try {
         startActivity(Intent.createChooser(intent, "Send mail..."))
-    } catch (ex: ActivityNotFoundException) {
-//        showToast("There are no email clients installed.")
+    } catch (ex: ActivityNotFoundException) { //        showToast("There are no email clients installed.")
     }
 }
 

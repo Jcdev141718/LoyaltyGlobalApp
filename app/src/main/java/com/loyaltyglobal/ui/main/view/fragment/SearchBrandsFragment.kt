@@ -22,10 +22,10 @@ import com.loyaltyglobal.util.*
  */
 class SearchBrandsFragment : Fragment() {
 
-    private lateinit var binding : FragmentSearchBrandsBinding
+    private lateinit var binding: FragmentSearchBrandsBinding
     private val exploreViewModel: ExploreViewModel by activityViewModels()
-    private var brandAdapter : SubBrandAdapter? = null
-    private var brandList : ArrayList<SubBrandAndCoalition> = ArrayList()
+    private var brandAdapter: SubBrandAdapter? = null
+    private var brandList: ArrayList<SubBrandAndCoalition> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class SearchBrandsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentSearchBrandsBinding.inflate(inflater,container,false)
+        binding = FragmentSearchBrandsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -64,7 +64,7 @@ class SearchBrandsFragment : Fragment() {
         binding.rvBrands.layoutManager = layoutManager
         brandAdapter = SubBrandAdapter(latLong, object : SubBrandAdapter.SubBrandItemClickListener {
             override fun clickListener(position: Int) {
-                exploreViewModel.brandDetailsData.value = brandList[position]
+                exploreViewModel.brandId = brandAdapter?.currentList?.get(position)?.subBrand?._id
                 activity?.addReplaceFragment(R.id.fl_main_container, ExploreDetailsFragment(), true, true)
             }
         })
@@ -76,6 +76,7 @@ class SearchBrandsFragment : Fragment() {
                     it.subBrand.brandName?.contains(text) == true || it.subBrand.locationType?.contains(text) == true
                 }
                 brandAdapter?.submitList(filteredList)
+
                 showNoSearchedItemUI(filteredList.isEmpty())
             } else {
                 brandAdapter?.submitList(brandList)
@@ -85,8 +86,8 @@ class SearchBrandsFragment : Fragment() {
         binding.imgBack.clickWithDebounce { activity?.supportFragmentManager?.popBackStack() }
     }
 
-    private fun showNoSearchedItemUI(isEmptyList : Boolean) {
-        if (isEmptyList){
+    private fun showNoSearchedItemUI(isEmptyList: Boolean) {
+        if (isEmptyList) {
             binding.rvBrands.hide()
             binding.txtNoItemFound.show()
         } else {

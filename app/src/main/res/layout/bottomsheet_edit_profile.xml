@@ -57,14 +57,14 @@
         style="@style/bottomSheetTitle20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semi_bold"
-        android:text="@string/save"
-        android:textSize="@dimen/sp_15"
-        android:clickable="true"
-        android:padding="@dimen/dp_10"
-        android:focusable="true"
         android:layout_marginEnd="@dimen/dp_6"
         android:background="@drawable/default_ripple_square"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:padding="@dimen/dp_10"
+        android:text="@string/save"
+        android:textSize="@dimen/sp_15"
         app:layout_constraintBottom_toBottomOf="@id/img_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/txt_title"
@@ -109,50 +109,52 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_name_label"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/display_name"
-        style="@style/bottomSheetLabel14"
         android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/display_name"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/view_divider_2"/>
+        app:layout_constraintTop_toBottomOf="@id/view_divider_2" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_email_address_label"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email_address"
-        style="@style/bottomSheetLabel14"
-        app:layout_constraintTop_toTopOf="@id/txt_email_address"
-        app:layout_constraintStart_toStartOf="@id/guideline_start" />
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="@id/txt_email_address" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_dob_label"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dob"
-        style="@style/bottomSheetLabel14"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="@id/txt_dob"/>
+        app:layout_constraintTop_toTopOf="@id/txt_dob" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_phone_num_label"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/phone_number"
-        style="@style/bottomSheetLabel14"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="@id/txt_phone_num"/>
+        app:layout_constraintTop_toTopOf="@id/txt_phone_num" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_name"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="mushaleen bhai"
-        style="@style/bottomSheetLabel14"
         android:layout_marginTop="@dimen/dp_14"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="@id/guideline_mid"
-        app:layout_constraintTop_toBottomOf="@id/view_divider_2"/>
+        app:layout_constraintTop_toBottomOf="@id/view_divider_2"
+        tools:text="mushaleen bhai" />
 
     <View
         android:id="@+id/view_divider_name"
@@ -166,13 +168,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_email_address"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="mm@isystematic.com"
-        style="@style/bottomSheetLabel14"
         android:layout_marginTop="@dimen/dp_14"
         app:layout_constraintStart_toStartOf="@id/guideline_mid"
-        app:layout_constraintTop_toBottomOf="@id/view_divider_name"/>
+        app:layout_constraintTop_toBottomOf="@id/view_divider_name"
+        tools:text="mm@isystematic.com" />
 
     <View
         android:id="@+id/view_divider_email"
@@ -186,13 +188,15 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_dob"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="15/03/1990"
-        style="@style/bottomSheetLabel14"
         android:layout_marginTop="@dimen/dp_14"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="@id/guideline_mid"
-        app:layout_constraintTop_toBottomOf="@id/view_divider_email"/>
+        app:layout_constraintTop_toBottomOf="@id/view_divider_email"
+        tools:text="15/03/1990" />
 
     <View
         android:id="@+id/view_divider_dob"
@@ -206,13 +210,15 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_phone_num"
+        style="@style/bottomSheetLabel14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="+921234567890"
-        style="@style/bottomSheetLabel14"
         android:layout_marginTop="@dimen/dp_14"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="@id/guideline_mid"
-        app:layout_constraintTop_toBottomOf="@id/view_divider_dob"/>
+        app:layout_constraintTop_toBottomOf="@id/view_divider_dob"
+        tools:text="+921234567890" />
 
     <View
         android:id="@+id/view_divider_phone_num"
@@ -223,5 +229,15 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_mid"
         app:layout_constraintTop_toBottomOf="@id/txt_phone_num" />
+
+    <FrameLayout
+        android:id="@+id/fl_test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

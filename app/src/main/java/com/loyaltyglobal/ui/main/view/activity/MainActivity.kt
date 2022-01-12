@@ -25,7 +25,7 @@ class MainActivity : BaseActivity(), NotificationReceiveListener {
     lateinit var binding: ActivityMainBinding
     private var marshMellowHelper: MarshMellowHelper? = null
     private var isLocationPermissionGrant = false
-    internal var gpsTracker : GPSTracker? = null
+    internal var gpsTracker: GPSTracker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +57,8 @@ class MainActivity : BaseActivity(), NotificationReceiveListener {
     }
 
     private fun loadHomeFragment() {
-        addReplaceFragment(R.id.fl_main_container, HomeScreenFragment(), addFragment = true, addToBackStack = false)
         binding.menuBottom.setItemSelected(R.id.menu_home)
+        addReplaceFragment(R.id.fl_main_container, HomeScreenFragment(), addFragment = true, addToBackStack = false)
     }
 
     override fun onNotificationReceive(payload: String) {
@@ -77,6 +77,9 @@ class MainActivity : BaseActivity(), NotificationReceiveListener {
         binding.menuBottom.setItemSelected(R.id.menu_stories)
     }
 
+    fun moveToHomeTab() {
+        binding.menuBottom.setItemSelected(R.id.menu_home)
+    }
 
     private fun initMapPermission() {
         marshMellowHelper = MarshMellowHelper(this, locationPermissions, Constants.MAP_PERMISSIONS_REQUEST_CODE)

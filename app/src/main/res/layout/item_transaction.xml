@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
             type="com.loyaltyglobal.data.model.response.transactionData.Data" />
@@ -15,11 +17,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_transaction_brand_logo"
+            setCircleImageWithPlaceHolder="@{data.brandLogo}"
             android:layout_width="@dimen/dp_48"
             android:layout_height="@dimen/dp_48"
             android:layout_marginVertical="@dimen/dp_18"
             android:layout_marginStart="@dimen/dp_16"
-            setCircleImageWithPlaceHolder="@{data.brandLogo}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +29,7 @@
         <View
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/gray"
+            android:background="?main_divider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_transaction_brand_logo" />
@@ -54,13 +56,13 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_16"
             android:fontFamily="@font/poppins"
-            app:setTime="@{data.created}"
             android:textColor="@color/caption"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_transaction_brand_logo"
             app:layout_constraintTop_toBottomOf="@id/txt_transaction_title"
+            app:setTime="@{data.created}"
             tool:text="30 minutes ago" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

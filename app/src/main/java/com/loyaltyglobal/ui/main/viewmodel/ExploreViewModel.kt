@@ -44,7 +44,7 @@ class ExploreViewModel @Inject constructor(
 
     var brandId: String? = null
     var mutableFiltersList = MutableLiveData<ArrayList<String>>()
-    var brandDetailsData = MutableLiveData<SubBrandAndCoalition>()
+    var brandDetailsData: MutableLiveData<SubBrandAndCoalition?> = MutableLiveData()
 
     fun getBusinessList() {
         viewModelScope.launch {
@@ -53,6 +53,7 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun getBrandDetails() {
+        brandDetailsData.value = null
         viewModelScope.launch {
             brandId?.let {
                 brandDetailsData.postValue(exploreRepository.getSubBrandWithCoalitionDataById(it))

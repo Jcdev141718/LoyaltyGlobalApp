@@ -3,13 +3,16 @@ package com.loyaltyglobal.ui.main.view.fragment
 import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils.concat
-import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.loyaltyglobal.R
 import com.loyaltyglobal.databinding.BottomsheetEditProfileBinding
 import com.loyaltyglobal.util.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +37,24 @@ class EditProfileBottomSheetFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        view?.isFocusableInTouchMode = true
+        view?.requestFocus()
+        view?.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                if (!binding.flTest.isVisible) {
+                    dismiss()
+                } else {
+                    childFragmentManager.popBackStack()
+                }
+                true
+            } else {
+                false
+            }
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setOnShowListener {
@@ -50,21 +71,34 @@ class EditProfileBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imgClose.clickWithDebounce { dismiss() }
-        Log.e("TAG","onViewCreated --> ${preferenceProvider.getValue(Constants.PREF_USER_DATA,"")}")
         setDataToUI()
+        initClicks()
+    }
+
+    private fun initClicks() {
+        binding.imgClose.clickWithDebounce { dismiss() }
+        binding.txtName.clickWithDebounce {
+            binding.flTest.show()
+            val fragment = EnterNameFragment()
+            val transaction: FragmentTransaction = childFragmentManager.beginTransaction()
+            transaction.add(R.id.fl_test, fragment, fragment.javaClass.simpleName)
+            transaction.addToBackStack(fragment.tag)
+            activity?.hideKeyboard()
+            transaction.commit()
+
+            //            activity?.addReplaceFragment(R.id.fl_test, fragment,true,true)
+        }
     }
 
     private fun setDataToUI() {
         preferenceProvider.getUserData().let { userData ->
             binding.apply {
-                txtName.text = concat(userData.firstName?.firstLetterCap()," ",userData.lastName?.firstLetterCap())
+                txtName.text = concat(userData.firstName?.firstLetterCap(), " ", userData.lastName?.firstLetterCap())
                 txtEmailAddress.text = userData.email
                 txtDob.text = userData.birthday.toString()
-                txtPhoneNum.text = concat(userData.dialingCode,userData.phone)
+                txtPhoneNum.text = concat(userData.dialingCode, userData.phone)
             }
         }
     }
-
 
 }

@@ -31,21 +31,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/dp_12"
+            android:background="@drawable/default_ripple_round"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/default_ripple_round"
-            android:src="@drawable/icon_search" />
+            android:padding="@dimen/dp_12"
+            android:src="@drawable/icon_search"
+            android:tint="?heading" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_explore_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/dp_12"
+            android:background="@drawable/default_ripple_round"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/default_ripple_round"
+            android:padding="@dimen/dp_12"
             android:src="@drawable/icon_filter"
             android:tint="?heading" />
 

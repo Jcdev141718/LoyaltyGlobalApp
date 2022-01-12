@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.loyaltyglobal.R
 import com.loyaltyglobal.data.model.AllDaysModel
+import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
 import com.loyaltyglobal.databinding.FragmentExploreDetailsBinding
 import com.loyaltyglobal.ui.main.adapter.AllDaysAdapter
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
@@ -37,17 +38,17 @@ class ExploreDetailsFragment : Fragment() {
     }
 
     private fun initObserver() {
-        exploreViewModel.mutableUrlLinks.observe(this,{
-            if (!it.isNullOrEmpty()){
+        exploreViewModel.mutableUrlLinks.observe(this, {
+            if (!it.isNullOrEmpty()) {
                 binding.txtSeeMore.show()
             } else {
                 binding.txtSeeMore.hide()
             }
         })
 
-        exploreViewModel.brandDetailsData.observe(this,{
-            if (it != null){
-                setData()
+        exploreViewModel.brandDetailsData.observe(this, {
+            if (it != null) {
+                setData(it)
             }
         })
     }
@@ -65,8 +66,7 @@ class ExploreDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initClickListener()
-        exploreViewModel.getBrandDetails()
-//        setData()
+        exploreViewModel.getBrandDetails() //        setData()
     }
 
     private fun initClickListener() {
@@ -92,9 +92,9 @@ class ExploreDetailsFragment : Fragment() {
         }
     }
 
-    private fun setData() {
+    private fun setData(subBrandAndCoalition: SubBrandAndCoalition?) {
         exploreViewModel.getLinksData()
-        exploreViewModel.brandDetailsData.value.let { data ->
+        subBrandAndCoalition.let { data ->
             binding.txtFoodDetails.setResizableText(data?.subBrand?.description.toString(), 2, false)
             initMap(LatLng(data?.subBrand?.location?.lat ?: 0.0, data?.subBrand?.location?.lng ?: 0.0), "")
         }

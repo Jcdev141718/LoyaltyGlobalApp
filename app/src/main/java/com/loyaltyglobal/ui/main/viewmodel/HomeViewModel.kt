@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository,
 ) : BaseViewModel() {
 
-    var  mOfferList = MutableLiveData<ArrayList<DealOffer>>()
+    var mOfferList = MutableLiveData<ArrayList<DealOffer>>()
     var mDealPromotionsList = MutableLiveData<ArrayList<CustomField>>()
     var mStoriesList = MutableLiveData<ArrayList<Notification?>>()
     var mPassData = MutableLiveData<Pass>()

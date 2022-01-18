@@ -1,8 +1,10 @@
 package com.loyaltyglobal.data.source.localModels.subBrandResponse
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.loyaltyglobal.util.firstLetterCap
 import kotlinx.parcelize.Parcelize
@@ -45,7 +47,9 @@ data class SubBrand(
     var updated: Long? = null,
     @Embedded(prefix = "sub_brand_updated_at_") var updatedAt: UpdatedAt? = null,
     @Embedded(prefix = "sub_brand_walletApp_") var walletApp: WalletApp? = null,
+    @Ignore var bitmap: Bitmap? = null
 ) : Parcelable {
+    constructor() : this(_id = "",bitmap = null)
     fun getBrandNameFirstCap() = brandName?.firstLetterCap()
     fun getLocationTypeFirstCap() = locationType?.firstLetterCap()
     fun getSafePointsPer() = earnPointPer ?: 0

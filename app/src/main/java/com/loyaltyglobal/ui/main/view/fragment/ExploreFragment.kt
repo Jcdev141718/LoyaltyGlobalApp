@@ -11,6 +11,8 @@ import com.loyaltyglobal.ui.base.BaseFragment
 import com.loyaltyglobal.ui.main.adapter.ViewPagerAdapter
 import com.loyaltyglobal.util.addReplaceFragment
 import com.loyaltyglobal.util.clickWithDebounce
+import com.loyaltyglobal.util.hide
+import com.loyaltyglobal.util.show
 
 /**
  * Created by Abhin.
@@ -34,6 +36,16 @@ class ExploreFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setExploreTabs()
         clickListener()
+        if (mBaseActivity?.isBrandsLoaded == false) mBaseActivity?.getBusinessList()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mBaseActivity?.isProgress?.observe(this,{
+            if(it != null) {
+                if (it) mBinding.progressBar.show() else mBinding.progressBar.hide()
+            }
+        })
     }
 
     private fun clickListener() {

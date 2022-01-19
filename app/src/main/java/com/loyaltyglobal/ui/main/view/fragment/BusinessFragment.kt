@@ -1,7 +1,6 @@
 package com.loyaltyglobal.ui.main.view.fragment
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -23,10 +23,12 @@ import com.loyaltyglobal.ui.main.adapter.MyInfoWindowAdapter
 import com.loyaltyglobal.ui.main.adapter.SubBrandAdapter
 import com.loyaltyglobal.ui.main.view.activity.MainActivity
 import com.loyaltyglobal.ui.main.viewmodel.ExploreViewModel
-import com.loyaltyglobal.util.*
+import com.loyaltyglobal.util.addReplaceFragment
+import com.loyaltyglobal.util.clickWithDebounce
+import com.loyaltyglobal.util.hide
+import com.loyaltyglobal.util.show
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 /**
@@ -91,16 +93,14 @@ class BusinessFragment : BaseFragment() {
 
     private fun initObserver() {
 
-        exploreViewModel.mutableBusinessList.observe(viewLifecycleOwner, {
+        mBaseActivity?.mutableBusinessList?.observe(viewLifecycleOwner, {
             if (!it.isNullOrEmpty()) {
                 binding.rvExploreBusiness.show()
                 brandList.clear()
-//                brandList.addAll(it)
-                brandList.addAll(mBaseActivity?.mutableBusinessList as ArrayList)
+                brandList.addAll(it)
                 subBrandAdapter.submitList(brandList)
                 binding.txtNoItemFound.hide()
                 initMap()
-//                lifecycleScope.launch { initCustomLocationMarkers() }
             } else {
                 binding.txtNoItemFound.show()
                 binding.rvExploreBusiness.hide()
@@ -118,28 +118,12 @@ class BusinessFragment : BaseFragment() {
         })
     }
 
-    private suspend fun initCustomLocationMarkers() {
-        val markerBitmapList: ArrayList<Bitmap> = ArrayList()
-        brandList.forEach { brand ->
-            val bitmap = withContext(Dispatchers.IO) {
-                createCustomMarker(requireActivity(), brand.subBrand.brandLogo.toString())
-            }
-            if (bitmap != null) {
-                googleMap.let {
-                    val marker: Marker = googleMap.addMarker(MarkerOptions().position(LatLng(brand.subBrand.location?.lat!!,brand.subBrand.location?.lng!!)))!!
-                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap))
-                }
-            }
-        }
-    }
-
     @SuppressLint("PotentialBehaviorOverride")
     private fun initMap() {
         mMapFragment = childFragmentManager.findFragmentById(R.id.map_fragment_business) as? SupportMapFragment
         mMapFragment?.getMapAsync { it ->
             googleMap = it
             lifecycleScope.launch(Dispatchers.Main) {
-//                val markerList = withContext(Dispatchers.IO) { initCustomLocationMarkers() }
                 for (i in 0 until brandList.size) {
                     val latLng = brandList[i].subBrand.location?.lng?.let { it1 ->
                         brandList[i].subBrand.location?.lat?.let { it2 ->
@@ -150,9 +134,8 @@ class BusinessFragment : BaseFragment() {
                         val marker: Marker = googleMap.addMarker(MarkerOptions().position(latlng))!!
                         marker.setIcon(brandList[i].subBrand.bitmap?.let { it1 -> BitmapDescriptorFactory.fromBitmap(it1) })
                         marker.tag = brandList[i].subBrand._id
-//                        googleMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f))
-//                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng))
-//                    marker.showInfoWindow()
+                        googleMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f))
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng))
                     }
                 }
             }

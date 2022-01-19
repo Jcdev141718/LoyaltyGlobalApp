@@ -271,13 +271,13 @@ fun hasPermissions(
 
 fun FragmentActivity.showTopSnackBar(title: String, message: String) {
     CookieBar.build(this).setCustomView(R.layout.view_snackbar_cookie).setCustomViewInitializer { v ->
-            val tvTitle = v.findViewById<AppCompatTextView>(R.id.tv_title)
-            if (title.isEmpty()) {
-                tvTitle.hide()
-            } else {
-                tvTitle.show()
-            }
-        }.setTitle(title).setMessage(message).setEnableAutoDismiss(true).setSwipeToDismiss(false).setCookiePosition(Gravity.TOP)
+        val tvTitle = v.findViewById<AppCompatTextView>(R.id.tv_title)
+        if (title.isEmpty()) {
+            tvTitle.hide()
+        } else {
+            tvTitle.show()
+        }
+    }.setTitle(title).setMessage(message).setEnableAutoDismiss(true).setSwipeToDismiss(false).setCookiePosition(Gravity.TOP)
         .show()
 }
 
@@ -443,7 +443,7 @@ private fun TextView.addClickablePartTextResizable(
 
 val locationPermissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
 
-fun getDistance(userLatLng : LatLng, brandLatLng: LatLng): String {
+fun getDistance(userLatLng: LatLng, brandLatLng: LatLng): String {
     val locationA = Location("User Location").apply {
         latitude = userLatLng.latitude
         longitude = userLatLng.longitude
@@ -455,34 +455,33 @@ fun getDistance(userLatLng : LatLng, brandLatLng: LatLng): String {
     return ((locationA.distanceTo(locationB)) / 1000).toInt().toString() + " kilometers away"
 }
 
-suspend fun createCustomMarker(context: Context,imageUrl: String): Bitmap? {
+suspend fun createCustomMarker(context: Context, imageUrl: String): Bitmap? {
     val bitmap: Bitmap?
     val marker =
-            (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.custom_marker_layout,
-                null)
-        val markerImage = marker.findViewById(R.id.user_dp) as CircleImageView
-        val imageBitMap = withContext(Dispatchers.IO){
+        (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.custom_marker_layout, null)
+    val markerImage = marker.findViewById(R.id.user_dp) as CircleImageView
+    try {
+        val imageBitMap = withContext(Dispatchers.IO) {
             getBitmapFromUrl(imageUrl)
         }
-        try {
-            markerImage.setImageBitmap(imageBitMap)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        val displayMetrics = DisplayMetrics()
-        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
-        marker.layoutParams = ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT)
-        marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
-        marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
-        marker.buildDrawingCache()
-        bitmap = Bitmap.createBitmap(marker.measuredWidth, marker.measuredHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap!!)
-        marker.draw(canvas)
+        markerImage.setImageBitmap(imageBitMap)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    val displayMetrics = DisplayMetrics()
+    (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+    marker.layoutParams = ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT)
+    marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
+    marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+    marker.buildDrawingCache()
+    bitmap = Bitmap.createBitmap(marker.measuredWidth, marker.measuredHeight, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap!!)
+    marker.draw(canvas)
     return bitmap
 }
 
 
-suspend fun getBitmapFromUrl(imageUrl : String) : Bitmap {
+suspend fun getBitmapFromUrl(imageUrl: String): Bitmap {
     val url = URL(imageUrl)
     val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
     conn.doInput = true

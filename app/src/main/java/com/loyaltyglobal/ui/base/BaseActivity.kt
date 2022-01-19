@@ -1,8 +1,10 @@
 package com.loyaltyglobal.ui.base
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.loyaltyglobal.data.source.local.DatabaseDAO
 import com.loyaltyglobal.data.source.localModels.SubBrandAndCoalition
@@ -29,7 +31,9 @@ open class BaseActivity : AppCompatActivity() {
     @Inject
     lateinit var databaseDAO: DatabaseDAO
 
-    var mutableBusinessList : ArrayList<SubBrandAndCoalition> = ArrayList()
+    var mutableBusinessList : MutableLiveData<ArrayList<SubBrandAndCoalition>> = MutableLiveData()
+    var isProgress : MutableLiveData<Boolean> = MutableLiveData()
+    var isBrandsLoaded : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +45,19 @@ open class BaseActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun getBusinessList() {
+    fun getBusinessList() {
+        val list = ArrayList<SubBrandAndCoalition>()
         lifecycleScope.launch {
+            isProgress.postValue(true)
             val brandList = withContext(Dispatchers.IO) {databaseDAO.getSubBrandWithCoalitionData()}
             brandList.forEach { brand ->
                 val bitmap = createCustomMarker(this@BaseActivity, brand.subBrand.brandLogo.toString())
                 brand.subBrand.bitmap = bitmap
-                mutableBusinessList.add(brand)
+                list.add(brand)
             }
-
+            isBrandsLoaded = true
+            mutableBusinessList.postValue(list)
+            isProgress.postValue(false)
         }
     }
 
